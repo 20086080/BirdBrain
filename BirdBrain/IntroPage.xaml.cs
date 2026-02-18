@@ -1,4 +1,4 @@
-﻿namespace MyBirdApp.Views;
+﻿namespace BirdBrain.Views;
 
 public partial class IntroPage : ContentPage
 {
@@ -10,11 +10,11 @@ public partial class IntroPage : ContentPage
 
         LocationCarousel.ItemsSource = new List<string>
         {
-        "Delhi",
-        "Mumbai",
-        "Jaipur",
-        "Bangalore",
-        "Goa"
+        "1 Location",
+        "2 Location",
+        "3 Location",
+        "4 Location",
+        "5 Location"
         };
     }
 

@@ -76,4 +76,13 @@
 	  </Compile>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="Resources\Themes\BlueTealTheme.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Themes\CoralNavyTheme.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

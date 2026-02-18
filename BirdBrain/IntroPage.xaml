@@ -1,53 +1,58 @@
 ﻿<ContentPage
-    x:Class="MyBirdApp.Views.IntroPage"
+    x:Class="BirdBrain.Views.IntroPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    BackgroundColor="Black">
+    BackgroundColor="{DynamicResource Background}">
     <Shell.NavBarIsVisible>false</Shell.NavBarIsVisible>
-    <Grid>
+    <Grid RowDefinitions="*">
 
         <!-- MENU PANEL (Hidden underneath) -->
         <VerticalStackLayout
             x:Name="MenuPanel"
-            BackgroundColor="White"
+            BackgroundColor="Transparent"
             Padding="30"
             Spacing="25"
             Opacity="0"
-            TranslationY="200"
-            HeightRequest="400">
-            <!-- VerticalOptions="Fill" -->
-            <!-- Manual Entry -->
+            TranslationY="200">
             <Entry
                 x:Name="LocationEntry"
                 Placeholder="Enter location"
                 HeightRequest="55"
-                BackgroundColor="#F2F2F2" />
+                BackgroundColor="{DynamicResource Surface}"
+                TextColor="{DynamicResource TextPrimary}"
+                PlaceholderColor="{DynamicResource Accent}"
+                />
             <HorizontalStackLayout
                 Spacing="10"
                 VerticalOptions="Start"
-                HorizontalOptions="Fill">
+                HorizontalOptions="Fill"
+                Background="Transparent">
                 <Label 
                     Text="Select Location"
                     FontSize="14"
                     FontAttributes="Bold"
+                    TextColor="{DynamicResource TextPrimary}"
                     HorizontalOptions="Center"/>
                 <VerticalStackLayout
                     Spacing="5"
-                    HorizontalOptions="End">
+                    HorizontalOptions="Fill"
+                    Background="Transparent">
                     <CarouselView
                         x:Name="LocationCarousel"
                         HeightRequest="80"
                         PeekAreaInsets="10"
-                        IndicatorView="indicatorView">
-
+                        IndicatorView="indicatorView"
+                        BackgroundColor="{DynamicResource Background}">
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
                                 <Border
                                     Margin="10"
                                     Padding="10"
-                                    BackgroundColor="#E6F0FF">
-                                    <Label
+                                    BackgroundColor="{DynamicResource Surface}"
+                                    Stroke="{DynamicResource Accent}">
+                                <Label
                                     Text="{Binding}"
+                                    TextColor="{DynamicResource TextPrimary}"
                                     HorizontalOptions="Center"
                                     VerticalOptions="Center"
                                     FontSize="14"
@@ -60,36 +65,40 @@
                     <IndicatorView
                         x:Name="indicatorView"
                         HorizontalOptions="Center"
-                        IndicatorColor="LightGray"
-                        SelectedIndicatorColor="Blue"/>
+                        IndicatorColor="{DynamicResource Surface}"
+                        SelectedIndicatorColor="{DynamicResource Accent}"/>
                 </VerticalStackLayout>
             </HorizontalStackLayout>
 
             <!-- Optional GPS Button -->
             <HorizontalStackLayout
                 HorizontalOptions="Center"
-                Spacing="40">
+                Spacing="40"
+                Background="Transparent">
                 <VerticalStackLayout
                     Spacing="8"
-                    HorizontalOptions="Center">
+                    HorizontalOptions="Center"
+                    Background="Transparent">
                     <Button
                         Text=""
                         HeightRequest="60"
                         WidthRequest="60"
                         CornerRadius="30"
-                        BackgroundColor="Black"
-                        HorizontalOptions="Center"
-                        TextColor="White"/>
+                        BackgroundColor="{DynamicResource Accent}"
+                        TextColor="{DynamicResource TextOnPrimary}"
+                        HorizontalOptions="Center"/>
                     <Label
                         Text="Current Location"
                         FontSize="14"
+                        TextColor="{DynamicResource TextPrimary}"
                         HorizontalOptions="Center" />
                 </VerticalStackLayout>
 
                 <!-- Select Bird -->
                 <VerticalStackLayout
                     Spacing="8"
-                    HorizontalOptions="Center">
+                    HorizontalOptions="Center"
+                    Background="Transparent">
                     <!-- SELECT BIRD BUTTON -->
                     <Button
                         x:Name="SelectBirdButton"
@@ -98,11 +107,12 @@
                         WidthRequest="60"
                         HorizontalOptions="Center"
                         CornerRadius="30"
-                        BackgroundColor="Black"
-                        TextColor="White" />
+                        BackgroundColor="{DynamicResource Accent}"
+                        TextColor="{DynamicResource TextOnPrimary}"/>
                     <Label
                         Text="Select Bird"
                         FontSize="14"
+                        TextColor="{DynamicResource TextPrimary}"
                         HorizontalOptions="Center" />
                 </VerticalStackLayout>
             </HorizontalStackLayout>
@@ -117,7 +127,8 @@
                 Aspect="AspectFill"
                 HorizontalOptions="Fill"
                 VerticalOptions="Fill"
-                Opacity="0"/>
+                Opacity="0"
+                Background="Transparent"/>
         </Grid>
     </Grid>
 </ContentPage>

@@ -1,0 +1,123 @@
+﻿<ContentPage
+    x:Class="MyBirdApp.Views.IntroPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="Black">
+    <Shell.NavBarIsVisible>false</Shell.NavBarIsVisible>
+    <Grid>
+
+        <!-- MENU PANEL (Hidden underneath) -->
+        <VerticalStackLayout
+            x:Name="MenuPanel"
+            BackgroundColor="White"
+            Padding="30"
+            Spacing="25"
+            Opacity="0"
+            TranslationY="200"
+            HeightRequest="400">
+            <!-- VerticalOptions="Fill" -->
+            <!-- Manual Entry -->
+            <Entry
+                x:Name="LocationEntry"
+                Placeholder="Enter location"
+                HeightRequest="55"
+                BackgroundColor="#F2F2F2" />
+            <HorizontalStackLayout
+                Spacing="10"
+                VerticalOptions="Start"
+                HorizontalOptions="Fill">
+                <Label 
+                    Text="Select Location"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"/>
+                <VerticalStackLayout
+                    Spacing="5"
+                    HorizontalOptions="End">
+                    <CarouselView
+                        x:Name="LocationCarousel"
+                        HeightRequest="80"
+                        PeekAreaInsets="10"
+                        IndicatorView="indicatorView">
+
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Margin="10"
+                                    Padding="10"
+                                    BackgroundColor="#E6F0FF">
+                                    <Label
+                                    Text="{Binding}"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    FontSize="14"
+                                    FontAttributes="Bold"/>
+                                </Border>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+
+                    <IndicatorView
+                        x:Name="indicatorView"
+                        HorizontalOptions="Center"
+                        IndicatorColor="LightGray"
+                        SelectedIndicatorColor="Blue"/>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+
+            <!-- Optional GPS Button -->
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Spacing="40">
+                <VerticalStackLayout
+                    Spacing="8"
+                    HorizontalOptions="Center">
+                    <Button
+                        Text=""
+                        HeightRequest="60"
+                        WidthRequest="60"
+                        CornerRadius="30"
+                        BackgroundColor="Black"
+                        HorizontalOptions="Center"
+                        TextColor="White"/>
+                    <Label
+                        Text="Current Location"
+                        FontSize="14"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+
+                <!-- Select Bird -->
+                <VerticalStackLayout
+                    Spacing="8"
+                    HorizontalOptions="Center">
+                    <!-- SELECT BIRD BUTTON -->
+                    <Button
+                        x:Name="SelectBirdButton"
+                        Text=""
+                        HeightRequest="60"
+                        WidthRequest="60"
+                        HorizontalOptions="Center"
+                        CornerRadius="30"
+                        BackgroundColor="Black"
+                        TextColor="White" />
+                    <Label
+                        Text="Select Bird"
+                        FontSize="14"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+            <!--Clicked="OnSelectBirdClicked"-->
+        </VerticalStackLayout>
+
+
+        <!-- IMAGE LAYER (Covers screen initially) -->
+        <Grid x:Name="ImageLayer">
+            <Image
+                x:Name="AnimatedImage"
+                Aspect="AspectFill"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill"
+                Opacity="0"/>
+        </Grid>
+    </Grid>
+</ContentPage>

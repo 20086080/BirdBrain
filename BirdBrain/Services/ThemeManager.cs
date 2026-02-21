@@ -12,11 +12,11 @@ public static class ThemeManager
         switch (themeName)
         {
             case "CoralNavy":
-                mergedDictionaries.Add(new CoralNavyTheme());
+                mergedDictionaries.Add(new CoralNavyDark());
                 break;
 
             case "BlueTeal":
-                mergedDictionaries.Add(new BlueTealTheme());
+                mergedDictionaries.Add(new BlueTealDark());
                 break;
         }
     }

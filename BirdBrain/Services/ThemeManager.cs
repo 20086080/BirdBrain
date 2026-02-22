@@ -1,23 +1,31 @@
 ﻿using BirdBrain.Resources.Themes;
-
 namespace BirdBrain.Services;
 
 public static class ThemeManager
 {
-    public static void ApplyTheme(string themeName)
+    private const string ThemePrefKey = "SelectedTheme";
+    public static void ApplyTheme(Type themeDictionaryType, bool persist = true)
     {
-        var mergedDictionaries = Application.Current.Resources.MergedDictionaries;
-        mergedDictionaries.Clear();
+        if (!typeof(ResourceDictionary).IsAssignableFrom(themeDictionaryType))
+            throw new ArgumentException("Theme must be a ResourceDictionary");
 
-        switch (themeName)
-        {
-            case "CoralNavy":
-                mergedDictionaries.Add(new CoralNavyDark());
-                break;
+        var dictionaries = Application.Current.Resources.MergedDictionaries;
 
-            case "BlueTeal":
-                mergedDictionaries.Add(new BlueTealDark());
-                break;
-        }
+        dictionaries.Clear();
+        dictionaries.Add((ResourceDictionary)Activator.CreateInstance(themeDictionaryType)!);
+
+        if (persist)
+            Preferences.Set(ThemePrefKey, themeDictionaryType.AssemblyQualifiedName);
+    }
+
+    public static void LoadSavedTheme(Type fallbackTheme)
+    {
+        var saved = Preferences.Get(ThemePrefKey, null);
+
+        var themeType = saved != null
+            ? Type.GetType(saved)
+            : fallbackTheme;
+
+        ApplyTheme(themeType ?? fallbackTheme, persist: false);
     }
 }

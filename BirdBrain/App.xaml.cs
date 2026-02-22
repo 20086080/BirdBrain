@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using BirdBrain.Resources.Themes;
 using BirdBrain.Services;
 
 namespace BirdBrain
@@ -8,8 +9,7 @@ namespace BirdBrain
         public App()
         {
             InitializeComponent();
-            ThemeManager.ApplyTheme("CoralNavy");
-            
+            ThemeManager.LoadSavedTheme(typeof(BlueTealDark));
         }
 
         protected override Window CreateWindow(IActivationState? activationState)

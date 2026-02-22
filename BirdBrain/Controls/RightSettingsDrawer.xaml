@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="BirdBrain.Controls.RightSettingsDrawer"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    IsVisible="True">
+
+    <Grid>
+
+        <!-- Overlay -->
+        <BoxView
+            x:Name="Overlay"
+            BackgroundColor="#80000000"
+            IsVisible="False"
+            Opacity="0" />
+
+        <!-- Drawer -->
+        <Border
+            x:Name="Drawer"
+            WidthRequest="320"
+            BackgroundColor="{DynamicResource Surface}"
+            HorizontalOptions="End"
+            TranslationX="320"
+            ZIndex="10">
+
+            <VerticalStackLayout Padding="24" Spacing="20">
+
+                <HorizontalStackLayout>
+                    <Label
+                        Text="Settings"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        HorizontalOptions="StartAndExpand"/>
+
+                    <Button
+                        Text="✕"
+                        BackgroundColor="Transparent"
+                        Clicked="Close"/>
+                </HorizontalStackLayout>
+
+                <!-- 🔌 Drop your theme UI here -->
+                <ContentPresenter />
+
+            </VerticalStackLayout>
+        </Border>
+
+    </Grid>
+</ContentView>

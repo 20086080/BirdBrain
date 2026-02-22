@@ -2,19 +2,24 @@
     x:Class="BirdBrain.Views.IntroPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:BirdBrain.Controls"
     BackgroundColor="{DynamicResource Background}">
     <Shell.NavBarIsVisible>false</Shell.NavBarIsVisible>
-    <Grid RowDefinitions="*">
+    <Grid RowDefinitions="Auto,*">
+        <!-- HEADER -->
+        <controls:HeaderView />
 
-        <!-- MENU PANEL (Hidden underneath) -->
-        <VerticalStackLayout
+        <!-- PAGE CONTENT -->
+        <Grid Grid.Row="1">
+            <!-- MENU PANEL (Hidden underneath) -->
+            <VerticalStackLayout
             x:Name="MenuPanel"
             BackgroundColor="Transparent"
             Padding="30"
             Spacing="25"
             Opacity="0"
             TranslationY="200">
-            <Entry
+                <Entry
                 x:Name="LocationEntry"
                 Placeholder="Enter location"
                 HeightRequest="55"
@@ -22,64 +27,64 @@
                 TextColor="{DynamicResource TextPrimary}"
                 PlaceholderColor="{DynamicResource Accent}"
                 />
-            <HorizontalStackLayout
+                <HorizontalStackLayout
                 Spacing="10"
                 VerticalOptions="Start"
                 HorizontalOptions="Fill"
                 Background="Transparent">
-                <Label 
+                    <Label 
                     Text="Select Location"
                     FontSize="14"
                     FontAttributes="Bold"
                     TextColor="{DynamicResource TextPrimary}"
                     HorizontalOptions="Center"/>
-                <VerticalStackLayout
+                    <VerticalStackLayout
                     Spacing="5"
                     HorizontalOptions="Fill"
                     Background="Transparent">
-                    <CarouselView
+                        <CarouselView
                         x:Name="LocationCarousel"
                         HeightRequest="80"
                         PeekAreaInsets="10"
                         IndicatorView="indicatorView"
                         BackgroundColor="{DynamicResource Background}">
-                        <CarouselView.ItemTemplate>
-                            <DataTemplate>
-                                <Border
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border
                                     Margin="10"
                                     Padding="10"
                                     BackgroundColor="{DynamicResource Surface}"
                                     Stroke="{DynamicResource Accent}">
-                                <Label
+                                        <Label
                                     Text="{Binding}"
                                     TextColor="{DynamicResource TextPrimary}"
                                     HorizontalOptions="Center"
                                     VerticalOptions="Center"
                                     FontSize="14"
                                     FontAttributes="Bold"/>
-                                </Border>
-                            </DataTemplate>
-                        </CarouselView.ItemTemplate>
-                    </CarouselView>
+                                    </Border>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
 
-                    <IndicatorView
+                        <IndicatorView
                         x:Name="indicatorView"
                         HorizontalOptions="Center"
                         IndicatorColor="{DynamicResource Surface}"
                         SelectedIndicatorColor="{DynamicResource Accent}"/>
-                </VerticalStackLayout>
-            </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
 
-            <!-- Optional GPS Button -->
-            <HorizontalStackLayout
+                <!-- Optional GPS Button -->
+                <HorizontalStackLayout
                 HorizontalOptions="Center"
                 Spacing="40"
                 Background="Transparent">
-                <VerticalStackLayout
+                    <VerticalStackLayout
                     Spacing="8"
                     HorizontalOptions="Center"
                     Background="Transparent">
-                    <Button
+                        <Button
                         Text=""
                         HeightRequest="60"
                         WidthRequest="60"
@@ -87,20 +92,20 @@
                         BackgroundColor="{DynamicResource Accent}"
                         TextColor="{DynamicResource TextOnPrimary}"
                         HorizontalOptions="Center"/>
-                    <Label
+                        <Label
                         Text="Current Location"
                         FontSize="14"
                         TextColor="{DynamicResource TextPrimary}"
                         HorizontalOptions="Center" />
-                </VerticalStackLayout>
+                    </VerticalStackLayout>
 
-                <!-- Select Bird -->
-                <VerticalStackLayout
+                    <!-- Select Bird -->
+                    <VerticalStackLayout
                     Spacing="8"
                     HorizontalOptions="Center"
                     Background="Transparent">
-                    <!-- SELECT BIRD BUTTON -->
-                    <Button
+                        <!-- SELECT BIRD BUTTON -->
+                        <Button
                         x:Name="SelectBirdButton"
                         Text=""
                         HeightRequest="60"
@@ -109,26 +114,27 @@
                         CornerRadius="30"
                         BackgroundColor="{DynamicResource Accent}"
                         TextColor="{DynamicResource TextOnPrimary}"/>
-                    <Label
+                        <Label
                         Text="Select Bird"
                         FontSize="14"
                         TextColor="{DynamicResource TextPrimary}"
                         HorizontalOptions="Center" />
-                </VerticalStackLayout>
-            </HorizontalStackLayout>
-            <!--Clicked="OnSelectBirdClicked"-->
-        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+                <!--Clicked="OnSelectBirdClicked"-->
+            </VerticalStackLayout>
 
 
-        <!-- IMAGE LAYER (Covers screen initially) -->
-        <Grid x:Name="ImageLayer">
-            <Image
+            <!-- IMAGE LAYER (Covers screen initially) -->
+            <Grid x:Name="ImageLayer">
+                <Image
                 x:Name="AnimatedImage"
                 Aspect="AspectFill"
                 HorizontalOptions="Fill"
                 VerticalOptions="Fill"
                 Opacity="0"
                 Background="Transparent"/>
+            </Grid>
         </Grid>
     </Grid>
 </ContentPage>

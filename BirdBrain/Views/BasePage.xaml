@@ -3,15 +3,23 @@
     x:Class="BirdBrain.Views.BasePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:BirdBrain.Controls">
+    xmlns:controls="clr-namespace:BirdBrain.Controls"
+    BackgroundColor="{DynamicResource Background}">
+    <Grid RowDefinitions="Auto,*">
 
-    <Grid>
+        <!-- GLOBAL HEADER -->
+        <!--<controls:HeaderView />-->
 
-        <!-- Page content injected here -->
-        <ContentPresenter x:Name="PageContent"/>
+        <!-- PAGE CONTENT + DRAWER LAYER -->
+        <Grid Grid.Row="1">
 
-        <!-- Global settings drawer -->
-        <controls:RightSettingsDrawer x:Name="SettingsDrawer"/>
+            <ContentPresenter x:Name="PageContent" />
+            <!-- 
+            <controls:RightSettingsDrawer
+                x:Name="SettingsDrawer"
+                ZIndex="10"/>-->
 
+        </Grid>
     </Grid>
 </ContentPage>
+    

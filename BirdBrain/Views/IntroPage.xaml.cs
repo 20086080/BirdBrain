@@ -69,4 +69,41 @@ public partial class IntroPage : ContentPage
         }
     }
 
+    void OnAllBirdsTapped(object sender, EventArgs e)
+    {
+        var primary = (Color)Application.Current.Resources["Primary"];
+        var surface = (Color)Application.Current.Resources["Surface"];
+        var textOnPrimary = (Color)Application.Current.Resources["TextOnPrimary"];
+        var textPrimary = (Color)Application.Current.Resources["TextPrimary"];
+
+        AllBirdsTab.BackgroundColor = primary;
+        SpecificBirdTab.BackgroundColor = surface;
+
+        ((Label)AllBirdsTab.Content).TextColor = textOnPrimary;
+        ((Label)SpecificBirdTab.Content).TextColor = textPrimary;
+    }
+
+    void OnSpecificBirdTapped(object sender, EventArgs e)
+    {
+        var primary = (Color)Application.Current.Resources["Primary"];
+        var surface = (Color)Application.Current.Resources["Surface"];
+        var textOnPrimary = (Color)Application.Current.Resources["TextOnPrimary"];
+        var textPrimary = (Color)Application.Current.Resources["TextPrimary"];
+
+        SpecificBirdTab.BackgroundColor = primary;
+        AllBirdsTab.BackgroundColor = surface;
+
+        ((Label)SpecificBirdTab.Content).TextColor = textOnPrimary;
+        ((Label)AllBirdsTab.Content).TextColor = textPrimary;
+    }
+
+    async void OnUseLocationInvoked(object sender, EventArgs e)
+    {
+        // Optional micro animation
+        await this.ScaleTo(0.98, 70);
+        await this.ScaleTo(1, 70);
+
+        // 🔥 Call your location logic here
+        // await GetCurrentLocation();
+    }
 }

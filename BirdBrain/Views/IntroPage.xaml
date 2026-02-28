@@ -11,12 +11,9 @@
         <!-- PAGE CONTENT -->
         <Grid>
             <!-- MENU PANEL (Hidden underneath) -->
-            <VerticalStackLayout
-                x:Name="MenuPanel"
-                BackgroundColor="Transparent"
-                Padding="30"
-                Spacing="40"
-                Opacity="0"
+            <VerticalStackLayout x:Name="MenuPanel"
+                BackgroundColor="{DynamicResource Surface}"
+                Padding="30" Spacing="40" Opacity="0"
                 TranslationY="0">
                 <Grid RowDefinitions="4*,*"
                     ColumnSpacing="15"
@@ -37,61 +34,28 @@
                         </SwipeView.RightItems>
 
                         <!-- MAIN CONTENT (Visible Area) -->
-                        <Border
-                            BackgroundColor="{DynamicResource Surface}"
-                            Stroke="{DynamicResource Accent}"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 30"
-                            Padding="20,0"
-                            HeightRequest="60">
-                            <Label
-                                Text="Swipe - Current Location"
-                                VerticalOptions="Center"
-                                TextColor="{DynamicResource TextPrimary}"
-                                FontAttributes="Bold"/>
+                        <Border Style="{StaticResource RoundedAccentBorderStyle}" HeightRequest="60">
+                            <Label Text="Swipe - Current Location" Style="{StaticResource PageLabel}"/>
                         </Border>
                     </SwipeView>
-                    
+
                     <Entry
-                        Grid.Row="1"
-                        x:Name="LocationEntry"
-                        Placeholder="Enter location"
-                        HeightRequest="55"
-                        BackgroundColor="{DynamicResource Surface}"
-                        TextColor="{DynamicResource TextPrimary}"
-                        PlaceholderColor="{DynamicResource Accent}"/>
+                        Grid.Row="1" x:Name="LocationEntry" 
+                        Placeholder="Enter location" Style="{StaticResource PrimaryEntryStyle}" />
                 </Grid>
                 <VerticalStackLayout
                         Spacing="5">
-                    <Label 
-                            Text="Saved Locations"
-                            FontSize="14"
-                            FontAttributes="Bold"
-                            TextColor="{DynamicResource TextPrimary}"/>
+                    <Label Text="Saved Locations" Style="{StaticResource PageLabel}" />
                     <CarouselView
                             x:Name="LocationCarousel"
                             HeightRequest="80"   
-                            ItemsLayout="HorizontalList"
-                            HorizontalScrollBarVisibility="Never"
+                            ItemsLayout="HorizontalList" HorizontalScrollBarVisibility="Never"
                             BackgroundColor="{DynamicResource Background}">
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
-                                <Border
-                                    WidthRequest="130"
-                                    HeightRequest="50"
-                                    Margin="5"
-                                    Padding="10"
-                                    BackgroundColor="{DynamicResource Surface}"
-                                    Stroke="{DynamicResource Accent}"
-                                    StrokeShape="RoundRectangle 20">
-                                
-                                    <Label
-                                        Text="{Binding}"
-                                        TextColor="{DynamicResource TextPrimary}"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="Center"
-                                        FontSize="14"
-                                        FontAttributes="Bold"/>
+                                <Border Style="{StaticResource RoundedAccentBorderStyle}"
+                                    WidthRequest="130" HeightRequest="50">
+                                    <Label Text="{Binding}" Style="{StaticResource PageLabel}"/>
                                 </Border>
                             </DataTemplate>
                         </CarouselView.ItemTemplate>
@@ -107,28 +71,14 @@
                 <HorizontalStackLayout
                     HorizontalOptions="Center"
                     Spacing="40"
-                    Background="Transparent">
-                    <Border
-                        Stroke="{DynamicResource Accent}"
-                        StrokeThickness="1"
-                        HorizontalOptions="Start"
-                        Padding="0"
-                        BackgroundColor="{DynamicResource Surface}"
-                        StrokeShape="RoundRectangle 20">
+                    Background="{DynamicResource Surface}">
+                    <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0"
+                            HorizontalOptions="Start">
                         <Grid ColumnDefinitions="*,*"
                             HeightRequest="36">
                             <!-- All Birds TAB -->
-                            <Border
-                                x:Name="AllBirdsTab"
-                                Grid.Column="0"
-                                BackgroundColor="{DynamicResource Primary}"
-                                Padding="12,6"
-                                StrokeShape="RoundRectangle 20,0,0,20">
-                                <Label
-                                    Text="All Birds"
-                                    TextColor="{DynamicResource TextOnPrimary}"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"/>
+                            <Border x:Name="AllBirdsTab" Grid.Column="0" Style="{StaticResource SelectorBorderStyle1}">
+                                <Label Text="All Birds" Style="{StaticResource PageLabel}"/>
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnAllBirdsTapped"/>
                                 </Border.GestureRecognizers>
@@ -136,16 +86,8 @@
 
                             <!-- BIRD TAB -->
                             <Border
-                                x:Name="SpecificBirdTab"
-                                Grid.Column="1"
-                                BackgroundColor="{DynamicResource Surface}"
-                                Padding="12,6"
-                                StrokeShape="RoundRectangle 0,20,20,0">
-                                <Label
-                                    Text="Specific Bird"
-                                    TextColor="{DynamicResource TextPrimary}"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"/>
+                                x:Name="SpecificBirdTab" Grid.Column="1" Style="{StaticResource SelectorBorderStyle2}" >
+                                <Label Text="Specific Bird" Style="{StaticResource PageLabel}"/>
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnSpecificBirdTapped"/>
                                 </Border.GestureRecognizers>

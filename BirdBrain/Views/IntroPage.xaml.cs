@@ -36,12 +36,6 @@ public partial class IntroPage : ContentPage
             await AnimatedImage.FadeTo(0, 250);   // Fade out
         }
 
-        // Final image stays visible
-        // AnimatedImage.Source = images.Last();
-        //        await AnimatedImage.FadeTo(1, 600);
-
-        //        await Task.Delay(800);
-
         // Slide entire image layer up
         await ImageLayer.TranslateTo(0, -this.Height, 200, Easing.CubicInOut);
 

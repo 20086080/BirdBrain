@@ -1,4 +1,5 @@
-﻿namespace BirdBrain.Views;
+﻿
+namespace BirdBrain.Views;
 
 public partial class IntroPage : ContentPage
 {
@@ -31,9 +32,9 @@ public partial class IntroPage : ContentPage
         {
             AnimatedImage.Source = img;
 
-            await AnimatedImage.FadeTo(1, 250);  // Fade in
-            await Task.Delay(350);               // Hold
-            await AnimatedImage.FadeTo(0, 250);   // Fade out
+            await AnimatedImage.FadeTo(1, 150);  // Fade in
+            await Task.Delay(550);               // Hold image
+            await AnimatedImage.FadeTo(0, 150);   // Fade out
         }
 
         // Slide entire image layer up
@@ -65,31 +66,38 @@ public partial class IntroPage : ContentPage
 
     void OnAllBirdsTapped(object sender, EventArgs e)
     {
-        var primary = (Color)Application.Current.Resources["Primary"];
-        var surface = (Color)Application.Current.Resources["Surface"];
-        var textOnPrimary = (Color)Application.Current.Resources["TextOnPrimary"];
-        var textPrimary = (Color)Application.Current.Resources["TextPrimary"];
+        AllBirdsTab.Style =
+            (Style)Application.Current.Resources["SegmentSelectedStyle"];
 
-        AllBirdsTab.BackgroundColor = primary;
-        SpecificBirdTab.BackgroundColor = surface;
+        SpecificBirdTab.Style =
+            (Style)Application.Current.Resources["SegmentUnselectedStyle"];
 
-        ((Label)AllBirdsTab.Content).TextColor = textOnPrimary;
-        ((Label)SpecificBirdTab.Content).TextColor = textPrimary;
+        AllBirdsLabel.Style =
+            (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
+
+        SpecificBirdLabel.Style =
+            (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
     }
 
-    void OnSpecificBirdTapped(object sender, EventArgs e)
+    async void OnSpecificBirdTapped(object sender, EventArgs e)
     {
-        var primary = (Color)Application.Current.Resources["Primary"];
-        var surface = (Color)Application.Current.Resources["Surface"];
-        var textOnPrimary = (Color)Application.Current.Resources["TextOnPrimary"];
-        var textPrimary = (Color)Application.Current.Resources["TextPrimary"];
+        SpecificBirdTab.Style =
+            (Style)Application.Current.Resources["SegmentSelectedStyle"];
 
-        SpecificBirdTab.BackgroundColor = primary;
-        AllBirdsTab.BackgroundColor = surface;
+        AllBirdsTab.Style =
+            (Style)Application.Current.Resources["SegmentUnselectedStyle"];
 
-        ((Label)SpecificBirdTab.Content).TextColor = textOnPrimary;
-        ((Label)AllBirdsTab.Content).TextColor = textPrimary;
+        SpecificBirdLabel.Style =
+            (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
+
+        AllBirdsLabel.Style =
+            (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
+
+        // Navigate using Shell
+        await Shell.Current.GoToAsync(nameof(BirdSelectionPage));
     }
+    
+
 
     async void OnUseLocationInvoked(object sender, EventArgs e)
     {

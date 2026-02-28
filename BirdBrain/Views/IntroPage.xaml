@@ -18,10 +18,8 @@
                 <Grid RowDefinitions="4*,*"
                     ColumnSpacing="15"
                     HorizontalOptions="Fill">
-                    
                     <!-- Optional GPS Button -->
                     <SwipeView HeightRequest="60">
-
                         <!-- RIGHT SWIPE ACTION -->
                         <SwipeView.RightItems>
                             <SwipeItems Mode="Reveal">
@@ -39,16 +37,13 @@
                         </Border>
                     </SwipeView>
 
-                    <Entry
-                        Grid.Row="1" x:Name="LocationEntry" 
-                        Placeholder="Enter location" Style="{StaticResource PrimaryEntryStyle}" />
+                    <Entry Grid.Row="1" x:Name="LocationEntry" 
+                        Placeholder="Enter location" Style="{StaticResource PrimaryEntryStyle}"/>
                 </Grid>
-                <VerticalStackLayout
-                        Spacing="5">
+                <VerticalStackLayout Spacing="5">
                     <Label Text="Saved Locations" Style="{StaticResource PageLabel}" />
                     <CarouselView
-                            x:Name="LocationCarousel"
-                            HeightRequest="80"   
+                            x:Name="LocationCarousel" HeightRequest="80"   
                             ItemsLayout="HorizontalList" HorizontalScrollBarVisibility="Never"
                             BackgroundColor="{DynamicResource Background}">
                         <CarouselView.ItemTemplate>
@@ -60,10 +55,8 @@
                             </DataTemplate>
                         </CarouselView.ItemTemplate>
                     </CarouselView>
-
                     <IndicatorView
-                            x:Name="indicatorView"
-                            HorizontalOptions="Center"
+                            x:Name="indicatorView" HorizontalOptions="Center"
                             IndicatorColor="{DynamicResource Surface}"
                             SelectedIndicatorColor="{DynamicResource Accent}"/>
                 </VerticalStackLayout>
@@ -74,11 +67,10 @@
                     Background="{DynamicResource Surface}">
                     <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0"
                             HorizontalOptions="Start">
-                        <Grid ColumnDefinitions="*,*"
-                            HeightRequest="36">
+                        <Grid ColumnDefinitions="*,*" HeightRequest="36">
                             <!-- All Birds TAB -->
-                            <Border x:Name="AllBirdsTab" Grid.Column="0" Style="{StaticResource SelectorBorderStyle1}">
-                                <Label Text="All Birds" Style="{StaticResource PageLabel}"/>
+                            <Border x:Name="AllBirdsTab" Grid.Column="0" Style="{StaticResource SegmentSelectedStyle}">
+                                <Label x:Name="AllBirdsLabel" Text="All Birds" Style="{StaticResource SegmentSelectedLabelStyle}"/>
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnAllBirdsTapped"/>
                                 </Border.GestureRecognizers>
@@ -86,15 +78,14 @@
 
                             <!-- BIRD TAB -->
                             <Border
-                                x:Name="SpecificBirdTab" Grid.Column="1" Style="{StaticResource SelectorBorderStyle2}" >
-                                <Label Text="Specific Bird" Style="{StaticResource PageLabel}"/>
+                                x:Name="SpecificBirdTab" Grid.Column="1" Style="{StaticResource SegmentUnselectedStyle}" >
+                                <Label x:Name="SpecificBirdLabel" Text="Specific Bird" Style="{StaticResource SegmentUnselectedLabelStyle}"/>
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnSpecificBirdTapped"/>
                                 </Border.GestureRecognizers>
                             </Border>
                         </Grid>
                     </Border>
-                    
                 </HorizontalStackLayout>
 
             </VerticalStackLayout>
@@ -106,7 +97,7 @@
                 HorizontalOptions="Fill"
                 VerticalOptions="Fill"
                 Opacity="0"
-                Background="Transparent"/>
+                Background="{DynamicResource Primary}"/>
             </Grid>
         </Grid>
     </Grid>

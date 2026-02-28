@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="BirdBrain.Controls.AppHeader"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Grid ColumnDefinitions="Auto,*,Auto, Auto, Auto, Auto"
+          Padding="20,12"
+          BackgroundColor="{DynamicResource Background}"
+          VerticalOptions="Center">
+
+        <!-- Hamburger -->
+        <Image Source="icon_hamburger.png" Style="{StaticResource MenuIconStyle}">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnMenuTapped"/>
+            </Image.GestureRecognizers>
+        </Image>
+
+        <!-- Logo -->
+        <HorizontalStackLayout Grid.Column="1">
+            <Image Source="header.png"
+                   HeightRequest="100"/>
+        </HorizontalStackLayout>
+
+        <!-- Favourite -->
+        <Image Grid.Column="2" Source="icon_favourite.png" Style="{StaticResource MenuIconStyle}">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnMenuFavouriteTapped"/>
+            </Image.GestureRecognizers>
+        </Image>
+
+        <!-- Refresh -->
+        <Image Grid.Column="3" Source="icon_refresh.png" Style="{StaticResource MenuIconStyle}">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnMenuRefreshTapped"/>
+            </Image.GestureRecognizers>
+        </Image>
+
+        <!-- Settings -->
+        <Image Grid.Column="4" Source="icon_settings.png" Style="{StaticResource MenuIconStyle}">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnMenuSettingsTapped"/>
+            </Image.GestureRecognizers>
+        </Image>
+        
+        <!-- Close -->
+        <Image Grid.Column="5" Source="icon_exit.png" Style="{StaticResource MenuIconStyle}">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnCloseTapped"/>
+            </Image.GestureRecognizers>
+        </Image>
+
+    </Grid>
+
+</ContentView>

@@ -5,21 +5,35 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:BirdBrain.Controls"
     BackgroundColor="{DynamicResource Background}">
-    <Grid RowDefinitions="Auto,*">
 
-        <!-- GLOBAL HEADER -->
-        <!--<controls:HeaderView />-->
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
 
-        <!-- PAGE CONTENT + DRAWER LAYER -->
+            <Grid RowDefinitions="Auto,*">
+
+                <!-- GLOBAL HEADER -->
+                <controls:AppHeader Grid.Row="0"/>
+
+                <!-- PAGE CONTENT -->
+                <ContentPresenter Grid.Row="1"/>
+
+            </Grid>
+
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+</ContentPage>
+
+<!--
+<Grid RowDefinitions="Auto,*">
+
+        
         <Grid Grid.Row="1">
 
             <ContentPresenter x:Name="PageContent" />
-            <!-- 
-            <controls:RightSettingsDrawer
-                x:Name="SettingsDrawer"
-                ZIndex="10"/>-->
-
+            
         </Grid>
     </Grid>
 </ContentPage>
+    -->
     

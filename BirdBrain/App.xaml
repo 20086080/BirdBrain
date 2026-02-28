@@ -6,12 +6,19 @@
     <Application.Resources>
         <ResourceDictionary>
             <!-- Label Style -->
-            <Style x:Key="PageLabel"
-               TargetType="Label">
+            <Style x:Key="PageLabel" TargetType="Label">
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="TextColor" Value="{DynamicResource TextPrimary}" />
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <!-- Menu Icon -->
+            <Style x:Key="MenuIconStyle" TargetType="Image">
+                <Setter Property="HeightRequest" Value="22" />
+                <Setter Property="WidthRequest" Value="22" />
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Aspect" Value="AspectFit" />
             </Style>
             <!-- Data Entry Style -->
             <Style x:Key="PrimaryEntryStyle"
@@ -34,7 +41,7 @@
                 <Setter Property="Stroke" Value="{DynamicResource Accent}" />
             </Style>
             <!-- Selector Border 1st Element -->
-            <Style x:Key="SelectorBorderStyle1" TargetType="Border">
+            <Style x:Key="SegmentSelectedStyle" TargetType="Border">
                 <Setter Property="BackgroundColor" Value="{DynamicResource Primary}" />
                 <Setter Property="Stroke" Value="{DynamicResource Accent}" />
                 <Setter Property="Padding" Value="12,6" />
@@ -45,7 +52,7 @@
                 </Setter>
             </Style>
             <!-- Selector Border 2nd Element -->
-            <Style x:Key="SelectorBorderStyle2" TargetType="Border">
+            <Style x:Key="SegmentUnselectedStyle" TargetType="Border">
                 <Setter Property="Padding" Value="12,6" />
                 <Setter Property="StrokeShape">
                     <Setter.Value>
@@ -53,6 +60,14 @@
                     </Setter.Value>
                 </Setter>
                 <Setter Property="BackgroundColor" Value="{DynamicResource Surface}" />
+            </Style>
+
+            <Style x:Key="SegmentSelectedLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource TextOnPrimary}" />
+            </Style>
+
+            <Style x:Key="SegmentUnselectedLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource TextPrimary}" />
             </Style>
             
             <ResourceDictionary.MergedDictionaries>

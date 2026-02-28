@@ -70,6 +70,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Controls\AppHeader.xaml.cs">
+	    <DependentUpon>AppHeader.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\IntroPage.xaml.cs">
 	    <DependentUpon>IntroPage.xaml</DependentUpon>
 	  </Compile>
@@ -79,13 +82,16 @@
 	  <Compile Update="Resources\Themes\CoralNavyDark.xaml.cs">
 	    <DependentUpon>CoralNavyDark.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\BirdSelectionPage.xaml.cs">
+	    <DependentUpon>BirdSelectionPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="Controls\FooterView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Controls\HeaderView.xaml">
+	  <MauiXaml Update="Controls\AppHeader.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\LeftNavigationDrawer.xaml">
@@ -137,6 +143,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\BasePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\BirdSelectionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

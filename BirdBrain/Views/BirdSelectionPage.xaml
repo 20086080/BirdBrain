@@ -7,7 +7,7 @@
     Title="Bird Selection"
     BackgroundColor="{DynamicResource Background}">
 
-    <Grid RowDefinitions="2*,Auto,Auto,Auto,*"
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
           Padding="20"
           RowSpacing="20">
 
@@ -15,7 +15,7 @@
         <!-- EXPLORE BY + SEGMENT -->
         <!-- ========================= -->
         <VerticalStackLayout Grid.Row="1" Spacing="12">
-            <Label Text="Location : Kings Park" Style="{StaticResource SegmentSelectedLabelStyle}"/>
+            <Label Text="Location : XXX" Style="{StaticResource SegmentSelectedLabelStyle}"/>
         </VerticalStackLayout>
 
 
@@ -23,58 +23,40 @@
         <!-- 2️⃣ ENTER BIRD -->
         <!-- ========================= -->
         <VerticalStackLayout Grid.Row="2" Spacing="8">
-            <Label Text="Enter Bird" Style="{StaticResource PageLabel}" />
-            <Border Style="{StaticResource RoundedAccentBorderStyle}">
-                <Entry Placeholder="Type bird name..." Style="{StaticResource PrimaryEntryStyle}" />
-            </Border>
-
+            <Label Text="Bird" Style="{StaticResource PageLabel}" />
+            <Entry Placeholder="Type bird name..." Style="{StaticResource PrimaryEntryStyle}" />
         </VerticalStackLayout>
-        <VerticalStackLayout Grid.Row="3" Spacing="10">
+        <VerticalStackLayout Grid.Row="3" Spacing="15">
             <Label Text="Saved Birds"
             Style="{StaticResource PageLabel}" />
 
-            <CarouselView HeightRequest="190"
-                  PeekAreaInsets="60"
-                  IndicatorView="BirdIndicator"
-                  HorizontalOptions="FillAndExpand">
-
+            <CarouselView HeightRequest="140" ItemsSource="{Binding MyCollection}" 
+                          x:Name="BirdCarousel"
+                PeekAreaInsets="60" IndicatorView="BirdIndicator">
                 <CarouselView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal"
-                               SnapPointsType="MandatorySingle"
-                               SnapPointsAlignment="Center"
-                               ItemSpacing="10"/>
+                    <LinearItemsLayout Orientation="Horizontal" 
+                               SnapPointsType="MandatorySingle" SnapPointsAlignment="Center"
+                               ItemSpacing="5"/>
                 </CarouselView.ItemsLayout>
 
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
-                        <Grid WidthRequest="220"
-                      HorizontalOptions="Center">
-
-                            <Border Stroke="{DynamicResource Accent}"
-                            StrokeThickness="1"
-                            BackgroundColor="{DynamicResource Surface}"
-                            Padding="10"
-                            StrokeShape="RoundRectangle 20">
-
-                                <VerticalStackLayout Spacing="8"
-                                             HorizontalOptions="Center">
-
+                        <Grid WidthRequest="200" HorizontalOptions="Center">
+                            <Border Stroke="{DynamicResource Accent}" StrokeThickness="1"
+                                BackgroundColor="{DynamicResource Surface}" Padding="10"
+                                StrokeShape="RoundRectangle 20">
+                                <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
                                     <Image Source="{Binding Image}"
-                                   HeightRequest="110"
-                                   Aspect="AspectFill" />
-
+                                        HeightRequest="110" Aspect="AspectFill" />
                                     <Label Text="{Binding Name}"
-                                   HorizontalTextAlignment="Center"
-                                   TextColor="{DynamicResource TextPrimary}"
-                                   FontAttributes="Bold" />
+                                        HorizontalTextAlignment="Center"
+                                        TextColor="{DynamicResource TextPrimary}"
+                                        FontAttributes="Bold" />
                                 </VerticalStackLayout>
-
                             </Border>
-
                         </Grid>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
-
             </CarouselView>
 
             <IndicatorView x:Name="BirdIndicator"
@@ -83,59 +65,5 @@
                    SelectedIndicatorColor="{DynamicResource Primary}" />
 
         </VerticalStackLayout>
-
-        <!-- ========================= -->
-        <!-- 3️⃣ SAVED BIRDS -->
-        <!-- ========================= -->
-        
-        
-        <!--
-        <VerticalStackLayout Grid.Row="3" Spacing="10">
-
-            <Label Text="Saved Birds" Style="{StaticResource PageLabel}" />
-
-            <CarouselView HeightRequest="180"
-                          IndicatorView="BirdIndicator">
-
-                <CarouselView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal"
-                                       SnapPointsType="MandatorySingle"
-                                       SnapPointsAlignment="Center" />
-                </CarouselView.ItemsLayout>
-
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
-                        <Border Stroke="{DynamicResource Accent}"
-                                StrokeThickness="1"
-                                Padding="10"
-                                Margin="5"
-                                BackgroundColor="{DynamicResource Surface}">
-                            <VerticalStackLayout Spacing="8"
-                                                 HorizontalOptions="Center">
-
-                                <Image Source="{Binding Image}"
-                                       HeightRequest="100"
-                                       Aspect="AspectFill" />
-
-                                <Label Text="{Binding Name}"
-                                       HorizontalTextAlignment="Center"
-                                       TextColor="{DynamicResource TextPrimary}"
-                                       FontAttributes="Bold" />
-                            </VerticalStackLayout>
-                        </Border>
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-
-            </CarouselView>
--->
-            <!-- Indicator -->
-        <!--
-            <IndicatorView x:Name="BirdIndicator"
-                           HorizontalOptions="Center"
-                           IndicatorColor="{DynamicResource Accent}"
-                           SelectedIndicatorColor="{DynamicResource Primary}" />
-
-        </VerticalStackLayout>
- -->
     </Grid>
 </views:BasePage>

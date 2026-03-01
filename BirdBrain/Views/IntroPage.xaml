@@ -5,43 +5,33 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:BirdBrain.Controls"
     xmlns:views="clr-namespace:BirdBrain.Views"
-    Shell.NavBarIsVisible="False">
+    Title="Location Selection"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{DynamicResource Background}">
 
     <Grid>
         <!-- PAGE CONTENT -->
         <Grid>
             <!-- MENU PANEL (Hidden underneath) -->
             <VerticalStackLayout x:Name="MenuPanel"
-                BackgroundColor="{DynamicResource Surface}"
+                BackgroundColor="{DynamicResource Background}"
                 Padding="30" Spacing="40" Opacity="0"
                 TranslationY="0">
-                <Grid RowDefinitions="4*,*"
+                <Grid RowDefinitions="5*,*"
                     ColumnSpacing="15"
                     HorizontalOptions="Fill">
                     <!-- Optional GPS Button -->
-                    <SwipeView HeightRequest="60">
-                        <!-- RIGHT SWIPE ACTION -->
-                        <SwipeView.RightItems>
-                            <SwipeItems Mode="Reveal">
-                                <SwipeItem
-                                    Text="Use Location"
-                                    BackgroundColor="{DynamicResource Accent}"
-                                    IconImageSource="location.png"
-                                    Invoked="OnUseLocationInvoked"/>
-                            </SwipeItems>
-                        </SwipeView.RightItems>
-
-                        <!-- MAIN CONTENT (Visible Area) -->
-                        <Border Style="{StaticResource RoundedAccentBorderStyle}" HeightRequest="60">
-                            <Label Text="Swipe - Current Location" Style="{StaticResource PageLabel}"/>
-                        </Border>
-                    </SwipeView>
-
-                    <Entry Grid.Row="1" x:Name="LocationEntry" 
-                        Placeholder="Enter location" Style="{StaticResource PrimaryEntryStyle}"/>
+                    <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
+                        <Label Text="Use Current Location" Style="{StaticResource PageLabel}" />
+                        <Switch IsToggled="{Binding UseCurrentLocation}" Style="{StaticResource PrimarySwitchStyle}"/>
+                    </HorizontalStackLayout>
+                    <VerticalStackLayout Grid.Row="1" Spacing="2">
+                        <Entry x:Name="LocationEntry" Placeholder="Enter location" Style="{StaticResource PrimaryEntryStyle}" />
+                        <BoxView Style="{StaticResource UnderlineStyle}"/>
+                    </VerticalStackLayout>
                 </Grid>
                 <VerticalStackLayout Spacing="5">
-                    <Label Text="Saved Locations" Style="{StaticResource PageLabel}" />
+                    <Label Text="Saved Locations" Style="{StaticResource PageLabel}" HorizontalOptions="Center" />
                     <CarouselView
                             x:Name="LocationCarousel" HeightRequest="80"   
                             ItemsLayout="HorizontalList" HorizontalScrollBarVisibility="Never"
@@ -64,7 +54,7 @@
                 <HorizontalStackLayout
                     HorizontalOptions="Center"
                     Spacing="40"
-                    Background="{DynamicResource Surface}">
+                    Background="{DynamicResource Background}">
                     <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0"
                             HorizontalOptions="Start">
                         <Grid ColumnDefinitions="*,*" HeightRequest="36">

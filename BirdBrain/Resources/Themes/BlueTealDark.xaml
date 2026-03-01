@@ -2,12 +2,10 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BirdBrain.Resources.Themes.BlueTealDark">
-
     <Color x:Key="Primary">#0B3C5D</Color>
-    <Color x:Key="Accent">#1CA7A6</Color>
-    <Color x:Key="Background">#0A1923</Color>
-    <Color x:Key="Surface">#102A3A</Color>
+    <Color x:Key="Accent">#FF00FFFF</Color>
+    <Color x:Key="Background">#000033</Color>
+    <Color x:Key="Surface">#FF708090</Color>
     <Color x:Key="TextPrimary">#E6F4F7</Color>
     <Color x:Key="TextOnPrimary">#FFFFFF</Color>
-
 </ResourceDictionary>

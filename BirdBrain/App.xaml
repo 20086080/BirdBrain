@@ -4,18 +4,28 @@
              xmlns:local="clr-namespace:BirdBrain"
              x:Class="BirdBrain.App">
     <Application.Resources>
+  
         <ResourceDictionary>
+            <!-- Font Aliases -->
+            <x:String x:Key="FontPrimary">AppRegular</x:String>
+            <x:String x:Key="FontEmphasis">AppMedium</x:String>
+            <x:String x:Key="FontDisplay">AppMedium</x:String>
+
             <!-- Label Style -->
             <Style x:Key="PageLabel" TargetType="Label">
                 <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="FontAutoScalingEnabled" Value="True" />
                 <Setter Property="TextColor" Value="{DynamicResource TextPrimary}" />
-                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontFamily" Value="AppMedium" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
             <!-- Menu Icon -->
             <Style x:Key="MenuIconStyle" TargetType="Image">
-                <Setter Property="HeightRequest" Value="22" />
-                <Setter Property="WidthRequest" Value="22" />
+                <Setter Property="HeightRequest" Value="23" />
+                <Setter Property="WidthRequest" Value="23" />
+                <Setter Property="Margin" Value="0,0,4,0" />
                 <Setter Property="HorizontalOptions" Value="End" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="Aspect" Value="AspectFit" />
@@ -24,9 +34,25 @@
             <Style x:Key="PrimaryEntryStyle"
                 TargetType="Entry">
                 <Setter Property="HeightRequest" Value="55" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource Surface}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource Background}" />
                 <Setter Property="TextColor" Value="{DynamicResource TextPrimary}" />
                 <Setter Property="PlaceholderColor" Value="{DynamicResource Accent}" />
+                <Setter Property="FontAutoScalingEnabled" Value="True" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontFamily" Value="AppPrimary" />
+            </Style>
+            <!-- Underline -->
+            <Style x:Key="UnderlineStyle" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="HorizontalOptions" Value="Fill" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource Accent}" />
+                <Setter Property="Opacity" Value="0.4" />
+            </Style>
+            <!-- Toggle Switch-->
+            <Style x:Key="PrimarySwitchStyle" TargetType="Switch">
+                <Setter Property="OnColor" Value="{DynamicResource Accent}" />
+                <Setter Property="Scale" Value="1.3" />
+                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
             <!-- Rounded Border -->
             <Style x:Key="RoundedAccentBorderStyle" TargetType="Border">
@@ -40,10 +66,11 @@
                 <Setter Property="BackgroundColor" Value="{DynamicResource Surface}" />
                 <Setter Property="Stroke" Value="{DynamicResource Accent}" />
             </Style>
+            
             <!-- Selector Border 1st Element -->
             <Style x:Key="SegmentSelectedStyle" TargetType="Border">
-                <Setter Property="BackgroundColor" Value="{DynamicResource Primary}" />
-                <Setter Property="Stroke" Value="{DynamicResource Accent}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource Accent}" />
+                <Setter Property="Stroke" Value="{DynamicResource Primary}" />
                 <Setter Property="Padding" Value="12,6" />
                 <Setter Property="StrokeShape">
                     <Setter.Value>
@@ -63,11 +90,11 @@
             </Style>
 
             <Style x:Key="SegmentSelectedLabelStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="{DynamicResource TextOnPrimary}" />
+                <Setter Property="TextColor" Value="{DynamicResource Background}" />
             </Style>
 
             <Style x:Key="SegmentUnselectedLabelStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="{DynamicResource TextPrimary}" />
+                <Setter Property="TextColor" Value="{DynamicResource Background}" />
             </Style>
             
             <ResourceDictionary.MergedDictionaries>

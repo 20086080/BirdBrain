@@ -17,40 +17,45 @@ public partial class IntroPage : ContentPage
         "4 Location",
         "5 Location"
         };
+
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
 
+        Shell.SetNavBarIsVisible(this, true);
         await RunIntroAnimation();
     }
 
     private async Task RunIntroAnimation()
     {
+        AnimatedImage.Opacity = 0;
         foreach (var img in images)
         {
+            await AnimatedImage.FadeToAsync(0, 150);
             AnimatedImage.Source = img;
+            await AnimatedImage.FadeToAsync(1, 150);
+            await Task.Delay(1200);
 
-            await AnimatedImage.FadeTo(1, 150);  // Fade in
-            await Task.Delay(550);               // Hold image
-            await AnimatedImage.FadeTo(0, 150);   // Fade out
+            //await AnimatedImage.FadeToAsync(1, 150);    // Fade in
+            //await Task.Delay(850);                      // Hold image
+            //await AnimatedImage.FadeToAsync(0, 150);   // Fade out
         }
 
         // Slide entire image layer up
-        await ImageLayer.TranslateTo(0, -this.Height, 200, Easing.CubicInOut);
+        await ImageLayer.TranslateToAsync(0, -this.Height, 200, Easing.CubicInOut);
 
         // Remove it completely (optional but cleaner)
         ImageLayer.IsVisible = false;
 
-        //await Task.Delay(600);
         // Enable menu
         MenuPanel.IsEnabled = true;
         MenuPanel.InputTransparent = false;
 
         // 🔥 Slide menu from bottom to TOP
         MenuPanel.Opacity = 100;
-        await MenuPanel.TranslateTo(0, 0, 100, Easing.CubicOut);
+        await MenuPanel.TranslateToAsync(0, 0, 100, Easing.CubicOut);
 
     }
 
@@ -96,14 +101,12 @@ public partial class IntroPage : ContentPage
         // Navigate using Shell
         await Shell.Current.GoToAsync(nameof(BirdSelectionPage));
     }
-    
-
 
     async void OnUseLocationInvoked(object sender, EventArgs e)
     {
         // Optional micro animation
-        await this.ScaleTo(0.98, 70);
-        await this.ScaleTo(1, 70);
+        await this.ScaleToAsync(0.98, 70);
+        await this.ScaleToAsync(1, 70);
 
         // 🔥 Call your location logic here
         // await GetCurrentLocation();

@@ -13,9 +13,7 @@ namespace BirdBrain
                 {
                     fonts.AddFont("Roboto-Regular.ttf", "AppRegular");
                     fonts.AddFont("Roboto-Medium.ttf", "AppMedium");
-//                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-//                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                    
+
                 });
 
 #if DEBUG

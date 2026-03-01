@@ -50,7 +50,7 @@
                                     <Border Stroke="{DynamicResource Accent}" Style="{StaticResource CarouselBorder}">
                                         <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
                                             <Image Source="{Binding Image}" HeightRequest="110" Aspect="AspectFill" />
-                                            <Label Text="{Binding Name}" Style="{StaticResource PageLabel}"/>
+                                            <Label Text="{Binding Name}" Style="{StaticResource CarouselLabel}"/>
                                         </VerticalStackLayout>
                                     </Border>
                                 </Grid>

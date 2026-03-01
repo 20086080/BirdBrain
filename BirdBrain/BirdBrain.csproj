@@ -103,6 +103,9 @@
 	  <Compile Update="Views\BirdSelectionPage.xaml.cs">
 	    <DependentUpon>BirdSelectionPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\BirdSighting.xaml.cs">
+	    <DependentUpon>BirdSighting.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -164,6 +167,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\BirdSelectionPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\BirdSighting.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

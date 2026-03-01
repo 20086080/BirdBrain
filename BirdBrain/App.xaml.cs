@@ -9,7 +9,7 @@ namespace BirdBrain
         public App()
         {
             InitializeComponent();
-            ThemeManager.LoadSavedTheme(typeof(BlueTealDark));
+            ThemeManager.LoadSavedTheme(typeof(SunsetCoralNavyDark));
         }
 
         protected override Window CreateWindow(IActivationState? activationState)

@@ -52,6 +52,5 @@
             </CarouselView>
             <IndicatorView x:Name="BirdIndicator" Style="{StaticResource PrimaryIndicatorStyle}"/>
         </VerticalStackLayout>
-
     </Grid>
 </views:BasePage>

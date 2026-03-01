@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage
+    x:Class="BirdBrain.Views.BirdSighting"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:BirdBrain.Views"
+    Title="Bird Sightings">
+
+    <!-- ================= MAIN LAYOUT GRID ================= -->
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" Padding="20" RowSpacing="20">
+
+        <!-- ================================================= -->
+        <!-- ROW 0 – SEGMENT CONTROL -->
+        <!-- ================================================= -->
+        <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center"
+                               Spacing="40" Background="{DynamicResource Background}">
+            <Border Style="{StaticResource RoundedAccentBorderStyle}"
+                    Padding="0" HorizontalOptions="Start">
+                <Grid ColumnDefinitions="*,*" HeightRequest="36">
+                    <!-- All Birds TAB -->
+                    <Border x:Name="AllBirdsTab" Grid.Column="0"
+                            Style="{StaticResource SegmentSelectedStyle}">
+                        <Label x:Name="AllBirdsLabel" Text="All Birds"
+                               Style="{StaticResource SegmentSelectedLabelStyle}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAllBirdsTapped"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <!-- Specific Bird TAB -->
+                    <Border x:Name="SpecificBirdTab" Grid.Column="1"
+                            Style="{StaticResource SegmentUnselectedStyle}">
+                        <Label x:Name="SpecificBirdLabel" Text="Specific Bird"
+                               Style="{StaticResource SegmentUnselectedLabelStyle}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSpecificBirdTapped"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                </Grid>
+            </Border>
+        </HorizontalStackLayout>
+
+        <!-- ================================================= -->
+        <!-- ROW 1 – CONTEXT LABEL -->
+        <!-- ================================================= -->
+        <HorizontalStackLayout Grid.Row="1" Spacing="12">
+            <Label Text="Location: XXX" Style="{StaticResource SegmentSelectedLabelStyle}" />
+            <Label Text="Bird: XXX" Style="{StaticResource SegmentSelectedLabelStyle}" />
+        </HorizontalStackLayout>
+
+        <!-- ================================================= -->
+        <!-- ROW 2 – BIRD CARD -->
+        <!-- ================================================= -->
+        <Border Grid.Row="2" Padding="12"
+                Stroke="{DynamicResource BorderColor}"
+                StrokeThickness="1"
+                BackgroundColor="{DynamicResource CardBackground}"
+                StrokeShape="RoundRectangle 12">
+
+            <Grid ColumnDefinitions="120,*" ColumnSpacing="12">
+                <Image Source="robin.jpg" HeightRequest="110" WidthRequest="110" Aspect="AspectFill"/>
+                <VerticalStackLayout Grid.Column="1" Spacing="4">
+                    <Label Text="XXX" Style="{StaticResource PageLabel}"/>
+                    <Label Text="XXX" Style="{StaticResource PageLabel}"/>
+                    <Label Text="{Binding SpeciesName}"  Style="{StaticResource PageLabel}"/>
+                    <Label Text="Location" Style="{StaticResource PageLabel}"/>
+                    <Label Text="XXX"  Style="{StaticResource PageLabel}"/>
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+        <!-- ================================================= -->
+        <!-- ROW 3 – STATS + PIE -->
+        <!-- ================================================= -->
+        <Grid Grid.Row="3" ColumnDefinitions="*,*" ColumnSpacing="12">
+
+            <!-- Sightings Stats -->
+            <Border Padding="12" Stroke="{DynamicResource BorderColor}"
+                    StrokeThickness="1"
+                    BackgroundColor="{DynamicResource CardBackground}"
+                    StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Sightings" Style="{StaticResource PageLabel}"/>
+                    <HorizontalStackLayout Spacing="20">
+                        <VerticalStackLayout>
+                            <Label Text="34" Style="{StaticResource PageLabel}"/>
+                            <Label Text="Sightings" Style="{StaticResource PageLabel}"/>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
+                            <Label Text="22%" Style="{StaticResource PageLabel}"/>
+                            <Label Text="% Total" Style="{StaticResource PageLabel}"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Top 5 Times -->
+            <Border Grid.Column="1"
+                    Padding="12"
+                    Stroke="{DynamicResource BorderColor}"
+                    StrokeThickness="1"
+                    BackgroundColor="{DynamicResource CardBackground}"
+                    StrokeShape="RoundRectangle 12">
+
+                <VerticalStackLayout>
+                    <Label Text="Top 5 Times" Style="{StaticResource PageLabel}"/>
+                    <!-- Pie Chart Placeholder -->
+                    <BoxView HeightRequest="150"
+                             BackgroundColor="#E5E5E5"
+                             CornerRadius="75"
+                             HorizontalOptions="Center"
+                             VerticalOptions="CenterAndExpand"/>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!-- ================================================= -->
+        <!-- ROW 4 – DAILY SIGHTINGS (Expands) -->
+        <!-- ================================================= -->
+        <Border Grid.Row="4"
+                Padding="12"
+                Stroke="{DynamicResource BorderColor}"
+                StrokeThickness="1"
+                BackgroundColor="{DynamicResource CardBackground}"
+                StrokeShape="RoundRectangle 12">
+
+            <VerticalStackLayout>
+                <Label Text="Daily Sightings"
+                       Style="{StaticResource PageLabel}"/>
+
+                <!-- Line Chart Placeholder -->
+                <BoxView HeightRequest="180"
+                         BackgroundColor="#E5E5E5"
+                         CornerRadius="8"/>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</views:BasePage>

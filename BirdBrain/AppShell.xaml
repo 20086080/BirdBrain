@@ -10,5 +10,4 @@
         Title="Home"
         ContentTemplate="{DataTemplate local:IntroPage}"
         Route="IntroPage" />
-
 </Shell>

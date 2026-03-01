@@ -65,6 +65,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\bird_thumbnail\aigrette_garzette_au_lac_sud_de_tunis_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\alcedo_atthis_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\asian_koel_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\black_drongo_in_purulia_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\brahminy_kite_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\common_myna_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\heron_garde_boeufs_a_oued_mejerda_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\house_sparrow_male_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\indian_pond_heron_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\indian_roller_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\jungle_myna_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\milvus_migrans_front_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\pied_kingfisher_female_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\pycnonotus_jocosus_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\western_reef_heron_t.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
 	</ItemGroup>
@@ -148,6 +166,33 @@
 	  <MauiXaml Update="Views\BirdSelectionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Resources\Images\bird_full\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\Images\bird_thumbnail\aigrette_garzette_au_lac_sud_de_tunis_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\alcedo_atthis_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\asian_koel_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\black_drongo_in_purulia_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\brahminy_kite_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\common_myna_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\green_bee_eater_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\grey_headed_bulbul_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\halcyon_smyrnensis_white_throated_kingfisher_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\heron_garde_boeufs_a_oued_mejerda_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\house_crow_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\house_sparrow_male_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\indian_pond_heron_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\indian_roller_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\jungle_myna_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\milvus_migrans_front_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\pied_kingfisher_female_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\pycnonotus_jocosus_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\red_vented_bulbul_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\western_reef_heron_t.png" />
 	</ItemGroup>
 
 </Project>

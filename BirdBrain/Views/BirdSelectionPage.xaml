@@ -28,7 +28,7 @@
         <!-- ========================= -->
         <!-- 3️⃣ SAVED BIRDS (EXPANDS) -->
         <!-- ========================= -->
-        <VerticalStackLayout Grid.Row="2" Spacing="15" Margin="0,30,0,0" VerticalOptions="FillAndExpand">
+        <VerticalStackLayout Grid.Row="2" Spacing="15" Margin="0,20,0,20" VerticalOptions="FillAndExpand">
             <Label Text="Saved Birds" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
             <CarouselView ItemsSource="{Binding MyCollection}"
                       x:Name="BirdCarousel" IndicatorView="BirdIndicator" VerticalOptions="FillAndExpand"
@@ -42,8 +42,8 @@
                         <Grid WidthRequest="200" HorizontalOptions="Center">
                             <Border Stroke="{DynamicResource Accent}" Style="{StaticResource CarouselBorder}">
                                 <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
-                                    <Image Source="{Binding Image}" HeightRequest="110" Aspect="AspectFill" />
-                                    <Label Text="{Binding Name}" Style="{StaticResource PageLabel}"/>
+                                    <Image Source="{Binding Image}" HeightRequest="128" Aspect="AspectFill" />
+                                    <Label Text="{Binding Name}" Style="{StaticResource CarouselLabel}" />
                                 </VerticalStackLayout>
                             </Border>
                         </Grid>

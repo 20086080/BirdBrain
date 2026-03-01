@@ -21,6 +21,16 @@
                 <Setter Property="FontFamily" Value="AppMedium" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
+            <!-- Carousel Label Stye-->
+            <Style x:Key="CarouselLabel" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="FontAutoScalingEnabled" Value="True" />
+                <Setter Property="TextColor" Value="{DynamicResource Accent}" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontFamily" Value="AppMedium" />
+                
+            </Style>
             <!-- Menu Icon -->
             <Style x:Key="MenuIconStyle" TargetType="Image">
                 <Setter Property="HeightRequest" Value="23" />

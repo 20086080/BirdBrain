@@ -30,25 +30,34 @@
                         <BoxView Style="{StaticResource UnderlineStyle}"/>
                     </VerticalStackLayout>
                 </Grid>
-                <VerticalStackLayout Spacing="5">
-                    <Label Text="Saved Locations" Style="{StaticResource PageLabel}" HorizontalOptions="Center" />
-                    <CarouselView
-                            x:Name="LocationCarousel" HeightRequest="80"   
-                            ItemsLayout="HorizontalList" HorizontalScrollBarVisibility="Never"
-                            BackgroundColor="{DynamicResource Background}">
+
+
+                <!-- ========================= -->
+                <!-- 3️⃣ SAVED LOCATIONS (EXPANDS) -->
+                <!-- ========================= -->
+                <VerticalStackLayout Grid.Row="2" Spacing="15" Margin="0,30,0,0" VerticalOptions="FillAndExpand">
+                    <Label Text="Saved Locations" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
+                    <CarouselView ItemsSource="{Binding MyCollection}"
+                        x:Name="LocationCarousel" IndicatorView="LocationIndicator" VerticalOptions="FillAndExpand"
+                        PeekAreaInsets="60">
+                        <CarouselView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" SnapPointsType="MandatorySingle"
+                                   SnapPointsAlignment="Center" ItemSpacing="5"/>
+                        </CarouselView.ItemsLayout>
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
-                                <Border Style="{StaticResource RoundedAccentBorderStyle}"
-                                    WidthRequest="130" HeightRequest="50">
-                                    <Label Text="{Binding}" Style="{StaticResource PageLabel}"/>
-                                </Border>
+                                <Grid WidthRequest="200" HorizontalOptions="Center">
+                                    <Border Stroke="{DynamicResource Accent}" Style="{StaticResource CarouselBorder}">
+                                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                                            <Image Source="{Binding Image}" HeightRequest="110" Aspect="AspectFill" />
+                                            <Label Text="{Binding Name}" Style="{StaticResource PageLabel}"/>
+                                        </VerticalStackLayout>
+                                    </Border>
+                                </Grid>
                             </DataTemplate>
                         </CarouselView.ItemTemplate>
                     </CarouselView>
-                    <IndicatorView
-                            x:Name="indicatorView" HorizontalOptions="Center"
-                            IndicatorColor="{DynamicResource Surface}"
-                            SelectedIndicatorColor="{DynamicResource Accent}"/>
+                    <IndicatorView x:Name="LocationIndicator" Style="{StaticResource PrimaryIndicatorStyle}"/>
                 </VerticalStackLayout>
 
                 <HorizontalStackLayout

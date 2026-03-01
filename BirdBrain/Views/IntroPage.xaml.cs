@@ -1,4 +1,6 @@
 ﻿
+using BirdBrain.Models;
+
 namespace BirdBrain.Views;
 
 public partial class IntroPage : ContentPage
@@ -9,14 +11,15 @@ public partial class IntroPage : ContentPage
     {
         InitializeComponent();
 
-        LocationCarousel.ItemsSource = new List<string>
+        LocationCarousel.ItemsSource = new List<SavedLocation>
         {
-        "1 Location",
-        "2 Location",
-        "3 Location",
-        "4 Location",
-        "5 Location"
+          
+            new SavedLocation { Name = "Location 1", Image = "parrot.png" },
+            new SavedLocation { Name = "Location 2", Image = "sparrow.png" },
+            new SavedLocation { Name = "Location 3", Image = "parrot.png" },
+            new SavedLocation { Name = "Location 4", Image = "sparrow.png" }
         };
+            
 
     }
 

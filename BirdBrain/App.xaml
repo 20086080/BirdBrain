@@ -54,6 +54,30 @@
                 <Setter Property="Scale" Value="1.3" />
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
+            <!-- Carousel Indicator -->
+            <Style x:Key="PrimaryIndicatorStyle" TargetType="IndicatorView">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="IndicatorColor" Value="{DynamicResource Accent}" />
+                <Setter Property="SelectedIndicatorColor" Value="{DynamicResource Primary}" />
+            </Style>
+            <!-- Carousel Border-->
+            <Style x:Key="CarouselBorder" TargetType="Border">
+                <Setter Property="Stroke" Value="{DynamicResource Accent}" />
+                <Setter Property="StrokeThickness" Value="0.1" />
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <Shadow Brush="{DynamicResource Surface}"
+                                Opacity="0.2" Radius="10" Offset="0,4" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BackgroundColor" Value="{DynamicResource Background}" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="StrokeShape">
+                    <Setter.Value>
+                        <RoundRectangle CornerRadius="20" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
             <!-- Rounded Border -->
             <Style x:Key="RoundedAccentBorderStyle" TargetType="Border">
                 <Setter Property="Margin" Value="5" />

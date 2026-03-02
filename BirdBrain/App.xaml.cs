@@ -11,10 +11,9 @@ namespace BirdBrain
             InitializeComponent();
             ThemeManager.LoadSavedTheme(typeof(SunsetCoralNavyDark));
         }
-
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new AppShell());
+            return new Window(new BirdBrain.Views.Animation());
         }
     }
 }

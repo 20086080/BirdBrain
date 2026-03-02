@@ -1,12 +1,12 @@
 ﻿
 using BirdBrain.Models;
+using BirdBrain.Services;
 
 namespace BirdBrain.Views;
 
-public partial class IntroPage : ContentPage
+public partial class IntroPage : BasePage
 {
-    string[] images = { "animate1a.png", "animate2a.png", "animate3a.png", "animate4a.png", "animate5a.png" };
-
+    
     public IntroPage()
     {
         InitializeComponent();
@@ -19,58 +19,16 @@ public partial class IntroPage : ContentPage
             new SavedLocation { Name = "Location 3", Image = "parrot.png" },
             new SavedLocation { Name = "Location 4", Image = "sparrow.png" }
         };
-            
-
     }
 
-    protected override async void OnAppearing()
+    
+
+    private void OnTextChanged(object sender, EventArgs e)
     {
-        base.OnAppearing();
-
-        Shell.SetNavBarIsVisible(this, true);
-        await RunIntroAnimation();
+        this.AppState.SelectedLocationName = LocationEntry.Text;
     }
 
-    private async Task RunIntroAnimation()
-    {
-        AnimatedImage.Opacity = 0;
-        foreach (var img in images)
-        {
-            await AnimatedImage.FadeToAsync(0, 150);
-            AnimatedImage.Source = img;
-            await AnimatedImage.FadeToAsync(1, 150);
-            await Task.Delay(1200);
-
-            //await AnimatedImage.FadeToAsync(1, 150);    // Fade in
-            //await Task.Delay(850);                      // Hold image
-            //await AnimatedImage.FadeToAsync(0, 150);   // Fade out
-        }
-
-        // Slide entire image layer up
-        await ImageLayer.TranslateToAsync(0, -this.Height, 200, Easing.CubicInOut);
-
-        // Remove it completely (optional but cleaner)
-        ImageLayer.IsVisible = false;
-
-        // Enable menu
-        MenuPanel.IsEnabled = true;
-        MenuPanel.InputTransparent = false;
-
-        // 🔥 Slide menu from bottom to TOP
-        MenuPanel.Opacity = 100;
-        await MenuPanel.TranslateToAsync(0, 0, 100, Easing.CubicOut);
-
-    }
-
-    protected override void OnSizeAllocated(double width, double height)
-    {
-        base.OnSizeAllocated(width, height);
-
-        if (MenuPanel.TranslationY == 0) // prevent resetting
-        {
-            MenuPanel.TranslationY = height;
-        }
-    }
+    
 
     void OnAllBirdsTapped(object sender, EventArgs e)
     {

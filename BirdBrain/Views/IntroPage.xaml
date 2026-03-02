@@ -1,105 +1,128 @@
-﻿<!--<views:BasePage-->
-<ContentPage
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage
     x:Class="BirdBrain.Views.IntroPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:BirdBrain.Controls"
     xmlns:views="clr-namespace:BirdBrain.Views"
     Title="Location Selection"
-    Shell.NavBarIsVisible="False"
     BackgroundColor="{DynamicResource Background}">
 
-    <Grid>
-        <!-- PAGE CONTENT -->
-        <Grid>
-            <!-- MENU PANEL (Hidden underneath) -->
-            <VerticalStackLayout x:Name="MenuPanel"
-                BackgroundColor="{DynamicResource Background}"
-                Padding="30" Spacing="40" Opacity="0"
-                TranslationY="0">
-                <Grid RowDefinitions="5*,*"
-                    ColumnSpacing="15"
-                    HorizontalOptions="Fill">
-                    <!-- Optional GPS Button -->
-                    <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
-                        <Label Text="Use Current Location" Style="{StaticResource PageLabel}" />
-                        <Switch IsToggled="{Binding UseCurrentLocation}" Style="{StaticResource PrimarySwitchStyle}"/>
-                    </HorizontalStackLayout>
-                    <VerticalStackLayout Grid.Row="1" Spacing="2">
-                        <Entry x:Name="LocationEntry" Placeholder="Enter location" Style="{StaticResource PrimaryEntryStyle}" />
-                        <BoxView Style="{StaticResource UnderlineStyle}"/>
-                    </VerticalStackLayout>
-                </Grid>
+    <!-- Proper page grid -->
+    <Grid Padding="20"
+          RowSpacing="20"
+          RowDefinitions="Auto,Auto,*,Auto">
 
+        <!-- 1️⃣ GPS Toggle -->
+        <HorizontalStackLayout Grid.Row="0"
+                               Spacing="12"
+                               VerticalOptions="Center">
+            <Label Text="Use Current Location"
+                   Style="{StaticResource PageLabel}" />
+            <Switch IsToggled="{Binding UseCurrentLocation}"
+                    Style="{StaticResource PrimarySwitchStyle}" />
+        </HorizontalStackLayout>
 
-                <!-- ========================= -->
-                <!-- 3️⃣ SAVED LOCATIONS (EXPANDS) -->
-                <!-- ========================= -->
-                <VerticalStackLayout Grid.Row="2" Spacing="15" Margin="0,30,0,0" VerticalOptions="FillAndExpand">
-                    <Label Text="Saved Locations" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
-                    <CarouselView ItemsSource="{Binding MyCollection}"
-                        x:Name="LocationCarousel" IndicatorView="LocationIndicator" VerticalOptions="FillAndExpand"
-                        PeekAreaInsets="60">
-                        <CarouselView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal" SnapPointsType="MandatorySingle"
-                                   SnapPointsAlignment="Center" ItemSpacing="5"/>
-                        </CarouselView.ItemsLayout>
-                        <CarouselView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid WidthRequest="200" HorizontalOptions="Center">
-                                    <Border Stroke="{DynamicResource Accent}" Style="{StaticResource CarouselBorder}">
-                                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
-                                            <Image Source="{Binding Image}" HeightRequest="110" Aspect="AspectFill" />
-                                            <Label Text="{Binding Name}" Style="{StaticResource CarouselLabel}"/>
-                                        </VerticalStackLayout>
-                                    </Border>
-                                </Grid>
-                            </DataTemplate>
-                        </CarouselView.ItemTemplate>
-                    </CarouselView>
-                    <IndicatorView x:Name="LocationIndicator" Style="{StaticResource PrimaryIndicatorStyle}"/>
-                </VerticalStackLayout>
+        <!-- 2️⃣ Location Entry -->
+        <VerticalStackLayout Grid.Row="1" Spacing="2">
+            <Entry x:Name="LocationEntry"
+                   Placeholder="Enter location"
+                   TextChanged="OnTextChanged"
+                   Style="{StaticResource PrimaryEntryStyle}" />
+            <BoxView Style="{StaticResource UnderlineStyle}" />
+        </VerticalStackLayout>
 
-                <HorizontalStackLayout
-                    HorizontalOptions="Center"
-                    Spacing="40"
-                    Background="{DynamicResource Background}">
-                    <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0"
-                            HorizontalOptions="Start">
-                        <Grid ColumnDefinitions="*,*" HeightRequest="36">
-                            <!-- All Birds TAB -->
-                            <Border x:Name="AllBirdsTab" Grid.Column="0" Style="{StaticResource SegmentSelectedStyle}">
-                                <Label x:Name="AllBirdsLabel" Text="All Birds" Style="{StaticResource SegmentSelectedLabelStyle}"/>
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnAllBirdsTapped"/>
-                                </Border.GestureRecognizers>
-                            </Border>
+        <!-- 3️⃣ SAVED LOCATIONS (Expands Fully) -->
+        <VerticalStackLayout Grid.Row="2"
+                             Spacing="15"
+                             VerticalOptions="FillAndExpand">
 
-                            <!-- BIRD TAB -->
-                            <Border
-                                x:Name="SpecificBirdTab" Grid.Column="1" Style="{StaticResource SegmentUnselectedStyle}" >
-                                <Label x:Name="SpecificBirdLabel" Text="Specific Bird" Style="{StaticResource SegmentUnselectedLabelStyle}"/>
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnSpecificBirdTapped"/>
-                                </Border.GestureRecognizers>
-                            </Border>
-                        </Grid>
-                    </Border>
-                </HorizontalStackLayout>
+            <Label Text="Saved Locations"
+                   Style="{StaticResource PageLabel}"
+                   HorizontalOptions="Center"/>
 
-            </VerticalStackLayout>
-            <!-- IMAGE LAYER (Covers screen initially) -->
-            <Grid x:Name="ImageLayer" >
-                <Image
-                x:Name="AnimatedImage"
-                Aspect="AspectFill"
-                HorizontalOptions="Fill"
-                VerticalOptions="Fill"
-                Opacity="0"
-                Background="{DynamicResource Primary}"/>
+            <CarouselView ItemsSource="{Binding MyCollection}"
+                          x:Name="LocationCarousel"
+                          IndicatorView="LocationIndicator"
+                          VerticalOptions="FillAndExpand"
+                          HorizontalOptions="FillAndExpand"
+                          PeekAreaInsets="60">
+
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"
+                                       SnapPointsType="MandatorySingle"
+                                       SnapPointsAlignment="Center"
+                                       ItemSpacing="10"/>
+                </CarouselView.ItemsLayout>
+
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="{DynamicResource Accent}"
+                                Style="{StaticResource CarouselBorder}"
+                                HorizontalOptions="Center"
+                                WidthRequest="220">
+
+                            <VerticalStackLayout Spacing="8"
+                                                 Padding="10">
+                                <Image Source="{Binding Image}"
+                                       HeightRequest="130"
+                                       Aspect="AspectFill" />
+
+                                <Label Text="{Binding Name}"
+                                       Style="{StaticResource CarouselLabel}"
+                                       HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+
+                        </Border>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+            <IndicatorView x:Name="LocationIndicator"
+                           Style="{StaticResource PrimaryIndicatorStyle}"
+                           HorizontalOptions="Center"/>
+
+        </VerticalStackLayout>
+
+        <!-- 4️⃣ Bottom Segmented Tabs (Anchored) -->
+        <Border Grid.Row="3"
+                Style="{StaticResource RoundedAccentBorderStyle}"
+                Padding="0"
+                HorizontalOptions="Center">
+
+            <Grid ColumnDefinitions="*,*"
+                  HeightRequest="44"
+                  WidthRequest="300">
+
+                <!-- All Birds TAB -->
+                <Border x:Name="AllBirdsTab"
+                        Grid.Column="0"
+                        Style="{StaticResource SegmentSelectedStyle}">
+                    <Label x:Name="AllBirdsLabel"
+                           Text="All Birds"
+                           Style="{StaticResource SegmentSelectedLabelStyle}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAllBirdsTapped"/>
+                    </Border.GestureRecognizers>
+                </Border>
+
+                <!-- Specific Bird TAB -->
+                <Border x:Name="SpecificBirdTab"
+                        Grid.Column="1"
+                        Style="{StaticResource SegmentUnselectedStyle}">
+                    <Label x:Name="SpecificBirdLabel"
+                           Text="Specific Bird"
+                           Style="{StaticResource SegmentUnselectedLabelStyle}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSpecificBirdTapped"/>
+                    </Border.GestureRecognizers>
+                </Border>
+
             </Grid>
-        </Grid>
-    </Grid>
+        </Border>
 
-    <!--</views:BasePage>-->
-</ContentPage>
+    </Grid>
+</views:BasePage>

@@ -1,7 +1,10 @@
 
 using BirdBrain.Controls;
 using BirdBrain.Services;
+using Microsoft.Maui.Controls.PlatformConfiguration;
+using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
 using System.Windows.Markup;
+
 namespace BirdBrain.Views;
 
 public partial class BasePage : ContentPage
@@ -13,13 +16,14 @@ public partial class BasePage : ContentPage
     const double DrawerHiddenX = -360;
     public BasePage()
     {
-        InitializeComponent();        
+        InitializeComponent();
+        Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific.Page
+    .SetUseSafeArea(this, false);
     }
 
     protected override void OnApplyTemplate()
     {
         base.OnApplyTemplate();
-
         _drawerOverlay = GetTemplateChild("DrawerOverlay") as BoxView;
         _leftDrawer = GetTemplateChild("LeftDrawer") as LeftSettingsDrawer;
 
@@ -45,7 +49,6 @@ public partial class BasePage : ContentPage
    async Task OpenDrawer()
     {
         if (_leftDrawer == null) return;
-
         _drawerOverlay.IsVisible = true;
         await _leftDrawer.TranslateTo(0, 0, 250, Easing.CubicOut);
     }
@@ -53,16 +56,12 @@ public partial class BasePage : ContentPage
     async Task CloseDrawer()
     {
         if (_leftDrawer == null) return;
-
         await _leftDrawer.TranslateTo(DrawerHiddenX, 0, 250, Easing.CubicIn);
         _drawerOverlay.IsVisible = false;
     }
 
-    
-
-
     protected AppState AppState =>
-    Application.Current
+    Microsoft.Maui.Controls.Application.Current
         .Handler
         .MauiContext
         .Services

@@ -4,7 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:BirdBrain.Controls"
-    BackgroundColor="{DynamicResource Background}">
+    BackgroundColor="{DynamicResource Background}"
+    Padding="0">
 
     <!-- TEMPLATE REGION -->
        
@@ -14,9 +15,7 @@
                 <Grid RowDefinitions="Auto,Auto,*">
 
                     <controls:AppHeader Grid.Row="0"/>
-
                     <ContentPresenter Grid.Row="1"/>
-
                     <controls:FooterView Grid.Row="2"/>
 
                     <Grid.GestureRecognizers>
@@ -26,19 +25,16 @@
                 </Grid>
 
                 <!-- OVERLAY -->
-                <BoxView
-            x:Name="DrawerOverlay"
-            BackgroundColor="#80000000"
-            IsVisible="False" />
+                <BoxView x:Name="DrawerOverlay"
+                    BackgroundColor="#80000000" IsVisible="False" />
 
                 <!-- LEFT DRAWER (ABSOLUTE POSITIONED) -->
-                <controls:LeftSettingsDrawer
-            x:Name="LeftDrawer"
-            WidthRequest="300"
-            TranslationX="-300"
-             />
-
-                </Grid>
+                <controls:LeftSettingsDrawer x:Name="LeftDrawer"
+                    WidthRequest="300" TranslationX="-360" 
+                    HorizontalOptions="Start"
+                    Margin="0"
+                     />
+            </Grid>
             </ControlTemplate>
     </ContentPage.ControlTemplate>
 

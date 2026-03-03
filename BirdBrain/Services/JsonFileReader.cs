@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Diagnostics;
 
 namespace BirdBrain.Services
 {
@@ -9,8 +10,15 @@ namespace BirdBrain.Services
             using var stream = await FileSystem.OpenAppPackageFileAsync(fileName);
             using var reader = new StreamReader(stream);
             var json = await reader.ReadToEndAsync();
-
-            return JsonSerializer.Deserialize<List<T>>(json);
+            try
+            {
+                return JsonSerializer.Deserialize<List<T>>(json);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                throw;
+            }
         }
     }
 }

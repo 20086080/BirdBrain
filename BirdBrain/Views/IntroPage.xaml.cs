@@ -6,29 +6,28 @@ namespace BirdBrain.Views;
 
 public partial class IntroPage : BasePage
 {
-    
-    public IntroPage()
+    private readonly JsonFileReader _jsonReader;
+
+    public IntroPage(JsonFileReader jsonReader)
     {
         InitializeComponent();
-
-        LocationCarousel.ItemsSource = new List<SavedLocation>
-        {
-          
-            new SavedLocation { Name = "Location 1", Image = "parrot.png" },
-            new SavedLocation { Name = "Location 2", Image = "sparrow.png" },
-            new SavedLocation { Name = "Location 3", Image = "parrot.png" },
-            new SavedLocation { Name = "Location 4", Image = "sparrow.png" }
-        };
+        _jsonReader = jsonReader;
     }
 
-    
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        var savedLocations = await _jsonReader
+            .ReadListAsync<SavedLocation>("LocationSeedData.json");
+
+        LocationCarousel.ItemsSource = savedLocations;
+    }
 
     private void OnTextChanged(object sender, EventArgs e)
     {
         this.AppState.SelectedLocationName = LocationEntry.Text;
     }
-
-    
 
     void OnAllBirdsTapped(object sender, EventArgs e)
     {

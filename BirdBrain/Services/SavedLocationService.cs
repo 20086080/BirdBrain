@@ -17,6 +17,6 @@ public class SavedLocationService
         if (Locations != null)
             return;
 
-        Locations = await _jsonReader.ReadListAsync<SavedLocation>("savedlocations.json");
+        Locations = await _jsonReader.ReadListAsync<SavedLocation>("LocationSeedData.json");
     }
 }

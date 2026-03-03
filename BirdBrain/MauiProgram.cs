@@ -18,7 +18,7 @@ namespace BirdBrain
                 });
             builder.Services.AddSingleton<JsonFileReader>();
             builder.Services.AddSingleton<SavedLocationService>();
-
+            builder.Services.AddSingleton<SavedBirdService>();
             builder.Services.AddSingleton<AppState>();
 
 #if DEBUG

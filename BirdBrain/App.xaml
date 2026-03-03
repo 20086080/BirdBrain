@@ -11,6 +11,16 @@
             <x:String x:Key="FontEmphasis">AppMedium</x:String>
             <x:String x:Key="FontDisplay">AppMedium</x:String>
 
+            <!-- Menu Close Button Style -->
+            <Style x:Key="MenuButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="VerticalOptions" Value="Start" />
+            </Style>
+            
             <!-- Label Style -->
             <Style x:Key="PageLabel" TargetType="Label">
                 <Setter Property="VerticalOptions" Value="Center" />

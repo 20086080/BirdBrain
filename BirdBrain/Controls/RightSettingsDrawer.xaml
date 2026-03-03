@@ -6,36 +6,17 @@
     IsVisible="True">
 
     <Grid>
-
         <!-- Overlay -->
-        <BoxView
-            x:Name="Overlay"
-            BackgroundColor="#80000000"
-            IsVisible="False"
-            Opacity="0" />
-
+        <BoxView x:Name="Overlay" BackgroundColor="#80000000" IsVisible="False" Opacity="0" />
         <!-- Drawer -->
-        <Border
-            x:Name="Drawer"
-            WidthRequest="320"
-            BackgroundColor="{DynamicResource Surface}"
-            HorizontalOptions="End"
-            TranslationX="320"
+        <Border x:Name="Drawer" WidthRequest="320" BackgroundColor="{DynamicResource Surface}"
+            HorizontalOptions="End" TranslationX="320"
             ZIndex="10">
 
             <VerticalStackLayout Padding="24" Spacing="20">
-
                 <HorizontalStackLayout>
-                    <Label
-                        Text="Settings"
-                        FontSize="20"
-                        FontAttributes="Bold"
-                        HorizontalOptions="StartAndExpand"/>
-
-                    <Button
-                        Text="✕"
-                        BackgroundColor="Transparent"
-                        Clicked="Close"/>
+                    <Label Text="Settings" Style="{StaticResource PageLabel}" HorizontalOptions="StartAndExpand"/>
+                    <Button Text="✕" Style="{StaticResource MenuButtonStyle}" Clicked="OnCloseClicked"/>
                 </HorizontalStackLayout>
 
                 <!-- 🔌 Drop your theme UI here -->

@@ -16,6 +16,9 @@ namespace BirdBrain
                     fonts.AddFont("Roboto-Medium.ttf", "AppMedium");
 
                 });
+            builder.Services.AddSingleton<JsonFileReader>();
+            builder.Services.AddSingleton<SavedLocationService>();
+
             builder.Services.AddSingleton<AppState>();
 
 #if DEBUG

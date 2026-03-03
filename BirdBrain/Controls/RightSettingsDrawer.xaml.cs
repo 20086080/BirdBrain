@@ -13,6 +13,9 @@ public partial class RightSettingsDrawer : ContentView
 
     public async Task OpenAsync()
     {
+
+        await Application.Current.MainPage.DisplayAlert("Debug", "OpenAsync hit", "OK");
+
         if (_isOpen) return;
         _isOpen = true;
 
@@ -37,6 +40,8 @@ public partial class RightSettingsDrawer : ContentView
         _isOpen = false;
     }
 
-    void Close(object sender, EventArgs e)
-        => CloseAsync();
+    private async void OnCloseClicked(object sender, EventArgs e)
+    {
+        await CloseAsync();
+    }
 }

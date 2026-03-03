@@ -20,21 +20,17 @@ public partial class Animation : ContentPage
         AnimatedImage.Opacity = 0;
         foreach (var img in images)
         {
-            await AnimatedImage.FadeToAsync(0, 150);
+            //await AnimatedImage.FadeToAsync(0, 100);
             AnimatedImage.Source = img;
-            await AnimatedImage.FadeToAsync(1, 150);
-            await Task.Delay(1200);
-
-    
+            await AnimatedImage.FadeToAsync(1, 100);
+            await Task.Delay(1000);
         }
-        await Task.Delay(100);
+        await Task.Delay(50);
 
         MainThread.BeginInvokeOnMainThread(() =>
         {
             Application.Current.Windows[0].Page = new AppShell();
         });
-       
-        
     }
 
     protected override void OnSizeAllocated(double width, double height)

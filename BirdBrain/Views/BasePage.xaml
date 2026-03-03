@@ -6,34 +6,36 @@
     xmlns:controls="clr-namespace:BirdBrain.Controls"
     BackgroundColor="{DynamicResource Background}">
 
-    <ContentPage.ControlTemplate>
-        <ControlTemplate>
+   
 
-            <Grid RowDefinitions="Auto,*">
+        <!-- TEMPLATE REGION -->
+       
+            <ContentPage.ControlTemplate>
+                <ControlTemplate>
+                    <Grid RowDefinitions="Auto,Auto,*">
 
-                <!-- GLOBAL HEADER -->
-                <controls:AppHeader Grid.Row="0"/>
+                        <controls:AppHeader Grid.Row="0"/>
 
-                <!-- PAGE CONTENT -->
-                <ContentPresenter Grid.Row="1"/>
+                        <ContentPresenter Grid.Row="1"/>
 
+                        <controls:FooterView Grid.Row="2"/>
+
+
+                <!-- DRAWER OUTSIDE TEMPLATE -->
+                        <!--
+       <controls:RightSettingsDrawer
+            x:Name="RightDrawer" />
+-->
+        <!-- Swipe Gesture Layer -->
+<!--
+        <Grid.GestureRecognizers>
+            <SwipeGestureRecognizer
+                Direction="Left"
+                Swiped="OnRightSwiped"/>
+        </Grid.GestureRecognizers>
+-->
             </Grid>
-
         </ControlTemplate>
     </ContentPage.ControlTemplate>
 
 </ContentPage>
-
-<!--
-<Grid RowDefinitions="Auto,*">
-
-        
-        <Grid Grid.Row="1">
-
-            <ContentPresenter x:Name="PageContent" />
-            
-        </Grid>
-    </Grid>
-</ContentPage>
-    -->
-    

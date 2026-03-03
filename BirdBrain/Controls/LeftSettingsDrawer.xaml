@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="BirdBrain.Controls.LeftSettingsDrawer"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:BirdBrain.Controls"
+    BackgroundColor="#F4F4F4"
+    Padding="20,40">
+
+    <VerticalStackLayout Spacing="24">
+
+        <!-- HEADER -->
+        <Grid ColumnDefinitions="*,Auto">
+            <Label
+                Text="BirdApp"
+                FontSize="20"
+                FontAttributes="Bold" />
+
+            <ImageButton
+                Source="close.png"
+                WidthRequest="24"
+                HeightRequest="24"
+                Command="{Binding CloseCommand,
+                          Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+        </Grid>
+
+        <!-- NAVIGATION -->
+        <VerticalStackLayout Spacing="16">
+            <Button Text="Sightings"
+                    Command="{Binding SightingsCommand,
+                              Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+            <Button Text="Profile"
+                    Command="{Binding ProfileCommand,
+                              Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+            <Button Text="Insights"
+                    Command="{Binding InsightsCommand,
+                              Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+            <Button Text="Select Location"
+                    Command="{Binding SelectLocationCommand,
+                              Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+            <Button Text="Select Bird"
+                    Command="{Binding SelectBirdCommand,
+                              Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+            <Button Text="Home"
+                    Command="{Binding HomeCommand,
+                              Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+        </VerticalStackLayout>
+
+        <!-- RADIUS -->
+        <VerticalStackLayout>
+            <Label Text="Radius (km)" FontAttributes="Bold"/>
+            <Slider Minimum="1"
+                    Maximum="50"
+                    Value="{Binding Radius, Mode=TwoWay,
+                            Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+        </VerticalStackLayout>
+
+        <!-- DAYS -->
+        <VerticalStackLayout>
+            <Label Text="Days" FontAttributes="Bold"/>
+            <Slider Minimum="1"
+                    Maximum="30"
+                    Value="{Binding Days, Mode=TwoWay,
+                            Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+</ContentView>

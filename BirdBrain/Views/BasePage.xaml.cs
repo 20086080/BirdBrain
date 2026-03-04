@@ -26,10 +26,14 @@ public partial class BasePage : ContentPage
         base.OnApplyTemplate();
         _drawerOverlay = GetTemplateChild("DrawerOverlay") as BoxView;
         _leftDrawer = GetTemplateChild("LeftDrawer") as LeftSettingsDrawer;
+        var header = GetTemplateChild("AppHeader") as AppHeader;
 
-        if (_drawerOverlay == null || _leftDrawer == null)
-            return;
-
+      //  if (_drawerOverlay == null || _leftDrawer == null)
+      //      return;
+        if (header != null)
+        {
+            header.HamburgerClicked += async (_, __) => await OpenDrawer();
+        }
         _drawerOverlay.IsVisible = false;
 
         // 🔒 GUARANTEED hidden

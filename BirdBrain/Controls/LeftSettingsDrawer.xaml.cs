@@ -7,6 +7,7 @@ public partial class LeftSettingsDrawer : ContentView
     public LeftSettingsDrawer()
     {
         InitializeComponent();
+        
     }
 
     // ===== Sliders =====

@@ -13,11 +13,9 @@
         <ControlTemplate>
             <Grid IsClippedToBounds="True">
                 <Grid RowDefinitions="Auto,Auto,*">
-
-                    <controls:AppHeader Grid.Row="0"/>
+                    <controls:AppHeader x:Name="AppHeader" Grid.Row="0"/>
                     <ContentPresenter Grid.Row="1"/>
                     <controls:FooterView Grid.Row="2"/>
-
                     <Grid.GestureRecognizers>
                         <SwipeGestureRecognizer Direction="Right" Swiped="OnSwipeRight" />
                         <SwipeGestureRecognizer Direction="Left" Swiped="OnSwipeLeft" />
@@ -31,9 +29,7 @@
                 <!-- LEFT DRAWER (ABSOLUTE POSITIONED) -->
                 <controls:LeftSettingsDrawer x:Name="LeftDrawer"
                     WidthRequest="300" TranslationX="-360" 
-                    HorizontalOptions="Start"
-                    Margin="0"
-                     />
+                    HorizontalOptions="Start" Margin="0" />
             </Grid>
             </ControlTemplate>
     </ContentPage.ControlTemplate>

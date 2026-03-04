@@ -9,12 +9,14 @@ public partial class RightSettingsDrawer : ContentView
     public RightSettingsDrawer()
     {
         InitializeComponent();
+        
+        
     }
 
     public async Task OpenAsync()
     {
 
-        await Application.Current.MainPage.DisplayAlert("Debug", "OpenAsync hit", "OK");
+        await Application.Current.MainPage.DisplayAlertAsync("Debug", "OpenAsync hit", "OK");
 
         if (_isOpen) return;
         _isOpen = true;
@@ -22,8 +24,8 @@ public partial class RightSettingsDrawer : ContentView
         Overlay.IsVisible = true;
 
         await Task.WhenAll(
-            Overlay.FadeTo(1, AnimationSpeed, Easing.CubicIn),
-            Drawer.TranslateTo(0, 0, AnimationSpeed, Easing.CubicOut)
+            Overlay.FadeToAsync(1, AnimationSpeed, Easing.CubicIn),
+            Drawer.TranslateToAsync(0, 0, AnimationSpeed, Easing.CubicOut)
         );
     }
 
@@ -32,8 +34,8 @@ public partial class RightSettingsDrawer : ContentView
         if (!_isOpen) return;
 
         await Task.WhenAll(
-            Overlay.FadeTo(0, AnimationSpeed, Easing.CubicOut),
-            Drawer.TranslateTo(320, 0, AnimationSpeed, Easing.CubicIn)
+            Overlay.FadeToAsync(0, AnimationSpeed, Easing.CubicOut),
+            Drawer.TranslateToAsync(320, 0, AnimationSpeed, Easing.CubicIn)
         );
 
         Overlay.IsVisible = false;

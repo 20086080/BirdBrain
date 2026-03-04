@@ -4,65 +4,86 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:BirdBrain.Controls"
-    BackgroundColor="#F4F4F4"
+    BackgroundColor="#B2FF9A76"         
     Padding="0" Margin= "0">
-
-    <VerticalStackLayout Padding="20,40" Spacing="24">
+    <!-- Make all themes translucent version-->
+    
+    <VerticalStackLayout Padding="20,40" Spacing="24" >
 
         <!-- HEADER -->
         <Grid ColumnDefinitions="*,Auto">
-            <Label
-                Text="BirdApp"
-                FontSize="20"
-                FontAttributes="Bold" />
-
-            <ImageButton
-                Source="close.png"
-                WidthRequest="24"
-                HeightRequest="24"
-                Command="{Binding CloseCommand,
-                          Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+            <Grid ColumnDefinitions="*,26" ColumnSpacing="12">
+        
+                <Label Grid.Column ="0" Text="BirdBrain Menu" Style="{StaticResource Titles}" />
+                <Image Grid.Column ="1" Source="icon_exit.png" Style="{StaticResource DrawerMenuIconStyle}" />
+            </Grid>
+         
         </Grid>
-
+        <BoxView Style="{StaticResource DrawerDividerStyle}" />
+        
         <!-- NAVIGATION -->
-        <VerticalStackLayout Spacing="16">
-            <Button Text="Sightings"
+        <VerticalStackLayout Spacing="18">
+            <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
+                <Image Source="icon_sightings.png" Style="{StaticResource DrawerMenuIconStyle}" />
+                <Button Grid.Column ="1" Text="Sightings" Style="{StaticResource DrawerMenuButtonStyle}"
                     Command="{Binding SightingsCommand,
                               Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
-            <Button Text="Profile"
+                <Image Source="icon_hamburger.png" Style="{StaticResource DrawerMenuIconStyle}" />
+            </Grid>
+            <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
+                <Image Source="icon_profile.png" Style="{StaticResource DrawerMenuIconStyle}" />
+                <Button Grid.Column ="1" Text="Profile" Style="{StaticResource DrawerMenuButtonStyle}"
                     Command="{Binding ProfileCommand,
                               Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
-            <Button Text="Insights"
+            </Grid>
+            <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
+                <Image Source="icon_insights.png" Style="{StaticResource DrawerMenuIconStyle}" />
+                <Button Grid.Column ="1" Text="Insights" Style="{StaticResource DrawerMenuButtonStyle}"
                     Command="{Binding InsightsCommand,
                               Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
-            <Button Text="Select Location"
+            </Grid>
+            <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
+                <Image Source="icon_location.png" Style="{StaticResource DrawerMenuIconStyle}" />
+                <Button Grid.Column ="1" Text="Select Location" Style="{StaticResource DrawerMenuButtonStyle}"
                     Command="{Binding SelectLocationCommand,
                               Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
-            <Button Text="Select Bird"
+            </Grid>
+            <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
+                <Image Source="icon_bird.png" Style="{StaticResource DrawerMenuIconStyle}" />
+                <Button Grid.Column ="1" Text="Select Bird" Style="{StaticResource DrawerMenuButtonStyle}"
                     Command="{Binding SelectBirdCommand,
                               Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
-            <Button Text="Home"
-                    Command="{Binding HomeCommand,
-                              Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+            </Grid>
+            <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
+                <Image Source="icon_home.png" Style="{StaticResource DrawerMenuIconStyle}" />
+                <Button Grid.Column ="1" Text="Home" Style="{StaticResource DrawerMenuButtonStyle}"
+                    Command="{Binding HomeCommand, Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+            </Grid>
         </VerticalStackLayout>
+        <BoxView Style="{StaticResource DrawerDividerStyle}" />
 
-        <!-- RADIUS -->
-        <VerticalStackLayout>
-            <Label Text="Radius (km)" FontAttributes="Bold"/>
-            <Slider Minimum="1"
-                    Maximum="50"
+        <VerticalStackLayout Spacing="8">
+            <Label Text="Radius (km)" Style="{StaticResource DrawerSectionLabelStyle}" />
+            <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+                <Label Text="1" Style="{StaticResource SliderEndpointLabelStyle}" />
+                <Slider Grid.Column="1" Style="{StaticResource DrawerSliderStyle}"
+                    Minimum="1" Maximum="50"
                     Value="{Binding Radius, Mode=TwoWay,
-                            Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+                        Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+                <Label Text ="50"  Grid.Column="2" Style="{StaticResource SliderEndpointLabelStyle}" />
+            </Grid>
         </VerticalStackLayout>
-
         <!-- DAYS -->
-        <VerticalStackLayout>
-            <Label Text="Days" FontAttributes="Bold"/>
-            <Slider Minimum="1"
-                    Maximum="30"
+        <VerticalStackLayout Spacing="8">
+            <Label Text="Days" Style="{StaticResource DrawerSectionLabelStyle}" />
+            <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+                <Label Text="1" Style="{StaticResource SliderEndpointLabelStyle}" />
+                <Slider Grid.Column="1" Style="{StaticResource DrawerSliderStyle}"
+                    Minimum="1" Maximum="30"
                     Value="{Binding Days, Mode=TwoWay,
-                            Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+                        Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+                <Label Text="30" Grid.Column="2" Style="{StaticResource SliderEndpointLabelStyle}" />
+            </Grid>
         </VerticalStackLayout>
-
     </VerticalStackLayout>
 </ContentView>

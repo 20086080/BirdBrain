@@ -2,14 +2,14 @@ namespace BirdBrain.Controls;
 
 public partial class AppHeader : ContentView
 {
-	public AppHeader()
+    public event EventHandler HamburgerClicked;
+    public AppHeader()
 	{
 		InitializeComponent();
 	}
     async void OnMenuTapped(object sender, EventArgs e)
     {
-        // If using Shell Flyout
-        Shell.Current.FlyoutIsPresented = true;
+        HamburgerClicked?.Invoke(this, EventArgs.Empty);
     }
 
     async void OnCloseTapped(object sender, EventArgs e)

@@ -139,7 +139,7 @@
             </Style>
             <!-- Selector UnSelected Label -->
             <Style x:Key="SegmentUnselectedLabelStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="{DynamicResource Background}" />
+                <Setter Property="TextColor" Value="{DynamicResource Accent}" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
             </Style>

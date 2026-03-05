@@ -18,7 +18,7 @@ namespace BirdBrain.Models
 
         public Color PreviewTextPrimary { get; set; }
 
-        public Color PrimaryTextOnPrimary { get; set; }
+        public Color PreviewTextOnPrimary { get; set; }
 
     }
 }

@@ -28,19 +28,8 @@ namespace BirdBrain.ViewModels
         public ThemeViewModel()
         {
             Themes = new ObservableCollection<AppThemeOption>(
-    ThemeManager.GetAvailableThemes()
-    .Select(t => new AppThemeOption
-    {
-        Name = ThemeManager.FormatThemeName(t),
-        ThemeType = t,
-
-        PreviewPrimary = Colors.SteelBlue,
-        PreviewAccent = Colors.LightBlue,
-        PreviewBackground = Colors.White,
-        PreviewSurface = Colors.LightGray,
-        PreviewTextPrimary = Colors.Black,
-        PrimaryTextOnPrimary = Colors.White
-    }));
+                ThemeManager.GetAvailableThemes()
+                .Select(t => ThemeManager.CreateThemeOption(t)));
         }
     }
 }

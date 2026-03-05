@@ -8,4 +8,5 @@
     <Color x:Key="Surface">#1A2A1C</Color>
     <Color x:Key="TextPrimary">#EAF5EA</Color>
     <Color x:Key="TextOnPrimary">#000000</Color>
+    <Color x:Key="Accent70">#B2A3D9A5</Color>
 </ResourceDictionary>

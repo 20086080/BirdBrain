@@ -3,27 +3,62 @@
     x:Class="BirdBrain.Controls.RightSettingsDrawer"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    IsVisible="True">
+    xmlns:controls="clr-namespace:BirdBrain.Controls"
+    xmlns:viewmodels="clr-namespace:BirdBrain.ViewModels"
+    BackgroundColor="#B2FF9A76"         
+    Padding="0" Margin= "0">
+    
+    <VerticalStackLayout Padding="20,40" Spacing="24" >
 
-    <Grid>
-        <!-- Overlay -->
-        <BoxView x:Name="Overlay" BackgroundColor="#80000000" IsVisible="False" Opacity="0" />
-        <!-- Drawer -->
-        <Border x:Name="Drawer" WidthRequest="320" BackgroundColor="{DynamicResource Surface}"
-            HorizontalOptions="End" TranslationX="320"
-            ZIndex="10">
+        <!-- Header -->
+        <Grid ColumnDefinitions="*,Auto">
+            <Grid ColumnDefinitions="*,26" ColumnSpacing="12">
 
-            <VerticalStackLayout Padding="24" Spacing="20">
-                <HorizontalStackLayout>
-                    <Label Text="Settings" Style="{StaticResource PageLabel}" HorizontalOptions="StartAndExpand"/>
-                    <Button Text="✕" Style="{StaticResource MenuButtonStyle}" Clicked="OnCloseClicked"/>
-                </HorizontalStackLayout>
+                <Label Grid.Column ="0" Text="Settings" Style="{StaticResource Titles}" />
+                <Image Grid.Column ="1" Source="icon_exit.png" Style="{StaticResource DrawerMenuIconStyle}" />
+            </Grid>
 
-                <!-- 🔌 Drop your theme UI here -->
-                <ContentPresenter />
+        </Grid>
+        <BoxView Style="{StaticResource DrawerDividerStyle}" />
 
-            </VerticalStackLayout>
-        </Border>
+       
+        <!-- Theme Section -->
+        <VerticalStackLayout Spacing="12">
 
-    </Grid>
+            <VerticalStackLayout.BindingContext>
+                <viewmodels:ThemeViewModel />
+            </VerticalStackLayout.BindingContext>
+
+            <Label Text="Theme" Style="{StaticResource DrawerSectionLabelStyle}" />
+
+            <CollectionView ItemsSource="{Binding Themes}" SelectionMode="Single"
+                SelectedItem="{Binding SelectedTheme}" HeightRequest="160">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding Name}" Padding="6" FontSize="14" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+
+        <BoxView Style="{StaticResource DrawerDividerStyle}" />
+
+        <!-- Slider -->
+        <VerticalStackLayout Spacing="8">
+            <Label Text="Radius (km)" Style="{StaticResource DrawerSectionLabelStyle}" />
+            <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+                <Label Text="1" Style="{StaticResource SliderEndpointLabelStyle}" />
+                <Slider Grid.Column="1" Style="{StaticResource DrawerSliderStyle}"
+                    Minimum="1" Maximum="50"
+                    Value="{Binding Radius, Mode=TwoWay,
+                        Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+                <Label Text ="50"  Grid.Column="2" Style="{StaticResource SliderEndpointLabelStyle}" />
+            </Grid>
+        </VerticalStackLayout>
+
+        
+    </VerticalStackLayout>
 </ContentView>

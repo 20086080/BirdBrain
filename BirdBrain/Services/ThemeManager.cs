@@ -1,5 +1,6 @@
 ﻿using BirdBrain.Resources.Themes;
 namespace BirdBrain.Services;
+using System.Text.RegularExpressions;
 
 public static class ThemeManager
 {
@@ -27,5 +28,20 @@ public static class ThemeManager
             : fallbackTheme;
 
         ApplyTheme(themeType ?? fallbackTheme, persist: false);
+    }
+
+    public static string FormatThemeName(Type themeType)
+    {
+        return Regex.Replace(themeType.Name, "(\\B[A-Z])", " $1");
+    }
+
+    public static List<Type> GetAvailableThemes()
+    {
+        return typeof(BlueTealDark).Assembly
+            .GetTypes()
+            .Where(t =>
+                t.IsSubclassOf(typeof(ResourceDictionary)) &&
+                t.Namespace == "BirdBrain.Resources.Themes")
+            .ToList();
     }
 }

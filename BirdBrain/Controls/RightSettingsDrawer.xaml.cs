@@ -1,49 +1,96 @@
 
+using System.Windows.Input;
+
 namespace BirdBrain.Controls;
 
 public partial class RightSettingsDrawer : ContentView
 {
-    const uint AnimationSpeed = 250;
-    bool _isOpen;
-
     public RightSettingsDrawer()
     {
         InitializeComponent();
-        
-        
+
     }
 
-    public async Task OpenAsync()
+    // ===== Sliders =====
+    public static readonly BindableProperty RadiusProperty =
+        BindableProperty.Create(nameof(Radius), typeof(double), typeof(LeftSettingsDrawer), 10.0);
+
+    public double Radius
     {
-
-        await Application.Current.MainPage.DisplayAlertAsync("Debug", "OpenAsync hit", "OK");
-
-        if (_isOpen) return;
-        _isOpen = true;
-
-        Overlay.IsVisible = true;
-
-        await Task.WhenAll(
-            Overlay.FadeToAsync(1, AnimationSpeed, Easing.CubicIn),
-            Drawer.TranslateToAsync(0, 0, AnimationSpeed, Easing.CubicOut)
-        );
+        get => (double)GetValue(RadiusProperty);
+        set => SetValue(RadiusProperty, value);
     }
 
-    public async Task CloseAsync()
+    public static readonly BindableProperty DaysProperty =
+        BindableProperty.Create(nameof(Days), typeof(double), typeof(LeftSettingsDrawer), 30.0);
+
+    public double Days
     {
-        if (!_isOpen) return;
-
-        await Task.WhenAll(
-            Overlay.FadeToAsync(0, AnimationSpeed, Easing.CubicOut),
-            Drawer.TranslateToAsync(320, 0, AnimationSpeed, Easing.CubicIn)
-        );
-
-        Overlay.IsVisible = false;
-        _isOpen = false;
+        get => (double)GetValue(DaysProperty);
+        set => SetValue(DaysProperty, value);
     }
 
-    private async void OnCloseClicked(object sender, EventArgs e)
+    // ===== Commands (THIS WAS THE BUG) =====
+    public static readonly BindableProperty CloseCommandProperty =
+        BindableProperty.Create(nameof(CloseCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
+
+    public ICommand CloseCommand
     {
-        await CloseAsync();
+        get => (ICommand)GetValue(CloseCommandProperty);
+        set => SetValue(CloseCommandProperty, value);
+    }
+
+    public static readonly BindableProperty SightingsCommandProperty =
+        BindableProperty.Create(nameof(SightingsCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
+
+    public ICommand SightingsCommand
+    {
+        get => (ICommand)GetValue(SightingsCommandProperty);
+        set => SetValue(SightingsCommandProperty, value);
+    }
+
+    public static readonly BindableProperty ProfileCommandProperty =
+        BindableProperty.Create(nameof(ProfileCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
+
+    public ICommand ProfileCommand
+    {
+        get => (ICommand)GetValue(ProfileCommandProperty);
+        set => SetValue(ProfileCommandProperty, value);
+    }
+
+    public static readonly BindableProperty InsightsCommandProperty =
+        BindableProperty.Create(nameof(InsightsCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
+
+    public ICommand InsightsCommand
+    {
+        get => (ICommand)GetValue(InsightsCommandProperty);
+        set => SetValue(InsightsCommandProperty, value);
+    }
+
+    public static readonly BindableProperty SelectLocationCommandProperty =
+        BindableProperty.Create(nameof(SelectLocationCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
+
+    public ICommand SelectLocationCommand
+    {
+        get => (ICommand)GetValue(SelectLocationCommandProperty);
+        set => SetValue(SelectLocationCommandProperty, value);
+    }
+
+    public static readonly BindableProperty SelectBirdCommandProperty =
+        BindableProperty.Create(nameof(SelectBirdCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
+
+    public ICommand SelectBirdCommand
+    {
+        get => (ICommand)GetValue(SelectBirdCommandProperty);
+        set => SetValue(SelectBirdCommandProperty, value);
+    }
+
+    public static readonly BindableProperty HomeCommandProperty =
+        BindableProperty.Create(nameof(HomeCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
+
+    public ICommand HomeCommand
+    {
+        get => (ICommand)GetValue(HomeCommandProperty);
+        set => SetValue(HomeCommandProperty, value);
     }
 }

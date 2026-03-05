@@ -11,9 +11,11 @@ public partial class BasePage : ContentPage
 {
     BoxView _drawerOverlay;
     LeftSettingsDrawer _leftDrawer;
+    RightSettingsDrawer _rightDrawer;
     bool _isDrawerOpen;
     BoxView _swipeCatcher;
     const double DrawerHiddenX = -360;
+    const double RightDrawerHiddenX = 360;
     public BasePage()
     {
         InitializeComponent();
@@ -26,44 +28,93 @@ public partial class BasePage : ContentPage
         base.OnApplyTemplate();
         _drawerOverlay = GetTemplateChild("DrawerOverlay") as BoxView;
         _leftDrawer = GetTemplateChild("LeftDrawer") as LeftSettingsDrawer;
+        _rightDrawer = GetTemplateChild("RightDrawer") as RightSettingsDrawer;
         var header = GetTemplateChild("AppHeader") as AppHeader;
 
-      //  if (_drawerOverlay == null || _leftDrawer == null)
-      //      return;
+
         if (header != null)
         {
-            header.HamburgerClicked += async (_, __) => await OpenDrawer();
+            header.HamburgerClicked += async (_, __) =>
+            {
+                if (IsAnyDrawerOpen())
+                    await CloseAllDrawers();
+                else
+                    await OpenDrawer(); // ← existing left drawer logic
+            };
         }
-        _drawerOverlay.IsVisible = false;
+
+        bool IsAnyDrawerOpen()
+        {
+            return (_leftDrawer?.TranslationX == 0) || (_rightDrawer?.TranslationX == 0);
+        }
 
         // 🔒 GUARANTEED hidden
         _leftDrawer.TranslationX = DrawerHiddenX;
+        if (_rightDrawer != null)
+            _rightDrawer.TranslationX = RightDrawerHiddenX;
+    }
+
+    async Task OpenRightDrawer()
+    {
+        if (_rightDrawer == null) return;
+
+        await CloseDrawer(); // close LEFT first
+
+        _drawerOverlay.IsVisible = true;
+        await _rightDrawer.TranslateToAsync(0, 0, 250, Easing.CubicOut);
+    }
+
+    async Task CloseRightDrawer()
+    {
+        if (_rightDrawer == null) return;
+
+        await _rightDrawer.TranslateToAsync(RightDrawerHiddenX, 0, 250, Easing.CubicIn);
+        _drawerOverlay.IsVisible = false;
     }
 
     async void OnSwipeRight(object sender, SwipedEventArgs e)
     {
-        await OpenDrawer();
+        if (_rightDrawer?.TranslationX == 0)
+            await CloseRightDrawer();
+        else
+            await OpenDrawer(); // existing LEFT drawer
     }
 
     async void OnSwipeLeft(object sender, SwipedEventArgs e)
     {
-        await CloseDrawer();
+        if (_leftDrawer?.TranslationX == 0)
+            await CloseDrawer();
+        else
+            await OpenRightDrawer();
     }
 
-   async Task OpenDrawer()
+    async Task OpenDrawer()
     {
         if (_leftDrawer == null) return;
         _drawerOverlay.IsVisible = true;
-        await _leftDrawer.TranslateTo(0, 0, 250, Easing.CubicOut);
+        await _leftDrawer.TranslateToAsync(0, 0, 250, Easing.CubicOut);
     }
 
     async Task CloseDrawer()
     {
         if (_leftDrawer == null) return;
-        await _leftDrawer.TranslateTo(DrawerHiddenX, 0, 250, Easing.CubicIn);
+        await _leftDrawer.TranslateToAsync(DrawerHiddenX, 0, 250, Easing.CubicIn);
         _drawerOverlay.IsVisible = false;
     }
 
+    async void OnOverlayTapped(object sender, EventArgs e)
+    {
+        await CloseAllDrawers();
+    }
+
+    async Task CloseAllDrawers()
+    {
+        if (_leftDrawer?.TranslationX == 0)
+            await CloseDrawer();
+
+        if (_rightDrawer?.TranslationX == 0)
+            await CloseRightDrawer();
+    }
     protected AppState AppState =>
     Microsoft.Maui.Controls.Application.Current
         .Handler

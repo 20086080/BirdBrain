@@ -6,11 +6,11 @@
     xmlns:controls="clr-namespace:BirdBrain.Controls"
     BackgroundColor="#B2FF9A76"         
     Padding="0" Margin= "0">
-    <!-- Make all themes translucent version-->
+    <!-- TODO Make all themes translucent version-->
     
     <VerticalStackLayout Padding="20,40" Spacing="24" >
 
-        <!-- HEADER -->
+        <!-- Header -->
         <Grid ColumnDefinitions="*,Auto">
             <Grid ColumnDefinitions="*,26" ColumnSpacing="12">
         
@@ -21,7 +21,7 @@
         </Grid>
         <BoxView Style="{StaticResource DrawerDividerStyle}" />
         
-        <!-- NAVIGATION -->
+        <!-- Menu -->
         <VerticalStackLayout Spacing="18">
             <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
                 <Image Source="icon_sightings.png" Style="{StaticResource DrawerMenuIconStyle}" />
@@ -61,7 +61,8 @@
             </Grid>
         </VerticalStackLayout>
         <BoxView Style="{StaticResource DrawerDividerStyle}" />
-
+        
+        <!-- Slider -->
         <VerticalStackLayout Spacing="8">
             <Label Text="Radius (km)" Style="{StaticResource DrawerSectionLabelStyle}" />
             <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
@@ -73,7 +74,7 @@
                 <Label Text ="50"  Grid.Column="2" Style="{StaticResource SliderEndpointLabelStyle}" />
             </Grid>
         </VerticalStackLayout>
-        <!-- DAYS -->
+       
         <VerticalStackLayout Spacing="8">
             <Label Text="Days" Style="{StaticResource DrawerSectionLabelStyle}" />
             <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">

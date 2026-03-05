@@ -30,6 +30,11 @@
                 <controls:LeftSettingsDrawer x:Name="LeftDrawer"
                     WidthRequest="300" TranslationX="-360" 
                     HorizontalOptions="Start" Margin="0" />
+
+                <!-- RIGHT DRAWER (ABSOLUTE POSITIONED) -->
+                <controls:RightSettingsDrawer x:Name="RightDrawer"
+                    WidthRequest="300" TranslationX="360"
+                    HorizontalOptions="End" Margin="0" />
             </Grid>
             </ControlTemplate>
     </ContentPage.ControlTemplate>

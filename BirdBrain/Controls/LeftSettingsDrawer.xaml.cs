@@ -7,7 +7,11 @@ public partial class LeftSettingsDrawer : ContentView
     public LeftSettingsDrawer()
     {
         InitializeComponent();
-        
+    }
+
+    async Task GoHome()
+    {
+        await Shell.Current.GoToAsync("//IntroPage");
     }
 
     // ===== Sliders =====
@@ -29,7 +33,6 @@ public partial class LeftSettingsDrawer : ContentView
         set => SetValue(DaysProperty, value);
     }
 
-    // ===== Commands (THIS WAS THE BUG) =====
     public static readonly BindableProperty CloseCommandProperty =
         BindableProperty.Create(nameof(CloseCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
 
@@ -85,7 +88,11 @@ public partial class LeftSettingsDrawer : ContentView
     }
 
     public static readonly BindableProperty HomeCommandProperty =
-        BindableProperty.Create(nameof(HomeCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
+     BindableProperty.Create(
+         nameof(HomeCommand),
+         typeof(ICommand),
+         typeof(LeftSettingsDrawer),
+         null);
 
     public ICommand HomeCommand
     {

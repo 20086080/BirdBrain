@@ -7,7 +7,7 @@ namespace BirdBrain
         public AppShell()
         {
             InitializeComponent();
-            
+            Routing.RegisterRoute(nameof(IntroPage), typeof(IntroPage));
             Routing.RegisterRoute(nameof(BirdSelectionPage), typeof(BirdSelectionPage));
             Routing.RegisterRoute(nameof(BirdSighting), typeof(BirdSighting));
         }

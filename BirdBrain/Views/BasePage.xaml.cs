@@ -23,6 +23,7 @@ public partial class BasePage : ContentPage
     .SetUseSafeArea(this, false);
     }
 
+
     protected override void OnApplyTemplate()
     {
         base.OnApplyTemplate();
@@ -31,6 +32,16 @@ public partial class BasePage : ContentPage
         _rightDrawer = GetTemplateChild("RightDrawer") as RightSettingsDrawer;
         var header = GetTemplateChild("AppHeader") as AppHeader;
 
+        if (_leftDrawer != null)
+        {
+            _leftDrawer.HomeCommand = new Command(async () =>
+            {
+                if (IsAnyDrawerOpen())
+                    await CloseAllDrawers();
+
+                await Shell.Current.GoToAsync("//IntroPage");
+            });
+        }
 
         if (header != null)
         {
@@ -40,6 +51,14 @@ public partial class BasePage : ContentPage
                     await CloseAllDrawers();
                 else
                     await OpenDrawer(); // ← existing left drawer logic
+            };
+            // Right drawer
+            header.SettingsClicked += async (_, __) =>
+            {
+                if (IsAnyDrawerOpen())
+                    await CloseAllDrawers();
+                else
+                    await OpenRightDrawer();
             };
         }
 
@@ -67,7 +86,6 @@ public partial class BasePage : ContentPage
 
         await _rightDrawer.TranslateToAsync(0, 0, 250, Easing.CubicOut);
     }
-
 
     async Task CloseRightDrawer()
     {

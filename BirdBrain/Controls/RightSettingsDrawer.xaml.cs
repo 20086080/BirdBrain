@@ -1,4 +1,5 @@
 
+using BirdBrain.Views;
 using System.Windows.Input;
 
 namespace BirdBrain.Controls;
@@ -8,12 +9,11 @@ public partial class RightSettingsDrawer : ContentView
     public RightSettingsDrawer()
     {
         InitializeComponent();
-
     }
 
     // ===== Sliders =====
     public static readonly BindableProperty RadiusProperty =
-        BindableProperty.Create(nameof(Radius), typeof(double), typeof(LeftSettingsDrawer), 10.0);
+        BindableProperty.Create(nameof(Radius), typeof(double), typeof(RightSettingsDrawer), 10.0);
 
     public double Radius
     {
@@ -21,18 +21,8 @@ public partial class RightSettingsDrawer : ContentView
         set => SetValue(RadiusProperty, value);
     }
 
-    public static readonly BindableProperty DaysProperty =
-        BindableProperty.Create(nameof(Days), typeof(double), typeof(LeftSettingsDrawer), 30.0);
-
-    public double Days
-    {
-        get => (double)GetValue(DaysProperty);
-        set => SetValue(DaysProperty, value);
-    }
-
-    // ===== Commands (THIS WAS THE BUG) =====
     public static readonly BindableProperty CloseCommandProperty =
-        BindableProperty.Create(nameof(CloseCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
+        BindableProperty.Create(nameof(CloseCommand), typeof(ICommand), typeof(RightSettingsDrawer));
 
     public ICommand CloseCommand
     {
@@ -40,57 +30,33 @@ public partial class RightSettingsDrawer : ContentView
         set => SetValue(CloseCommandProperty, value);
     }
 
-    public static readonly BindableProperty SightingsCommandProperty =
-        BindableProperty.Create(nameof(SightingsCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
-
-    public ICommand SightingsCommand
+    void OnDarkTapped(object sender, EventArgs e)
     {
-        get => (ICommand)GetValue(SightingsCommandProperty);
-        set => SetValue(SightingsCommandProperty, value);
+        DarkTab.Style =
+            (Style)Application.Current.Resources["SegmentSelectedStyle"];
+
+        LightTab.Style =
+            (Style)Application.Current.Resources["SegmentUnselectedStyle"];
+
+        DarkLabel.Style =
+            (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
+
+        LightLabel.Style =
+            (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
     }
 
-    public static readonly BindableProperty ProfileCommandProperty =
-        BindableProperty.Create(nameof(ProfileCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
-
-    public ICommand ProfileCommand
+    async void OnLightTapped(object sender, EventArgs e)
     {
-        get => (ICommand)GetValue(ProfileCommandProperty);
-        set => SetValue(ProfileCommandProperty, value);
-    }
+        LightTab.Style =
+            (Style)Application.Current.Resources["SegmentSelectedStyle"];
 
-    public static readonly BindableProperty InsightsCommandProperty =
-        BindableProperty.Create(nameof(InsightsCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
+        DarkTab.Style =
+            (Style)Application.Current.Resources["SegmentUnselectedStyle"];
 
-    public ICommand InsightsCommand
-    {
-        get => (ICommand)GetValue(InsightsCommandProperty);
-        set => SetValue(InsightsCommandProperty, value);
-    }
+        LightLabel.Style =
+            (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
 
-    public static readonly BindableProperty SelectLocationCommandProperty =
-        BindableProperty.Create(nameof(SelectLocationCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
-
-    public ICommand SelectLocationCommand
-    {
-        get => (ICommand)GetValue(SelectLocationCommandProperty);
-        set => SetValue(SelectLocationCommandProperty, value);
-    }
-
-    public static readonly BindableProperty SelectBirdCommandProperty =
-        BindableProperty.Create(nameof(SelectBirdCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
-
-    public ICommand SelectBirdCommand
-    {
-        get => (ICommand)GetValue(SelectBirdCommandProperty);
-        set => SetValue(SelectBirdCommandProperty, value);
-    }
-
-    public static readonly BindableProperty HomeCommandProperty =
-        BindableProperty.Create(nameof(HomeCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
-
-    public ICommand HomeCommand
-    {
-        get => (ICommand)GetValue(HomeCommandProperty);
-        set => SetValue(HomeCommandProperty, value);
+        DarkLabel.Style =
+            (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
     }
 }

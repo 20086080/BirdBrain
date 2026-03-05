@@ -45,8 +45,7 @@
             <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
                 <Image Source="icon_location.png" Style="{StaticResource DrawerMenuIconStyle}" />
                 <Button Grid.Column ="1" Text="Select Location" Style="{StaticResource DrawerMenuButtonStyle}"
-                    Command="{Binding SelectLocationCommand,
-                              Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
+                    Command="{Binding HomeCommand, Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
             </Grid>
             <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
                 <Image Source="icon_bird.png" Style="{StaticResource DrawerMenuIconStyle}" />

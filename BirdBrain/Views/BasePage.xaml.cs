@@ -23,7 +23,6 @@ public partial class BasePage : ContentPage
     .SetUseSafeArea(this, false);
     }
 
-
     protected override void OnApplyTemplate()
     {
         base.OnApplyTemplate();
@@ -40,6 +39,15 @@ public partial class BasePage : ContentPage
                     await CloseAllDrawers();
 
                 await Shell.Current.GoToAsync("//IntroPage");
+            });
+
+            // Bird Selection
+            _leftDrawer.SelectBirdCommand = new Command(async () =>
+            {
+                if (IsAnyDrawerOpen())
+                    await CloseAllDrawers();
+
+                await Shell.Current.GoToAsync("BirdSelectionPage");
             });
         }
 

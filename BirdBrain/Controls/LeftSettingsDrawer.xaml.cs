@@ -78,15 +78,6 @@ public partial class LeftSettingsDrawer : ContentView
         set => SetValue(SelectLocationCommandProperty, value);
     }
 
-    public static readonly BindableProperty SelectBirdCommandProperty =
-        BindableProperty.Create(nameof(SelectBirdCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
-
-    public ICommand SelectBirdCommand
-    {
-        get => (ICommand)GetValue(SelectBirdCommandProperty);
-        set => SetValue(SelectBirdCommandProperty, value);
-    }
-
     public static readonly BindableProperty HomeCommandProperty =
      BindableProperty.Create(
          nameof(HomeCommand),
@@ -98,5 +89,17 @@ public partial class LeftSettingsDrawer : ContentView
     {
         get => (ICommand)GetValue(HomeCommandProperty);
         set => SetValue(HomeCommandProperty, value);
+    }
+
+    public static readonly BindableProperty SelectBirdCommandProperty =
+     BindableProperty.Create(
+         nameof(SelectBirdCommand),
+         typeof(ICommand),
+         typeof(LeftSettingsDrawer),
+         null);
+    public ICommand SelectBirdCommand
+    {
+        get => (ICommand)GetValue(SelectBirdCommandProperty);
+        set => SetValue(SelectBirdCommandProperty, value);
     }
 }

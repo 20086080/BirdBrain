@@ -134,10 +134,14 @@
             <!-- Selector Selected Label -->
             <Style x:Key="SegmentSelectedLabelStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="{DynamicResource Background}" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
             </Style>
             <!-- Selector UnSelected Label -->
             <Style x:Key="SegmentUnselectedLabelStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="{DynamicResource Background}" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
             </Style>
             <!-- Drawer Menu Icon-->
             <Style x:Key="DrawerMenuIconStyle" TargetType="Image">

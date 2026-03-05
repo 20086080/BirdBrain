@@ -24,8 +24,12 @@
 
                 <!-- OVERLAY -->
                 <BoxView x:Name="DrawerOverlay"
-                    BackgroundColor="#80000000" IsVisible="False" />
-
+                    BackgroundColor="#80000000" IsVisible="False"
+                         InputTransparent="False">
+                    <BoxView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnOverlayTapped"/>
+                    </BoxView.GestureRecognizers>
+                </BoxView>
                 <!-- LEFT DRAWER (ABSOLUTE POSITIONED) -->
                 <controls:LeftSettingsDrawer x:Name="LeftDrawer"
                     WidthRequest="300" TranslationX="-360" 

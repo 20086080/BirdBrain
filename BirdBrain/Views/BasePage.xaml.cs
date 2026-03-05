@@ -58,11 +58,16 @@ public partial class BasePage : ContentPage
     {
         if (_rightDrawer == null) return;
 
-        await CloseDrawer(); // close LEFT first
+        _leftDrawer?.AbortAnimation("TranslateTo");
+        _rightDrawer.AbortAnimation("TranslateTo");
+
+        await CloseDrawer(); // closes left if open
 
         _drawerOverlay.IsVisible = true;
+
         await _rightDrawer.TranslateToAsync(0, 0, 250, Easing.CubicOut);
     }
+
 
     async Task CloseRightDrawer()
     {
@@ -91,7 +96,12 @@ public partial class BasePage : ContentPage
     async Task OpenDrawer()
     {
         if (_leftDrawer == null) return;
+
+        _leftDrawer.AbortAnimation("TranslateTo");
+        _rightDrawer?.AbortAnimation("TranslateTo");
+
         _drawerOverlay.IsVisible = true;
+
         await _leftDrawer.TranslateToAsync(0, 0, 250, Easing.CubicOut);
     }
 

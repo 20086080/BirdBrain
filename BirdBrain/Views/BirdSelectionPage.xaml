@@ -7,27 +7,22 @@
     Title="Bird Selection"
     BackgroundColor="{DynamicResource Background}">
 
-    <Grid RowDefinitions="Auto,Auto,*" Padding="20" RowSpacing="20">
+    <Grid RowDefinitions="Auto,Auto,*" Padding="20" RowSpacing="10">
 
-        <!-- ========================= -->
-        <!-- 1️⃣ LOCATION INFO -->
-        <!-- ========================= -->
         <VerticalStackLayout Grid.Row="0" Spacing="12">
-            <Label Text="Location : XXX" Style="{StaticResource SegmentSelectedLabelStyle}" />
+            <HorizontalStackLayout>
+                <Label Text="Location: " Style="{StaticResource PageLabel}" />
+                <Label Text ="{Binding SelectedLocationName}" Style="{StaticResource PageLabel}" />
+            </HorizontalStackLayout>
         </VerticalStackLayout>
 
-        <!-- ========================= -->
-        <!-- 2️⃣ ENTER BIRD -->
-        <!-- ========================= -->
-
         <VerticalStackLayout Grid.Row="1" Spacing="2">
-            <Entry x:Name="Bird" Placeholder="Enter bird name..." Style="{StaticResource PrimaryEntryStyle}" />
+            <Entry x:Name="Bird" Placeholder="Enter bird OR select from saved birds" FontAttributes="Italic" 
+                   Style="{StaticResource PrimaryEntryStyle}" Completed="Bird_Completed"/>
             <BoxView Style="{StaticResource UnderlineStyle}"/>
         </VerticalStackLayout>
 
-        <!-- ========================= -->
-        <!-- 3️⃣ SAVED BIRDS (EXPANDS) -->
-        <!-- ========================= -->
+        <!-- Bird Carousel -->
         <VerticalStackLayout Grid.Row="2" Spacing="15" Margin="0,20,0,20" VerticalOptions="FillAndExpand">
             <Label Text="Saved Birds" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
             <CarouselView ItemsSource="{Binding MyCollection}"

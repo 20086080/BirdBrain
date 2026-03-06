@@ -67,7 +67,7 @@
             <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
                 <Label Text="1" Style="{StaticResource SliderEndpointLabelStyle}" />
                 <Slider Grid.Column="1" Style="{StaticResource DrawerSliderStyle}"
-                    Minimum="1" Maximum="50"
+                    Minimum="1" Maximum = "50"
                     Value="{Binding Radius, Mode=TwoWay,
                         Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
                 <Label Text ="50"  Grid.Column="2" Style="{StaticResource SliderEndpointLabelStyle}" />

@@ -58,7 +58,7 @@ public partial class IntroPage : BasePage
         AllBirdsLabel.Style =
             (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
 
-        // Navigate using Shell
+        // Navigate to BirdSelectionPage
         await Shell.Current.GoToAsync(nameof(BirdSelectionPage));
     }
 

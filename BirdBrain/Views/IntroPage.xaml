@@ -9,21 +9,17 @@
 
     <!-- Proper page grid -->
     <Grid Padding="20" RowSpacing="15" RowDefinitions="Auto,Auto,*,Auto">
-
-        <!-- 1️⃣ GPS Toggle -->
         <HorizontalStackLayout Grid.Row="0" Spacing="10" VerticalOptions="Center">
             <Label Text="Use Current Location" Style="{StaticResource PageLabel}" />
             <Switch IsToggled="{Binding UseCurrentLocation}" Style="{StaticResource PrimarySwitchStyle}" />
         </HorizontalStackLayout>
-
-        <!-- 2️⃣ Location Entry -->
         <VerticalStackLayout Grid.Row="1" Spacing="2">
-            <Entry x:Name="LocationEntry" Placeholder="Enter location"
+            <Entry x:Name="LocationEntry" Placeholder="Enter location OR select from saved locations" FontAttributes="Italic"
                    TextChanged="OnTextChanged"  Style="{StaticResource PrimaryEntryStyle}" />
             <BoxView Style="{StaticResource UnderlineStyle}" />
         </VerticalStackLayout>
 
-        <!-- 3️⃣ SAVED LOCATIONS (Expands Fully) -->
+        <!-- Location Carousel -->
         <VerticalStackLayout Grid.Row="2" Spacing="10" VerticalOptions="FillAndExpand">
 
             <Label Text="Saved Locations" Style="{StaticResource PageLabel}"
@@ -60,7 +56,7 @@
                            HorizontalOptions="Center"/>
         </VerticalStackLayout>
 
-        <!-- 4️⃣ Bottom Segmented Tabs (Anchored) -->
+        <!-- Selector - All Birds / Specific Bird -->
         <Border Grid.Row="3" Style="{StaticResource RoundedAccentBorderStyle}"
                 Padding="0" HorizontalOptions="Center">
 

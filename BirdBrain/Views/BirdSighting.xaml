@@ -6,12 +6,9 @@
     xmlns:views="clr-namespace:BirdBrain.Views"
     Title="Bird Sightings">
 
-    <!-- ================= MAIN LAYOUT GRID ================= -->
     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" Padding="20" RowSpacing="20">
 
-        <!-- ================================================= -->
-        <!-- ROW 0 – SEGMENT CONTROL -->
-        <!-- ================================================= -->
+        <!-- ROW 0 – segment control Bird / Location  -->
         <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center"
                                Spacing="40" Background="{DynamicResource Background}">
             <Border Style="{StaticResource RoundedAccentBorderStyle}"
@@ -39,17 +36,13 @@
             </Border>
         </HorizontalStackLayout>
 
-        <!-- ================================================= -->
-        <!-- ROW 1 – CONTEXT LABEL -->
-        <!-- ================================================= -->
+        <!-- ROW 1 – Location Information -->
         <HorizontalStackLayout Grid.Row="1" Spacing="12">
             <Label Text="Location: XXX" Style="{StaticResource SegmentSelectedLabelStyle}" />
             <Label Text="Bird: XXX" Style="{StaticResource SegmentSelectedLabelStyle}" />
         </HorizontalStackLayout>
-
-        <!-- ================================================= -->
-        <!-- ROW 2 – BIRD CARD -->
-        <!-- ================================================= -->
+        
+        <!-- ROW 2 – Bird Information -->
         <Border Grid.Row="2" Padding="12"
                 Stroke="{DynamicResource BorderColor}"
                 StrokeThickness="1"

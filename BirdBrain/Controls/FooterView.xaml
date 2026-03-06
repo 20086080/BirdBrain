@@ -4,7 +4,11 @@
              x:Class="BirdBrain.Controls.FooterView">
     <Grid>
         <HorizontalStackLayout Grid.Row="5" HorizontalOptions="Center">
-            <Label Text="Radius - 5Km  |  Days - 30 Days" Style="{StaticResource PageLabel}"/>
+            <Label Text="Radius - " Style="{StaticResource PageLabel}"/>
+            <Label Text="{Binding Radius}" Style="{StaticResource PageLabel}"/>
+            <Label Text =" km   |  Days - " Style = "{StaticResource PageLabel}" />
+            <Label Text="{Binding Days}" Style="{StaticResource PageLabel}"/>
+            <Label Text =" Days" Style="{StaticResource PageLabel}"/>
         </HorizontalStackLayout>
     </Grid>
 </ContentView>

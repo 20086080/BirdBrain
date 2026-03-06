@@ -9,7 +9,55 @@
     "Rarity": "Common",
     "ConservationStatus": "Least Concern",
     "Thumbnail": "white_throated_kingfisher_t.png",
-    "ProfileImage": "halcyon_smyrnensis_white-throated_kingfisher_t.png"
+    "ProfileImage": "kingfisher_t.png"
+  },
+  {
+    "CommonName": "Australian Pelican",
+    "ScientificName": "Pelecanus conspicillatus",
+    "EBirdName": "Australian Pelican",
+    "Description": "Large waterbird with an enormous bill and throat pouch.",
+    "Habitat": "Coasts, lakes, wetlands",
+    "Diet": "Fish",
+    "Rarity": "Common",
+    "ConservationStatus": "Least Concern",
+    "Thumbnail": "pelican_t.png",
+    "ProfileImage": "pelican.png"
+  },
+  {
+    "CommonName": "New Holland Honeyeater",
+    "ScientificName": "Phylidonyris novaehollandiae",
+    "EBirdName": "New Holland Honeyeater",
+    "Description": "Active honeyeater frequently visiting flowering plants.",
+    "Habitat": "Heathlands, gardens",
+    "Diet": "Nectar, insects",
+    "Rarity": "Common",
+    "ConservationStatus": "Least Concern",
+    "Thumbnail": "phylidonyris_novaehollandiae_t.png",
+    "ProfileImage": "phylidonyris_novaehollandiae.png"
+  },
+  {
+    "CommonName": "Tawny Frogmouth",
+    "ScientificName": "Podargus strigoides",
+    "EBirdName": "Tawny Frogmouth",
+    "Description": "Nocturnal bird with excellent camouflage.",
+    "Habitat": "Forests, suburban trees",
+    "Diet": "Insects, small animals",
+    "Rarity": "Common",
+    "ConservationStatus": "Least Concern",
+    "Thumbnail": "frogmouth_t.png",
+    "ProfileImage": "frogmouth.png"
+  },
+  {
+    "CommonName": "Black Swan",
+    "ScientificName": "Cygnus atratus",
+    "EBirdName": "Black Swan",
+    "Description": "Iconic black swan found on lakes and wetlands.",
+    "Habitat": "Lakes, wetlands",
+    "Diet": "Aquatic plants",
+    "Rarity": "Common",
+    "ConservationStatus": "Least Concern",
+    "Thumbnail": "black_swan_t.png",
+    "ProfileImage": "black_swan.png"
   },
   {
     "CommonName": "House Crow",
@@ -35,7 +83,6 @@
     "Thumbnail": "common_myna_t.png",
     "ProfileImage": "common_myna.png"
   },
-
   {
     "CommonName": "Cattle Egret",
     "ScientificName": "Bubulcus ibis",
@@ -142,7 +189,7 @@
     "Rarity": "Common",
     "ConservationStatus": "Least Concern",
     "Thumbnail": "pond_heron_t.png",
-    "ProfileImage": "Indian_Pond_Heron_t.png"
+    "ProfileImage": "indian_pond_heron_t.png"
   },
   {
     "CommonName": "White-breasted Waterhen",
@@ -300,54 +347,7 @@
     "Thumbnail": "little_corella_t.png",
     "ProfileImage": "little_corella.png"
   },
-  {
-    "CommonName": "Australian Pelican",
-    "ScientificName": "Pelecanus conspicillatus",
-    "EBirdName": "Australian Pelican",
-    "Description": "Large waterbird with an enormous bill and throat pouch.",
-    "Habitat": "Coasts, lakes, wetlands",
-    "Diet": "Fish",
-    "Rarity": "Common",
-    "ConservationStatus": "Least Concern",
-    "Thumbnail": "pelican_t.png",
-    "ProfileImage": "pelican.png"
-  },
-  {
-    "CommonName": "New Holland Honeyeater",
-    "ScientificName": "Phylidonyris novaehollandiae",
-    "EBirdName": "New Holland Honeyeater",
-    "Description": "Active honeyeater frequently visiting flowering plants.",
-    "Habitat": "Heathlands, gardens",
-    "Diet": "Nectar, insects",
-    "Rarity": "Common",
-    "ConservationStatus": "Least Concern",
-    "Thumbnail": "phylidonyris_novaehollandiae_t.png",
-    "ProfileImage": "phylidonyris_novaehollandiae.png"
-  },
-  {
-    "CommonName": "Tawny Frogmouth",
-    "ScientificName": "Podargus strigoides",
-    "EBirdName": "Tawny Frogmouth",
-    "Description": "Nocturnal bird with excellent camouflage.",
-    "Habitat": "Forests, suburban trees",
-    "Diet": "Insects, small animals",
-    "Rarity": "Common",
-    "ConservationStatus": "Least Concern",
-    "Thumbnail": "frogmouth_t.png",
-    "ProfileImage": "frogmouth.png"
-  },
-  {
-    "CommonName": "Black Swan",
-    "ScientificName": "Cygnus atratus",
-    "EBirdName": "Black Swan",
-    "Description": "Iconic black swan found on lakes and wetlands.",
-    "Habitat": "Lakes, wetlands",
-    "Diet": "Aquatic plants",
-    "Rarity": "Common",
-    "ConservationStatus": "Least Concern",
-    "Thumbnail": "black_swan_t.png",
-    "ProfileImage": "black_swan.png"
-  },
+
   {
     "CommonName": "White Ibis",
     "ScientificName": "Threskiornis molucca",

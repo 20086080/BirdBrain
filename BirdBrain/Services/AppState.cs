@@ -12,7 +12,7 @@ namespace BirdBrain.Services
         private int _selectedLocationId;
         private string _selectedLocationName = "";
         private int _days = 30;
-        private double _radius = 5;
+        private double _radius = 50;
 
         public int SelectedBirdId
         {

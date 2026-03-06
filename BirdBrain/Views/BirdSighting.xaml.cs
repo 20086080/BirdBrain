@@ -4,7 +4,7 @@ public partial class BirdSighting : BasePage
 {
 	public BirdSighting()
 	{
-		InitializeComponent();
+        InitializeComponent();
 	}
 
     void LocationTapped(object sender, EventArgs e)

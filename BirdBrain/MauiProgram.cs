@@ -5,6 +5,7 @@ namespace BirdBrain
 {
     public static class MauiProgram
     {
+        
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
@@ -20,6 +21,11 @@ namespace BirdBrain
             builder.Services.AddSingleton<SavedLocationService>();
             builder.Services.AddSingleton<SavedBirdService>();
             builder.Services.AddSingleton<AppState>();
+            var app = builder.Build();
+
+            App.State = app.Services.GetRequiredService<AppState>();
+
+            return app;
 
 #if DEBUG
             builder.Logging.AddDebug();

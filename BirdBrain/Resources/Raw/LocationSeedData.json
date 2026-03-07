@@ -9,7 +9,8 @@
     "CountryCode": "AU",
     "Region": "Western Australia",
     "Description": "Large urban bushland reserve in Perth offering views of honeyeaters, parrots, raptors, and seasonal migrants.",
-    "Image": "kings_park_t.png"
+    "Thumbnail": "kings_park_t.png",
+    "ProfileImage": "kings_park.png"
   },
   {
     "Id": "AU_PER_LAKE_MONGER",
@@ -21,7 +22,8 @@
     "CountryCode": "AU",
     "Region": "Western Australia",
     "Description": "Freshwater lake near Perth attracting ducks, swans, cormorants, and other waterbirds.",
-    "Image": "lake_monger_t.png"
+    "Thumbnail": "lake_monger_t.png",
+    "ProfileImage": "lake_monger.png"
   },
   {
     "Id": "AU_WA_ROTTNEST_IS",
@@ -33,7 +35,8 @@
     "CountryCode": "AU",
     "Region": "Western Australia",
     "Description": "Offshore island with seabirds, terns, shearwaters, and coastal specialists.",
-    "Image": "rottnest_island_t.png"
+    "Thumbnail": "rottnest_island_t.png",
+    "ProfileImage": "rottnest_island.png"
   },
   {
     "Id": "AU_WA_SHARK_BAY",
@@ -45,7 +48,8 @@
     "CountryCode": "AU",
     "Region": "Western Australia",
     "Description": "World Heritage coastal site supporting shorebirds, seabirds, and arid-zone species.",
-    "Image": "shark_bay_t.png"
+    "Thumbnail": "shark_bay_t.png",
+    "ProfileImage": "shark_bay.png"
   },
   {
     "Id": "AU_NT_KAKADU_NP",
@@ -57,7 +61,8 @@
     "CountryCode": "AU",
     "Region": "Northern Territory",
     "Description": "Extensive wetlands and floodplains hosting one of Australia’s richest bird communities.",
-    "Image": "kakadu_t.png"
+    "Thumbnail": "kakadu_t.png",
+    "ProfileImage": "kakadu.png"
   },
   {
     "Id": "AU_NT_YELLOW_WATER",
@@ -69,7 +74,8 @@
     "CountryCode": "AU",
     "Region": "Northern Territory",
     "Description": "Iconic billabong in Kakadu famous for waterbirds, kingfishers, and birds of prey.",
-    "Image": ""
+    "Thumbnail": "yellow_water_billabong_t.png",
+    "ProfileImage": "yellow_water_billabong.png"
   },
   {
     "Id": "AU_QLD_DAINTREE",
@@ -81,7 +87,8 @@
     "CountryCode": "AU",
     "Region": "Queensland",
     "Description": "Ancient tropical rainforest home to endemic species including cassowaries and riflebirds.",
-    "Image": "daintree_rainforest_t.png"
+    "Thumbnail": "daintree_rainforest_t.png",
+    "ProfileImage": "daintree_rainforest.png"
   },
   {
     "Id": "AU_QLD_CAIRNS_ESPLANADE",
@@ -93,7 +100,8 @@
     "CountryCode": "AU",
     "Region": "Queensland",
     "Description": "Internationally significant mudflat and mangrove site for migratory shorebirds.",
-    "Image": "esplanade_t.png"
+    "Thumbnail": "esplanade_t.png",
+    "ProfileImage": "esplanade.png"
   },
   {
     "Id": "AU_QLD_ATHERTON",
@@ -105,7 +113,8 @@
     "CountryCode": "AU",
     "Region": "Queensland",
     "Description": "Upland forests and wetlands supporting many Queensland endemic birds.",
-    "Image": "atherton_rainforest_t.png"
+    "Thumbnail": "atherton_rainforest_t.png",
+    "ProfileImage": "atherton_rainforest.png"
   },
   {
     "Id": "AU_QLD_LAMINGTON_NP",
@@ -117,7 +126,8 @@
     "CountryCode": "AU",
     "Region": "Queensland",
     "Description": "Subtropical rainforest park known for lyrebirds, bowerbirds, and parrots.",
-    "Image": "lamington_t.png"
+    "Thumbnail": "lamington_t.png",
+    "ProfileImage": "lamington.png"
   },
   {
     "Id": "AU_NSW_BLUE_MOUNTAINS",
@@ -129,7 +139,8 @@
     "CountryCode": "AU",
     "Region": "New South Wales",
     "Description": "Eucalypt forests and escarpments supporting cockatoos, honeyeaters, and raptors.",
-    "Image": "blue_mountains_t.png"
+    "Thumbnail": "blue_mountains_t.png",
+    "ProfileImage": "blue_mountains.png"
   },
   {
     "Id": "AU_NSW_ROYAL_NP",
@@ -141,7 +152,8 @@
     "CountryCode": "AU",
     "Region": "New South Wales",
     "Description": "Coastal bushland south of Sydney with seabirds, forest birds, and migratory species.",
-    "Image": "royal_national_park_t.png"
+    "Thumbnail": "royal_national_park_t.png",
+    "ProfileImage": "royal_national_park.png"
   },
   {
     "Id": "AU_NSW_MURRAMARANG",
@@ -153,7 +165,8 @@
     "CountryCode": "AU",
     "Region": "New South Wales",
     "Description": "Coastal forests and beaches supporting a wide variety of bird species.",
-    "Image": "murramarang_t.png"
+    "Thumbnail": "murramarang_t.png",
+    "ProfileImage": "murramarang.png"
   },
   {
     "Id": "AU_VIC_BARMAH",
@@ -165,7 +178,8 @@
     "CountryCode": "AU",
     "Region": "Victoria",
     "Description": "River red gum forest critical for waterbirds, parrots, and woodland species.",
-    "Image": "barmah_t.png"
+    "Thumbnail": "barmah_t.png",
+    "ProfileImage": "barmah.png"
   },
   {
     "Id": "AU_VIC_WERRIBEE",
@@ -177,7 +191,8 @@
     "CountryCode": "AU",
     "Region": "Victoria",
     "Description": "One of Australia’s most important wetland sites for shorebirds and waterfowl.",
-    "Image": "werribee_t.png"
+    "Thumbnail": "werribee_t.png",
+    "ProfileImage": "werribee.png"
   },
   {
     "Id": "AU_TAS_CRADLE_MT",
@@ -189,7 +204,8 @@
     "CountryCode": "AU",
     "Region": "Tasmania",
     "Description": "Alpine and temperate habitats hosting several Tasmanian endemic birds.",
-    "Image": "cradle_mountain_t.png"
+    "Thumbnail": "cradle_mountain_t.png",
+    "ProfileImage": "cradle_mountain.png"
   },
   {
     "Id": "AU_TAS_FREYCINET",
@@ -201,7 +217,8 @@
     "CountryCode": "AU",
     "Region": "Tasmania",
     "Description": "Granite peaks and coastal environments supporting seabirds and forest birds.",
-    "Image": "freycinet_t.png"
+    "Thumbnail": "freycinet_t.png",
+    "ProfileImage": "freycinet.png"
   },
   {
     "Id": "AU_SA_COORONG",
@@ -213,7 +230,8 @@
     "CountryCode": "AU",
     "Region": "South Australia",
     "Description": "Lagoon and saltmarsh system vital for migratory shorebirds.",
-    "Image": "coorong_t.png"
+    "Thumbnail": "coorong_t.png",
+    "ProfileImage": "coorong.png"
   },
   {
     "Id": "AU_SA_FLINDERS",
@@ -225,7 +243,8 @@
     "CountryCode": "AU",
     "Region": "South Australia",
     "Description": "Arid mountain ranges supporting emus, raptors, and desert-adapted birds.",
-    "Image": "flinders_t.png"
+    "Thumbnail": "flinders_t.png",
+    "ProfileImage": "flinders.png"
   },
   {
     "Id": "AU_JBT_BOODEREE",
@@ -237,7 +256,8 @@
     "CountryCode": "AU",
     "Region": "Jervis Bay Territory",
     "Description": "Coastal forests and heathlands rich in honeyeaters and seabirds.",
-    "Image": "booderee_t.png"
+    "Thumbnail": "booderee_t.png",
+    "ProfileImage": "booderee.png"
   },
   {
     "Id": "IN_GOA_SALIM_ALI",
@@ -249,7 +269,8 @@
     "CountryCode": "IN",
     "Region": "North Goa",
     "Description": "Mangrove sanctuary on Chorao Island known for herons, egrets, and kingfishers.",
-    "Image": "salim_ali_t.png"
+    "Thumbnail": "salim_ali_t.png",
+    "ProfileImage": "salim_ali.png"
   },
   {
     "Id": "IN_GOA_CARAMBOLIM",
@@ -261,7 +282,8 @@
     "CountryCode": "IN",
     "Region": "North Goa",
     "Description": "Freshwater lake attracting migratory ducks, jacanas, and wading birds.",
-    "Image": "carambolim_lake_t.png"
+    "Thumbnail": "carambolim_lake_t.png",
+    "ProfileImage": "carambolim_lake.png"
   },
   {
     "Id": "IN_GOA_COTIGAO",
@@ -273,7 +295,8 @@
     "CountryCode": "IN",
     "Region": "South Goa",
     "Description": "Dense forest sanctuary home to hornbills, trogons, and forest passerines.",
-    "Image": "cotigao_t.png"
+    "Thumbnail": "cotigao_t.png",
+    "ProfileImage": "cotigao.png"
   },
   {
     "Id": "IN_GOA_BONDLA",
@@ -285,7 +308,8 @@
     "CountryCode": "IN",
     "Region": "North Goa",
     "Description": "Compact forest reserve ideal for spotting bulbuls, drongos, barbets, and woodland species.",
-    "Image": "bondla_t.png"
+    "Thumbnail": "bondla_t.png",
+    "ProfileImage": "bondla.png"
   },
   {
     "Id": "IN_GOA_MHADAI",
@@ -297,7 +321,8 @@
     "CountryCode": "IN",
     "Region": "North Goa",
     "Description": "Western Ghats habitat supporting Malabar trogons, hornbills, and endemic forest birds.",
-    "Image": "mhadei_t.png"
+    "Thumbnail": "mhadei_t.png",
+    "ProfileImage": "mhadei.png"
   },
   {
     "Id": "IN_GOA_NETRAVALI",
@@ -309,7 +334,8 @@
     "CountryCode": "IN",
     "Region": "South Goa",
     "Description": "Rich evergreen forests with flycatchers, pittas, laughingthrushes, and raptors.",
-    "Image": "netravali_t.png"
+    "Thumbnail": "netravali_t.png",
+    "ProfileImage": "netravali.png"
   },
   {
     "Id": "IN_GOA_CHAPORA_ESTUARY",
@@ -321,7 +347,8 @@
     "CountryCode": "IN",
     "Region": "North Goa",
     "Description": "Coastal estuary attracting sandpipers, plovers, gulls, and terns.",
-    "Image": "chapora_t.png"
+    "Thumbnail": "chapora_t.png",
+    "ProfileImage": "chapora.png"
   },
   {
     "Id": "IN_GOA_COLVA_BEACH",
@@ -333,7 +360,8 @@
     "CountryCode": "IN",
     "Region": "South Goa",
     "Description": "Sandy shoreline good for observing gulls, terns, and migratory shorebirds.",
-    "Image": "colva_beach_t.png"
+    "Thumbnail": "colva_beach_t.png",
+    "ProfileImage": "colva_beach.png"
   },
   {
     "Id": "IN_GOA_MORJIM",
@@ -345,7 +373,8 @@
     "CountryCode": "IN",
     "Region": "North Goa",
     "Description": "River estuary and beach habitat supporting waders, herons, and coastal species.",
-    "Image": "morjim_t.png"
+    "Thumbnail": "morjim_t.png",
+    "ProfileImage": "morjim.png"
   },
   {
     "Id": "IN_GOA_RIBANDAR",
@@ -357,6 +386,7 @@
     "CountryCode": "IN",
     "Region": "North Goa",
     "Description": "Tidal wetlands and paddy fields attracting egrets, ibis, jacanas, and migratory birds.",
-    "Image": "ribandar_t.png"
+    "Thumbnail": "ribandar_t.png",
+    "ProfileImage": "ribandar.png"
   }
 ]

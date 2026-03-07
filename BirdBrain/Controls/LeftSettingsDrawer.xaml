@@ -15,7 +15,7 @@
             <Grid ColumnDefinitions="*,26" ColumnSpacing="12">
         
                 <Label Grid.Column ="0" Text="BirdBrain Menu" Style="{StaticResource Titles}" />
-                <Image Grid.Column ="1" Source="icon_exit.png" Style="{StaticResource DrawerMenuIconStyle}" />
+                <Image Grid.Column ="1" Source="icon_exit.svg" Style="{StaticResource DrawerMenuIconStyle}" />
             </Grid>
          
         </Grid>
@@ -24,37 +24,37 @@
         <!-- Menu -->
         <VerticalStackLayout Spacing="18">
             <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
-                <Image Source="icon_sightings.png" Style="{StaticResource DrawerMenuIconStyle}" />
+                <Image Source="icon_sightings.svg" Style="{StaticResource DrawerMenuIconStyle}" />
                 <Button Grid.Column ="1" Text="Sightings" Style="{StaticResource DrawerMenuButtonStyle}"
                     Command="{Binding SightingsCommand,
                               Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
-                <Image Source="icon_hamburger.png" Style="{StaticResource DrawerMenuIconStyle}" />
+                <Image Source="icon_hamburger.svg" Style="{StaticResource DrawerMenuIconStyle}" />
             </Grid>
             <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
-                <Image Source="icon_profile.png" Style="{StaticResource DrawerMenuIconStyle}" />
+                <Image Source="icon_profile.svg" Style="{StaticResource DrawerMenuIconStyle}" />
                 <Button Grid.Column ="1" Text="Profile" Style="{StaticResource DrawerMenuButtonStyle}"
                     Command="{Binding ProfileCommand,
                               Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
             </Grid>
             <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
-                <Image Source="icon_insights.png" Style="{StaticResource DrawerMenuIconStyle}" />
+                <Image Source="icon_insights.svg" Style="{StaticResource DrawerMenuIconStyle}" />
                 <Button Grid.Column ="1" Text="Insights" Style="{StaticResource DrawerMenuButtonStyle}"
                     Command="{Binding InsightsCommand,
                               Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
             </Grid>
             <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
-                <Image Source="icon_location.png" Style="{StaticResource DrawerMenuIconStyle}" />
+                <Image Source="icon_location.svg" Style="{StaticResource DrawerMenuIconStyle}" />
                 <Button Grid.Column ="1" Text="Select Location" Style="{StaticResource DrawerMenuButtonStyle}"
                     Command="{Binding HomeCommand, Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
             </Grid>
             <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
-                <Image Source="icon_bird.png" Style="{StaticResource DrawerMenuIconStyle}" />
+                <Image Source="icon_bird.svg" Style="{StaticResource DrawerMenuIconStyle}" />
                 <Button Grid.Column ="1" Text="Select Bird" Style="{StaticResource DrawerMenuButtonStyle}"
                     Command="{Binding SelectBirdCommand,
                               Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
             </Grid>
             <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
-                <Image Source="icon_home.png" Style="{StaticResource DrawerMenuIconStyle}" />
+                <Image Source="icon_home.svg" Style="{StaticResource DrawerMenuIconStyle}" />
                 <Button Grid.Column ="1" Text="Home" Style="{StaticResource DrawerMenuButtonStyle}"
                     Command="{Binding HomeCommand, Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
             </Grid>

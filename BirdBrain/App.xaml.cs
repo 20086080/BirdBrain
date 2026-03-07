@@ -6,7 +6,7 @@ namespace BirdBrain
 {
     public partial class App : Application
     {
-        public static AppState State { get; private set; }
+        public static AppState State { get; set; }
         public App()
         {
             InitializeComponent();

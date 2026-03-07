@@ -1,4 +1,5 @@
 
+using BirdBrain.Helpers;
 using BirdBrain.Models;
 using BirdBrain.Services;
 
@@ -10,6 +11,7 @@ public partial class BirdSelectionPage : BasePage
     public BirdSelectionPage(JsonFileReader jsonReader)
 	{
 		InitializeComponent();
+        BindingContext = App.State;
         _jsonReader = jsonReader;
     }
 
@@ -27,8 +29,12 @@ public partial class BirdSelectionPage : BasePage
     {
         // Navigate to BirdSelection Page
         //await DisplayAlertAsync("debug","ok","OK");
-        Bird.Unfocus();   // release keyboard / focus
-        await Task.Delay(100);   // allow UI to settle
-        await Shell.Current.GoToAsync(nameof(BirdSighting));
+        Bird.Unfocus();
+        await KeyboardHelper.DismissAsync();
+        // optional short delay
+        Application.Current.Dispatcher.Dispatch(async () =>
+        {
+            await Shell.Current.GoToAsync(nameof(BirdSighting));
+        });
     }
 }

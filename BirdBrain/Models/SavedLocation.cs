@@ -19,6 +19,7 @@ namespace BirdBrain.Models
         {
             get; set;
         }
-        public string Image { get; set; }
+        public string Thumbnail { get; set; }
+        public string ProfileImage { get; set; }
     }
 }

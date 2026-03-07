@@ -72,34 +72,49 @@
 	  <None Remove="Resources\Images\bird_full\australian_king_parrot.png" />
 	  <None Remove="Resources\Images\bird_full\australian_magpie.png" />
 	  <None Remove="Resources\Images\bird_full\black_drongo.png" />
+	  <None Remove="Resources\Images\bird_full\black_swan.png" />
 	  <None Remove="Resources\Images\bird_full\brahminy_kite.png" />
+	  <None Remove="Resources\Images\bird_full\cattle_egret.png" />
 	  <None Remove="Resources\Images\bird_full\common_myna.png" />
 	  <None Remove="Resources\Images\bird_full\corvus_coronoides.png" />
 	  <None Remove="Resources\Images\bird_full\crested_pigeon.png" />
+	  <None Remove="Resources\Images\bird_full\currawong.png" />
 	  <None Remove="Resources\Images\bird_full\eolophus_roseicapilla.png" />
+	  <None Remove="Resources\Images\bird_full\frogmouth.png" />
 	  <None Remove="Resources\Images\bird_full\grallina_cyanoleuca_Female.png" />
+	  <None Remove="Resources\Images\bird_full\greater_coucal.png" />
 	  <None Remove="Resources\Images\bird_full\heron_garde_boeufs_a_oued_mejerda.png" />
 	  <None Remove="Resources\Images\bird_full\house_crow.png" />
 	  <None Remove="Resources\Images\bird_full\house_sparrow_male.png" />
 	  <None Remove="Resources\Images\bird_full\indian_pond_heron.png" />
+	  <None Remove="Resources\Images\bird_full\indian_robin.png" />
 	  <None Remove="Resources\Images\bird_full\indian_roller.png" />
+	  <None Remove="Resources\Images\bird_full\jungle_babbler.png" />
 	  <None Remove="Resources\Images\bird_full\jungle_myna.png" />
 	  <None Remove="Resources\Images\bird_full\kingfisher.png" />
 	  <None Remove="Resources\Images\bird_full\larus_novaehollandiae.png" />
 	  <None Remove="Resources\Images\bird_full\Little_corella.png" />
+	  <None Remove="Resources\Images\bird_full\little_egret.png" />
+	  <None Remove="Resources\Images\bird_full\magpie_robin.png" />
 	  <None Remove="Resources\Images\bird_full\male_chestnut_teal.png" />
 	  <None Remove="Resources\Images\bird_full\manorina_melanocephala.png" />
+	  <None Remove="Resources\Images\bird_full\masked_lapwing.png" />
 	  <None Remove="Resources\Images\bird_full\milvus_migrans_front.png" />
 	  <None Remove="Resources\Images\bird_full\pacific_black_duck.png" />
+	  <None Remove="Resources\Images\bird_full\parakeet.png" />
+	  <None Remove="Resources\Images\bird_full\peafowl.png" />
 	  <None Remove="Resources\Images\bird_full\pelican.png" />
 	  <None Remove="Resources\Images\bird_full\phylidonyris_novaehollandiae.png" />
 	  <None Remove="Resources\Images\bird_full\pied_kingfisher.png" />
 	  <None Remove="Resources\Images\bird_full\platycercus_eximius_diemenensis_male.png" />
+	  <None Remove="Resources\Images\bird_full\purple_songbird.png" />
 	  <None Remove="Resources\Images\bird_full\pycnonotus_jocosus.png" />
 	  <None Remove="Resources\Images\bird_full\rainbow_lorikeet.png" />
 	  <None Remove="Resources\Images\bird_full\red_vented_bulbul.png" />
 	  <None Remove="Resources\Images\bird_full\rhipidura_leucophrys.png" />
+	  <None Remove="Resources\Images\bird_full\shikara.png" />
 	  <None Remove="Resources\Images\bird_full\threskiornis_molucca.png" />
+	  <None Remove="Resources\Images\bird_full\waterhen.png" />
 	  <None Remove="Resources\Images\bird_full\western_reef_heron.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\aigrette_garzette_au_lac_sud_de_tunis_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\alcedo_atthis_t.png" />
@@ -108,32 +123,48 @@
 	  <None Remove="Resources\Images\bird_thumbnail\australian_king_parrot_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\australian_magpie_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\black_drongo_in_purulia_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\black_swan_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\brahminy_kite_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\cattle_egret_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\common_myna_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\corvus_coronoides_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\crested_pigeon_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\currawong_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\eolophus_roseicapilla_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\frogmouth_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\grallina_cyanoleuca_female_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\greater_coucal_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\heron_garde_boeufs_a_oued_mejerda_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\house_sparrow_male_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\indian_pond_heron_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\indian_robin_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\indian_roller_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\jungle_babbler_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\jungle_myna_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\kingfisher_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\larus_novaehollandiae_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\Little_corella_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\little_egret_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\magpie_robin_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\male_chestnut_teal_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\manorina_melanocephala_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\masked_lapwing_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\milvus_migrans_front_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\pacific_black_duck_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\parakeet_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\peafowl_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\pelican_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\phylidonyris_novaehollandiae_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\pied_kingfisher_female_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\platycercus_eximius_diemenensis_male_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\purple_songbird_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\pycnonotus_jocosus_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\rainbow_lorikeet_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\rhipidura_leucophrys_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\shikara_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\spotted_dove_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\threskiornis_molucca_t.png" />
+	  <None Remove="Resources\Images\bird_thumbnail\waterhen_t.png" />
 	  <None Remove="Resources\Images\bird_thumbnail\western_reef_heron_t.png" />
 	  <None Remove="Resources\Images\location_full\atherton_rainforest.jpg" />
 	  <None Remove="Resources\Images\location_full\barmah_millewa.jpg" />
@@ -167,6 +198,7 @@
 	  <None Remove="Resources\Images\location_thumbnail\bondla_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\booderee_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\carambolim_lake_t.png" />
+	  <None Remove="Resources\Images\location_thumbnail\chapora_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\colva_beach_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\coorong_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\cotigao_t.png" />
@@ -179,6 +211,7 @@
 	  <None Remove="Resources\Images\location_thumbnail\kings_park_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\lake_monger_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\lamington_t.png" />
+	  <None Remove="Resources\Images\location_thumbnail\mhadei_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\morjim_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\murramarang_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\netravali_t.png" />
@@ -188,6 +221,7 @@
 	  <None Remove="Resources\Images\location_thumbnail\salim_ali_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\shark_bay_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\werribee_t.png" />
+	  <None Remove="Resources\Images\location_thumbnail\yellow_water_billabong_t.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -265,6 +299,24 @@
 	  <MauiXaml Update="Resources\Themes\IndigoAquaLight.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Resources\Themes\MidnightDark.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Themes\MidnightLight.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Themes\ModernDark.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Themes\ModernLight.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Themes\PlumOrangesDark.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Themes\PlumOrangesLight.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Resources\Themes\SkyBlueGreyDark.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -299,38 +351,54 @@
 	  <MauiImage Include="Resources\Images\bird_full\australian_king_parrot.png" />
 	  <MauiImage Include="Resources\Images\bird_full\australian_magpie.png" />
 	  <MauiImage Include="Resources\Images\bird_full\black_drongo.png" />
+	  <MauiImage Include="Resources\Images\bird_full\black_swan.png" />
 	  <MauiImage Include="Resources\Images\bird_full\brahminy_kite.png" />
+	  <MauiImage Include="Resources\Images\bird_full\cattle_egret.png" />
 	  <MauiImage Include="Resources\Images\bird_full\common_myna.png" />
 	  <MauiImage Include="Resources\Images\bird_full\corvus_coronoides.png" />
 	  <MauiImage Include="Resources\Images\bird_full\crested_pigeon.png" />
+	  <MauiImage Include="Resources\Images\bird_full\currawong.png" />
 	  <MauiImage Include="Resources\Images\bird_full\eolophus_roseicapilla.png" />
+	  <MauiImage Include="Resources\Images\bird_full\frogmouth.png" />
 	  <MauiImage Include="Resources\Images\bird_full\grallina_cyanoleuca_female.png" />
+	  <MauiImage Include="Resources\Images\bird_full\greater_coucal.png" />
 	  <MauiImage Include="Resources\Images\bird_full\green_bee_eater.png" />
 	  <MauiImage Include="Resources\Images\bird_full\grey_headed_bulbul.png" />
 	  <MauiImage Include="Resources\Images\bird_full\heron_garde_boeufs_a_oued_mejerda.png" />
 	  <MauiImage Include="Resources\Images\bird_full\house_crow.png" />
 	  <MauiImage Include="Resources\Images\bird_full\house_sparrow_male.png" />
 	  <MauiImage Include="Resources\Images\bird_full\indian_pond_heron.png" />
+	  <MauiImage Include="Resources\Images\bird_full\indian_robin.png" />
 	  <MauiImage Include="Resources\Images\bird_full\indian_roller.png" />
+	  <MauiImage Include="Resources\Images\bird_full\jungle_babbler.png" />
 	  <MauiImage Include="Resources\Images\bird_full\jungle_myna.png" />
 	  <MauiImage Include="Resources\Images\bird_full\kingfisher.png" />
 	  <MauiImage Include="Resources\Images\bird_full\larus_novaehollandiae.png" />
 	  <MauiImage Include="Resources\Images\bird_full\little_corella.png" />
+	  <MauiImage Include="Resources\Images\bird_full\little_egret.png" />
+	  <MauiImage Include="Resources\Images\bird_full\magpie_robin.png" />
 	  <MauiImage Include="Resources\Images\bird_full\male_chestnut_teal.png" />
 	  <MauiImage Include="Resources\Images\bird_full\manorina_melanocephala.png" />
+	  <MauiImage Include="Resources\Images\bird_full\masked_lapwing.png" />
 	  <MauiImage Include="Resources\Images\bird_full\milvus_migrans_front.png" />
 	  <MauiImage Include="Resources\Images\bird_full\pacific_black_duck.png" />
+	  <MauiImage Include="Resources\Images\bird_full\parakeet.png" />
+	  <MauiImage Include="Resources\Images\bird_full\peafowl.png" />
 	  <MauiImage Include="Resources\Images\bird_full\pelican.png" />
 	  <MauiImage Include="Resources\Images\bird_full\phylidonyris_novaehollandiae.png" />
 	  <MauiImage Include="Resources\Images\bird_full\pied_kingfisher.png" />
 	  <MauiImage Include="Resources\Images\bird_full\platycercus_eximius_diemenensis_male.png" />
+	  <MauiImage Include="Resources\Images\bird_full\purple_songbird.png" />
 	  <MauiImage Include="Resources\Images\bird_full\pycnonotus_jocosus.png" />
 	  <MauiImage Include="Resources\Images\bird_full\rainbow_bee_eaters.png" />
 	  <MauiImage Include="Resources\Images\bird_full\rainbow_lorikeet.png" />
 	  <MauiImage Include="Resources\Images\bird_full\red_vented_bulbul.png" />
 	  <MauiImage Include="Resources\Images\bird_full\rhipidura_leucophrys.png" />
+	  <MauiImage Include="Resources\Images\bird_full\shikara.png" />
+	  <MauiImage Include="Resources\Images\bird_full\silver_gull.png" />
 	  <MauiImage Include="Resources\Images\bird_full\sulphur_crested_cockatoo.png" />
 	  <MauiImage Include="Resources\Images\bird_full\threskiornis_molucca.png" />
+	  <MauiImage Include="Resources\Images\bird_full\waterhen.png" />
 	  <MauiImage Include="Resources\Images\bird_full\western_reef_heron.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\aigrette_garzette_au_lac_sud_de_tunis_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\alcedo_atthis_t.png" />
@@ -339,38 +407,55 @@
 	  <MauiImage Include="Resources\Images\bird_thumbnail\australian_king_parrot_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\australian_magpie_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\black_drongo_in_purulia_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\black_swan_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\brahminy_kite_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\cattle_egret_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\common_myna_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\corvus_coronoides_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\crested_pigeon_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\currawong_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\eolophus_roseicapilla_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\frogmouth_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\grallina_cyanoleuca_female_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\greater_coucal_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\green_bee_eater_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\grey_headed_bulbul_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\heron_garde_boeufs_a_oued_mejerda_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\house_crow_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\house_sparrow_male_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\indian_pond_heron_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\indian_robin_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\indian_roller_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\jungle_babbler_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\jungle_myna_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\kingfisher_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\larus_novaehollandiae_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\little_corella_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\little_egret_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\magpie_robin_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\male_chestnut_teal_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\manorina_melanocephala_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\masked_lapwing_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\milvus_migrans_front_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\pacific_black_duck_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\parakeet_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\peafowl_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\pelican_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\phylidonyris_novaehollandiae_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\pied_kingfisher_female_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\platycercus_eximius_diemenensis_male_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\purple_songbird_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\pycnonotus_jocosus_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\rainbow_bee_eaters_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\rainbow_lorikeet_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\red_vented_bulbul_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\rhipidura_leucophrys_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\shikara_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\silver_gull_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\spotted_dove_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\sulphur_crested_cockatoo_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\threskiornis_molucca_t.png" />
+	  <MauiImage Include="Resources\Images\bird_thumbnail\waterhen_t.png" />
 	  <MauiImage Include="Resources\Images\bird_thumbnail\western_reef_heron_t.png" />
 	  <MauiImage Include="Resources\Images\Icons\icon_bird.svg" />
 	  <MauiImage Include="Resources\Images\Icons\icon_exit.svg" />
@@ -416,6 +501,7 @@
 	  <MauiImage Include="Resources\Images\location_thumbnail\bondla_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\booderee_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\carambolim_lake_t.png" />
+	  <MauiImage Include="Resources\Images\location_thumbnail\chapora_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\colva_beach_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\coorong_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\cotigao_t.png" />
@@ -428,6 +514,7 @@
 	  <MauiImage Include="Resources\Images\location_thumbnail\kings_park_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\lake_monger_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\lamington_t.png" />
+	  <MauiImage Include="Resources\Images\location_thumbnail\mhadei_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\morjim_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\murramarang_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\netravali_t.png" />
@@ -437,6 +524,7 @@
 	  <MauiImage Include="Resources\Images\location_thumbnail\salim_ali_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\shark_bay_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\werribee_t.png" />
+	  <MauiImage Include="Resources\Images\location_thumbnail\yellow_water_billabong_t.png" />
 	</ItemGroup>
 
 </Project>

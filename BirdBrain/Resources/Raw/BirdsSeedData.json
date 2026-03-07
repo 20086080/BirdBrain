@@ -8,8 +8,8 @@
     "Diet": "Insects, small vertebrates",
     "Rarity": "Common",
     "ConservationStatus": "Least Concern",
-    "Thumbnail": "white_throated_kingfisher_t.png",
-    "ProfileImage": "kingfisher_t.png"
+    "Thumbnail": "kingfisher_t.png",
+    "ProfileImage": "kingfisher.png"
   },
   {
     "CommonName": "Australian Pelican",
@@ -164,8 +164,8 @@
     "Diet": "Nectar, insects",
     "Rarity": "Common",
     "ConservationStatus": "Least Concern",
-    "Thumbnail": "purple_sunbird_t.png",
-    "ProfileImage": "purple_sunbird.png"
+    "Thumbnail": "purple_songbird_t.png",
+    "ProfileImage": "purple_songbird.png"
   },
   {
     "CommonName": "Brahminy Kite",
@@ -188,8 +188,8 @@
     "Diet": "Fish, insects",
     "Rarity": "Common",
     "ConservationStatus": "Least Concern",
-    "Thumbnail": "pond_heron_t.png",
-    "ProfileImage": "indian_pond_heron_t.png"
+    "Thumbnail": "indian_pond_heron_t.png",
+    "ProfileImage": "indian_pond_heron.png"
   },
   {
     "CommonName": "White-breasted Waterhen",
@@ -284,8 +284,8 @@
     "Diet": "Small birds, reptiles",
     "Rarity": "Uncommon",
     "ConservationStatus": "Least Concern",
-    "Thumbnail": "shikra_t.png",
-    "ProfileImage": "shikra.png"
+    "Thumbnail": "shikara_t.png",
+    "ProfileImage": "shikara.png"
   },
   {
     "CommonName": "Eastern Rosella",

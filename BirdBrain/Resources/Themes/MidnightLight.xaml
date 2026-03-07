@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BirdBrain.Resources.Themes.MidnightLight">
+    <Color x:Key="Primary">#009FA5</Color>
+    <Color x:Key="Accent">#FF3B00</Color>
+    <Color x:Key="Background">#F7FAFA</Color>
+    <Color x:Key="Surface">#FFFFFF</Color>
+    <Color x:Key="TextPrimary">#202020</Color>
+    <Color x:Key="TextOnPrimary">#FFFFFF</Color>
+    <Color x:Key="Accent70">#B3FF3B00</Color>
+</ResourceDictionary>

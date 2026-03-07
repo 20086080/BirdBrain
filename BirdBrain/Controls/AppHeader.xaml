@@ -11,39 +11,39 @@
 
         <!-- Logo -->
         <HorizontalStackLayout Grid.Column="0">
-            <Image Source="header.png" HeightRequest="120"/>
+            <Image Source="header.svg" HeightRequest="120"/>
         </HorizontalStackLayout>
 
         <!-- Hamburger -->
-        <Image Grid.Column ="1" Source="icon_hamburger.png" Style="{StaticResource MenuIconStyle}">
+        <Image Grid.Column ="1" Source="icon_hamburger.svg" Style="{StaticResource MenuIconStyle}">
             <Image.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnMenuTapped"/>
             </Image.GestureRecognizers>
         </Image>
 
         <!-- Favourite -->
-        <Image Grid.Column="2" Source="icon_favourite.png" Style="{StaticResource MenuIconStyle}">
+        <Image Grid.Column="2" Source="icon_favourite.svg" Style="{StaticResource MenuIconStyle}">
             <Image.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnMenuFavouriteTapped"/>
             </Image.GestureRecognizers>
         </Image>
 
         <!-- Refresh -->
-        <Image Grid.Column="3" Source="icon_refresh.png" Style="{StaticResource MenuIconStyle}">
+        <Image Grid.Column="3" Source="icon_refresh.svg" Style="{StaticResource MenuIconStyle}">
             <Image.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnMenuRefreshTapped"/>
             </Image.GestureRecognizers>
         </Image>
 
         <!-- Settings -->
-        <Image Grid.Column="4" Source="icon_settings.png" Style="{StaticResource MenuIconStyle}">
+        <Image Grid.Column="4" Source="icon_settings.svg" Style="{StaticResource MenuIconStyle}">
             <Image.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnMenuSettingsTapped"/>
             </Image.GestureRecognizers>
         </Image>
 
         <!-- Close -->
-        <Image Grid.Column="5" Source="icon_exit.png" Style="{StaticResource MenuIconStyle}">
+        <Image Grid.Column="5" Source="icon_exit.svg" Style="{StaticResource MenuIconStyle}">
             <Image.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnCloseTapped"/>
             </Image.GestureRecognizers>

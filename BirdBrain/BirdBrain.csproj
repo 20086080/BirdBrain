@@ -83,6 +83,8 @@
 	  <None Remove="Resources\Images\bird_full\frogmouth.png" />
 	  <None Remove="Resources\Images\bird_full\grallina_cyanoleuca_Female.png" />
 	  <None Remove="Resources\Images\bird_full\greater_coucal.png" />
+	  <None Remove="Resources\Images\bird_full\green_bee_eater.png" />
+	  <None Remove="Resources\Images\bird_full\grey_headed_bulbul.png" />
 	  <None Remove="Resources\Images\bird_full\heron_garde_boeufs_a_oued_mejerda.png" />
 	  <None Remove="Resources\Images\bird_full\house_crow.png" />
 	  <None Remove="Resources\Images\bird_full\house_sparrow_male.png" />
@@ -109,10 +111,14 @@
 	  <None Remove="Resources\Images\bird_full\platycercus_eximius_diemenensis_male.png" />
 	  <None Remove="Resources\Images\bird_full\purple_songbird.png" />
 	  <None Remove="Resources\Images\bird_full\pycnonotus_jocosus.png" />
+	  <None Remove="Resources\Images\bird_full\rainbow_bee_eaters.png" />
 	  <None Remove="Resources\Images\bird_full\rainbow_lorikeet.png" />
 	  <None Remove="Resources\Images\bird_full\red_vented_bulbul.png" />
 	  <None Remove="Resources\Images\bird_full\rhipidura_leucophrys.png" />
 	  <None Remove="Resources\Images\bird_full\shikara.png" />
+	  <None Remove="Resources\Images\bird_full\silver_gull.png" />
+	  <None Remove="Resources\Images\bird_full\spotted_dove.png" />
+	  <None Remove="Resources\Images\bird_full\sulphur_crested_cockatoo.png" />
 	  <None Remove="Resources\Images\bird_full\threskiornis_molucca.png" />
 	  <None Remove="Resources\Images\bird_full\waterhen.png" />
 	  <None Remove="Resources\Images\bird_full\western_reef_heron.png" />
@@ -393,9 +399,9 @@
 	  <MauiImage Include="Resources\Images\bird_full\rainbow_bee_eaters.png" />
 	  <MauiImage Include="Resources\Images\bird_full\rainbow_lorikeet.png" />
 	  <MauiImage Include="Resources\Images\bird_full\red_vented_bulbul.png" />
-	  <MauiImage Include="Resources\Images\bird_full\rhipidura_leucophrys.png" />
 	  <MauiImage Include="Resources\Images\bird_full\shikara.png" />
 	  <MauiImage Include="Resources\Images\bird_full\silver_gull.png" />
+	  <MauiImage Include="Resources\Images\bird_full\spotted_dove.png" />
 	  <MauiImage Include="Resources\Images\bird_full\sulphur_crested_cockatoo.png" />
 	  <MauiImage Include="Resources\Images\bird_full\threskiornis_molucca.png" />
 	  <MauiImage Include="Resources\Images\bird_full\waterhen.png" />
@@ -525,6 +531,10 @@
 	  <MauiImage Include="Resources\Images\location_thumbnail\shark_bay_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\werribee_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\yellow_water_billabong_t.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\Images\bird_full\rhipidura_leucophrys.png" />
 	</ItemGroup>
 
 </Project>

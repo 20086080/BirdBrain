@@ -42,7 +42,7 @@
                                 Style="{StaticResource CarouselBorder}"
                                 HorizontalOptions="Center" WidthRequest="220">
                             <VerticalStackLayout Spacing="8" Padding="5">
-                                <Image Source="{Binding Image}" HeightRequest="130"
+                                <Image Source="{Binding Thumbnail}" HeightRequest="130"
                                        Aspect="AspectFill" />
                                 <Label Text="{Binding Name}" Style="{StaticResource CarouselLabel}"
                                        HorizontalOptions="Center"/>

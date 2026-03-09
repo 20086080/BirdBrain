@@ -1,3 +1,5 @@
+using BirdBrain.Views;
+
 namespace BirdBrain.Controls;
 
 public partial class AppHeader : ContentView
@@ -25,9 +27,20 @@ public partial class AppHeader : ContentView
 
     }
 
-    private void OnMenuRefreshTapped(object sender, TappedEventArgs e)
+    async void OnMenuRefreshTapped(object sender, TappedEventArgs e)
     {
+        var refresh = new RefreshData();
 
+        bool refreshed =
+            await refresh.RefreshAsync(App.State.Lat, App.State.Lng);
+
+        if (!refreshed)
+        {
+            await Application.Current.MainPage.DisplayAlert(
+                "Please Wait",
+                "You must wait 60 minutes before refreshing again.",
+                "OK");
+        }
     }
     void OnMenuSettingsTapped(object sender, TappedEventArgs e)
     {

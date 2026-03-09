@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using SQLite;
 using BirdBrain.Models;
+using System.Linq;
 
 namespace BirdBrain.Services
 {
@@ -30,9 +31,9 @@ namespace BirdBrain.Services
         }
 
         public List<BirdObservationDb> ConvertToDb(
-            List<BirdObservation> apiList)
+            List<BirdObservation> apiList, DateTime refreshTime)
         {
-            var now = DateTime.UtcNow;
+            //var now = DateTime.UtcNow;
 
             return apiList.Select(o => new BirdObservationDb
             {
@@ -46,7 +47,7 @@ namespace BirdBrain.Services
                 Lat = o.lat,
                 Lng = o.lng,
                 ObsValid = o.obsValid,
-                DateStamp = now
+                DateStamp = refreshTime
             }).ToList();
         }
 
@@ -64,6 +65,30 @@ namespace BirdBrain.Services
                                 .FirstOrDefaultAsync();
 
             return last?.DateStamp;
+        }
+
+        public async Task CleanupOldObservationsAsync(double lat, double lng)
+        {
+            // Find the two most recent DateStamp groups
+            var keepDates = await _db.QueryAsync<DateTime>(
+                @"SELECT DISTINCT DateStamp 
+          FROM BirdObservationDb
+          WHERE Lat = ? AND Lng = ?
+          ORDER BY DateStamp DESC
+          LIMIT 2",
+                lat, lng);
+
+            if (keepDates.Count < 2)
+                return;
+
+            var cutoff = keepDates.Last();
+
+            await _db.ExecuteAsync(
+                @"DELETE FROM BirdObservationDb
+          WHERE Lat = ?
+          AND Lng = ?
+          AND DateStamp < ?",
+                lat, lng, cutoff);
         }
     }
 }

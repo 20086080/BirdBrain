@@ -65,6 +65,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\animation\animate1a.png" />
+	  <None Remove="Resources\Images\animation\animate2a.png" />
+	  <None Remove="Resources\Images\animation\animate3a.png" />
+	  <None Remove="Resources\Images\animation\animate4a.png" />
+	  <None Remove="Resources\Images\animation\animate5a.png" />
 	  <None Remove="Resources\Images\bird_full\aigrette_garzette_au_lac_sud_de_tunis.png" />
 	  <None Remove="Resources\Images\bird_full\alcedo_atthis.png" />
 	  <None Remove="Resources\Images\bird_full\anthochaera_carunculata.png" />
@@ -351,6 +356,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Include="Resources\Images\animation\animate1a.png" />
+	  <MauiImage Include="Resources\Images\animation\animate2a.png" />
+	  <MauiImage Include="Resources\Images\animation\animate3a.png" />
+	  <MauiImage Include="Resources\Images\animation\animate4a.png" />
+	  <MauiImage Include="Resources\Images\animation\animate5a.png" />
 	  <MauiImage Include="Resources\Images\bird_full\aigrette_garzette_au_lac_sud_de_tunis.png" />
 	  <MauiImage Include="Resources\Images\bird_full\alcedo_atthis.png" />
 	  <MauiImage Include="Resources\Images\bird_full\anthochaera_carunculata.png" />

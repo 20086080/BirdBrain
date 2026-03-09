@@ -1,9 +1,8 @@
-﻿using BirdBrain.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BirdBrain.Views
+namespace BirdBrain.Services
 {
     public class RefreshData
     {
@@ -31,10 +30,13 @@ namespace BirdBrain.Views
             var observations =
                 await _ebird.GetRecentObservationsAsync(lat, lng, 50, 7);
 
+            var refreshTime = DateTime.UtcNow;
             var dbList =
-                App.State.Database.ConvertToDb(observations);
+                App.State.Database.ConvertToDb(observations, refreshTime);
 
             await App.State.Database.SaveObservationsAsync(dbList);
+            // Keep only last 2 refresh sets
+            await App.State.Database.CleanupOldObservationsAsync(lat, lng);
 
             App.State.Observations = observations;
 

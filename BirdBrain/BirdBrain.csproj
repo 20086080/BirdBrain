@@ -266,6 +266,9 @@
 	  <Compile Update="Views\Animation.xaml.cs">
 	    <DependentUpon>Animation.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\LocationSightingPage.xaml.cs">
+	    <DependentUpon>LocationSightingPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -351,6 +354,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Animation.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\LocationSightingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

@@ -13,7 +13,7 @@ namespace BirdBrain.Services
         private int _selectedLocationId;
         private string _selectedLocationName = "";
         private int _days = 30;
-        private double _radius = 50;
+        private int _radius = 50;
         private double _lat;
         private double _lng;
         public List<BirdObservation> Observations { get; set; } = new();
@@ -71,7 +71,7 @@ namespace BirdBrain.Services
             }
         }
 
-        public double Radius
+        public int Radius
         {
             get => _radius;
             set

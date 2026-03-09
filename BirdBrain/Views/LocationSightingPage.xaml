@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage
+    x:Class="BirdBrain.Views.LocationSightingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:BirdBrain.Views"
+    xmlns:services="clr-namespace:BirdBrain.Services"
+    x:DataType="services:AppState" 
+    Title="Location Sightings">
+    <Grid  Padding="20" RowSpacing="20">
+        <VerticalStackLayout Padding="15" Spacing="15">
+    <!-- LOCATION / BIRD SEGMENT -->
+    <Grid ColumnDefinitions="*,*"
+                  HeightRequest="40">
+
+        <Button Text="Location"
+                        BackgroundColor="#505050"
+                        TextColor="White"
+                        CornerRadius="6"/>
+
+        <Button Grid.Column="1"
+                        Text="Bird"
+                        BackgroundColor="#DADADA"
+                        TextColor="Black"
+                        CornerRadius="6"/>
+
+    </Grid>
+
+
+    <!-- LOCATION LABEL -->
+    <Label Text="Location: Kings Park"
+                   FontSize="18"
+                   FontAttributes="Bold"/>
+
+
+    <!-- LOCATION IMAGE -->
+    <Border Padding="0"
+                   >
+
+        <Image Source="location_image.jpg"
+                       HeightRequest="140"
+                       Aspect="AspectFill"/>
+
+    </Border>
+
+
+    <!-- STATS + TOP 5 -->
+    <Grid ColumnDefinitions="*,1.5*"
+                  ColumnSpacing="12">
+
+        <!-- SIGHTING STATS -->
+        <Border Padding="10"
+                      >
+
+            <VerticalStackLayout Spacing="10">
+
+                <Label Text="Sightings"
+                               FontAttributes="Bold"/>
+
+                <Grid ColumnDefinitions="*,*">
+
+                    <VerticalStackLayout HorizontalOptions="Center">
+
+                        <Label Text="56"
+                                       FontSize="28"
+                                       FontAttributes="Bold"/>
+
+                        <Label Text="Sightings"
+                                       FontSize="12"/>
+
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1"
+                                                 HorizontalOptions="Center">
+
+                        <Label Text="40"
+                                       FontSize="28"
+                                       FontAttributes="Bold"/>
+
+                        <Label Text="Types of Birds"
+                                       FontSize="12"/>
+
+                    </VerticalStackLayout>
+
+                </Grid>
+
+            </VerticalStackLayout>
+
+        </Border>
+
+
+        <!-- TOP 5 BIRDS -->
+        <Border Grid.Column="1"
+                       Padding="10"
+                       >
+
+            <VerticalStackLayout>
+
+                <Label Text="Top 5 Birds"
+                               FontAttributes="Bold"
+                               Margin="0,0,0,6"/>
+
+                <Grid ColumnDefinitions="*,Auto"
+                              RowSpacing="6"
+                              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+
+                    <Label Text="Bird Name"
+                                   FontAttributes="Bold"/>
+
+                    <Label Text="Sightings"
+                                   Grid.Column="1"
+                                   FontAttributes="Bold"/>
+
+                    <Label Grid.Row="1" Text="Northern Cardinal"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="12"/>
+
+                    <Label Grid.Row="2" Text="American Robin"/>
+                    <Label Grid.Row="2" Grid.Column="1" Text="10"/>
+
+                    <Label Grid.Row="3" Text="House Finch"/>
+                    <Label Grid.Row="3" Grid.Column="1" Text="8"/>
+
+                    <Label Grid.Row="4" Text="Great Egret"/>
+                    <Label Grid.Row="4" Grid.Column="1" Text="6"/>
+
+                    <Label Grid.Row="5" Text="Black-capped Chickadee"/>
+                    <Label Grid.Row="5" Grid.Column="1" Text="5"/>
+
+                </Grid>
+
+            </VerticalStackLayout>
+
+        </Border>
+
+    </Grid>
+
+
+    <!-- DAILY SIGHTINGS -->
+            <Border Padding="10"
+                   >
+
+                <VerticalStackLayout>
+
+                    <Label Text="Daily Sightings"
+                           FontAttributes="Bold"
+                           Margin="0,0,0,10"/>
+
+                    <!-- Chart placeholder -->
+                    <BoxView HeightRequest="160"
+                             BackgroundColor="#E6E6E6"/>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+        </VerticalStackLayout>
+    </Grid>
+</views:BasePage>

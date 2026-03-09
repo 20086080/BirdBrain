@@ -1,7 +1,7 @@
 ﻿
 using BirdBrain.Models;
 using BirdBrain.Services;
-
+using BirdBrain.Helpers;
 namespace BirdBrain.Views;
 
 public partial class IntroPage : BasePage
@@ -27,9 +27,10 @@ public partial class IntroPage : BasePage
     private void OnTextChanged(object sender, EventArgs e)
     {
         this.AppState.SelectedLocationName = LocationEntry.Text;
+        
     }
 
-    void OnAllBirdsTapped(object sender, EventArgs e)
+    async void OnAllBirdsTapped(object sender, EventArgs e)
     {
         AllBirdsTab.Style =
             (Style)Application.Current.Resources["SegmentSelectedStyle"];
@@ -42,6 +43,7 @@ public partial class IntroPage : BasePage
 
         SpecificBirdLabel.Style =
             (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
+        await Shell.Current.GoToAsync(nameof(LocationSightingPage));
     }
 
     async void OnSpecificBirdTapped(object sender, EventArgs e)

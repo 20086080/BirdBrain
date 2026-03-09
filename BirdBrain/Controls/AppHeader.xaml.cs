@@ -30,7 +30,8 @@ public partial class AppHeader : ContentView
     async void OnMenuRefreshTapped(object sender, TappedEventArgs e)
     {
         var refresh = new RefreshData();
-
+        App.State.Lat = -31.9617;
+        App.State.Lng = 115.8420;
         bool refreshed =
             await refresh.RefreshAsync(App.State.Lat, App.State.Lng);
 

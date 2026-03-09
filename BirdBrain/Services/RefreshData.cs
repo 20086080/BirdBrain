@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using BirdBrain.Services;
 
 namespace BirdBrain.Services
 {
@@ -28,7 +29,7 @@ namespace BirdBrain.Services
 
             // API call
             var observations =
-                await _ebird.GetRecentObservationsAsync(lat, lng, 50, 7);
+                await _ebird.GetRecentObservationsAsync(lat, lng, App.State.Radius, App.State.Days);
 
             var refreshTime = DateTime.UtcNow;
             var dbList =

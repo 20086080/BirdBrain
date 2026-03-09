@@ -10,6 +10,7 @@ namespace BirdBrain.Services
     public class DatabaseService
     {
         private SQLiteAsyncConnection _db;
+        public SQLiteAsyncConnection Db => _db;
 
         public async Task InitAsync()
         {

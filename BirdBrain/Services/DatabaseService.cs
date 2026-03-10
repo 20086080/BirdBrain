@@ -48,7 +48,11 @@ namespace BirdBrain.Services
                 Lat = o.lat,
                 Lng = o.lng,
                 ObsValid = o.obsValid,
-                DateStamp = refreshTime
+                ObsReviewed = o.obsReviewed,
+                LocationPrivate = o.locationPrivate,
+                DateStamp = refreshTime,
+                AppLat = o.AppLat,
+                AppLng = o.AppLng
             }).ToList();
         }
 
@@ -74,7 +78,7 @@ namespace BirdBrain.Services
             var keepDates = await _db.QueryAsync<DateTime>(
                 @"SELECT DISTINCT DateStamp 
           FROM BirdObservationDb
-          WHERE Lat = ? AND Lng = ?
+          WHERE AppLat = ? AND AppLng = ?
           ORDER BY DateStamp DESC
           LIMIT 2",
                 lat, lng);
@@ -86,8 +90,8 @@ namespace BirdBrain.Services
 
             await _db.ExecuteAsync(
                 @"DELETE FROM BirdObservationDb
-          WHERE Lat = ?
-          AND Lng = ?
+          WHERE AppLat = ?
+          AND AppLng = ?
           AND DateStamp < ?",
                 lat, lng, cutoff);
         }

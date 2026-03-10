@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BirdBrain.Models
 {
-    public class BirdObservation
+    public class BirdObservation            // Used for Json after API calls 
     {
         public string speciesCode { get; set; }
         public string comName { get; set; }
@@ -19,5 +19,20 @@ namespace BirdBrain.Models
         {
             get; set;
         }
+
+        public bool obsReviewed
+        {
+            get; set;
+        }
+
+        public bool locationPrivate
+        {
+            get; set;
+        }
+
+        public DateTime DateStamp { get; set; }
+
+        public double AppLat { get; set; }
+        public double AppLng { get; set; }
     }
 }

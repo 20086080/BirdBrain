@@ -21,6 +21,8 @@ namespace BirdBrain
             builder.Services.AddSingleton<SavedLocationService>();
             builder.Services.AddSingleton<SavedBirdService>();
             builder.Services.AddSingleton<AppState>();
+            builder.Services.AddSingleton<DatabaseService>();
+            builder.Services.AddSingleton<SummaryService>();
             var app = builder.Build();
 
             App.State = app.Services.GetRequiredService<AppState>();

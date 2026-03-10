@@ -5,7 +5,7 @@ using SQLite;
 
 namespace BirdBrain.Models
 {
-    public class BirdObservationDb
+    public class BirdObservationDb          // Table Name in Database BirdBrain in SQLite 
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -26,6 +26,13 @@ namespace BirdBrain.Models
 
         public bool ObsValid { get; set; }
 
+        public bool ObsReviewed { get; set; }
+
+        public bool  LocationPrivate { get; set; }
+
         public DateTime DateStamp { get; set; }
+
+        public double AppLat { get; set; }
+        public double AppLng { get; set; }
     }
 }

@@ -68,6 +68,13 @@
                 <Setter Property="BackgroundColor" Value="{DynamicResource Accent}" />
                 <Setter Property="Opacity" Value="0.4" />
             </Style>
+            <!-- Verticalline -->
+            <Style x:Key="VerticallineStyle" TargetType="BoxView">
+                <Setter Property="WidthRequest" Value="1" />
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource Accent}" />
+                <Setter Property="Opacity" Value="0.4" />
+            </Style>
             <!-- Toggle Switch-->
             <Style x:Key="PrimarySwitchStyle" TargetType="Switch">
                 <Setter Property="OnColor" Value="{DynamicResource Accent}" />

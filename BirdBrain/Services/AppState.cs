@@ -11,11 +11,25 @@ namespace BirdBrain.Services
     {
         private int _selectedBirdId;
         private int _selectedLocationId;
-        private string _selectedLocationName = "";
+
+        //TODO remove below values once testing is finished
+        //private string _selectedLocationName = "";
+        private string _selectedLocationName = "Kings Park";
+
         private int _days = 30;
         private int _radius = 50;
-        private double _lat;
-        private double _lng;
+
+        private int _totalSightings;
+        private int _totalTypeOfBird;
+        public List<TopBirds> TopBirds { get; set; } = new();
+
+        //private double _lat;
+        //private double _lng;
+
+        //TODO remove below 2 values once testing is finished 
+        private double _lat = -31.9617;
+        private double _lng = 115.8420;
+
         public List<BirdObservation> Observations { get; set; } = new();
 
         public DatabaseService Database { get; set; }
@@ -53,6 +67,32 @@ namespace BirdBrain.Services
                 if (_selectedLocationName != value)
                 {
                     _selectedLocationName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public int TotalSightings
+        {
+            get => _totalSightings;
+            set
+            {
+                if (_totalSightings != value)
+                {
+                    _totalSightings = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public int TotalTypeOfBird
+        {
+            get => _totalTypeOfBird;
+            set
+            {
+                if (_totalTypeOfBird != value)
+                {
+                    _totalTypeOfBird = value;
                     OnPropertyChanged();
                 }
             }

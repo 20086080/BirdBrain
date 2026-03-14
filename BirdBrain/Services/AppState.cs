@@ -1,4 +1,7 @@
 ﻿using BirdBrain.Models;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.Measure;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +24,12 @@ namespace BirdBrain.Services
         //private string _selectedLocationThumbnail = "";
         //private string _selectedLocationProfileImage = "";
         //private string _selectedBirdProfileImage = "";
+        //private double _lat;
+        //private double _lng;
+
+        
+        private double _lat = -31.9617;
+        private double _lng = 115.8420;
         private string _selectedLocationName = "Kings Park";
         private string _city_ascii = "Perth";
         private string _country = "Australia";
@@ -47,16 +56,45 @@ namespace BirdBrain.Services
         }
         public List<LocationDailyObs> LocationDailyObs { get; set; } = new();
 
-        //private double _lat;
-        //private double _lng;
-
-        //TODO remove below 2 values once testing is finished 
-        private double _lat = -31.9617;
-        private double _lng = 115.8420;
+        
 
         public List<BirdObservation> Observations { get; set; } = new();
 
         public DatabaseService Database { get; set; }
+
+        
+
+        public ISeries[] Series { get; set; }   //For Graphs
+        public string[] Labels { get; set; }    //For Graphs
+
+        public Axis[] XAxes { get; set; }   //For Graphs
+        public void BuildChart(List<LocationDailyObs> data)
+        {
+            Series = new ISeries[]
+            {
+                new LineSeries<int>
+                {
+                    Values = data.Select(x => x.Sightings).ToArray()
+                }
+            };
+
+            Labels = data
+                .Select(x => x.ObsDt)
+                .ToArray();
+
+            XAxes = new Axis[]
+            {
+                new Axis
+                {
+                    Labels = Labels,
+                    LabelsRotation = 20
+                }
+            }; 
+            OnPropertyChanged(nameof(Series));
+            OnPropertyChanged(nameof(Labels));
+            OnPropertyChanged(nameof(XAxes));
+        }
+
         public int SelectedBirdId
         {
             get => _selectedBirdId;

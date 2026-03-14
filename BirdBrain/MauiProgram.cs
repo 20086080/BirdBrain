@@ -4,6 +4,7 @@ using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView.Maui;
 using Microsoft.Extensions.Logging;
 
+using SkiaSharp.Views.Maui.Controls.Hosting;
 namespace BirdBrain
 {
     public static class MauiProgram
@@ -30,6 +31,7 @@ namespace BirdBrain
 
             builder
                 .UseMauiApp<App>()
+                .UseSkiaSharp()
                 .UseLiveCharts();
 
             var app = builder.Build();

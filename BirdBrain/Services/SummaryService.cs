@@ -87,7 +87,8 @@ namespace BirdBrain.Services
                 FROM BirdObservationDb
                 WHERE AppLat = ? AND AppLng = ?
                 )
-                GROUP BY ObsDt",
+                GROUP BY ObsDt
+                ORDER BY ObsDt",
                 lat, lng, lat, lng);
             return result;
         }

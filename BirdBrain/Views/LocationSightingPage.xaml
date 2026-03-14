@@ -13,10 +13,10 @@
     <Grid RowDefinitions="Auto,Auto,Auto, Auto,Auto,*" Padding="10" RowSpacing="5">
 
         <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center" HeightRequest="45"
-                       Spacing="20" Background="{DynamicResource Background}" >
+                       Spacing="10" Background="{DynamicResource Background}" >
 
             <!-- LOCATION / BIRD Selection -->
-            <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" WidthRequest="200">
+            <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" WidthRequest="200" >
                 <Grid ColumnDefinitions="*,*" HorizontalOptions="Fill" >
                     <!-- Location TAB -->
                     <Border x:Name="LocationTab" Grid.Column="0" Style="{StaticResource SegmentSelectedStyle}">
@@ -46,7 +46,7 @@
                     <Label Text = "{Binding SelectedLocationName}" Style="{StaticResource SubTitles}"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Padding="10">
-                    <Label Text = "{Binding Lat}" Style="{StaticResource PageLabelNormal}"/>
+                    <Label Text = "{Binding Lat}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
                     <Label Text = ", " Style="{StaticResource PageLabelNormal}"/>
                     <Label Text = "{Binding Lng}" Style="{StaticResource PageLabelNormal}"/>
                 </HorizontalStackLayout>
@@ -87,9 +87,9 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:TopBirds">
                             <Grid ColumnDefinitions="2*,*" Padding="2" ColumnSpacing="5">
-                                <Label Text="{Binding BirdName}" Style="{StaticResource PageLabel}" HorizontalOptions="Start" />
+                                <Label Text="{Binding BirdName}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start" />
                                 <Label Grid.Column="1" Text="{Binding Sightings}" HorizontalTextAlignment="Center" 
-                                       HorizontalOptions="Center" Style="{StaticResource PageLabel}" />
+                                       HorizontalOptions="Center" Style="{StaticResource PageLabelNormal}" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -102,7 +102,8 @@
             <VerticalStackLayout>
                 <Label Text="Daily Sightings" Style="{StaticResource PageLabel}"/>
                 <!-- Chart placeholder -->
-                <BoxView  HeightRequest="100" Style="{StaticResource UnderlineStyle}"/>
+                <BoxView  HeightRequest="130" Style="{StaticResource UnderlineStyle}"/>
+                <lvc:CartesianChart Series="{Binding Series}" XAxes="{Binding XAxes}" HeightRequest="130"/>
             </VerticalStackLayout>
         </Border>
     </Grid>

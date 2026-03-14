@@ -37,7 +37,7 @@ public partial class AppHeader : ContentView
 
         if (!refreshed)
         {
-            await Application.Current.MainPage.DisplayAlert(
+            await Application.Current.MainPage.DisplayAlertAsync(
                 "Please Wait",
                 "You must wait 60 minutes before refreshing again.",
                 "OK");

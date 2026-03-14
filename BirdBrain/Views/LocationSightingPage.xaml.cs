@@ -1,12 +1,11 @@
 using BirdBrain.Services;
-
+using BirdBrain.Models;
 namespace BirdBrain.Views;
 
 public partial class LocationSightingPage : BasePage
 {
     private readonly SummaryService _summaryService;
 
-    
     public LocationSightingPage(SummaryService summaryService)
     {
         InitializeComponent();
@@ -20,6 +19,7 @@ public partial class LocationSightingPage : BasePage
         App.State.TotalSightings = await _summaryService.GetTotalLocationCountAsync(App.State.Lat,App.State.Lng);
         App.State.TotalTypeOfBird = await _summaryService.GetTotalLocationBirdCountAsync(App.State.Lat, App.State.Lng);
         App.State.TopBirds = await _summaryService.GetTop5BirdCountAsync(App.State.Lat, App.State.Lng);
+        App.State.LocationDailyObs = await _summaryService.GetLocationDailyObsAsync(App.State.Lat, App.State.Lng);
     }
 
     void LocationTapped(object sender, EventArgs e)

@@ -4,6 +4,7 @@ using System.Text;
 using BirdBrain.Services;
 using BirdBrain.Models;
 
+
 namespace BirdBrain.Services
 {
     public class SummaryService
@@ -51,7 +52,7 @@ namespace BirdBrain.Services
             return result;
         }
 
-        ///Top 5 birds and # Observatons in location ///
+        ///Top  birds and # Observatons in location ///
         public async Task<List<TopBirds>> GetTop5BirdCountAsync(double lat, double lng)
         {
             await _databaseService.InitAsync();
@@ -66,10 +67,49 @@ namespace BirdBrain.Services
                 FROM BirdObservationDb
                 WHERE AppLat = ? AND AppLng = ?) 
                 GROUP BY comName
-                ORDER BY Sightings DESC
-                LIMIT 5",
+                ORDER BY Sightings DESC",
                 lat, lng, lat, lng);
             return result.ToList();
+        }
+
+        ///Daily Observation location ///
+        public async Task<List<LocationDailyObs>> GetLocationDailyObsAsync(double lat, double lng)
+        {
+            await _databaseService.InitAsync();
+            var db = _databaseService.Db;
+            var result = await db.QueryAsync<LocationDailyObs>(
+                @"SELECT ObsDt as ObsDt, SUM(HowMany) as Sightings
+                FROM BirdObservationDb
+                WHERE AppLat = ?
+                AND AppLng = ?
+                AND DateStamp = (
+                SELECT MAX(DateStamp)
+                FROM BirdObservationDb
+                WHERE AppLat = ? AND AppLng = ?
+                )
+                GROUP BY ObsDt",
+                lat, lng, lat, lng);
+            return result;
+        }
+
+        ///Total Observations of Bird in location ///        
+        public async Task<int> GetTotalBirdCountAsync(double lat, double lng, string comName)
+        {
+            await _databaseService.InitAsync();
+            var db = _databaseService.Db;
+            var result = await db.ExecuteScalarAsync<int>(
+                @"SELECT SUM(HowMany) as Sightings
+                FROM BirdObservationDb
+                WHERE AppLat = ?
+                AND AppLng = ?
+                AND ComName = ?
+                AND DateStamp = (
+                SELECT MAX(DateStamp)
+                FROM BirdObservationDb
+                WHERE AppLat = ? AND AppLng = ?
+                )",
+                lat, lng, comName, lat, lng);
+            return result;
         }
     }
 }

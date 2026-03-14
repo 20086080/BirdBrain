@@ -14,14 +14,38 @@ namespace BirdBrain.Services
 
         //TODO remove below values once testing is finished
         //private string _selectedLocationName = "";
+        //private string _city_ascii = "";
+        //private string _country = "";
+        //private string _selectedBirdCommonName = "";
+        //private string _selectedBirdThumbnail = "";
+        //private string _selectedLocationThumbnail = "";
+        //private string _selectedLocationProfileImage = "";
+        //private string _selectedBirdProfileImage = "";
         private string _selectedLocationName = "Kings Park";
+        private string _city_ascii = "Perth";
+        private string _country = "Australia";
+        private string _selectedBirdCommonName = "Pied Stilt";
+        private string _selectedBirdThumbnail = "currawong_t.png";
+        private string _selectedLocationThumbnail = "kings_park_t.png";
+        private string _selectedLocationProfileImage = "kings_park.png";
+        private string _selectedBirdProfileImage = "currawong.png";
 
         private int _days = 30;
         private int _radius = 50;
 
         private int _totalSightings;
         private int _totalTypeOfBird;
-        public List<TopBirds> TopBirds { get; set; } = new();
+        private List<TopBirds> _topBirds = new();
+        public List<TopBirds> TopBirds
+        {
+            get => _topBirds;
+            set
+            {
+                _topBirds = value;
+                OnPropertyChanged();
+            }
+        }
+        public List<LocationDailyObs> LocationDailyObs { get; set; } = new();
 
         //private double _lat;
         //private double _lng;
@@ -72,6 +96,97 @@ namespace BirdBrain.Services
             }
         }
 
+        public string City_Ascii
+        {
+            get => _city_ascii;
+            set
+            {
+                if (_city_ascii != value)
+                {
+                    _city_ascii = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string Country
+        {
+            get => _country;
+            set
+            {
+                if (_country != value)
+                {
+                    _country = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string SelectedBirdCommonName
+        {
+            get => _selectedBirdCommonName;
+            set
+            {
+                if (_selectedBirdCommonName != value)
+                {
+                    _selectedBirdCommonName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string SelectedBirdThumbnail
+        {
+            get => _selectedBirdThumbnail;
+            set
+            {
+                if (_selectedBirdThumbnail != value)
+                {
+                    _selectedBirdThumbnail = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string SelectedLocationThumbnail
+        {
+            get => _selectedLocationThumbnail;
+            set
+            {
+                if (_selectedLocationThumbnail != value)
+                {
+                    _selectedLocationThumbnail = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string SelectedLocationProfileImage
+        {
+            get => _selectedLocationProfileImage;
+            set
+            {
+                if (_selectedLocationProfileImage != value)
+                {
+                    _selectedLocationProfileImage = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string SelectedBirdProfileImage
+        {
+            get => _selectedBirdProfileImage;
+            set
+            {
+                if (_selectedBirdProfileImage != value)
+                {
+                    _selectedBirdProfileImage = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public int TotalSightings
         {
             get => _totalSightings;
@@ -98,6 +213,7 @@ namespace BirdBrain.Services
             }
         }
 
+        
         public int Days
         {
             get => _days;

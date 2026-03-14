@@ -5,17 +5,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:BirdBrain.Views"
     xmlns:services="clr-namespace:BirdBrain.Services"
+    xmlns:models="clr-namespace:BirdBrain.Models"
+    xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
     x:DataType="services:AppState" 
     Title="Location Sightings">
-    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="20" RowSpacing="20">
     
-        <!-- LOCATION / BIRD Selection -->
-        <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center"
-                       Spacing="40" Background="{DynamicResource Background}">
-            <Label Text = "Sightings" Style="{StaticResource PageLabel}"/>
-            <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" HorizontalOptions="Start">
-                <Grid ColumnDefinitions="*,*" HeightRequest="36">
-                    
+    <Grid RowDefinitions="Auto,Auto,Auto, Auto,Auto,*" Padding="10" RowSpacing="5">
+
+        <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center" HeightRequest="45"
+                       Spacing="20" Background="{DynamicResource Background}" >
+
+            <!-- LOCATION / BIRD Selection -->
+            <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" WidthRequest="200">
+                <Grid ColumnDefinitions="*,*" HorizontalOptions="Fill" >
                     <!-- Location TAB -->
                     <Border x:Name="LocationTab" Grid.Column="0" Style="{StaticResource SegmentSelectedStyle}">
                         <Label x:Name="LocationTabLabel" Text="Location" Style="{StaticResource SegmentSelectedLabelStyle}"/>
@@ -34,69 +36,73 @@
                 </Grid>
             </Border>
         </HorizontalStackLayout>
-
+        <BoxView Grid.Row="1" Style="{StaticResource UnderlineStyle}" />
+        
         <!-- LOCATION LABEL -->
-        <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="20" Background="{DynamicResource Background}">
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="20" Background="{DynamicResource Background}">
             <VerticalStackLayout>
-                <Label Text = "Location: " Style="{StaticResource PageLabel}"/>
-                <Label Text = "{Binding SelectedLocationName}" Style="{StaticResource PageLabel}"/>
+                <HorizontalStackLayout Padding="10">
+                    <Label Text = "Location: " Style="{StaticResource SubTitles}"/>
+                    <Label Text = "{Binding SelectedLocationName}" Style="{StaticResource SubTitles}"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Padding="10">
+                    <Label Text = "{Binding Lat}" Style="{StaticResource PageLabelNormal}"/>
+                    <Label Text = ", " Style="{StaticResource PageLabelNormal}"/>
+                    <Label Text = "{Binding Lng}" Style="{StaticResource PageLabelNormal}"/>
+                </HorizontalStackLayout>
+                <Label Text = "{Binding City_Ascii}" Style="{StaticResource PageLabelNormal}"/>
+                <Label Text = "{Binding Country}" Style="{StaticResource PageLabelNormal}"/>
             </VerticalStackLayout>
-            <!-- LOCATION IMAGE -->
             <Border Padding="0" Grid.Column="1">
-                <Image Source="location_image.jpg" HeightRequest="140"  Aspect="AspectFill"/>
+                <Image Source="{Binding SelectedLocationThumbnail}"  HeightRequest="128" Aspect="AspectFill"/>
             </Border>
         </Grid>
-        
-        <!-- STATS + TOP 5 Grid Row = 2 -->
-        <Grid Grid.Row="2" ColumnDefinitions="*,1.1*" ColumnSpacing="12" Background="{DynamicResource Background}">
-            <!-- SIGHTING STATS -->
-            <Border Padding="10" Style ="{DynamicResource RoundedAccentBorderStyle}">
-                <VerticalStackLayout Spacing="5">
-                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="20" RowSpacing="5">
-                        <!-- Total Sightings -->
-                        <Label Grid.Row="0"  Grid.Column="0" Text="Sightings" Style="{StaticResource PageLabel}"/>
-                        <Label Grid.Row="1" Grid.Column="0" Text="{Binding TotalSightings}" Style="{StaticResource PageLabel}"/>
-                        <BoxView Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource VerticallineStyle}"/>
-                        <BoxView Grid.ColumnSpan="2" Grid.Row="0" Style="{StaticResource UnderlineStyle}" />
-                        <!-- Total Bird Types -->
-                        <Label Grid.Row="0" Grid.Column="1" Text="# Birds" Style="{StaticResource PageLabel}" />
-                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding TotalTypeOfBird}" Style="{StaticResource PageLabel}"/>
-                    </Grid>
-                </VerticalStackLayout>
-            </Border>
+        <BoxView Grid.Row="3" Style="{StaticResource UnderlineStyle}" />
 
-            <!-- TOP 5 BIRDS -->
-            <Border Grid.Column="1" Padding="10">
-                <VerticalStackLayout>
-                    <Label Text="Top 5 Birds" Style="{StaticResource PageLabel}"/>
-                    <Grid ColumnDefinitions="*,Auto"
-                              RowSpacing="6"
-                              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
-                        <Label Text="Bird Name" Style="{StaticResource PageLabel}"/>
-                        <Label Text="Sightings" Style="{StaticResource PageLabel}"
-                                   Grid.Column="1"/>
-                        <Label Grid.Row="1" Text="Northern Cardinal"/>
-                        <Label Grid.Row="1" Grid.Column="1" Text="12"/>
-                        <Label Grid.Row="2" Text="American Robin"/>
-                        <Label Grid.Row="2" Grid.Column="1" Text="10"/>
-                        <Label Grid.Row="3" Text="House Finch"/>
-                        <Label Grid.Row="3" Grid.Column="1" Text="8"/>
-                        <Label Grid.Row="4" Text="Great Egret"/>
-                        <Label Grid.Row="4" Grid.Column="1" Text="6"/>
-                        <Label Grid.Row="5" Text="Black-capped Chickadee"/>
-                        <Label Grid.Row="5" Grid.Column="1" Text="5"/>
-                    </Grid>
-                </VerticalStackLayout>
-            </Border>
-        </Grid>
         
+        <Grid Grid.Row="4" ColumnDefinitions="*,1.4*" >
+            <!-- SIGHTING STATS -->
+            <Border Grid.Column ="0" Padding="10" Style ="{DynamicResource RoundedAccentBorderStyle}" VerticalOptions="Start">
+                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" RowSpacing="5">
+                    <Label Grid.Row="0"  Grid.Column="0" Padding="0,5,0,5" Text="Sightings" Style="{StaticResource PageLabelCenter}"/>
+                    <Label Grid.Row="1" Grid.Column="0" Text="{Binding TotalSightings}" Style="{StaticResource PageLabelCenter}" />
+                    <BoxView Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource VerticallineStyle}" HorizontalOptions="End"/>
+                    <BoxView Grid.ColumnSpan="2" Grid.Row="0" Style="{StaticResource UnderlineStyle}" VerticalOptions="End"/>
+                    
+                    <Label Grid.Row="0" Grid.Column="1" Text="# Birds" Style="{StaticResource PageLabelCenter}" />
+                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding TotalTypeOfBird}" Style="{StaticResource PageLabelCenter}"/>
+                </Grid>
+            </Border>
+            <Border Grid.Column ="1" Padding="10" HeightRequest="150"  Style ="{DynamicResource RoundedAccentBorderStyle}">
+            <ScrollView VerticalScrollBarVisibility="Always">
+                <CollectionView ItemsSource="{Binding TopBirds}">
+                    <CollectionView.Header>
+                        <Grid ColumnDefinitions="*,*" RowDefinitions =" *,*" Padding="5">
+                            <Label Text="Birds" Grid.Row ="0" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
+                            <Label Grid.Column="1" Grid.Row ="0" Text="# Sightings" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Center"/>
+                            <BoxView Grid.Row ="1" Grid.ColumnSpan ="2" Style="{StaticResource UnderlineStyle}"/>
+                        </Grid>
+                    </CollectionView.Header>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:TopBirds">
+                            <Grid ColumnDefinitions="2*,*" Padding="2" ColumnSpacing="5">
+                                <Label Text="{Binding BirdName}" Style="{StaticResource PageLabel}" HorizontalOptions="Start" />
+                                <Label Grid.Column="1" Text="{Binding Sightings}" HorizontalTextAlignment="Center" 
+                                       HorizontalOptions="Center" Style="{StaticResource PageLabel}" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </Border>
+        </Grid>
         <!-- DAILY SIGHTINGS Grid.Row = 3-->
-        <Border Padding="10" Grid.Row="3" Style ="{DynamicResource RoundedAccentBorderStyle}">
+        <Border Padding="10" Grid.Row="5" Style ="{DynamicResource RoundedAccentBorderStyle}">
             <VerticalStackLayout>
                 <Label Text="Daily Sightings" Style="{StaticResource PageLabel}"/>
                 <!-- Chart placeholder -->
-                <BoxView HeightRequest="160"
-                             BackgroundColor="#E6E6E6"/>
+                <BoxView  HeightRequest="100" Style="{StaticResource UnderlineStyle}"/>
             </VerticalStackLayout>
         </Border>
     </Grid>

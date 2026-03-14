@@ -13,8 +13,8 @@
 
         <VerticalStackLayout Grid.Row="0" Spacing="12">
             <HorizontalStackLayout>
-                <Label Text="Location: " Style="{StaticResource PageLabel}" />
-                <Label Text ="{Binding SelectedLocationName}" Style="{StaticResource PageLabel}" />
+                <Label Text="Location: " Style="{StaticResource SubTitles}" />
+                <Label Text ="{Binding SelectedLocationName}" Style="{StaticResource SubTitles}" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
 

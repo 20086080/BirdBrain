@@ -40,8 +40,8 @@
 
         <!-- ROW 1 – Location Information -->
         <HorizontalStackLayout Grid.Row="1" Spacing="12">
-            <Label Text="Location: XXX" Style="{StaticResource SegmentSelectedLabelStyle}" />
-            <Label Text="Bird: XXX" Style="{StaticResource SegmentSelectedLabelStyle}" />
+            <Label Text="Location: XXX" Style="{StaticResource SubTitles}" />
+            <Label Text="Bird: XXX" Style="{StaticResource SubTitles}" />
         </HorizontalStackLayout>
         
         <!-- ROW 2 – Bird Information -->

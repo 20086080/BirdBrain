@@ -1,4 +1,7 @@
-﻿using BirdBrain.Services;
+﻿using BirdBrain;
+using BirdBrain.Services;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView.Maui;
 using Microsoft.Extensions.Logging;
 
 namespace BirdBrain
@@ -23,6 +26,12 @@ namespace BirdBrain
             builder.Services.AddSingleton<AppState>();
             builder.Services.AddSingleton<DatabaseService>();
             builder.Services.AddSingleton<SummaryService>();
+
+
+            builder
+                .UseMauiApp<App>()
+                .UseLiveCharts();
+
             var app = builder.Build();
 
             App.State = app.Services.GetRequiredService<AppState>();

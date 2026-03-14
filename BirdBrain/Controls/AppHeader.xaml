@@ -11,7 +11,7 @@
 
         <!-- Logo -->
         <HorizontalStackLayout Grid.Column="0">
-            <Image Source="header.svg" HeightRequest="120"/>
+            <Image Source="header.svg" HeightRequest="100"/>
         </HorizontalStackLayout>
 
         <!-- Hamburger -->

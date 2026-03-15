@@ -78,7 +78,7 @@ namespace BirdBrain.Services
             await _databaseService.InitAsync();
             var db = _databaseService.Db;
             var result = await db.QueryAsync<LocationDailyObs>(
-                @"SELECT ObsDt as ObsDt, SUM(HowMany) as Sightings
+                @"SELECT DATE(ObsDt) as ObsDt, SUM(HowMany) as Sightings
                 FROM BirdObservationDb
                 WHERE AppLat = ?
                 AND AppLng = ?
@@ -87,10 +87,10 @@ namespace BirdBrain.Services
                 FROM BirdObservationDb
                 WHERE AppLat = ? AND AppLng = ?
                 )
-                GROUP BY ObsDt
-                ORDER BY ObsDt",
+                GROUP BY DATE(ObsDt)
+                ORDER BY DATE(ObsDt)",
                 lat, lng, lat, lng);
-            return result;
+            return result.ToList();
         }
 
         ///Total Observations of Bird in location ///        

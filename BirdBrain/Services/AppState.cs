@@ -1,12 +1,16 @@
 ﻿using BirdBrain.Models;
-using LiveChartsCore;
-using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.Measure;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using LiveChartsCore.Defaults;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.Measure;
+
+using SkiaSharp;
+using LiveChartsCore.SkiaSharpView.Painting;
 
 namespace BirdBrain.Services
 {
@@ -27,7 +31,6 @@ namespace BirdBrain.Services
         //private double _lat;
         //private double _lng;
 
-        
         private double _lat = -31.9617;
         private double _lng = 115.8420;
         private string _selectedLocationName = "Kings Park";
@@ -56,43 +59,84 @@ namespace BirdBrain.Services
         }
         public List<LocationDailyObs> LocationDailyObs { get; set; } = new();
 
-        
-
         public List<BirdObservation> Observations { get; set; } = new();
 
         public DatabaseService Database { get; set; }
 
-        
+        private ISeries[] _series;
+        public ISeries[] Series
+        {
+            get => _series;
+            set
+            {
+                _series = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public ISeries[] Series { get; set; }   //For Graphs
-        public string[] Labels { get; set; }    //For Graphs
+        private List<string> _labels;
+        public List<string> Labels
+        {
+            get => _labels;
+            set
+            {
+                _labels = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public Axis[] XAxes { get; set; }   //For Graphs
+        private Axis[] _xAxes =
+        {
+            new Axis
+            {
+                LabelsRotation = 20
+            }
+        };
+
+        public Axis[] XAxes
+        {
+            get => _xAxes;
+            set
+            {
+                _xAxes = value;
+                OnPropertyChanged();
+            }
+        }
+
         public void BuildChart(List<LocationDailyObs> data)
         {
+            var color = (Color)Application.Current.Resources["TextPrimary"];
+            var skColor = new SKColor(
+                (byte)(color.Red * 255),
+                (byte)(color.Green * 255),
+                (byte)(color.Blue * 255),
+                (byte)(color.Alpha * 255));
+
             Series = new ISeries[]
             {
                 new LineSeries<int>
                 {
-                    Values = data.Select(x => x.Sightings).ToArray()
+                    Values = data.Select(x => x.Sightings).ToList(),
+                    GeometrySize = 0,
+                    Stroke = new SolidColorPaint(skColor)
+                    {
+                        StrokeThickness = 4
+                    },
+                    Fill = null
                 }
             };
-
             Labels = data
-                .Select(x => x.ObsDt)
-                .ToArray();
-
+                .Select(x => DateTime.Parse(x.ObsDt).ToString("dd/M"))
+                .ToList();
             XAxes = new Axis[]
             {
                 new Axis
                 {
                     Labels = Labels,
-                    LabelsRotation = 20
+                    LabelsRotation = 20,
+                    MinStep = 2
                 }
-            }; 
-            OnPropertyChanged(nameof(Series));
-            OnPropertyChanged(nameof(Labels));
-            OnPropertyChanged(nameof(XAxes));
+            };
         }
 
         public int SelectedBirdId

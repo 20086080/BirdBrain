@@ -151,7 +151,7 @@ public partial class BasePage : ContentPage
         if (_rightDrawer?.TranslationX == 0)
             await CloseRightDrawer();
     }
-    protected AppState AppState =>
+    public AppState AppState =>
     Microsoft.Maui.Controls.Application.Current
         .Handler
         .MauiContext

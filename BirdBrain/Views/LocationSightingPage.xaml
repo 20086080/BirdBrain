@@ -7,7 +7,7 @@
     xmlns:services="clr-namespace:BirdBrain.Services"
     xmlns:models="clr-namespace:BirdBrain.Models"
     xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
-    x:DataType="services:AppState" 
+    x:DataType="services:AppState"
     Title="Location Sightings">
     
     <Grid RowDefinitions="Auto,Auto,Auto, Auto,Auto,*" Padding="10" RowSpacing="5">
@@ -41,17 +41,17 @@
         <!-- LOCATION LABEL -->
         <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="20" Background="{DynamicResource Background}">
             <VerticalStackLayout>
-                <HorizontalStackLayout Padding="10">
+                <HorizontalStackLayout Padding="5">
                     <Label Text = "Location: " Style="{StaticResource SubTitles}"/>
                     <Label Text = "{Binding SelectedLocationName}" Style="{StaticResource SubTitles}"/>
                 </HorizontalStackLayout>
-                <HorizontalStackLayout Padding="10">
+                <HorizontalStackLayout Padding="5">
                     <Label Text = "{Binding Lat}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
                     <Label Text = ", " Style="{StaticResource PageLabelNormal}"/>
                     <Label Text = "{Binding Lng}" Style="{StaticResource PageLabelNormal}"/>
-                </HorizontalStackLayout>
-                <Label Text = "{Binding City_Ascii}" Style="{StaticResource PageLabelNormal}"/>
-                <Label Text = "{Binding Country}" Style="{StaticResource PageLabelNormal}"/>
+                </HorizontalStackLayout >
+                <Label Text = "{Binding City_Ascii}" Padding="5" Style="{StaticResource PageLabelNormal}" />
+                <Label Text = "{Binding Country}" Padding="5" Style="{StaticResource PageLabelNormal}" />
             </VerticalStackLayout>
             <Border Padding="0" Grid.Column="1">
                 <Image Source="{Binding SelectedLocationThumbnail}"  HeightRequest="128" Aspect="AspectFill"/>
@@ -73,7 +73,7 @@
                     <Label Grid.Row="1" Grid.Column="1" Text="{Binding TotalTypeOfBird}" Style="{StaticResource PageLabelCenter}"/>
                 </Grid>
             </Border>
-            <Border Grid.Column ="1" Padding="10" HeightRequest="150"  Style ="{DynamicResource RoundedAccentBorderStyle}">
+            <Border Grid.Column ="1" Padding="10" HeightRequest="130" Style ="{DynamicResource RoundedAccentBorderStyle}">
             <ScrollView VerticalScrollBarVisibility="Always">
                 <CollectionView ItemsSource="{Binding TopBirds}">
                     <CollectionView.Header>
@@ -98,12 +98,10 @@
         </Border>
         </Grid>
         <!-- DAILY SIGHTINGS Grid.Row = 3-->
-        <Border Padding="10" Grid.Row="5" Style ="{DynamicResource RoundedAccentBorderStyle}">
+        <Border Padding="10" Grid.Row="5" Style ="{DynamicResource RoundedAccentBorderStyle}" Background="{DynamicResource Background}">
             <VerticalStackLayout>
-                <Label Text="Daily Sightings" Style="{StaticResource PageLabel}"/>
-                <!-- Chart placeholder -->
-                <BoxView  HeightRequest="130" Style="{StaticResource UnderlineStyle}"/>
-                <lvc:CartesianChart Series="{Binding Series}" XAxes="{Binding XAxes}" HeightRequest="130"/>
+                <lvc:CartesianChart Series="{Binding Series}" XAxes="{Binding XAxes}" 
+                    Background="{DynamicResource Surface}" DrawMarginFrame="{x:Null}" HeightRequest="150"/>
             </VerticalStackLayout>
         </Border>
     </Grid>

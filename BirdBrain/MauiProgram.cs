@@ -15,6 +15,8 @@ namespace BirdBrain
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseSkiaSharp()
+                .UseLiveCharts()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("Roboto-Regular.ttf", "AppRegular");
@@ -28,11 +30,9 @@ namespace BirdBrain
             builder.Services.AddSingleton<DatabaseService>();
             builder.Services.AddSingleton<SummaryService>();
 
-
-            builder
-                .UseMauiApp<App>()
-                .UseSkiaSharp()
-                .UseLiveCharts();
+#if DEBUG
+            builder.Logging.AddDebug();
+#endif
 
             var app = builder.Build();
 
@@ -40,11 +40,6 @@ namespace BirdBrain
 
             return app;
 
-#if DEBUG
-            builder.Logging.AddDebug();
-#endif
-
-            return builder.Build();
         }
     }
 }

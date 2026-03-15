@@ -60,20 +60,27 @@
         <BoxView Grid.Row="3" Style="{StaticResource UnderlineStyle}" />
 
         
-        <Grid Grid.Row="4" ColumnDefinitions="*,1.4*" >
+        <Grid Grid.Row="4" ColumnDefinitions="*,1.3*" >
             <!-- SIGHTING STATS -->
-            <Border Grid.Column ="0" Padding="10" Style ="{DynamicResource RoundedAccentBorderStyle}" VerticalOptions="Start">
-                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" RowSpacing="5">
-                    <Label Grid.Row="0"  Grid.Column="0" Padding="0,5,0,5" Text="Sightings" Style="{StaticResource PageLabelCenter}"/>
-                    <Label Grid.Row="1" Grid.Column="0" Text="{Binding TotalSightings}" Style="{StaticResource PageLabelCenter}" />
-                    <BoxView Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource VerticallineStyle}" HorizontalOptions="End"/>
-                    <BoxView Grid.ColumnSpan="2" Grid.Row="0" Style="{StaticResource UnderlineStyle}" VerticalOptions="End"/>
+            <Border Grid.Column ="0" Margin ="0,20,0,0" Padding="5,5,5,5" Style ="{DynamicResource RoundedAccentBorderStyle}" VerticalOptions="Start" 
+                           Background="{DynamicResource Accent}">
+                <Grid ColumnDefinitions="1.4*,*" RowDefinitions="Auto,Auto" RowSpacing="5">
+                    <Label Grid.Row="0"  Grid.Column="0" Padding="5,10,5,10" Text="Sightings" Style="{StaticResource PageLabelCenter}" 
+                           TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="15"/>
+                    <Label Grid.Row="1" Grid.Column="0" Padding="5,10,5,10" Text="# Birds" Style="{StaticResource PageLabelCenter}" 
+                           TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="15"/>
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding TotalSightings}" Style="{StaticResource PageLabelCenter}" 
+                           TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding TotalTypeOfBird}" Style="{StaticResource PageLabelCenter}" 
+                            TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
+                    <BoxView Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource VerticallineStyle}" HorizontalOptions="End" 
+                           Color="{DynamicResource Background}" />
+                    <BoxView Grid.ColumnSpan="2" Grid.Row="0" Style="{StaticResource UnderlineStyle}" VerticalOptions="End"
+                           Color="{DynamicResource Background}"/>
                     
-                    <Label Grid.Row="0" Grid.Column="1" Text="# Birds" Style="{StaticResource PageLabelCenter}" />
-                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding TotalTypeOfBird}" Style="{StaticResource PageLabelCenter}"/>
                 </Grid>
             </Border>
-            <Border Grid.Column ="1" Padding="10" HeightRequest="130" Style ="{DynamicResource RoundedAccentBorderStyle}">
+            <Border Grid.Column ="1" Padding="5" HeightRequest="125" Style ="{DynamicResource RoundedAccentBorderStyle}">
             <ScrollView VerticalScrollBarVisibility="Always">
                 <CollectionView ItemsSource="{Binding TopBirds}">
                     <CollectionView.Header>
@@ -100,8 +107,8 @@
         <!-- DAILY SIGHTINGS Grid.Row = 3-->
         <Border Padding="10" Grid.Row="5" Style ="{DynamicResource RoundedAccentBorderStyle}" Background="{DynamicResource Background}">
             <VerticalStackLayout>
-                <lvc:CartesianChart Series="{Binding Series}" XAxes="{Binding XAxes}" 
-                    Background="{DynamicResource Surface}" DrawMarginFrame="{x:Null}" HeightRequest="150"/>
+                <lvc:CartesianChart Series="{Binding Series}" XAxes="{Binding XAxes}" YAxes="{Binding YAxes}"
+                    Background="{DynamicResource Surface}" DrawMarginFrame="{x:Null}" HeightRequest="155"/>
             </VerticalStackLayout>
         </Border>
     </Grid>

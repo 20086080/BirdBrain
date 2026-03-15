@@ -102,6 +102,23 @@ namespace BirdBrain.Services
                 OnPropertyChanged();
             }
         }
+        private Axis[] _yAxes =
+        {
+            new Axis
+            {
+                LabelsRotation = 20
+            }
+        };
+        public Axis[] YAxes
+        {
+            get => _yAxes;
+            set
+            {
+                _yAxes = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public void BuildChart(List<LocationDailyObs> data)
         {
@@ -111,7 +128,7 @@ namespace BirdBrain.Services
                 (byte)(color.Green * 255),
                 (byte)(color.Blue * 255),
                 (byte)(color.Alpha * 255));
-
+            var maxSightings = data.Max(x => x.Sightings);
             Series = new ISeries[]
             {
                 new LineSeries<int>
@@ -120,7 +137,7 @@ namespace BirdBrain.Services
                     GeometrySize = 0,
                     Stroke = new SolidColorPaint(skColor)
                     {
-                        StrokeThickness = 4
+                        StrokeThickness = 3
                     },
                     Fill = null
                 }
@@ -134,7 +151,22 @@ namespace BirdBrain.Services
                 {
                     Labels = Labels,
                     LabelsRotation = 20,
-                    MinStep = 2
+                    MinStep = 1,
+                    SeparatorsPaint = null,
+                    TextSize = 11,
+                    LabelsPaint = new SolidColorPaint(skColor)
+
+                }
+            };
+            YAxes = new Axis[]
+            {
+                new Axis
+                {
+                    SeparatorsPaint = null,
+                    MinStep = 5,
+                    TextSize = 11,
+                    LabelsPaint = new SolidColorPaint(skColor),
+                    MaxLimit = maxSightings + 5
                 }
             };
         }

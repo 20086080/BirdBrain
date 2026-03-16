@@ -1,32 +1,28 @@
 using BirdBrain.Services;
-using BirdBrain.Models;
-using System.Diagnostics;
+
 namespace BirdBrain.Views;
 
-public partial class LocationSightingPage : BasePage
+public partial class BirdSightingPage : BasePage
 {
     private readonly SummaryService _summaryService;
-
-    public LocationSightingPage(SummaryService summaryService)
-    {
+    public BirdSightingPage(SummaryService summaryService)
+	{
         InitializeComponent();
         _summaryService = summaryService;
 
         BindingContext = App.State;
-        
     }
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        App.State.TotalSightings = await _summaryService.GetTotalLocationCountAsync(App.State.Lat,App.State.Lng);
-        App.State.TotalTypeOfBird = await _summaryService.GetTotalLocationBirdCountAsync(App.State.Lat, App.State.Lng);
-        App.State.TopBirds = await _summaryService.GetTop5BirdCountAsync(App.State.Lat, App.State.Lng);
-        App.State.LocationDailyObs = await _summaryService.GetLocationDailyObsAsync(App.State.Lat, App.State.Lng);
-        
-        App.State.BuildChart(App.State.LocationDailyObs);
-        
-    }
+        App.State.TotalBirdSightings = await _summaryService.GetTotalBirdCountAsync(App.State.Lat, App.State.Lng, App.State.SelectedBirdCommonName);
+        App.State.TotalSightings = await _summaryService.GetTotalLocationCountAsync(App.State.Lat, App.State.Lng);
+        App.State.PercTotalBirdSightings = 100 * ((double)App.State.TotalBirdSightings / App.State.TotalSightings) ; 
+        App.State.BirdDailyObs = await _summaryService.GetBirdDailyObsAsync(App.State.Lat, App.State.Lng, App.State.SelectedBirdCommonName);
 
+        App.State.BuildChartBird(App.State.BirdDailyObs);
+
+    }
     async void LocationTapped(object sender, EventArgs e)
     {
         LocationTab.Style =
@@ -59,7 +55,7 @@ public partial class LocationSightingPage : BasePage
         LocationTabLabel.Style =
             (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
 
-        //Navigate using Shell
-        await Shell.Current.GoToAsync(nameof(BirdSightingPage));     
+        // Navigate using Shell
+        await Shell.Current.GoToAsync(nameof(BirdSightingPage));    
     }
 }

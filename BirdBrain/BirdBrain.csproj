@@ -261,7 +261,7 @@
 	  <Compile Update="Views\BirdSelectionPage.xaml.cs">
 	    <DependentUpon>BirdSelectionPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\BirdSighting.xaml.cs">
+	  <Compile Update="Views\BirdSightingPage.xaml.cs">
 	    <DependentUpon>BirdSighting.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Animation.xaml.cs">
@@ -351,7 +351,7 @@
 	  <MauiXaml Update="Views\BirdSelectionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\BirdSighting.xaml">
+	  <MauiXaml Update="Views\BirdSightingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Animation.xaml">

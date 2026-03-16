@@ -9,7 +9,7 @@ namespace BirdBrain
             InitializeComponent();
             Routing.RegisterRoute(nameof(IntroPage), typeof(IntroPage));
             Routing.RegisterRoute(nameof(BirdSelectionPage), typeof(BirdSelectionPage));
-            Routing.RegisterRoute(nameof(BirdSighting), typeof(BirdSighting));
+            Routing.RegisterRoute(nameof(BirdSightingPage), typeof(BirdSightingPage));
             Routing.RegisterRoute(nameof(LocationSightingPage), typeof(LocationSightingPage));
         }
     }

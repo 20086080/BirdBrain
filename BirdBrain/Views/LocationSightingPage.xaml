@@ -16,7 +16,7 @@
                        Spacing="10" Background="{DynamicResource Background}" >
 
             <!-- LOCATION / BIRD Selection -->
-            <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" WidthRequest="200" >
+            <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" WidthRequest="200" HeightRequest="45">
                 <Grid ColumnDefinitions="*,*" HorizontalOptions="Fill" >
                     <!-- Location TAB -->
                     <Border x:Name="LocationTab" Grid.Column="0" Style="{StaticResource SegmentSelectedStyle}">
@@ -40,9 +40,9 @@
         
         <!-- LOCATION LABEL -->
         <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="20" Background="{DynamicResource Background}">
-            <VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="1">
                 <HorizontalStackLayout Padding="5">
-                    <Label Text = "Location: " Style="{StaticResource SubTitles}"/>
+                    
                     <Label Text = "{Binding SelectedLocationName}" Style="{StaticResource SubTitles}"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Padding="5">
@@ -53,7 +53,7 @@
                 <Label Text = "{Binding City_Ascii}" Padding="5" Style="{StaticResource PageLabelNormal}" />
                 <Label Text = "{Binding Country}" Padding="5" Style="{StaticResource PageLabelNormal}" />
             </VerticalStackLayout>
-            <Border Padding="0" Grid.Column="1">
+            <Border Padding="0" Grid.Column="0">
                 <Image Source="{Binding SelectedLocationThumbnail}"  HeightRequest="128" Aspect="AspectFill"/>
             </Border>
         </Grid>
@@ -80,13 +80,14 @@
                     
                 </Grid>
             </Border>
-            <Border Grid.Column ="1" Padding="5" HeightRequest="125" Style ="{DynamicResource RoundedAccentBorderStyle}">
+            <Border Grid.Column ="1" Padding="5" HeightRequest="140" Style ="{DynamicResource RoundedAccentBorderStyle}">
             <ScrollView VerticalScrollBarVisibility="Always">
                 <CollectionView ItemsSource="{Binding TopBirds}">
                     <CollectionView.Header>
                         <Grid ColumnDefinitions="*,*" RowDefinitions =" *,*" Padding="5">
                             <Label Text="Birds" Grid.Row ="0" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
-                            <Label Grid.Column="1" Grid.Row ="0" Text="# Sightings" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Center"/>
+                            <Label Grid.Column="1" Grid.Row ="0" Text="# Sightings" Style="{StaticResource PageLabelNormal}" 
+                                   HorizontalOptions="Center"/>
                             <BoxView Grid.Row ="1" Grid.ColumnSpan ="2" Style="{StaticResource UnderlineStyle}"/>
                         </Grid>
                     </CollectionView.Header>
@@ -105,7 +106,7 @@
         </Border>
         </Grid>
         <!-- DAILY SIGHTINGS Grid.Row = 3-->
-        <Border Padding="10" Grid.Row="5" Style ="{DynamicResource RoundedAccentBorderStyle}" Background="{DynamicResource Background}">
+        <Border Padding="5" Grid.Row="5" Style ="{DynamicResource RoundedAccentBorderStyle}" Background="{DynamicResource Surface}">
             <VerticalStackLayout>
                 <lvc:CartesianChart Series="{Binding Series}" XAxes="{Binding XAxes}" YAxes="{Binding YAxes}"
                     Background="{DynamicResource Surface}" DrawMarginFrame="{x:Null}" HeightRequest="155"/>

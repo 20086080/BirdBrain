@@ -36,17 +36,19 @@ namespace BirdBrain.Services
         private string _selectedLocationName = "Kings Park";
         private string _city_ascii = "Perth";
         private string _country = "Australia";
-        private string _selectedBirdCommonName = "Pied Stilt";
+        private string _selectedBirdCommonName = "Yellow-billed Spoonbill";
         private string _selectedBirdThumbnail = "currawong_t.png";
         private string _selectedLocationThumbnail = "kings_park_t.png";
         private string _selectedLocationProfileImage = "kings_park.png";
         private string _selectedBirdProfileImage = "currawong.png";
 
         private int _days = 30;
-        private int _radius = 50;
+        private int _radius = 10;
 
         private int _totalSightings;
         private int _totalTypeOfBird;
+        private int _totalBirdSightings;
+        private double _PercTotalSightings;
         private List<TopBirds> _topBirds = new();
         public List<TopBirds> TopBirds
         {
@@ -58,6 +60,7 @@ namespace BirdBrain.Services
             }
         }
         public List<LocationDailyObs> LocationDailyObs { get; set; } = new();
+        public List<BirdDailyObs> BirdDailyObs { get; set; } = new();
 
         public List<BirdObservation> Observations { get; set; } = new();
 
@@ -159,6 +162,113 @@ namespace BirdBrain.Services
                 }
             };
             YAxes = new Axis[]
+            {
+                new Axis
+                {
+                    SeparatorsPaint = null,
+                    MinStep = 5,
+                    TextSize = 11,
+                    LabelsPaint = new SolidColorPaint(skColor),
+                    MaxLimit = maxSightings + 5
+                }
+            };
+        }
+
+        private ISeries[] _Birdseries;
+        public ISeries[] BirdSeries
+        {
+            get => _Birdseries;
+            set
+            {
+                _Birdseries = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private List<string> _Birdlabels;
+        public List<string> BirdLabels
+        {
+            get => _Birdlabels;
+            set
+            {
+                _Birdlabels = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Axis[] _BirdxAxes =
+        {
+            new Axis
+            {
+                LabelsRotation = 20
+            }
+        };
+
+        public Axis[] BirdXAxes
+        {
+            get => _BirdxAxes;
+            set
+            {
+                _BirdxAxes = value;
+                OnPropertyChanged();
+            }
+        }
+        private Axis[] _BirdyAxes =
+        {
+            new Axis
+            {
+                LabelsRotation = 20
+            }
+        };
+        public Axis[] BirdYAxes
+        {
+            get => _BirdyAxes;
+            set
+            {
+                _BirdyAxes = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void BuildChartBird(List<BirdDailyObs> data)
+        {
+            var color = (Color)Application.Current.Resources["TextPrimary"];
+            var skColor = new SKColor(
+                (byte)(color.Red * 255),
+                (byte)(color.Green * 255),
+                (byte)(color.Blue * 255),
+                (byte)(color.Alpha * 255));
+            var maxSightings = data.Max(x => x.Sightings);
+            BirdSeries = new ISeries[]
+            {
+                new LineSeries<int>
+                {
+                    Values = data.Select(x => x.Sightings).ToList(),
+                    GeometrySize = 0,
+                    Stroke = new SolidColorPaint(skColor)
+                    {
+                        StrokeThickness = 3
+                    },
+                    Fill = null
+                }
+            };
+            BirdLabels = data
+                .Select(x => DateTime.Parse(x.ObsDt).ToString("dd/M"))
+                .ToList();
+            BirdXAxes = new Axis[]
+            {
+                new Axis
+                {
+                    Labels = Labels,
+                    LabelsRotation = 20,
+                    MinStep = 1,
+                    SeparatorsPaint = null,
+                    TextSize = 11,
+                    LabelsPaint = new SolidColorPaint(skColor)
+
+                }
+            };
+            BirdYAxes = new Axis[]
             {
                 new Axis
                 {
@@ -309,6 +419,32 @@ namespace BirdBrain.Services
                 if (_totalSightings != value)
                 {
                     _totalSightings = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public int TotalBirdSightings
+        {
+            get => _totalBirdSightings;
+            set
+            {
+                if (_totalBirdSightings != value)
+                {
+                    _totalBirdSightings = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public double PercTotalBirdSightings
+        {
+            get => _PercTotalSightings;
+            set
+            {
+                if (_PercTotalSightings != value)
+                {
+                    _PercTotalSightings = value;
                     OnPropertyChanged();
                 }
             }

@@ -34,7 +34,7 @@ public partial class BirdSelectionPage : BasePage
         // optional short delay
         Application.Current.Dispatcher.Dispatch(async () =>
         {
-            await Shell.Current.GoToAsync(nameof(BirdSighting));
+            await Shell.Current.GoToAsync(nameof(BirdSightingPage));
         });
     }
 }

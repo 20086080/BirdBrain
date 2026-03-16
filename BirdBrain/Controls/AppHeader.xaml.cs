@@ -42,6 +42,11 @@ public partial class AppHeader : ContentView
                 "You must wait 60 minutes before refreshing again.",
                 "OK");
         }
+        else
+        {
+            await Application.Current.MainPage.DisplayAlertAsync(
+                "Success", "Successful Download of Observations", "OK");
+        }
     }
     void OnMenuSettingsTapped(object sender, TappedEventArgs e)
     {

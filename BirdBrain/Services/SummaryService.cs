@@ -78,17 +78,22 @@ namespace BirdBrain.Services
             await _databaseService.InitAsync();
             var db = _databaseService.Db;
             var result = await db.QueryAsync<LocationDailyObs>(
-                @"SELECT DATE(ObsDt) as ObsDt, SUM(HowMany) as Sightings
-                FROM BirdObservationDb
-                WHERE AppLat = ?
-                AND AppLng = ?
-                AND DateStamp = (
-                SELECT MAX(DateStamp)
-                FROM BirdObservationDb
-                WHERE AppLat = ? AND AppLng = ?
-                )
-                GROUP BY DATE(ObsDt)
-                ORDER BY DATE(ObsDt)",
+                //HowMany capped at 100 for levelliing anomalies such as flocks > 100 etc
+                @"SELECT DATE(ObsDt) as ObsDt, 
+                MIN(Sightings, 100) as Sightings 
+                FROM 
+                    (SELECT DATE(ObsDt) as ObsDt,
+                        SUM(HowMany) as Sightings
+                    FROM BirdObservationDb
+                    WHERE AppLat = ?
+                    AND AppLng = ?
+                    AND DateStamp = (
+                        SELECT MAX(DateStamp)
+                            FROM BirdObservationDb
+                        WHERE AppLat = ? AND AppLng = ?
+                        )
+                    GROUP BY DATE(ObsDt)
+                    ORDER BY DATE(ObsDt))",
                 lat, lng, lat, lng);
             return result.ToList();
         }
@@ -102,15 +107,45 @@ namespace BirdBrain.Services
                 @"SELECT SUM(HowMany) as Sightings
                 FROM BirdObservationDb
                 WHERE AppLat = ?
-                AND AppLng = ?
-                AND ComName = ?
-                AND DateStamp = (
-                SELECT MAX(DateStamp)
-                FROM BirdObservationDb
-                WHERE AppLat = ? AND AppLng = ?
-                )",
+                    AND AppLng = ?
+                    AND ComName = ?
+                    AND DateStamp = (
+                        SELECT MAX(DateStamp)
+                        FROM BirdObservationDb
+                        WHERE AppLat = ? AND AppLng = ?
+                        )",
                 lat, lng, comName, lat, lng);
             return result;
+        }
+
+        ///Daily Observation Bird ///
+        public async Task<List<BirdDailyObs>> GetBirdDailyObsAsync(double lat, double lng, string comName)
+        {
+            await _databaseService.InitAsync();
+            var db = _databaseService.Db;
+            var result = await db.QueryAsync<BirdDailyObs>(
+                //HowMany capped at 100 for levelliing anomalies such as flocks > 100 etc
+                @"SELECT DATE(ObsDt) as ObsDt,
+                MIN(Sightings,100) as Sightings
+                FROM
+                (
+                    SELECT DATE(ObsDt) as ObsDt,
+                        SUM(HowMany) as Sightings
+                    FROM BirdObservationDb b
+                    WHERE AppLat = ?
+                    AND AppLng = ?
+                    AND ComName = ?
+                    AND DateStamp = (
+                        SELECT MAX(DateStamp)
+                            FROM BirdObservationDb
+                        WHERE AppLat = b.AppLat
+                            AND AppLng = b.AppLng
+                            AND ComName = b.ComName
+                        )
+                    GROUP BY DATE(ObsDt)
+                )",
+                lat, lng, comName);
+            return result.ToList();
         }
     }
 }

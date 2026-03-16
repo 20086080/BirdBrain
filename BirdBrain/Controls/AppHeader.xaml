@@ -5,13 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <Grid ColumnDefinitions="*,Auto,Auto, Auto, Auto, Auto"
-          Padding="20,12"
-          BackgroundColor="{DynamicResource Background}"
-          VerticalOptions="Center">
+          Padding="10,5,10,0" BackgroundColor="{DynamicResource Background}" VerticalOptions="Center">
 
         <!-- Logo -->
         <HorizontalStackLayout Grid.Column="0">
-            <Image Source="header.svg" HeightRequest="100"/>
+            <Image Source="header.svg" HeightRequest="90"/>
         </HorizontalStackLayout>
 
         <!-- Hamburger -->

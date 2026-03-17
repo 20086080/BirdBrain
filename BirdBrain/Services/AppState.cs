@@ -29,6 +29,9 @@ namespace BirdBrain.Services
         //private string _selectedLocationThumbnail = "";
         //private string _selectedLocationProfileImage = "";
         //private string _selectedBirdProfileImage = "";
+        //private string _selectedBirdScName = "";
+        //private string _selectedBirdDesc = "";
+        //private string _selectedLocationDesc = "";
         //private double _lat;
         //private double _lng;
 
@@ -39,9 +42,15 @@ namespace BirdBrain.Services
         private string _country = "Australia";
         private string _selectedBirdCommonName = "Yellow-billed Spoonbill";
         private string _selectedBirdThumbnail = "currawong_t.png";
+        private string _selectedBirdProfileImage = "currawong.png";
+        
+        private string _selectedBirdScName = "Strepera graculina";
+        private string _selectedBirdDesc = "Large black bird with a ringing call and yellow eyes.";
+        private string _selectedLocationDesc = "Large urban bushland reserve in Perth offering views of honeyeaters, parrots, raptors, and seasonal migrants.";
+
         private string _selectedLocationThumbnail = "kings_park_t.png";
         private string _selectedLocationProfileImage = "kings_park.png";
-        private string _selectedBirdProfileImage = "currawong.png";
+        
 
         private int _days = 30;
         private int _radius = 10;
@@ -68,13 +77,13 @@ namespace BirdBrain.Services
 
         public DatabaseService Database { get; set; }
 
-        private ISeries[] _series;
+        private ISeries[] _series = Array.Empty<ISeries>();
         public ISeries[] Series
         {
             get => _series;
             set
             {
-                _series = value;
+                _series = value ?? Array.Empty<ISeries>();
                 OnPropertyChanged();
             }
         }
@@ -126,6 +135,12 @@ namespace BirdBrain.Services
 
         public void BuildChart(List<LocationDailyObs> data)
         {
+            if (data == null || !data.Any())
+            {
+                Series = Array.Empty<ISeries>();
+                Labels = new List<string>();
+                return;
+            }
             var color = (Color)Application.Current.Resources["TextPrimary"];
             var skColor = new SKColor(
                 (byte)(color.Red * 255),
@@ -175,13 +190,13 @@ namespace BirdBrain.Services
             };
         }
 
-        private ISeries[] _Birdseries;
+        private ISeries[] _Birdseries = Array.Empty<ISeries>();
         public ISeries[] BirdSeries
         {
             get => _Birdseries;
             set
             {
-                _Birdseries = value;
+                _Birdseries = value ?? Array.Empty<ISeries>();
                 OnPropertyChanged();
             }
         }
@@ -233,6 +248,12 @@ namespace BirdBrain.Services
 
         public void BuildChartBird(List<BirdDailyObs> data)
         {
+            if (data == null || !data.Any())
+            {
+                BirdSeries = Array.Empty<ISeries>();
+                BirdLabels = new List<string>();
+                return;
+            }
             var color = (Color)Application.Current.Resources["TextPrimary"];
             var skColor = new SKColor(
                 (byte)(color.Red * 255),
@@ -287,6 +308,7 @@ namespace BirdBrain.Services
 
         public void BuildChartBirdTime(List<BirdTimeObs> data)
         {
+            
             var color = (Color)Application.Current.Resources["TextPrimary"];
             var skColor = new SKColor(
                 (byte)(color.Red * 255),
@@ -361,6 +383,45 @@ namespace BirdBrain.Services
                 if (_selectedLocationName != value)
                 {
                     _selectedLocationName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string SelectedBirdScName
+        {
+            get => _selectedBirdScName;
+            set
+            {
+                if (_selectedBirdScName != value)
+                {
+                    _selectedBirdScName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string SelectedBirdDesc
+        {
+            get => _selectedBirdDesc;
+            set
+            {
+                if (_selectedBirdDesc != value)
+                {
+                    _selectedBirdDesc = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string SelectedLocationDesc
+        {
+            get => _selectedLocationDesc;
+            set
+            {
+                if (_selectedLocationDesc != value)
+                {
+                    _selectedLocationDesc = value;
                     OnPropertyChanged();
                 }
             }

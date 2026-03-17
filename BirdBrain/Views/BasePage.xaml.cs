@@ -25,96 +25,106 @@ public partial class BasePage : ContentPage
 
     protected override void OnApplyTemplate()
     {
-        base.OnApplyTemplate();
-        _drawerOverlay = GetTemplateChild("DrawerOverlay") as BoxView;
-        _leftDrawer = GetTemplateChild("LeftDrawer") as LeftSettingsDrawer;
-        _rightDrawer = GetTemplateChild("RightDrawer") as RightSettingsDrawer;
-        var header = GetTemplateChild("AppHeader") as AppHeader;
-
-        if (_leftDrawer != null)
+        try
         {
-            //Home Selection 
-            _leftDrawer.HomeCommand = new Command(async () =>
+            base.OnApplyTemplate();
+            _drawerOverlay = GetTemplateChild("DrawerOverlay") as BoxView;
+            _leftDrawer = GetTemplateChild("LeftDrawer") as LeftSettingsDrawer;
+            _rightDrawer = GetTemplateChild("RightDrawer") as RightSettingsDrawer;
+            var header = GetTemplateChild("AppHeader") as AppHeader;
+
+            if (_leftDrawer != null)
             {
-                if (IsAnyDrawerOpen())
-                    await CloseAllDrawers();
+                //Home Selection 
+                _leftDrawer.HomeCommand = new Command(async () =>
+                {
+                    if (IsAnyDrawerOpen())
+                        await CloseAllDrawers();
 
-                await Shell.Current.GoToAsync("//IntroPage");
-            });
+                    await Shell.Current.GoToAsync("//IntroPage");
+                });
 
-            // Bird Selection
-            _leftDrawer.SelectBirdCommand = new Command(async () =>
+                // Bird Selection
+                _leftDrawer.SelectBirdCommand = new Command(async () =>
+                {
+                    if (IsAnyDrawerOpen())
+                        await CloseAllDrawers();
+
+                    await Shell.Current.GoToAsync(nameof(BirdSelectionPage));
+                });
+
+                // Sighting Selection
+                _leftDrawer.SightingsCommand = new Command(async () =>
+                {
+                    if (IsAnyDrawerOpen())
+                        await CloseAllDrawers();
+                    if (App.State.LeftSelected)     //Location Selected on Page
+                        await Shell.Current.GoToAsync(nameof(LocationSightingPage));
+                    else
+                        await Shell.Current.GoToAsync(nameof(BirdSightingPage));
+                });
+
+                // Profile Selection
+                _leftDrawer.ProfileCommand = new Command(async () =>
+                {
+                    if (IsAnyDrawerOpen())
+                        await CloseAllDrawers();
+                    if (App.State.LeftSelected)     //Location Selected on Page
+                        await Shell.Current.GoToAsync(nameof(LocationProfilePage));
+                    else
+                        await Shell.Current.GoToAsync(nameof(BirdProfilePage));
+                });
+
+                // Insights Selection
+                _leftDrawer.InsightsCommand = new Command(async () =>
+                {
+                    if (IsAnyDrawerOpen())
+                        await CloseAllDrawers();
+                    if (App.State.LeftSelected)     //Location Selected on Page
+                        await Shell.Current.GoToAsync(nameof(LocationInsightsPage));
+                    else
+                        await Shell.Current.GoToAsync(nameof(BirdInsightsPage));
+                });
+
+            }
+
+
+            if (header != null)
             {
-                if (IsAnyDrawerOpen())
-                    await CloseAllDrawers();
+                header.HamburgerClicked += async (_, __) =>
+                {
+                    if (IsAnyDrawerOpen())
+                        await CloseAllDrawers();
+                    else
+                        await OpenDrawer(); // ← existing left drawer logic
+                };
+                // Right drawer
+                header.SettingsClicked += async (_, __) =>
+                {
+                    if (IsAnyDrawerOpen())
+                        await CloseAllDrawers();
+                    else
+                        await OpenRightDrawer();
+                };
+            }
 
-                await Shell.Current.GoToAsync("BirdSelectionPage");
-            });
-
-            // Sighting Selection
-            _leftDrawer.SightingsCommand = new Command(async () =>
+            bool IsAnyDrawerOpen()
             {
-                if (IsAnyDrawerOpen())
-                    await CloseAllDrawers();
-                if (App.State.LeftSelected)     //Location Selected on Page
-                    await Shell.Current.GoToAsync("LocationSightingPage");
-                else
-                    await Shell.Current.GoToAsync("BirdSightingPage");
-            });
+                return (_leftDrawer?.TranslationX == 0) || (_rightDrawer?.TranslationX == 0);
+            }
 
-            // Profile Selection
-            _leftDrawer.SightingsCommand = new Command(async () =>
-            {
-                if (IsAnyDrawerOpen())
-                    await CloseAllDrawers();
-                if (App.State.LeftSelected)     //Location Selected on Page
-                    await Shell.Current.GoToAsync("LocationProfilePage");
-                else
-                    await Shell.Current.GoToAsync("BirdProfilePage");
-            });
-
-            // Insights Selection
-            _leftDrawer.SightingsCommand = new Command(async () =>
-            {
-                if (IsAnyDrawerOpen())
-                    await CloseAllDrawers();
-                if (App.State.LeftSelected)     //Location Selected on Page
-                    await Shell.Current.GoToAsync("LocationInsightsPage");
-                else
-                    await Shell.Current.GoToAsync("BirdInsightsPage");
-            });
+            // 🔒 GUARANTEED hidden
+            if (_leftDrawer!= null)
+               _leftDrawer.TranslationX = DrawerHiddenX;
+            if (_rightDrawer != null)
+                _rightDrawer.TranslationX = RightDrawerHiddenX;
         }
-
-        if (header != null)
+        catch (Exception ex)
         {
-            header.HamburgerClicked += async (_, __) =>
-            {
-                if (IsAnyDrawerOpen())
-                    await CloseAllDrawers();
-                else
-                    await OpenDrawer(); // ← existing left drawer logic
-            };
-            // Right drawer
-            header.SettingsClicked += async (_, __) =>
-            {
-                if (IsAnyDrawerOpen())
-                    await CloseAllDrawers();
-                else
-                    await OpenRightDrawer();
-            };
+            System.Diagnostics.Debug.WriteLine("TEMPLATE CRASH: " + ex);
+            throw;
         }
-
-        bool IsAnyDrawerOpen()
-        {
-            return (_leftDrawer?.TranslationX == 0) || (_rightDrawer?.TranslationX == 0);
-        }
-
-        // 🔒 GUARANTEED hidden
-        _leftDrawer.TranslationX = DrawerHiddenX;
-        if (_rightDrawer != null)
-            _rightDrawer.TranslationX = RightDrawerHiddenX;
     }
-
     async Task OpenRightDrawer()
     {
         if (_rightDrawer == null) return;
@@ -124,7 +134,8 @@ public partial class BasePage : ContentPage
 
         await CloseDrawer(); // closes left if open
 
-        _drawerOverlay.IsVisible = true;
+        if (_drawerOverlay != null)
+            _drawerOverlay.IsVisible = true;
 
         await _rightDrawer.TranslateToAsync(0, 0, 250, Easing.CubicOut);
     }
@@ -134,7 +145,8 @@ public partial class BasePage : ContentPage
         if (_rightDrawer == null) return;
 
         await _rightDrawer.TranslateToAsync(RightDrawerHiddenX, 0, 250, Easing.CubicIn);
-        _drawerOverlay.IsVisible = false;
+        if (_drawerOverlay != null)
+            _drawerOverlay.IsVisible = false;
     }
 
     async void OnSwipeRight(object sender, SwipedEventArgs e)
@@ -160,7 +172,8 @@ public partial class BasePage : ContentPage
         _leftDrawer.AbortAnimation("TranslateTo");
         _rightDrawer?.AbortAnimation("TranslateTo");
 
-        _drawerOverlay.IsVisible = true;
+        if (_drawerOverlay != null)
+            _drawerOverlay.IsVisible = true;
 
         await _leftDrawer.TranslateToAsync(0, 0, 250, Easing.CubicOut);
     }
@@ -169,6 +182,7 @@ public partial class BasePage : ContentPage
     {
         if (_leftDrawer == null) return;
         await _leftDrawer.TranslateToAsync(DrawerHiddenX, 0, 250, Easing.CubicIn);
+        if (_drawerOverlay != null)
         _drawerOverlay.IsVisible = false;
     }
 

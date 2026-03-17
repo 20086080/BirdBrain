@@ -35,7 +35,10 @@ public partial class LeftSettingsDrawer : ContentView
     }
 
     public static readonly BindableProperty CloseCommandProperty =
-        BindableProperty.Create(nameof(CloseCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
+        BindableProperty.Create(
+            nameof(CloseCommand), 
+            typeof(ICommand), 
+            typeof(LeftSettingsDrawer));
 
     public ICommand CloseCommand
     {
@@ -44,7 +47,11 @@ public partial class LeftSettingsDrawer : ContentView
     }
 
     public static readonly BindableProperty SightingsCommandProperty =
-        BindableProperty.Create(nameof(SightingsCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
+        BindableProperty.Create(
+            nameof(SightingsCommand), 
+            typeof(ICommand), 
+            typeof(LeftSettingsDrawer),
+            null);
 
     public ICommand SightingsCommand
     {
@@ -53,7 +60,10 @@ public partial class LeftSettingsDrawer : ContentView
     }
 
     public static readonly BindableProperty ProfileCommandProperty =
-        BindableProperty.Create(nameof(ProfileCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
+        BindableProperty.Create(
+            nameof(ProfileCommand), 
+            typeof(ICommand), 
+            typeof(LeftSettingsDrawer), null);
 
     public ICommand ProfileCommand
     {
@@ -62,7 +72,11 @@ public partial class LeftSettingsDrawer : ContentView
     }
 
     public static readonly BindableProperty InsightsCommandProperty =
-        BindableProperty.Create(nameof(InsightsCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
+        BindableProperty.Create(
+            nameof(InsightsCommand), 
+            typeof(ICommand), 
+            typeof(LeftSettingsDrawer),
+            null);
 
     public ICommand InsightsCommand
     {
@@ -71,7 +85,11 @@ public partial class LeftSettingsDrawer : ContentView
     }
 
     public static readonly BindableProperty SelectLocationCommandProperty =
-        BindableProperty.Create(nameof(SelectLocationCommand), typeof(ICommand), typeof(LeftSettingsDrawer));
+        BindableProperty.Create(
+            nameof(SelectLocationCommand), 
+            typeof(ICommand), 
+            typeof(LeftSettingsDrawer), 
+            null);
 
     public ICommand SelectLocationCommand
     {

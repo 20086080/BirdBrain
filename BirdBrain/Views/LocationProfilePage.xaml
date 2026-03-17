@@ -1,11 +1,74 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BirdBrain.Views.LocationProfilePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
-</ContentView>
+<views:BasePage
+    x:Class="BirdBrain.Views.LocationProfilePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:BirdBrain.Views"
+    xmlns:services="clr-namespace:BirdBrain.Services"
+    xmlns:models="clr-namespace:BirdBrain.Models"
+    xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+    x:DataType="services:AppState"
+    Title="Location Profile">
+
+    <Grid RowDefinitions="Auto,Auto,Auto, Auto,Auto,*" Padding="10" RowSpacing="5">
+
+        <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center" HeightRequest="45"
+                       Spacing="10" Background="{DynamicResource Background}" >
+
+            <!-- LOCATION / BIRD Selection -->
+            <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" WidthRequest="200" HeightRequest="45">
+                <Grid ColumnDefinitions="*,*" HorizontalOptions="Fill" >
+                    <!-- Location TAB -->
+                    <Border x:Name="LocationTab" Grid.Column="0" Style="{StaticResource SegmentSelectedStyle}">
+                        <Label x:Name="LocationTabLabel" Text="Location" Style="{StaticResource SegmentSelectedLabelStyle}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="LocationTapped"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <!-- Bird TAB -->
+                    <Border x:Name="BirdTab" Grid.Column="1" Style="{StaticResource SegmentUnselectedStyle}">
+                        <Label x:Name="BirdTabLabel" Text="Bird" Style="{StaticResource SegmentUnselectedLabelStyle}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BirdTapped"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                </Grid>
+            </Border>
+        </HorizontalStackLayout>
+
+        <BoxView Grid.Row="1" Style="{StaticResource UnderlineStyle}" />
+
+        <Grid Grid.Row="2" ColumnDefinitions = "*,*" Padding ="5" Background="{DynamicResource Background}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text = "{Binding SelectedLocationName}" Style = "{StaticResource SubTitles}" 
+                   LineBreakMode="WordWrap"/>
+            <HorizontalStackLayout Grid.Row="0" Grid.Column="1">
+                <Label Text = "{Binding Lat}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
+                <Label Text = ", " Style="{StaticResource PageLabelNormal}"/>
+                <Label Text = "{Binding Lng}" Style="{StaticResource PageLabelNormal}"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <Label Text = "{Binding City_Ascii}" Style="{StaticResource PageLabelNormal}"/>
+                <Label Text = ", " Style="{StaticResource PageLabelNormal}"/>
+                <Label Text = "{Binding Country}" Style="{StaticResource PageLabelNormal}"/>
+            </HorizontalStackLayout>    
+        </Grid>
+        
+        <!-- Location LABEL -->
+        <Grid Grid.Row="3"  Background="{DynamicResource Background}">
+            <Image Source="{Binding SelectedLocationProfileImage}"  HeightRequest="330" Aspect="AspectFill"/>
+        </Grid>
+
+        <BoxView Grid.Row="4" Style="{StaticResource UnderlineStyle}" />
+
+
+        <Grid Grid.Row="5" ColumnSpacing="20" Padding ="10" Background="{DynamicResource Background}">
+            <Label Text = "{Binding SelectedLocationDesc}" Style = "{StaticResource PageLabelNormal}" LineBreakMode="WordWrap"/>
+        </Grid>
+    </Grid>
+</views:BasePage>
+

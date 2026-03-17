@@ -11,6 +11,11 @@ namespace BirdBrain
             Routing.RegisterRoute(nameof(BirdSelectionPage), typeof(BirdSelectionPage));
             Routing.RegisterRoute(nameof(BirdSightingPage), typeof(BirdSightingPage));
             Routing.RegisterRoute(nameof(LocationSightingPage), typeof(LocationSightingPage));
+            Routing.RegisterRoute(nameof(LocationSightingPage), typeof(LocationProfilePage));
+            Routing.RegisterRoute(nameof(LocationSightingPage), typeof(LocationInsightsPage));
+            Routing.RegisterRoute(nameof(LocationSightingPage), typeof(BirdProfilePage));
+            Routing.RegisterRoute(nameof(LocationSightingPage), typeof(BirdInsightsPage));
         }
     }
+    
 }

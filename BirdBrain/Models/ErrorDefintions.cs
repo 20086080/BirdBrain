@@ -88,6 +88,13 @@ namespace BirdBrain.Models
                     Image = "invalid_location.png"
                 },
 
+                ErrorType.ErrorFound => new AppError
+                {
+                    Title = "Unknown Error",
+                    Message = "Something went wrong - Try again little later.",
+                    Image = "error_occured.png"
+                },
+
                 _ => new AppError
                 {
                     Title = "Unknown Error",

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <views:BasePage
-    x:Class="BirdBrain.Views.BirdSightingPage"
+    x:Class="BirdBrain.Views.BirdProfilePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:BirdBrain.Views"
@@ -8,7 +8,7 @@
     xmlns:models="clr-namespace:BirdBrain.Models"
     xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
     x:DataType="services:AppState"
-    Title="Bird Sightings">
+    Title="Bird Profile">
 
     <Grid RowDefinitions="Auto,Auto,Auto, Auto,Auto,*" Padding="10" RowSpacing="5">
 
@@ -36,24 +36,24 @@
                 </Grid>
             </Border>
         </HorizontalStackLayout>
+        
         <BoxView Grid.Row="1" Style="{StaticResource UnderlineStyle}" />
 
-        <!-- Bird LABEL -->
-        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="20" Background="{DynamicResource Background}">
-            <Border Padding="0" Grid.Column="0">
-                <Image Source="{Binding SelectedBirdThumbnail}"  HeightRequest="128" Aspect="AspectFill"/>
-            </Border>
-            <VerticalStackLayout Grid.Column="1" Spacing="5">
-                <Label Text = "{Binding SelectedBirdCommonName}" Style = "{StaticResource SubTitles}"/>
-                <Label Text = "{Binding SelectedLocationName}" Style = "{StaticResource PageLabelNormal}"/>
-                <Label Text = "{Binding City_Ascii}" Style = "{StaticResource PageLabelNormal}" />
-                <Label Text = "{Binding Country}" Style = "{StaticResource PageLabelNormal}" />
-            </VerticalStackLayout>
-            
-        </Grid>
-        <BoxView Grid.Row="3" Style="{StaticResource UnderlineStyle}" />
+        <HorizontalStackLayout Grid.Row="2" Spacing="5" Background="{DynamicResource Background}">
+            <Label Text = "{Binding SelectedBirdCommonName}" Style = "{StaticResource SubTitles}"/>
+            <Label Text = "{Binding SelectedLocationName}" Style = "{StaticResource PageLabelNormal}"/>
+        </HorizontalStackLayout>
 
-        <Grid Grid.Row="4" ColumnDefinitions="*,1.3*" >
+        <!-- Bird LABEL -->
+        <Grid Grid.Row="3" ColumnSpacing="20" Background="{DynamicResource Background}">
+            <Border Padding="0" Grid.Column="0">
+                <Image Source="{Binding SelectedBird}"  HeightRequest="350" Aspect="AspectFill"/>
+            </Border>
+        </Grid>
+        
+        <BoxView Grid.Row="4" Style="{StaticResource UnderlineStyle}" />
+
+        <Grid Grid.Row="5" ColumnDefinitions="*,1.3*" >
             <!-- SIGHTING STATS -->
             <Border Grid.Column ="0" Margin ="0,20,0,0" Padding="5,5,5,5" Style ="{DynamicResource RoundedAccentBorderStyle}" VerticalOptions="Start" 
                            Background="{DynamicResource Accent}">
@@ -72,23 +72,9 @@
                            Color="{DynamicResource Background}"/>
                 </Grid>
             </Border>
-            
-            <Border Grid.Column ="1" Padding="2" HeightRequest="140" Style ="{DynamicResource RoundedAccentBorderStyle}">
-            <lvc:PieChart Series="{Binding PieSeries}"
-                LegendPosition="Right" Background="{DynamicResource Surface}">
-                <lvc:PieChart.LegendTextPaint>
-                        <lvc:SolidColorPaint Color="White" FontFamily ="8" />
-                </lvc:PieChart.LegendTextPaint>
-                </lvc:PieChart>
-            </Border>
-           
         </Grid>
-        <!-- DAILY SIGHTINGS Grid.Row = 3-->
-        <Border Padding="5" Grid.Row="5" Style ="{DynamicResource RoundedAccentBorderStyle}" Background="{DynamicResource Surface}">
-            <VerticalStackLayout>
-                <lvc:CartesianChart Series="{Binding BirdSeries}" XAxes="{Binding BirdXAxes}" YAxes="{Binding YAxes}"
-                    Background="{DynamicResource Surface}" DrawMarginFrame="{x:Null}" HeightRequest="155"/>
-            </VerticalStackLayout>
-        </Border>
+        <Grid Grid.Row="6" ColumnSpacing="20" Background="{DynamicResource Background}">
+        </Grid>
     </Grid>
 </views:BasePage>
+

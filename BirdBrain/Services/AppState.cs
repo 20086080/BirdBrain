@@ -45,7 +45,7 @@ namespace BirdBrain.Services
 
         private int _days = 30;
         private int _radius = 10;
-
+        private bool _leftSelected = true;
         private int _totalSightings;
         private int _totalTypeOfBird;
         private int _totalBirdSightings;
@@ -387,6 +387,19 @@ namespace BirdBrain.Services
                 if (_country != value)
                 {
                     _country = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool LeftSelected
+        {
+            get => _leftSelected;
+            set
+            {
+                if (_leftSelected != value)
+                {
+                    _leftSelected = value;
                     OnPropertyChanged();
                 }
             }

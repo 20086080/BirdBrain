@@ -40,21 +40,21 @@
         
         <!-- LOCATION LABEL -->
         <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="20" Background="{DynamicResource Background}">
-            <VerticalStackLayout Grid.Column="1">
+            <VerticalStackLayout Grid.Column="1" Spacing="5">
                 <Label Text = "{Binding SelectedLocationName}" Style="{StaticResource SubTitles}"/>
-                <HorizontalStackLayout Padding="5">
+                <HorizontalStackLayout >
                     <Label Text = "{Binding Lat}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
                     <Label Text = ", " Style="{StaticResource PageLabelNormal}"/>
                     <Label Text = "{Binding Lng}" Style="{StaticResource PageLabelNormal}"/>
                 </HorizontalStackLayout >
-                <Label Text = "{Binding City_Ascii}" Padding="5" Style="{StaticResource PageLabelNormal}" />
-                <Label Text = "{Binding Country}" Padding="5" Style="{StaticResource PageLabelNormal}" />
+                <Label Text = "{Binding City_Ascii}" Style="{StaticResource PageLabelNormal}"/>
+                <Label Text = "{Binding Country}" Style="{StaticResource PageLabelNormal}"/>
             </VerticalStackLayout>
             <Border Padding="0" Grid.Column="0">
-                <Image Source="{Binding SelectedLocationThumbnail}"  HeightRequest="128" Aspect="AspectFill"/>
+                <Image Source="{Binding SelectedLocationThumbnail}" HeightRequest="128" Aspect="AspectFill"/>
             </Border>
         </Grid>
-        <BoxView Grid.Row="3" Style="{StaticResource UnderlineStyle}" />
+        <BoxView Grid.Row="3" Style="{StaticResource UnderlineStyle}"/>
 
         
         <Grid Grid.Row="4" ColumnDefinitions="*,1.3*" >

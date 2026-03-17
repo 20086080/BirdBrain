@@ -11,6 +11,7 @@ public partial class IntroPage : BasePage
     public IntroPage(JsonFileReader jsonReader)
     {
         InitializeComponent();
+        App.State.LeftSelected = true;
         _jsonReader = jsonReader;
     }
 
@@ -43,6 +44,7 @@ public partial class IntroPage : BasePage
 
         SpecificBirdLabel.Style =
             (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
+        App.State.LeftSelected = true;
         await Shell.Current.GoToAsync(nameof(LocationSightingPage));
     }
 
@@ -59,7 +61,7 @@ public partial class IntroPage : BasePage
 
         AllBirdsLabel.Style =
             (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-
+        App.State.LeftSelected = false;
         // Navigate to BirdSelectionPage
         await Shell.Current.GoToAsync(nameof(BirdSelectionPage));
     }

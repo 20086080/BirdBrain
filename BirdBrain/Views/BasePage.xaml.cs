@@ -20,7 +20,7 @@ public partial class BasePage : ContentPage
     {
         InitializeComponent();
         Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific.Page
-    .SetUseSafeArea(this, false);
+        .SetUseSafeArea(this, false);
     }
 
     protected override void OnApplyTemplate()
@@ -33,6 +33,7 @@ public partial class BasePage : ContentPage
 
         if (_leftDrawer != null)
         {
+            //Home Selection 
             _leftDrawer.HomeCommand = new Command(async () =>
             {
                 if (IsAnyDrawerOpen())
@@ -48,6 +49,39 @@ public partial class BasePage : ContentPage
                     await CloseAllDrawers();
 
                 await Shell.Current.GoToAsync("BirdSelectionPage");
+            });
+
+            // Sighting Selection
+            _leftDrawer.SightingsCommand = new Command(async () =>
+            {
+                if (IsAnyDrawerOpen())
+                    await CloseAllDrawers();
+                if (App.State.LeftSelected)     //Location Selected on Page
+                    await Shell.Current.GoToAsync("LocationSightingPage");
+                else
+                    await Shell.Current.GoToAsync("BirdSightingPage");
+            });
+
+            // Profile Selection
+            _leftDrawer.SightingsCommand = new Command(async () =>
+            {
+                if (IsAnyDrawerOpen())
+                    await CloseAllDrawers();
+                if (App.State.LeftSelected)     //Location Selected on Page
+                    await Shell.Current.GoToAsync("LocationProfilePage");
+                else
+                    await Shell.Current.GoToAsync("BirdProfilePage");
+            });
+
+            // Insights Selection
+            _leftDrawer.SightingsCommand = new Command(async () =>
+            {
+                if (IsAnyDrawerOpen())
+                    await CloseAllDrawers();
+                if (App.State.LeftSelected)     //Location Selected on Page
+                    await Shell.Current.GoToAsync("LocationInsightsPage");
+                else
+                    await Shell.Current.GoToAsync("BirdInsightsPage");
             });
         }
 

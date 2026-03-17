@@ -10,7 +10,7 @@ public partial class BirdSightingPage : BasePage
 	{
         InitializeComponent();
         _summaryService = summaryService;
-
+        App.State.LeftSelected = false;
         BindingContext = App.State;
     }
     protected override async void OnAppearing()
@@ -33,6 +33,7 @@ public partial class BirdSightingPage : BasePage
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"DB Error: {ex}");
+            await ErrorService.Show(ErrorType.ErrorFound);
         }
     }
     async void LocationTapped(object sender, EventArgs e)
@@ -48,7 +49,7 @@ public partial class BirdSightingPage : BasePage
 
         BirdTabLabel.Style =
             (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-
+        App.State.LeftSelected = true;
         await Shell.Current.GoToAsync(nameof(LocationSightingPage));
 
     }
@@ -66,7 +67,7 @@ public partial class BirdSightingPage : BasePage
 
         LocationTabLabel.Style =
             (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-
+        App.State.LeftSelected = false;
         // Navigate using Shell
         await Shell.Current.GoToAsync(nameof(BirdSightingPage));    
     }

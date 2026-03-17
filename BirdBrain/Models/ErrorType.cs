@@ -16,6 +16,7 @@ namespace BirdBrain.Models
         ApiPleaseWait,
         BirdNotSelected,
         InvalidLocation,
-        InvalidBird
+        InvalidBird,
+        ErrorFound
     }
 }

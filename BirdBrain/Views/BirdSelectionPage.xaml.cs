@@ -11,6 +11,7 @@ public partial class BirdSelectionPage : BasePage
     public BirdSelectionPage(JsonFileReader jsonReader)
 	{
 		InitializeComponent();
+        App.State.LeftSelected = false;
         BindingContext = App.State;
         _jsonReader = jsonReader;
     }

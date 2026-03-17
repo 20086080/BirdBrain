@@ -1,5 +1,6 @@
-using BirdBrain.Views;
+using BirdBrain.Models;
 using BirdBrain.Services;
+using BirdBrain.Views;
 namespace BirdBrain.Controls;
 
 public partial class AppHeader : ContentView
@@ -29,23 +30,18 @@ public partial class AppHeader : ContentView
 
     async void OnMenuRefreshTapped(object sender, TappedEventArgs e)
     {
+        await ErrorService.Show(ErrorType.GettingInformation);
         var refresh = new RefreshData();
-        App.State.Lat = -31.9617;
-        App.State.Lng = 115.8420;
         bool refreshed =
             await refresh.RefreshAsync(App.State.Lat, App.State.Lng);
-
+        
         if (!refreshed)
         {
-            await Application.Current.MainPage.DisplayAlertAsync(
-                "Please Wait",
-                "You must wait 60 minutes before refreshing again.",
-                "OK");
+            await ErrorService.Show(ErrorType.ApiPleaseWait);
         }
         else
         {
-            await Application.Current.MainPage.DisplayAlertAsync(
-                "Success", "Successful Download of Observations", "OK");
+            await ErrorService.Show(ErrorType.RefreshSuccessful);
         }
     }
     void OnMenuSettingsTapped(object sender, TappedEventArgs e)

@@ -1,3 +1,4 @@
+using BirdBrain.Models;
 using BirdBrain.Services;
 
 namespace BirdBrain.Views;
@@ -15,13 +16,24 @@ public partial class BirdSightingPage : BasePage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        App.State.TotalBirdSightings = await _summaryService.GetTotalBirdCountAsync(App.State.Lat, App.State.Lng, App.State.SelectedBirdCommonName);
-        App.State.TotalSightings = await _summaryService.GetTotalLocationCountAsync(App.State.Lat, App.State.Lng);
-        App.State.PercTotalBirdSightings = 100 * ((double)App.State.TotalBirdSightings / App.State.TotalSightings) ; 
-        App.State.BirdDailyObs = await _summaryService.GetBirdDailyObsAsync(App.State.Lat, App.State.Lng, App.State.SelectedBirdCommonName);
-
-        App.State.BuildChartBird(App.State.BirdDailyObs);
-
+        try
+        {
+            App.State.TotalBirdSightings = await _summaryService.GetTotalBirdCountAsync(App.State.Lat, App.State.Lng, App.State.SelectedBirdCommonName);
+            if (App.State.TotalBirdSightings <= 0)
+            {
+                await ErrorService.Show(ErrorType.NoBirdsFound);
+            }
+            App.State.TotalSightings = await _summaryService.GetTotalLocationCountAsync(App.State.Lat, App.State.Lng);
+            App.State.PercTotalBirdSightings = 100 * ((double)App.State.TotalBirdSightings / App.State.TotalSightings) ; 
+            App.State.BirdDailyObs = await _summaryService.GetBirdDailyObsAsync(App.State.Lat, App.State.Lng, App.State.SelectedBirdCommonName);
+            App.State.BirdTimeObs = await _summaryService.GetBirdTimeObsAsync(App.State.Lat, App.State.Lng, App.State.SelectedBirdCommonName);
+            App.State.BuildChartBird(App.State.BirdDailyObs);
+            App.State.BuildChartBirdTime(App.State.BirdTimeObs);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"DB Error: {ex}");
+        }
     }
     async void LocationTapped(object sender, EventArgs e)
     {

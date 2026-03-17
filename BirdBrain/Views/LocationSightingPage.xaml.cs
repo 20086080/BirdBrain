@@ -18,13 +18,23 @@ public partial class LocationSightingPage : BasePage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        App.State.TotalSightings = await _summaryService.GetTotalLocationCountAsync(App.State.Lat,App.State.Lng);
-        App.State.TotalTypeOfBird = await _summaryService.GetTotalLocationBirdCountAsync(App.State.Lat, App.State.Lng);
-        App.State.TopBirds = await _summaryService.GetTop5BirdCountAsync(App.State.Lat, App.State.Lng);
-        App.State.LocationDailyObs = await _summaryService.GetLocationDailyObsAsync(App.State.Lat, App.State.Lng);
-        
-        App.State.BuildChart(App.State.LocationDailyObs);
-        
+        try
+        {
+            App.State.TotalSightings = await _summaryService.GetTotalLocationCountAsync(App.State.Lat, App.State.Lng);
+            if (App.State.TotalSightings <= 0)
+            {
+                await ErrorService.Show(ErrorType.NoLocationDataFound);
+            }
+            App.State.TotalTypeOfBird = await _summaryService.GetTotalLocationBirdCountAsync(App.State.Lat, App.State.Lng);
+            App.State.TopBirds = await _summaryService.GetTop5BirdCountAsync(App.State.Lat, App.State.Lng);
+            App.State.LocationDailyObs = await _summaryService.GetLocationDailyObsAsync(App.State.Lat, App.State.Lng);
+            App.State.BuildChart(App.State.LocationDailyObs);
+
+        }
+        catch (Exception ex) 
+        {
+            System.Diagnostics.Debug.WriteLine($"DB Error: {ex}");
+        }
     }
 
     async void LocationTapped(object sender, EventArgs e)

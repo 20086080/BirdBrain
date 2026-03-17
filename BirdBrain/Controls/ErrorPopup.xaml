@@ -1,0 +1,25 @@
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="BirdBrain.Controls.ErrorPopup"
+    Color="{DynamicResource Accent70}">
+
+    <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="20" WidthRequest="300"
+        HorizontalOptions="Center" VerticalOptions="Center">
+
+        <VerticalStackLayout Spacing="10">
+
+            <Image HeightRequest="80" Source="{Binding Image}" />
+
+            <Label Text="{Binding Title}" Style="{StaticResource SubTitles}"
+                   HorizontalOptions="Center"/>
+
+            <Label Text="{Binding Message}" Style="{StaticResource PageLabelNormal}"
+                   HorizontalTextAlignment="Center"/>
+
+        </VerticalStackLayout>
+
+    </Border>
+
+</toolkit:Popup>

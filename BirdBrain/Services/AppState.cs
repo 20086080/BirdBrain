@@ -1,16 +1,17 @@
 ﻿using BirdBrain.Models;
+using LiveChartsCore;
+using LiveChartsCore.Defaults;
+using LiveChartsCore.Kernel.Sketches;
+using LiveChartsCore.Measure;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.Kernel;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
-using LiveChartsCore.Defaults;
-using LiveChartsCore;
-using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.Measure;
-
-using SkiaSharp;
-using LiveChartsCore.SkiaSharpView.Painting;
 
 namespace BirdBrain.Services
 {
@@ -62,6 +63,7 @@ namespace BirdBrain.Services
         public List<LocationDailyObs> LocationDailyObs { get; set; } = new();
         public List<BirdDailyObs> BirdDailyObs { get; set; } = new();
 
+        public List<BirdTimeObs> BirdTimeObs { get; set; } = new();
         public List<BirdObservation> Observations { get; set; } = new();
 
         public DatabaseService Database { get; set; }
@@ -122,7 +124,6 @@ namespace BirdBrain.Services
             }
         }
 
-
         public void BuildChart(List<LocationDailyObs> data)
         {
             var color = (Color)Application.Current.Resources["TextPrimary"];
@@ -131,7 +132,7 @@ namespace BirdBrain.Services
                 (byte)(color.Green * 255),
                 (byte)(color.Blue * 255),
                 (byte)(color.Alpha * 255));
-            var maxSightings = data.Max(x => x.Sightings);
+            var maxSightings = data.Any() ? data.Max(x => x.Sightings) : 0;
             Series = new ISeries[]
             {
                 new LineSeries<int>
@@ -279,6 +280,51 @@ namespace BirdBrain.Services
                     MaxLimit = maxSightings + 5
                 }
             };
+        }
+
+        public ISeries[] PieSeries { get; set; }
+
+
+        public void BuildChartBirdTime(List<BirdTimeObs> data)
+        {
+            var color = (Color)Application.Current.Resources["TextPrimary"];
+            var skColor = new SKColor(
+                (byte)(color.Red * 255),
+                (byte)(color.Green * 255),
+                (byte)(color.Blue * 255),
+                (byte)(color.Alpha * 255));
+            if (data == null || !data.Any())
+            {
+                PieSeries = Array.Empty<ISeries>();
+                return;
+            }
+            var topTimes = data
+                .GroupBy(x => x.ObsDt)
+                .Select(g => new
+                {
+                    Time = g.Key,
+                    Total = g.Sum(x => x.Sightings)
+            })
+            .OrderByDescending(x => x.Total)
+            .Take(6)
+            .ToList();
+
+            PieSeries = topTimes
+                .Select(x => new PieSeries<double>
+                {
+                    Values = new double[] { x.Total },
+                    Name = DateTime.Parse(x.Time).ToString("HH:mm"),
+                    InnerRadius = 40,
+                    DataLabelsSize = 14,
+                    DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+                    DataLabelsFormatter = point => ((double)point.Model!).ToString("N0"),
+
+                    Stroke = new SolidColorPaint(skColor, 1)
+                })
+                .Cast<ISeries>()
+                .ToArray();
+
+            OnPropertyChanged(nameof(PieSeries));
         }
 
         public int SelectedBirdId

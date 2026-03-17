@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BirdBrain.Models
 {
-    public class LocationDailyObs
+    public class BirdTimeObs
     {
         public string ObsDt { get; set; }
         public int Sightings { get; set; }

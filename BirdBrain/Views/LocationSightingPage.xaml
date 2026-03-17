@@ -41,10 +41,7 @@
         <!-- LOCATION LABEL -->
         <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="20" Background="{DynamicResource Background}">
             <VerticalStackLayout Grid.Column="1">
-                <HorizontalStackLayout Padding="5">
-                    
-                    <Label Text = "{Binding SelectedLocationName}" Style="{StaticResource SubTitles}"/>
-                </HorizontalStackLayout>
+                <Label Text = "{Binding SelectedLocationName}" Style="{StaticResource SubTitles}"/>
                 <HorizontalStackLayout Padding="5">
                     <Label Text = "{Binding Lat}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
                     <Label Text = ", " Style="{StaticResource PageLabelNormal}"/>

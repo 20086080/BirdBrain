@@ -1,5 +1,6 @@
 ﻿using BirdBrain;
 using BirdBrain.Services;
+using CommunityToolkit.Maui;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView.Maui;
 using Microsoft.Extensions.Logging;
@@ -16,6 +17,7 @@ namespace BirdBrain
             builder
                 .UseMauiApp<App>()
                 .UseSkiaSharp()
+                .UseMauiCommunityToolkit()
                 .UseLiveCharts()
                 .ConfigureFonts(fonts =>
                 {

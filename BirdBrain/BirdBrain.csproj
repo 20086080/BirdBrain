@@ -47,6 +47,10 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-android|AnyCPU'">
+	  <RunAOTCompilation>False</RunAOTCompilation>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -233,9 +237,11 @@
 	  <None Remove="Resources\Images\location_thumbnail\shark_bay_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\werribee_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\yellow_water_billabong_t.png" />
+	  <None Remove="Resources\Images\messages\Loading.png" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
 		<PackageReference Include="LiveChartsCore.SkiaSharpView.Maui" Version="2.0.0-rc6.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
@@ -248,6 +254,9 @@
 	  </Compile>
 	  <Compile Update="Controls\LeftSettingsDrawer.xaml.cs">
 	    <DependentUpon>LeftSettingsDrawer.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Controls\ErrorPopup.xaml.cs">
+	    <DependentUpon>ErrorPopup.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\IntroPage.xaml.cs">
 	    <DependentUpon>IntroPage.xaml</DependentUpon>
@@ -280,6 +289,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\LeftSettingsDrawer.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\ErrorPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\RightSettingsDrawer.xaml">
@@ -553,6 +565,21 @@
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\bird_full\rhipidura_leucophrys.png" />
+	  <MauiImage Include="Resources\Images\messages\api_failure.png" />
+	  <MauiImage Include="Resources\Images\messages\api_please_wait.png" />
+	  <MauiImage Include="Resources\Images\messages\bird_not_selected.png" />
+	  <MauiImage Include="Resources\Images\messages\error_occured.png" />
+	  <MauiImage Include="Resources\Images\messages\getting_information.png" />
+	  <MauiImage Include="Resources\Images\messages\invalid_bird.png" />
+	  <MauiImage Include="Resources\Images\messages\invalid_location.png" />
+	  <MauiImage Include="Resources\Images\messages\loading.png" />
+	  <MauiImage Include="Resources\Images\messages\location_not_selected.png" />
+	  <MauiImage Include="Resources\Images\messages\no_bird_found.png" />
+	  <MauiImage Include="Resources\Images\messages\no_internet.png" />
+	  <MauiImage Include="Resources\Images\messages\no_location_data_found.png" />
+	  <MauiImage Include="Resources\Images\messages\offline_mode.png" />
+	  <MauiImage Include="Resources\Images\messages\ready_to_go.png" />
+	  <MauiImage Include="Resources\Images\messages\refresh_successful.png" />
 	</ItemGroup>
 
 </Project>

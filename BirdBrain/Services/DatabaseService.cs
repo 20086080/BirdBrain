@@ -51,8 +51,8 @@ namespace BirdBrain.Services
                 ObsReviewed = o.obsReviewed,
                 LocationPrivate = o.locationPrivate,
                 DateStamp = refreshTime,
-                AppLat = o.AppLat,
-                AppLng = o.AppLng
+                AppLat = App.State.Lat,
+                AppLng = App.State.Lng
             }).ToList();
         }
 
@@ -77,23 +77,23 @@ namespace BirdBrain.Services
             // Find the two most recent DateStamp groups
             var keepDates = await _db.QueryAsync<DateTime>(
                 @"SELECT DISTINCT DateStamp 
-          FROM BirdObservationDb
-          WHERE AppLat = ? AND AppLng = ?
-          ORDER BY DateStamp DESC
-          LIMIT 2",
+                    FROM BirdObservationDb
+                    WHERE AppLat = ? AND AppLng = ?
+                    ORDER BY DateStamp DESC
+                    LIMIT 2",
                 lat, lng);
 
             if (keepDates.Count < 2)
                 return;
 
-            var cutoff = keepDates.Last();
+            //var cutoff = keepDates.Last();
 
             await _db.ExecuteAsync(
                 @"DELETE FROM BirdObservationDb
-          WHERE AppLat = ?
-          AND AppLng = ?
-          AND DateStamp < ?",
-                lat, lng, cutoff);
+                    WHERE AppLat = ?
+                    AND AppLng = ?
+                    AND DateStamp NOT IN (?,?)",
+                lat, lng, keepDates[0], keepDates[1]);
         }
     }
 }

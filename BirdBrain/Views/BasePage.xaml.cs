@@ -9,6 +9,7 @@ namespace BirdBrain.Views;
 
 public partial class BasePage : ContentPage
 {
+    
     BoxView _drawerOverlay;
     LeftSettingsDrawer _leftDrawer;
     RightSettingsDrawer _rightDrawer;
@@ -58,7 +59,7 @@ public partial class BasePage : ContentPage
                 {
                     if (IsAnyDrawerOpen())
                         await CloseAllDrawers();
-                    if (App.State.LeftSelected)     //Location Selected on Page
+                    if (AppState.LeftSelected)     //Location Selected on Page
                         await Shell.Current.GoToAsync(nameof(LocationSightingPage));
                     else
                         await Shell.Current.GoToAsync(nameof(BirdSightingPage));
@@ -69,7 +70,7 @@ public partial class BasePage : ContentPage
                 {
                     if (IsAnyDrawerOpen())
                         await CloseAllDrawers();
-                    if (App.State.LeftSelected)     //Location Selected on Page
+                    if (AppState.LeftSelected)     //Location Selected on Page
                         await Shell.Current.GoToAsync(nameof(LocationProfilePage));
                     else
                         await Shell.Current.GoToAsync(nameof(BirdProfilePage));
@@ -80,7 +81,7 @@ public partial class BasePage : ContentPage
                 {
                     if (IsAnyDrawerOpen())
                         await CloseAllDrawers();
-                    if (App.State.LeftSelected)     //Location Selected on Page
+                    if (AppState.LeftSelected)     //Location Selected on Page
                         await Shell.Current.GoToAsync(nameof(LocationInsightsPage));
                     else
                         await Shell.Current.GoToAsync(nameof(BirdInsightsPage));

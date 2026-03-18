@@ -13,7 +13,7 @@ public partial class IntroPage : BasePage
     public IntroPage(JsonFileReader jsonReader)
     {
         InitializeComponent();
-        App.State.LeftSelected = true;
+        AppState.LeftSelected = true;
         _jsonReader = jsonReader;
         
     }
@@ -26,9 +26,9 @@ public partial class IntroPage : BasePage
             .ReadListAsync<SavedLocation>("LocationSeedData.json");
 
         LocationCarousel.ItemsSource = savedLocations;
-        if (App.State.SelectedLocationName != null)
+        if (AppState.SelectedLocationName != null)
         {
-            LocationIndex = savedLocations.FindIndex(x => x.Name == App.State.SelectedLocationName);
+            LocationIndex = savedLocations.FindIndex(x => x.Name == AppState.SelectedLocationName);
         }
         if (LocationIndex >= 0)
         {
@@ -42,7 +42,7 @@ public partial class IntroPage : BasePage
 
     private void OnTextChanged(object sender, EventArgs e)
     {
-        this.AppState.SelectedLocationName = LocationEntry.Text;
+        AppState.SelectedLocationName = LocationEntry.Text;
         
     }
 
@@ -59,7 +59,7 @@ public partial class IntroPage : BasePage
 
         SpecificBirdLabel.Style =
             (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-        App.State.LeftSelected = true;
+        AppState.LeftSelected = true;
         await Shell.Current.GoToAsync(nameof(LocationSightingPage));
     }
 
@@ -76,7 +76,7 @@ public partial class IntroPage : BasePage
 
         AllBirdsLabel.Style =
             (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-        App.State.LeftSelected = false;
+        AppState.LeftSelected = false;
         // Navigate to BirdSelectionPage
         await Shell.Current.GoToAsync(nameof(BirdSelectionPage));
     }
@@ -87,18 +87,15 @@ public partial class IntroPage : BasePage
             return;
         if (e.Parameter is SavedLocation location)
         {
-            App.State.SelectedLocationName = location.Name;
-            LocationIndex = savedLocations.FindIndex(x => x.Name == App.State.SelectedLocationName);
+            AppState.SelectedSavedLocation = location;
+            AppState.SelectedLocationName = location.Name;
+            LocationIndex = savedLocations.FindIndex(x => x.Name == AppState.SelectedLocationName);
             if (LocationIndex >= 0)
             {
                 LocationCarousel.Position = LocationIndex;
-                App.State.Lat = location.Lat;
-                App.State.Lng = location.Lng;
-                App.State.City_Ascii = location.Region;
-                App.State.Country = location.Country;
-                App.State.SelectedLocationDesc = location.Description;
-                App.State.SelectedLocationThumbnail = location.Thumbnail;
-                App.State.SelectedLocationProfileImage = location.ProfileImage;
+                AppState.Lat = location.Lat;
+                AppState.Lng = location.Lng;
+                
             }
         }
     }

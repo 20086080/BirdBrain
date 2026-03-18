@@ -10,13 +10,12 @@ public partial class LocationProfilePage : BasePage
 	{
 		InitializeComponent();
         _summaryService = summaryService;
-        App.State.LeftSelected = true;
-        BindingContext = App.State;
+        AppState.LeftSelected = true;
+        BindingContext = AppState;
     }
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-
     }
     async void LocationTapped(object sender, EventArgs e)
     {
@@ -33,8 +32,8 @@ public partial class LocationProfilePage : BasePage
 
             BirdTabLabel.Style =
                 (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-            App.State.LeftSelected = true;
-            await Shell.Current.GoToAsync(nameof(LocationSightingPage));
+            AppState.LeftSelected = true;
+            await Shell.Current.GoToAsync(nameof(LocationProfilePage));
         }
         catch (Exception ex)
         {
@@ -58,9 +57,9 @@ public partial class LocationProfilePage : BasePage
 
             LocationTabLabel.Style =
                 (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-            App.State.LeftSelected = false;
+            AppState.LeftSelected = false;
             //Navigate using Shell
-            await Shell.Current.GoToAsync(nameof(BirdSightingPage));
+            await Shell.Current.GoToAsync(nameof(BirdProfilePage));
         }
         catch (Exception ex)
         {

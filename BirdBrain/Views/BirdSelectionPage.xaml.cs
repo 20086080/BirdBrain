@@ -13,8 +13,8 @@ public partial class BirdSelectionPage : BasePage
     public BirdSelectionPage(JsonFileReader jsonReader)
 	{
 		InitializeComponent();
-        App.State.LeftSelected = false;
-        BindingContext = App.State;
+        AppState.LeftSelected = false;
+        BindingContext = AppState;
         _jsonReader = jsonReader;
     }
 
@@ -26,9 +26,9 @@ public partial class BirdSelectionPage : BasePage
             .ReadListAsync<Bird>("BirdsSeedData.json");
 
         BirdCarousel.ItemsSource = savedBirds;
-        if (App.State.SelectedBirdCommonName != null)
+        if (AppState.SelectedBirdCommonName != null)
         {
-            BirdIndex = savedBirds.FindIndex(x => x.CommonName == App.State.SelectedBirdCommonName);
+            BirdIndex = savedBirds.FindIndex(x => x.CommonName == AppState.SelectedBirdCommonName);
         }
         if (BirdIndex >= 0)
         {
@@ -59,15 +59,16 @@ public partial class BirdSelectionPage : BasePage
             return;
         if (e.Parameter is Bird bird)
         {
-            App.State.SelectedBirdCommonName = bird.CommonName;
-            BirdIndex = savedBirds.FindIndex(x => x.CommonName == App.State.SelectedBirdCommonName);
+            AppState.SelectedBirdCommonName = bird.CommonName;
+            AppState.SelectedSavedBird = bird;
+            BirdIndex = savedBirds.FindIndex(x => x.CommonName == AppState.SelectedBirdCommonName);
             if (BirdIndex >= 0)
             {
                 BirdCarousel.Position = BirdIndex;
-                App.State.SelectedBirdThumbnail = bird.Thumbnail;
-                App.State.SelectedBirdProfileImage = bird.ProfileImage;
-                App.State.SelectedBirdScName = bird.ScientificName;
-                App.State.SelectedBirdDesc = bird.Description;
+                //AppState.SelectedBirdThumbnail = bird.Thumbnail;
+                //AppState.SelectedBirdProfileImage = bird.ProfileImage;
+                //AppState.SelectedBirdScName = bird.ScientificName;
+                //AppState.SelectedBirdDesc = bird.Description;
             }
             await Shell.Current.GoToAsync(nameof(BirdSightingPage));
         }

@@ -52,22 +52,19 @@
                 <Label Text = "{Binding Lng}" Style="{StaticResource PageLabelNormal}"/>
             </HorizontalStackLayout>
             <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                <Label Text = "{Binding City_Ascii}" Style="{StaticResource PageLabelNormal}"/>
+                <Label Text = "{Binding SelectedSavedLocation.Region}" Style="{StaticResource PageLabelNormal}"/>
                 <Label Text = ", " Style="{StaticResource PageLabelNormal}"/>
-                <Label Text = "{Binding Country}" Style="{StaticResource PageLabelNormal}"/>
+                <Label Text = "{Binding SelectedSavedLocation.Country}" Style="{StaticResource PageLabelNormal}"/>
             </HorizontalStackLayout>    
         </Grid>
         
         <!-- Location LABEL -->
         <Grid Grid.Row="3"  Background="{DynamicResource Background}">
-            <Image Source="{Binding SelectedLocationProfileImage}"  HeightRequest="330" Aspect="AspectFill"/>
+            <Image Source="{Binding SelectedSavedLocation.ProfileImage}"  HeightRequest="330" Aspect="AspectFill"/>
         </Grid>
-
         <BoxView Grid.Row="4" Style="{StaticResource UnderlineStyle}" />
-
-
         <Grid Grid.Row="5" ColumnSpacing="20" Padding ="10" Background="{DynamicResource Background}">
-            <Label Text = "{Binding SelectedLocationDesc}" Style = "{StaticResource PageLabelNormal}" LineBreakMode="WordWrap"/>
+            <Label Text = "{Binding SelectedSavedLocation.Description}" Style = "{StaticResource PageLabelNormal}" LineBreakMode="WordWrap"/>
         </Grid>
     </Grid>
 </views:BasePage>

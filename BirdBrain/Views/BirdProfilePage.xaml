@@ -41,19 +41,19 @@
 
         <HorizontalStackLayout Grid.Row="2" Spacing="5" Padding ="10" Background="{DynamicResource Background} ">
             <Label Text = "{Binding SelectedBirdCommonName}" Style = "{StaticResource SubTitles}" LineBreakMode="WordWrap"/>
-            <Label Text = "{Binding SelectedBirdScName}" Margin="15,0,0,0" Style = "{StaticResource PageLabel}" LineBreakMode="WordWrap"/>
+            <Label Text = "{Binding SelectedSavedBird.ScientificName}" Margin="15,0,0,0" Style = "{StaticResource PageLabel}" LineBreakMode="WordWrap"/>
         </HorizontalStackLayout>
 
         <!-- Bird LABEL -->
         <Grid Grid.Row="3"  Background="{DynamicResource Background}">
-            <Image Source="{Binding SelectedBirdProfileImage}"  HeightRequest="330" Aspect="AspectFill"/>
+            <Image Source="{Binding SelectedSavedBird.ProfileImage}"  HeightRequest="330" Aspect="AspectFill"/>
         </Grid>
         
         <BoxView Grid.Row="4" Style="{StaticResource UnderlineStyle}" />
 
         
         <Grid Grid.Row="5" ColumnSpacing="20" Padding ="10" Background="{DynamicResource Background}">
-            <Label Text = "{Binding SelectedBirdDesc}" Style = "{StaticResource PageLabelNormal}" LineBreakMode="WordWrap"/>
+            <Label Text = "{Binding SelectedSavedBird.Description}" Style = "{StaticResource PageLabelNormal}" LineBreakMode="WordWrap"/>
         </Grid>
     </Grid>
 </views:BasePage>

@@ -237,7 +237,21 @@
 	  <None Remove="Resources\Images\location_thumbnail\shark_bay_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\werribee_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\yellow_water_billabong_t.png" />
-	  <None Remove="Resources\Images\messages\Loading.png" />
+	  <None Remove="Resources\Images\messages\api_failure.png" />
+	  <None Remove="Resources\Images\messages\api_please_wait.png" />
+	  <None Remove="Resources\Images\messages\bird_not_selected.png" />
+	  <None Remove="Resources\Images\messages\error_occured.png" />
+	  <None Remove="Resources\Images\messages\getting_information.png" />
+	  <None Remove="Resources\Images\messages\invalid_bird.png" />
+	  <None Remove="Resources\Images\messages\invalid_location.png" />
+	  <None Remove="Resources\Images\messages\loading.png" />
+	  <None Remove="Resources\Images\messages\location_not_selected.png" />
+	  <None Remove="Resources\Images\messages\no_bird_found.png" />
+	  <None Remove="Resources\Images\messages\no_internet.png" />
+	  <None Remove="Resources\Images\messages\no_location_data_found.png" />
+	  <None Remove="Resources\Images\messages\offline_mode.png" />
+	  <None Remove="Resources\Images\messages\ready_to_go.png" />
+	  <None Remove="Resources\Images\messages\refresh_successful.png" />
 	</ItemGroup>
 
 	<ItemGroup>

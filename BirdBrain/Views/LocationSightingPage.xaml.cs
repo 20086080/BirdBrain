@@ -12,16 +12,16 @@ public partial class LocationSightingPage : BasePage
         InitializeComponent();
         
         //TODO Clean -up 
-        if (App.State == null)
-            throw new Exception("App.State is NULL");
+        if (AppState == null)
+            throw new Exception("AppState is NULL");
 
        // _summaryService = summaryService;
              _summaryService = App.Current?.Handler?.MauiContext?.Services
                 .GetRequiredService<SummaryService>();
         if (_summaryService == null)
             throw new Exception("SummaryService is NULL");
-        BindingContext = App.State;
-        App.State.LeftSelected = true;
+        BindingContext = AppState;
+        AppState.LeftSelected = true;
     }
     protected override async void OnAppearing()
     {
@@ -29,15 +29,15 @@ public partial class LocationSightingPage : BasePage
         try
         {
             base.OnAppearing();
-            App.State.TotalSightings = await _summaryService.GetTotalLocationCountAsync(App.State.Lat, App.State.Lng);
-            if (App.State.TotalSightings <= 0)
+            AppState.TotalSightings = await _summaryService.GetTotalLocationCountAsync(AppState.Lat, AppState.Lng);
+            if (AppState.TotalSightings <= 0)
             {
                 await ErrorService.Show(ErrorType.NoLocationDataFound);
             }
-            App.State.TotalTypeOfBird = await _summaryService.GetTotalLocationBirdCountAsync(App.State.Lat, App.State.Lng);
-            App.State.TopBirds = await _summaryService.GetTop5BirdCountAsync(App.State.Lat, App.State.Lng);
-            App.State.LocationDailyObs = await _summaryService.GetLocationDailyObsAsync(App.State.Lat, App.State.Lng);
-            App.State.BuildChart(App.State.LocationDailyObs);
+            AppState.TotalTypeOfBird = await _summaryService.GetTotalLocationBirdCountAsync(AppState.Lat, AppState.Lng);
+            AppState.TopBirds = await _summaryService.GetTop5BirdCountAsync(AppState.Lat, AppState.Lng);
+            AppState.LocationDailyObs = await _summaryService.GetLocationDailyObsAsync(AppState.Lat, AppState.Lng);
+            AppState.BuildChart(AppState.LocationDailyObs);
 
         }
         catch (Exception ex) 
@@ -62,7 +62,7 @@ public partial class LocationSightingPage : BasePage
 
             BirdTabLabel.Style =
                 (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-            App.State.LeftSelected = true;
+            AppState.LeftSelected = true;
             await Shell.Current.GoToAsync(nameof(LocationSightingPage));
         }
         catch (Exception ex)
@@ -87,7 +87,7 @@ public partial class LocationSightingPage : BasePage
 
             LocationTabLabel.Style =
                 (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-            App.State.LeftSelected = false;
+            AppState.LeftSelected = false;
             //Navigate using Shell
             await Shell.Current.GoToAsync(nameof(BirdSightingPage));
         }

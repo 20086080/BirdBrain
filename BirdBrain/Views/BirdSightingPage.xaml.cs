@@ -10,25 +10,25 @@ public partial class BirdSightingPage : BasePage
 	{
         InitializeComponent();
         _summaryService = summaryService;
-        App.State.LeftSelected = false;
-        BindingContext = App.State;
+        AppState.LeftSelected = false;
+        BindingContext = AppState;
     }
     protected override async void OnAppearing()
     {
         base.OnAppearing();
         try
         {
-            App.State.TotalBirdSightings = await _summaryService.GetTotalBirdCountAsync(App.State.Lat, App.State.Lng, App.State.SelectedBirdCommonName);
-            if (App.State.TotalBirdSightings <= 0)
+            AppState.TotalBirdSightings = await _summaryService.GetTotalBirdCountAsync(AppState.Lat, AppState.Lng, AppState.SelectedBirdCommonName);
+            if (AppState.TotalBirdSightings <= 0)
             {
                 await ErrorService.Show(ErrorType.NoBirdsFound);
             }
-            App.State.TotalSightings = await _summaryService.GetTotalLocationCountAsync(App.State.Lat, App.State.Lng);
-            App.State.PercTotalBirdSightings = 100 * ((double)App.State.TotalBirdSightings / App.State.TotalSightings) ; 
-            App.State.BirdDailyObs = await _summaryService.GetBirdDailyObsAsync(App.State.Lat, App.State.Lng, App.State.SelectedBirdCommonName);
-            App.State.BirdTimeObs = await _summaryService.GetBirdTimeObsAsync(App.State.Lat, App.State.Lng, App.State.SelectedBirdCommonName);
-            App.State.BuildChartBird(App.State.BirdDailyObs);
-            App.State.BuildChartBirdTime(App.State.BirdTimeObs);
+            AppState.TotalSightings = await _summaryService.GetTotalLocationCountAsync(AppState.Lat, AppState.Lng);
+            AppState.PercTotalBirdSightings = 100 * ((double)AppState.TotalBirdSightings / AppState.TotalSightings) ; 
+            AppState.BirdDailyObs = await _summaryService.GetBirdDailyObsAsync(AppState.Lat, AppState.Lng, AppState.SelectedBirdCommonName);
+            AppState.BirdTimeObs = await _summaryService.GetBirdTimeObsAsync(AppState.Lat, AppState.Lng, AppState.SelectedBirdCommonName);
+            AppState.BuildChartBird(AppState.BirdDailyObs);
+            AppState.BuildChartBirdTime(AppState.BirdTimeObs);
         }
         catch (Exception ex)
         {
@@ -49,7 +49,7 @@ public partial class BirdSightingPage : BasePage
 
         BirdTabLabel.Style =
             (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-        App.State.LeftSelected = true;
+        AppState.LeftSelected = true;
         await Shell.Current.GoToAsync(nameof(LocationSightingPage));
 
     }
@@ -67,7 +67,7 @@ public partial class BirdSightingPage : BasePage
 
         LocationTabLabel.Style =
             (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-        App.State.LeftSelected = false;
+        AppState.LeftSelected = false;
         // Navigate using Shell
         await Shell.Current.GoToAsync(nameof(BirdSightingPage));    
     }

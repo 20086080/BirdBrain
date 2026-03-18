@@ -10,9 +10,9 @@
         <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
             <Image Grid.Column="0" VerticalOptions="Center" Source="{Binding Image}" />
             <VerticalStackLayout Grid.Column="1" Spacing="10">
-                <Label Text="{Binding Title}" Style="{StaticResource SubTitles}"
+                <Label Text="{Binding Title}" Style="{StaticResource SubTitles}" TextColor= "{DynamicResource Background}"
                    LineBreakMode="WordWrap" />
-                <Label Text="{Binding Message}" Style="{StaticResource PageLabelNormal}"
+                <Label Text="{Binding Message}" Style="{StaticResource PageLabelNormal}" TextColor= "{DynamicResource Background}"
                    LineBreakMode="WordWrap" />
             </VerticalStackLayout>
         </Grid>

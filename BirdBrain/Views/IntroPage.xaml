@@ -21,19 +21,18 @@
 
         <!-- Location Carousel -->
         <VerticalStackLayout Grid.Row="2" Spacing="10" VerticalOptions="FillAndExpand">
-
-            <Label Text="Saved Locations" Style="{StaticResource PageLabel}"
-                   HorizontalOptions="Center"/>
-
-            <CarouselView ItemsSource="{Binding MyCollection}" x:Name="LocationCarousel"
-                          IndicatorView="LocationIndicator" VerticalOptions="FillAndExpand"
-                          HorizontalOptions="FillAndExpand" PeekAreaInsets="60">
+            <Label Text="Saved Locations" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
+            <CarouselView ItemsSource="{Binding MyCollection}" 
+                          x:Name="LocationCarousel"
+                          IndicatorView="LocationIndicator" 
+                          VerticalOptions="FillAndExpand"
+                          HorizontalOptions="FillAndExpand" 
+                          PeekAreaInsets="60"
+                          CurrentItem="{Binding SelectedLocation, Mode=TwoWay}">
 
                 <CarouselView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal"
-                                       SnapPointsType="MandatorySingle"
-                                       SnapPointsAlignment="Center"
-                                       ItemSpacing="10"/>
+                    <LinearItemsLayout Orientation="Horizontal" SnapPointsType="MandatorySingle"
+                                       SnapPointsAlignment="Center" ItemSpacing="10"/>
                 </CarouselView.ItemsLayout>
 
                 <CarouselView.ItemTemplate>
@@ -41,9 +40,13 @@
                         <Border Stroke="{DynamicResource Accent}"
                                 Style="{StaticResource CarouselBorder}"
                                 HorizontalOptions="Center" WidthRequest="220">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Tapped="OnLocationTapped"
+                                    CommandParameter="{Binding .}" />
+                            </Border.GestureRecognizers>
                             <VerticalStackLayout Spacing="8" Padding="5">
-                                <Image Source="{Binding Thumbnail}" HeightRequest="130"
-                                       Aspect="AspectFill" />
+                                <Image Source="{Binding Thumbnail}" HeightRequest="130" Aspect="AspectFill" />
                                 <Label Text="{Binding Name}" Style="{StaticResource CarouselLabel}"
                                        HorizontalOptions="Center"/>
                             </VerticalStackLayout>

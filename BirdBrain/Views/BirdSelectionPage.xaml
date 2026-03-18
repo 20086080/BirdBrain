@@ -28,8 +28,11 @@
         <VerticalStackLayout Grid.Row="2" Spacing="15" Margin="0,20,0,20" VerticalOptions="FillAndExpand">
             <Label Text="Saved Birds" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
             <CarouselView ItemsSource="{Binding MyCollection}"
-                      x:Name="BirdCarousel" IndicatorView="BirdIndicator" VerticalOptions="FillAndExpand"
-                      PeekAreaInsets="60">
+                          x:Name="BirdCarousel" 
+                          IndicatorView="BirdIndicator" 
+                          VerticalOptions="FillAndExpand"
+                          PeekAreaInsets="60"
+                          CurrentItem="{Binding SelectedBird, Mode=TwoWay}">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="MandatorySingle"
                                    SnapPointsAlignment="Center" ItemSpacing="5"/>
@@ -37,9 +40,14 @@
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <Grid WidthRequest="200" HorizontalOptions="Center">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Tapped="OnBirdTapped"
+                                    CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
                             <Border Stroke="{DynamicResource Accent}" Style="{StaticResource CarouselBorder}">
                                 <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
-                                    <Image Source="{Binding Thumbnail}" HeightRequest="128" Aspect="AspectFill" />
+                                    <Image Source="{Binding Thumbnail}" HeightRequest="130" Aspect="AspectFill" />
                                     <Label Text="{Binding CommonName}" Style="{StaticResource CarouselLabel}" />
                                 </VerticalStackLayout>
                             </Border>

@@ -40,16 +40,16 @@ namespace BirdBrain.Services
         private string _selectedLocationName = "Kings Park";
         private string _city_ascii = "Perth";
         private string _country = "Australia";
-        private string _selectedBirdCommonName = "Yellow-billed Spoonbill";
-        private string _selectedBirdThumbnail = "currawong_t.png";
-        private string _selectedBirdProfileImage = "currawong.png";
-        
-        private string _selectedBirdScName = "Strepera graculina";
-        private string _selectedBirdDesc = "Large black bird with a ringing call and yellow eyes.";
         private string _selectedLocationDesc = "Large urban bushland reserve in Perth offering views of honeyeaters, parrots, raptors, and seasonal migrants.";
-
         private string _selectedLocationThumbnail = "kings_park_t.png";
         private string _selectedLocationProfileImage = "kings_park.png";
+
+        private string _selectedBirdCommonName = "Yellow-billed Spoonbill";
+        private string _selectedBirdThumbnail = "currawong_t.png";
+        private string _selectedBirdProfileImage = "currawong.png";        
+        private string _selectedBirdScName = "Strepera graculina";
+        private string _selectedBirdDesc = "Large black bird with a ringing call and yellow eyes.";
+        
         
 
         private int _days = 30;

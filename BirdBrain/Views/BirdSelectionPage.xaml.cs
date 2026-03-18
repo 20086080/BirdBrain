@@ -8,6 +8,8 @@ namespace BirdBrain.Views;
 public partial class BirdSelectionPage : BasePage
 {
     private readonly JsonFileReader _jsonReader;
+    public int BirdIndex = 0;
+    public List<Bird> savedBirds = new List<Bird>();
     public BirdSelectionPage(JsonFileReader jsonReader)
 	{
 		InitializeComponent();
@@ -20,10 +22,22 @@ public partial class BirdSelectionPage : BasePage
     {
         base.OnAppearing();
 
-        var savedLocations = await _jsonReader
+        savedBirds = await _jsonReader
             .ReadListAsync<Bird>("BirdsSeedData.json");
 
-        BirdCarousel.ItemsSource = savedLocations;
+        BirdCarousel.ItemsSource = savedBirds;
+        if (App.State.SelectedBirdCommonName != null)
+        {
+            BirdIndex = savedBirds.FindIndex(x => x.CommonName == App.State.SelectedBirdCommonName);
+        }
+        if (BirdIndex >= 0)
+        {
+            BirdCarousel.Position = BirdIndex;
+        }
+        else
+        {
+            BirdCarousel.Position = 0;
+        }
     }
 
     async void Bird_Completed(object sender, EventArgs e)
@@ -37,5 +51,25 @@ public partial class BirdSelectionPage : BasePage
         {
             await Shell.Current.GoToAsync(nameof(BirdSightingPage));
         });
+    }
+
+    async void OnBirdTapped(object sender, TappedEventArgs e)
+    {
+        if (e.Parameter == null)
+            return;
+        if (e.Parameter is Bird bird)
+        {
+            App.State.SelectedBirdCommonName = bird.CommonName;
+            BirdIndex = savedBirds.FindIndex(x => x.CommonName == App.State.SelectedBirdCommonName);
+            if (BirdIndex >= 0)
+            {
+                BirdCarousel.Position = BirdIndex;
+                App.State.SelectedBirdThumbnail = bird.Thumbnail;
+                App.State.SelectedBirdProfileImage = bird.ProfileImage;
+                App.State.SelectedBirdScName = bird.ScientificName;
+                App.State.SelectedBirdDesc = bird.Description;
+            }
+            await Shell.Current.GoToAsync(nameof(BirdSightingPage));
+        }
     }
 }

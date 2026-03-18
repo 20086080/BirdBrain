@@ -87,7 +87,7 @@
         <Border Padding="5" Grid.Row="5" Style ="{DynamicResource RoundedAccentBorderStyle}" Background="{DynamicResource Surface}">
             <VerticalStackLayout>
                 <lvc:CartesianChart Series="{Binding BirdSeries}" XAxes="{Binding BirdXAxes}" YAxes="{Binding YAxes}"
-                    Background="{DynamicResource Surface}" DrawMarginFrame="{x:Null}" HeightRequest="155"/>
+                    Background="{DynamicResource Surface}" DrawMarginFrame="{x:Null}" HeightRequest="150"/>
             </VerticalStackLayout>
         </Border>
     </Grid>

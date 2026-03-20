@@ -60,7 +60,7 @@ namespace BirdBrain.Services
         public DatabaseService Database { get; set; }
 
         public List<Bird> SavedBirds { get; set; } = new List<Bird>();
-
+        public List<SavedLocation> SavedLocations { get; set; } = new List<SavedLocation>();
         public SavedLocation SelectedSavedLocation
         {
             get => _selectedSavedLocation;

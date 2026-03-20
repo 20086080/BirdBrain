@@ -22,7 +22,7 @@
         <!-- Location Carousel -->
         <VerticalStackLayout Grid.Row="2" Spacing="10" VerticalOptions="FillAndExpand">
             <Label Text="Saved Locations" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
-            <CarouselView ItemsSource="{Binding MyCollection}" 
+            <CarouselView ItemsSource="{Binding SavedLocations}" 
                           x:Name="LocationCarousel"
                           IndicatorView="LocationIndicator" 
                           VerticalOptions="FillAndExpand"

@@ -8,46 +8,52 @@ namespace BirdBrain.Views;
 public partial class IntroPage : BasePage
 {
     private readonly JsonFileReader _jsonReader;
-    public int LocationIndex = 0;
+    
     public List<SavedLocation> savedLocations = new List<SavedLocation>();
     public IntroPage(JsonFileReader jsonReader)
     {
         InitializeComponent();
         AppState.LeftSelected = true;
         _jsonReader = jsonReader;
-        
+        BindingContext = AppState;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        
+        if (AppState.SavedLocations == null || AppState.SavedLocations.Count == 0)
+        {
+            AppState.SavedLocations = await _jsonReader
+                .ReadListAsync<SavedLocation>("LocationSeedData.json");
+        }
 
-        savedLocations = await _jsonReader
-            .ReadListAsync<SavedLocation>("LocationSeedData.json");
+        LocationCarousel.ItemsSource = AppState.SavedLocations;
 
-        LocationCarousel.ItemsSource = savedLocations;
-        if (AppState.SelectedLocationName != null)
+        if (AppState.SavedLocations != null && AppState.SavedLocations.Count > 0)
         {
-            LocationIndex = savedLocations.FindIndex(x => x.Name == AppState.SelectedLocationName);
+            if (!AppState.SavedLocations.Contains(AppState.SelectedSavedLocation))
+            {
+                AppState.SelectedSavedLocation = AppState.SavedLocations[0];
+            }
         }
-        else
-        {
-            LocationCarousel.Position = 0;
-        }
-        if (LocationIndex >= 0)
-        {
-            LocationCarousel.Position = LocationIndex;
-        }
-        else
-        {
-            LocationCarousel.Position = 0;
-        }
+
+
+
+        //savedLocations = await _jsonReader
+        //    .ReadListAsync<SavedLocation>("LocationSeedData.json");
+
+        //LocationCarousel.ItemsSource = savedLocations;
+        //if (AppState.SelectedLocationName != null)
+        //{
+            
+        //}
+        
     }
 
     private void OnTextChanged(object sender, EventArgs e)
     {
         AppState.SelectedLocationName = LocationEntry.Text;
-        
     }
 
     async void OnAllBirdsTapped(object sender, EventArgs e)
@@ -78,18 +84,10 @@ public partial class IntroPage : BasePage
         {
             AppState.SelectedSavedLocation = location;
             AppState.SelectedLocationName = location.Name;
-            LocationIndex = savedLocations.FindIndex(x => x.Name == AppState.SelectedLocationName);
-            if (LocationIndex >= 0)
-            {
-                LocationCarousel.Position = LocationIndex;
+            
+                //LocationCarousel.Position = LocationIndex;
                 AppState.Lat = location.Lat;
                 AppState.Lng = location.Lng;
-                
-            }
-            else
-            {
-                LocationCarousel.Position = 0;
-            }
         }
     }
 
@@ -99,7 +97,7 @@ public partial class IntroPage : BasePage
         await this.ScaleToAsync(0.98, 70);
         await this.ScaleToAsync(1, 70);
 
-        // 🔥 Call your location logic here
+        // 🔥 Call location logic here
         // await GetCurrentLocation();
     }
 }

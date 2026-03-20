@@ -8,7 +8,6 @@ namespace BirdBrain.Views;
 public partial class BirdSelectionPage : BasePage
 {
     private readonly JsonFileReader _jsonReader;
-    public int BirdIndex = 0;
     
     public BirdSelectionPage(JsonFileReader jsonReader)
 	{

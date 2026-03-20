@@ -7,34 +7,38 @@ namespace BirdBrain.Views;
 
 public partial class BirdSelectionPage : BasePage
 {
-    private readonly JsonFileReader _jsonReader;
+    //private readonly JsonFileReader _jsonReader;
     
     public BirdSelectionPage(JsonFileReader jsonReader)
 	{
 		InitializeComponent();
-        AppState.LeftSelected = false;
-        BindingContext = AppState;
-        _jsonReader = jsonReader;
+        App.State.LeftSelected = false;
+        BindingContext = App.State;
+        //_jsonReader = jsonReader;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        if (AppState.SavedBirds == null || AppState.SavedBirds.Count == 0)
-        {
-            AppState.SavedBirds = await _jsonReader
-                .ReadListAsync<Bird>("BirdsSeedData.json");
-        }
+        //if (AppState.SavedBirds == null || AppState.SavedBirds.Count == 0)
+        //{
+        //    AppState.SavedBirds = await _jsonReader
+        //        .ReadListAsync<Bird>("BirdsSeedData.json");
+        //}
 
-        BirdCarousel.ItemsSource = AppState.SavedBirds;
+        //BirdCarousel.ItemsSource = AppState.SavedBirds;
 
-        if (AppState.SavedBirds != null && AppState.SavedBirds.Count > 0)
-        {
-            if (!AppState.SavedBirds.Contains(AppState.SelectedSavedBird))
-            {
-                AppState.SelectedSavedBird = AppState.SavedBirds[0];
-            }
-        }
+        //if (AppState.SavedBirds != null && AppState.SavedBirds.Count > 0)
+        //{
+        //    if (!AppState.SavedBirds.Contains(AppState.SelectedSavedBird))
+        //    {
+        //        AppState.SelectedSavedBird = AppState.SavedBirds[0];
+        //    }
+        //}
+        //else
+        //{
+        //    AppState.SelectedSavedBird = null;
+        //}
     }
 
     async void Bird_Completed(object sender, EventArgs e)
@@ -54,8 +58,8 @@ public partial class BirdSelectionPage : BasePage
         
         if (e.Parameter is Bird bird)
         {
-            AppState.SelectedBirdCommonName = bird.CommonName;
-            AppState.SelectedSavedBird = bird;
+            App.State.SelectedBirdCommonName = bird.CommonName;
+            App.State.SelectedSavedBird = bird;
             
             await Shell.Current.GoToAsync(nameof(BirdSightingPage));
         }

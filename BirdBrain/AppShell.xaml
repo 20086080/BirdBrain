@@ -9,9 +9,5 @@
         
     <ShellContent
         Title="Home" ContentTemplate="{DataTemplate local:IntroPage}" Route="IntroPage" />
-    <TabBar>
-        <ShellContent
-            Title="Bird Selection"
-            ContentTemplate="{DataTemplate local:BirdSelectionPage}" />
-    </TabBar>
+    
 </Shell>

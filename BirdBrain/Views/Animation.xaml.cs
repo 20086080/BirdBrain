@@ -1,3 +1,4 @@
+using System.Diagnostics;
 namespace BirdBrain.Views;
 
 public partial class Animation : ContentPage
@@ -6,37 +7,39 @@ public partial class Animation : ContentPage
     public Animation()
 	{
         InitializeComponent();
-        RunIntroAnimation();
+        //RunIntroAnimation();
     }
 
     protected override async void OnAppearing()
     {
-        //base.OnAppearing();
+        base.OnAppearing();
         await RunIntroAnimation();
+        
+        Application.Current.MainPage = new AppShell();
     }
 
     private async Task RunIntroAnimation()
     {
-        AnimatedImage.Opacity = 0;
-        foreach (var img in images)
+        try
         {
-            //await AnimatedImage.FadeToAsync(0, 100);
-            AnimatedImage.Source = img;
-            await AnimatedImage.FadeToAsync(1, 100);
-            await Task.Delay(1000);
+            //AnimatedImage.Opacity = 0;
+            foreach (var img in images)
+            {
+                AnimatedImage.Opacity = 0;
+                AnimatedImage.Source = img;
+                await AnimatedImage.FadeToAsync(1, 100);
+                await Task.Delay(800);
+            }
+            
         }
-        await Task.Delay(50);
-
-        MainThread.BeginInvokeOnMainThread(() =>
+        catch (Exception ex)
         {
-            Application.Current.Windows[0].Page = new AppShell();
-        });
+            Debug.WriteLine(ex.Message);
+        }
     }
 
     protected override void OnSizeAllocated(double width, double height)
     {
         base.OnSizeAllocated(width, height);
     }
-
-    
 }

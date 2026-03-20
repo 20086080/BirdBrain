@@ -7,53 +7,46 @@ namespace BirdBrain.Views;
 
 public partial class IntroPage : BasePage
 {
-    private readonly JsonFileReader _jsonReader;
+    //private readonly JsonFileReader _jsonReader;
     
-    public List<SavedLocation> savedLocations = new List<SavedLocation>();
-    public IntroPage(JsonFileReader jsonReader)
+    //public List<SavedLocation> savedLocations = new List<SavedLocation>();
+    //public IntroPage(JsonFileReader jsonReader)
+    public IntroPage()
     {
         InitializeComponent();
-        AppState.LeftSelected = true;
-        _jsonReader = jsonReader;
-        BindingContext = AppState;
+        App.State.LeftSelected = true;
+        //_jsonReader = jsonReader;
+        BindingContext = App.State;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
         
-        if (AppState.SavedLocations == null || AppState.SavedLocations.Count == 0)
-        {
-            AppState.SavedLocations = await _jsonReader
-                .ReadListAsync<SavedLocation>("LocationSeedData.json");
-        }
-
-        LocationCarousel.ItemsSource = AppState.SavedLocations;
-
-        if (AppState.SavedLocations != null && AppState.SavedLocations.Count > 0)
-        {
-            if (!AppState.SavedLocations.Contains(AppState.SelectedSavedLocation))
-            {
-                AppState.SelectedSavedLocation = AppState.SavedLocations[0];
-            }
-        }
-
-
-
-        //savedLocations = await _jsonReader
-        //    .ReadListAsync<SavedLocation>("LocationSeedData.json");
-
-        //LocationCarousel.ItemsSource = savedLocations;
-        //if (AppState.SelectedLocationName != null)
+        //if (AppState.SavedLocations == null || AppState.SavedLocations.Count == 0)
         //{
-            
+        //    AppState.SavedLocations = await _jsonReader
+        //        .ReadListAsync<SavedLocation>("LocationSeedData.json");
         //}
-        
+
+        //LocationCarousel.ItemsSource = AppState.SavedLocations;
+
+        //if (AppState.SavedLocations != null && AppState.SavedLocations.Count > 0)
+        //{
+        //    if (!AppState.SavedLocations.Contains(AppState.SelectedSavedLocation))
+        //    {
+        //        AppState.SelectedSavedLocation = AppState.SavedLocations[0];
+        //    }
+        //}
+        //else
+        //{
+        //    AppState.SelectedSavedLocation = null;
+        //}
     }
 
     private void OnTextChanged(object sender, EventArgs e)
     {
-        AppState.SelectedLocationName = LocationEntry.Text;
+        App.State.SelectedLocationName = LocationEntry.Text;
     }
 
     async void OnAllBirdsTapped(object sender, EventArgs e)
@@ -62,7 +55,7 @@ public partial class IntroPage : BasePage
         SpecificBirdTab.Style = (Style)Application.Current.Resources["SegmentUnselectedStyle"];
         AllBirdsLabel.Style = (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
         SpecificBirdLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-        AppState.LeftSelected = true;
+        App.State.LeftSelected = true;
         await Shell.Current.GoToAsync(nameof(LocationSightingPage));
     }
 
@@ -72,7 +65,7 @@ public partial class IntroPage : BasePage
         AllBirdsTab.Style = (Style)Application.Current.Resources["SegmentUnselectedStyle"];
         SpecificBirdLabel.Style = (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
         AllBirdsLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-        AppState.LeftSelected = false;
+        App.State.LeftSelected = false;
         await Shell.Current.GoToAsync(nameof(BirdSelectionPage));
     }
 
@@ -82,12 +75,10 @@ public partial class IntroPage : BasePage
             return;
         if (e.Parameter is SavedLocation location)
         {
-            AppState.SelectedSavedLocation = location;
-            AppState.SelectedLocationName = location.Name;
-            
-                //LocationCarousel.Position = LocationIndex;
-                AppState.Lat = location.Lat;
-                AppState.Lng = location.Lng;
+            App.State.SelectedSavedLocation = location;
+            App.State.SelectedLocationName = location.Name;
+            App.State.Lat = location.Lat;
+            App.State.Lng = location.Lng;
         }
     }
 

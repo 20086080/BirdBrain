@@ -1,33 +1,61 @@
 ﻿using BirdBrain.Models;
 using BirdBrain.Resources.Themes;
 using BirdBrain.Services;
-using Microsoft.Extensions.DependencyInjection;
+using BirdBrain.Views;
 
 namespace BirdBrain
 {
     public partial class App : Application
     {
         public static AppState State { get; set; }
+
         public App()
         {
             InitializeComponent();
+
+            // Load theme
             ThemeManager.LoadSavedTheme(typeof(SunsetCoralNavyDark));
-            //State = Application.Current?.Handler?.MauiContext?.Services.GetService<AppState>();
+
+            // Initialize AppState
             State = new AppState();
             State.Database = new DatabaseService();
+
+            // Load cached DB data (non-blocking)
             LoadCachedData();
+
+            // Show animation page first
+            MainPage = new BirdBrain.Views.Animation();
+
+            // Start initialization
+            InitializeApp();
         }
-        protected override Window CreateWindow(IActivationState? activationState)
+
+        private async void InitializeApp()
         {
-            return new Window(new BirdBrain.Views.Animation());
+            try
+            {
+                await State.InitializeAsync();   
+            }
+            catch (Exception ex)
+            {
+                // Basic error fallback
+                MainPage = new ContentPage
+                {
+                    Content = new Label
+                    {
+                        Text = $"Startup error: {ex.Message}",
+                        VerticalOptions = LayoutOptions.Center,
+                        HorizontalOptions = LayoutOptions.Center
+                    }
+                };
+            }
         }
 
         private async void LoadCachedData()
         {
             await State.Database.InitAsync();
 
-            var cached =
-                await State.Database.GetLatestObservationsAsync();
+            var cached = await State.Database.GetLatestObservationsAsync();
 
             if (cached != null && cached.Count > 0)
             {

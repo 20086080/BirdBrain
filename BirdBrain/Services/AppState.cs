@@ -19,22 +19,22 @@ namespace BirdBrain.Services
     {
         private int _selectedBirdId;
         private int _selectedLocationId;
+        private JsonFileReader _jsonReader = new JsonFileReader();
 
         //TODO remove below values once testing is finished
         //private string _selectedLocationName = "";
-        
+
         //private string _selectedBirdCommonName = "";
-        
+
         //private double _lat;
         //private double _lng;
 
         private double _lat = -31.9617;
         private double _lng = 115.8420;
         private string _selectedLocationName = "Kings Park";
-        
-        private SavedLocation _selectedSavedLocation { get; set; } = new();
-
         private string _selectedBirdCommonName = "Yellow-billed Spoonbill";
+
+        private SavedLocation _selectedSavedLocation { get; set; } = new();
 
         private Bird _selectedSavedBird { get; set; } = new();
 
@@ -68,8 +68,7 @@ namespace BirdBrain.Services
             {
                 if (_selectedSavedLocation != value)
                 {
-                    _selectedSavedLocation = value;
-                    OnPropertyChanged();
+                    _selectedSavedLocation = value; OnPropertyChanged();
                 }
             }
         }
@@ -81,9 +80,44 @@ namespace BirdBrain.Services
             {
                 if (_selectedSavedBird != value)
                 {
-                    _selectedSavedBird = value;
-                    OnPropertyChanged();
+                    _selectedSavedBird = value; OnPropertyChanged();
                 }
+            }
+        }
+
+        public void SetJsonReader(JsonFileReader reader)
+        {
+            _jsonReader = reader;
+        }
+
+        public async Task InitializeAsync()
+        {
+            if (SavedBirds != null && SavedBirds.Count > 0)
+                return;
+
+            SavedBirds = await _jsonReader.ReadListAsync<Bird>("BirdsSeedData.json");
+
+            if (SavedBirds.Count > 0)
+            {
+                SelectedSavedBird = SavedBirds[0];
+            }
+            else
+            {
+                SelectedSavedBird = null;
+            }
+
+            if (SavedLocations != null && SavedLocations.Count > 0)
+                return;
+
+            SavedLocations = await _jsonReader.ReadListAsync<SavedLocation>("LocationSeedData.json");
+
+            if (SavedLocations.Count > 0)
+            {
+                SelectedSavedLocation = SavedLocations[0];
+            }
+            else
+            {
+                SelectedSavedLocation = null;
             }
         }
 
@@ -134,10 +168,8 @@ namespace BirdBrain.Services
             }
             var color = (Color)Application.Current.Resources["TextPrimary"];
             var skColor = new SKColor(
-                (byte)(color.Red * 255),
-                (byte)(color.Green * 255),
-                (byte)(color.Blue * 255),
-                (byte)(color.Alpha * 255));
+                (byte)(color.Red * 255), (byte)(color.Green * 255),
+                (byte)(color.Blue * 255), (byte)(color.Alpha * 255));
             var maxSightings = data.Any() ? data.Max(x => x.Sightings) : 0;
             Series = new ISeries[]
             {
@@ -222,10 +254,8 @@ namespace BirdBrain.Services
             }
             var color = (Color)Application.Current.Resources["TextPrimary"];
             var skColor = new SKColor(
-                (byte)(color.Red * 255),
-                (byte)(color.Green * 255),
-                (byte)(color.Blue * 255),
-                (byte)(color.Alpha * 255));
+                (byte)(color.Red * 255), (byte)(color.Green * 255),
+                (byte)(color.Blue * 255), (byte)(color.Alpha * 255));
             var maxSightings = data.Max(x => x.Sightings);
             BirdSeries = new ISeries[]
             {
@@ -269,10 +299,8 @@ namespace BirdBrain.Services
         {
             var color = (Color)Application.Current.Resources["TextPrimary"];
             var skColor = new SKColor(
-                (byte)(color.Red * 255),
-                (byte)(color.Green * 255),
-                (byte)(color.Blue * 255),
-                (byte)(color.Alpha * 255));
+                (byte)(color.Red * 255), (byte)(color.Green * 255),
+                (byte)(color.Blue * 255), (byte)(color.Alpha * 255));
             if (data == null || !data.Any())
             {
                 PieSeries = Array.Empty<ISeries>();
@@ -375,7 +403,6 @@ namespace BirdBrain.Services
             }
         }
 
-        
         public int Days
         {
             get => _days;

@@ -75,6 +75,7 @@ namespace BirdBrain.Services
         public async Task CleanupOldObservationsAsync(double lat, double lng)
         {
             // Find the two most recent DateStamp groups
+
             var keepDates = await _db.QueryAsync<DateTime>(
                 @"SELECT DISTINCT DateStamp 
                     FROM BirdObservationDb
@@ -86,7 +87,6 @@ namespace BirdBrain.Services
             if (keepDates.Count < 2)
                 return;
 
-            //var cutoff = keepDates.Last();
 
             await _db.ExecuteAsync(
                 @"DELETE FROM BirdObservationDb

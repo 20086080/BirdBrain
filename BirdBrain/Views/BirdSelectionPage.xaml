@@ -27,12 +27,12 @@
         <!-- Bird Carousel -->
         <VerticalStackLayout Grid.Row="2" Spacing="15" Margin="0,20,0,20" VerticalOptions="FillAndExpand">
             <Label Text="Saved Birds" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
-            <CarouselView ItemsSource="{Binding MyCollection}"
+            <CarouselView ItemsSource="{Binding SavedBirds}"
                           x:Name="BirdCarousel" 
                           IndicatorView="BirdIndicator" 
                           VerticalOptions="FillAndExpand"
                           PeekAreaInsets="60"
-                          CurrentItem="{Binding SelectedBird, Mode=TwoWay}">
+                          CurrentItem="{Binding SelectedSavedBird, Mode=TwoWay}">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="MandatorySingle"
                                    SnapPointsAlignment="Center" ItemSpacing="5"/>

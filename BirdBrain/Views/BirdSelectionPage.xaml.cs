@@ -9,7 +9,7 @@ public partial class BirdSelectionPage : BasePage
 {
     private readonly JsonFileReader _jsonReader;
     public int BirdIndex = 0;
-    public List<Bird> savedBirds = new List<Bird>();
+    
     public BirdSelectionPage(JsonFileReader jsonReader)
 	{
 		InitializeComponent();
@@ -21,32 +21,29 @@ public partial class BirdSelectionPage : BasePage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-
-        savedBirds = await _jsonReader
-            .ReadListAsync<Bird>("BirdsSeedData.json");
-
-        BirdCarousel.ItemsSource = savedBirds;
-        if (AppState.SelectedBirdCommonName != null)
+        if (AppState.SavedBirds == null || AppState.SavedBirds.Count == 0)
         {
-            BirdIndex = savedBirds.FindIndex(x => x.CommonName == AppState.SelectedBirdCommonName);
+            AppState.SavedBirds = await _jsonReader
+                .ReadListAsync<Bird>("BirdsSeedData.json");
         }
-        if (BirdIndex >= 0)
+
+        BirdCarousel.ItemsSource = AppState.SavedBirds;
+
+        if (AppState.SavedBirds != null && AppState.SavedBirds.Count > 0)
         {
-            BirdCarousel.Position = BirdIndex;
-        }
-        else
-        {
-            BirdCarousel.Position = 0;
+            if (!AppState.SavedBirds.Contains(AppState.SelectedSavedBird))
+            {
+                AppState.SelectedSavedBird = AppState.SavedBirds[0];
+            }
         }
     }
 
     async void Bird_Completed(object sender, EventArgs e)
     {
-        // Navigate to BirdSelection Page
-        //await DisplayAlertAsync("debug","ok","OK");
+        
         Bird.Unfocus();
         await KeyboardHelper.DismissAsync();
-        // optional short delay
+        
         Application.Current.Dispatcher.Dispatch(async () =>
         {
             await Shell.Current.GoToAsync(nameof(BirdSightingPage));
@@ -55,21 +52,12 @@ public partial class BirdSelectionPage : BasePage
 
     async void OnBirdTapped(object sender, TappedEventArgs e)
     {
-        if (e.Parameter == null)
-            return;
+        
         if (e.Parameter is Bird bird)
         {
             AppState.SelectedBirdCommonName = bird.CommonName;
             AppState.SelectedSavedBird = bird;
-            BirdIndex = savedBirds.FindIndex(x => x.CommonName == AppState.SelectedBirdCommonName);
-            if (BirdIndex >= 0)
-            {
-                BirdCarousel.Position = BirdIndex;
-                //AppState.SelectedBirdThumbnail = bird.Thumbnail;
-                //AppState.SelectedBirdProfileImage = bird.ProfileImage;
-                //AppState.SelectedBirdScName = bird.ScientificName;
-                //AppState.SelectedBirdDesc = bird.Description;
-            }
+            
             await Shell.Current.GoToAsync(nameof(BirdSightingPage));
         }
     }

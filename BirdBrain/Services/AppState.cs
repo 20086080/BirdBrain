@@ -24,11 +24,6 @@ namespace BirdBrain.Services
         //private string _selectedLocationName = "";
         
         //private string _selectedBirdCommonName = "";
-        //private string _selectedBirdThumbnail = "";
-        
-        //private string _selectedBirdProfileImage = "";
-        //private string _selectedBirdScName = "";
-        //private string _selectedBirdDesc = "";
         
         //private double _lat;
         //private double _lng;
@@ -41,10 +36,6 @@ namespace BirdBrain.Services
 
         private string _selectedBirdCommonName = "Yellow-billed Spoonbill";
 
-        //private string _selectedBirdThumbnail = "currawong_t.png";
-        //private string _selectedBirdProfileImage = "currawong.png";        
-        //private string _selectedBirdScName = "Strepera graculina";
-        //private string _selectedBirdDesc = "Large black bird with a ringing call and yellow eyes.";
         private Bird _selectedSavedBird { get; set; } = new();
 
         private int _days = 30;
@@ -67,6 +58,8 @@ namespace BirdBrain.Services
         public List<BirdObservation> Observations { get; set; } = new();
 
         public DatabaseService Database { get; set; }
+
+        public List<Bird> SavedBirds { get; set; } = new List<Bird>();
 
         public SavedLocation SelectedSavedLocation
         {
@@ -312,15 +305,6 @@ namespace BirdBrain.Services
             OnPropertyChanged(nameof(PieSeries));
         }
 
-        //public int SelectedBirdId
-        //{
-        //    get => _selectedBirdId;
-        //    set { 
-        //        if (_selectedBirdId != value)
-        //            { _selectedBirdId = value; OnPropertyChanged(); }
-        //    }
-        //}
-
         public string SelectedLocationName
         {
             get => _selectedLocationName;
@@ -330,26 +314,6 @@ namespace BirdBrain.Services
                     { _selectedLocationName = value; OnPropertyChanged(); }
             }
         }
-
-        //public string SelectedBirdScName
-        //{
-        //    get => _selectedBirdScName;
-        //    set
-        //    {
-        //        if (_selectedBirdScName != value)
-        //            { _selectedBirdScName = value; OnPropertyChanged(); }
-        //    }
-        //}
-
-        //public string SelectedBirdDesc
-        //{
-        //    get => _selectedBirdDesc;
-        //    set
-        //    {
-        //        if (_selectedBirdDesc != value)
-        //            { _selectedBirdDesc = value; OnPropertyChanged(); }
-        //    }
-        //}
 
         public bool LeftSelected
         {
@@ -370,26 +334,6 @@ namespace BirdBrain.Services
                     { _selectedBirdCommonName = value; OnPropertyChanged(); }
             }
         }
-
-        //public string SelectedBirdThumbnail
-        //{
-        //    get => _selectedBirdThumbnail;
-        //    set
-        //    {
-        //        if (_selectedBirdThumbnail != value)
-        //            { _selectedBirdThumbnail = value; OnPropertyChanged(); }
-        //    }
-        //}
-
-        //public string SelectedBirdProfileImage
-        //{
-        //    get => _selectedBirdProfileImage;
-        //    set
-        //    {
-        //        if (_selectedBirdProfileImage != value)
-        //            { _selectedBirdProfileImage = value; OnPropertyChanged(); }
-        //    }
-        //}
 
         public int TotalSightings
         {

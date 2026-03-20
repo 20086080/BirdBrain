@@ -20,37 +20,21 @@ public partial class BirdProfilePage : BasePage
     }
     async void LocationTapped(object sender, EventArgs e)
     {
-        LocationTab.Style =
-            (Style)Application.Current.Resources["SegmentSelectedStyle"];
-
-        BirdTab.Style =
-            (Style)Application.Current.Resources["SegmentUnselectedStyle"];
-
-        LocationTabLabel.Style =
-            (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
-
-        BirdTabLabel.Style =
-            (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
+        LocationTab.Style = (Style)Application.Current.Resources["SegmentSelectedStyle"];
+        BirdTab.Style = (Style)Application.Current.Resources["SegmentUnselectedStyle"];
+        LocationTabLabel.Style = (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
+        BirdTabLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
         AppState.LeftSelected = true;
         await Shell.Current.GoToAsync(nameof(LocationProfilePage));
-
     }
 
     async void BirdTapped(object sender, EventArgs e)
     {
-        BirdTab.Style =
-            (Style)Application.Current.Resources["SegmentSelectedStyle"];
-
-        LocationTab.Style =
-            (Style)Application.Current.Resources["SegmentUnselectedStyle"];
-
-        BirdTabLabel.Style =
-            (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
-
-        LocationTabLabel.Style =
-            (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
+        BirdTab.Style = (Style)Application.Current.Resources["SegmentSelectedStyle"];
+        LocationTab.Style = (Style)Application.Current.Resources["SegmentUnselectedStyle"];
+        BirdTabLabel.Style = (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
+        LocationTabLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
         AppState.LeftSelected = false;
-        // Navigate using Shell
         await Shell.Current.GoToAsync(nameof(BirdProfilePage));
     }
 }

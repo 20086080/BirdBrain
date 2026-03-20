@@ -28,7 +28,7 @@
                           VerticalOptions="FillAndExpand"
                           HorizontalOptions="FillAndExpand" 
                           PeekAreaInsets="60"
-                          CurrentItem="{Binding SelectedLocation, Mode=TwoWay}">
+                          CurrentItem="{Binding SelectedSavedLocation, Mode=TwoWay}">
 
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="MandatorySingle"

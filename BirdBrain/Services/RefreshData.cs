@@ -37,7 +37,7 @@ namespace BirdBrain.Services
 
             await App.State.Database.SaveObservationsAsync(dbList);
             // Keep only last 2 refresh sets
-            await App.State.Database.CleanupOldObservationsAsync(lat, lng);
+            //await App.State.Database.CleanupOldObservationsAsync(lat, lng);
 
             App.State.Observations = observations;
 

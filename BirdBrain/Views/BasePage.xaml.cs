@@ -9,7 +9,8 @@ namespace BirdBrain.Views;
 
 public partial class BasePage : ContentPage
 {
-    
+    private SummaryService _summaryService;
+
     BoxView _drawerOverlay;
     LeftSettingsDrawer _leftDrawer;
     RightSettingsDrawer _rightDrawer;
@@ -206,4 +207,12 @@ public partial class BasePage : ContentPage
         .MauiContext
         .Services
         .GetRequiredService<AppState>();
+
+    public SummaryService SummaryService =>
+    _summaryService ??=
+        Microsoft.Maui.Controls.Application.Current
+            .Handler
+            .MauiContext
+            .Services
+            .GetRequiredService<SummaryService>();
 }

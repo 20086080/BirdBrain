@@ -5,16 +5,14 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Class="BirdBrain.Controls.ErrorPopup">
 
-    <Border Style="{StaticResource RoundedAccentBorderStyle1}" Padding="5" WidthRequest="300"
+    <Border Style="{StaticResource RoundedAccentBorderStyle1}" Padding="5" WidthRequest="250"
         HorizontalOptions="Center" VerticalOptions="Center">
-        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-            <Image Grid.Column="0" VerticalOptions="Center" Source="{Binding Image}" />
-            <VerticalStackLayout Grid.Column="1" Spacing="10">
-                <Label Text="{Binding Title}" Style="{StaticResource SubTitles}" TextColor= "{DynamicResource Background}"
-                   LineBreakMode="WordWrap" />
-                <Label Text="{Binding Message}" Style="{StaticResource PageLabelNormal}" TextColor= "{DynamicResource Background}"
-                   LineBreakMode="WordWrap" />
-            </VerticalStackLayout>
+        <Grid RowDefinitions="*,*,*" RowSpacing="10">
+            <Image Grid.Row="0" VerticalOptions="Center" Source="{Binding Image}" HeightRequest="150"/>
+            <Label Grid.Row ="1" Text="{Binding Title}" Style="{StaticResource SubTitles}" 
+                   TextColor= "{DynamicResource Background}" LineBreakMode="WordWrap" />
+            <Label Grid.Row ="2" Text="{Binding Message}" Style="{StaticResource PageLabelNormal}" 
+                   TextColor= "{DynamicResource Background}" LineBreakMode="WordWrap" />
         </Grid>
     </Border>
 </toolkit:Popup>

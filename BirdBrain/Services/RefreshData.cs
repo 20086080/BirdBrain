@@ -17,7 +17,6 @@ namespace BirdBrain.Services
         public async Task<bool> RefreshAsync(double lat, double lng)
         {
             await App.State.Database.InitAsync();
-
             var lastRefresh =
                 await App.State.Database.GetLastRefreshTimeAsync();
 
@@ -40,7 +39,6 @@ namespace BirdBrain.Services
             //await App.State.Database.CleanupOldObservationsAsync(lat, lng);
 
             App.State.Observations = observations;
-
             return true;
         }
     }

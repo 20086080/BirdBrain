@@ -11,29 +11,54 @@ public partial class AppHeader : ContentView
 	{
 		InitializeComponent();
 	}
-    void OnMenuTapped(object sender, EventArgs e)
+    void OnMenuTapped(object sender, EventArgs e)                       // Open Menu 
     {
         HamburgerClicked?.Invoke(this, EventArgs.Empty);
     }
 
-    async void OnCloseTapped(object sender, EventArgs e)
+    async void OnCloseTapped(object sender, EventArgs e)                // Exit the app
     {
-            // Exit the app
-            Application.Current.Quit();
-        
+        //TODO - Save SavedLocations and SavedBirds to json files before quitting
+        Application.Current.Quit();   
     }
 
-    private void OnMenuFavouriteTapped(object sender, TappedEventArgs e)
+    async void OnMenuFavouriteTapped(object sender, TappedEventArgs e)
     {
-
+        if (App.State.LeftSelected)                                     // Location option is selected 
+        {
+            if (App.State.SelectedSavedLocation == null)
+                return;
+            if (App.State.SavedLocations.Contains(App.State.SelectedSavedLocation))
+            {
+                await ErrorService.Show(ErrorType.ReadytoGoLocationAlreadySaved);
+            }
+            else
+            {
+                App.State.SavedLocations.Add(App.State.SelectedSavedLocation);
+                await ErrorService.Show(ErrorType.ReadytoGoSavedLocation);
+            }
+        }
+        else
+        {                                                           // Bird option is selected
+            if (App.State.SelectedSavedBird == null)
+                return;
+            if (App.State.SavedBirds.Contains(App.State.SelectedSavedBird))
+            {
+                await ErrorService.Show(ErrorType.ReadytoGoBirdAlreadySaved);
+            }
+            else
+            { 
+                App.State.SavedBirds.Add(App.State.SelectedSavedBird);
+                await ErrorService.Show(ErrorType.ReadytoGoSavedBird);
+            }
+        }
     }
 
-    async void OnMenuRefreshTapped(object sender, TappedEventArgs e)
+    async void OnMenuRefreshTapped(object sender, TappedEventArgs e)    //Get API Data 
     {
         await ErrorService.Show(ErrorType.GettingInformation);
         var refresh = new RefreshData();
-        bool refreshed =
-            await refresh.RefreshAsync(App.State.Lat, App.State.Lng);
+        bool refreshed = await refresh.RefreshAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng);
         
         if (!refreshed)
         {
@@ -44,7 +69,7 @@ public partial class AppHeader : ContentView
             await ErrorService.Show(ErrorType.RefreshSuccessful);
         }
     }
-    void OnMenuSettingsTapped(object sender, TappedEventArgs e)
+    void OnMenuSettingsTapped(object sender, TappedEventArgs e)         // Call Settings Menu 
     {
         SettingsClicked?.Invoke(this, EventArgs.Empty);
     }

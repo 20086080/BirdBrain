@@ -14,7 +14,7 @@ public partial class ErrorPopup : Popup
 
     private async void StartAutoClose()
     {
-        await Task.Delay(8000); // 8 seconds
+        await Task.Delay(5000); // 5 seconds
         Close();
     }
 }

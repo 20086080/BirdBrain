@@ -17,6 +17,10 @@ namespace BirdBrain.Models
         BirdNotSelected,
         InvalidLocation,
         InvalidBird,
+        ReadytoGoSavedBird,
+        ReadytoGoSavedLocation,
+        ReadytoGoBirdAlreadySaved,
+        ReadytoGoLocationAlreadySaved,
         ErrorFound
     }
 }

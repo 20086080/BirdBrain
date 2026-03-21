@@ -14,7 +14,7 @@
         <VerticalStackLayout Grid.Row="0" Spacing="12">
             <HorizontalStackLayout>
                 <Label Text="Location: " Style="{StaticResource SubTitles}" />
-                <Label Text ="{Binding SelectedLocationName}" Style="{StaticResource SubTitles}" />
+                <Label Text ="{Binding SelectedSavedLocation.Name}" Style="{StaticResource SubTitles}" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
 
@@ -31,8 +31,7 @@
                           x:Name="BirdCarousel" 
                           IndicatorView="BirdIndicator" 
                           VerticalOptions="FillAndExpand"
-                          PeekAreaInsets="60"
-                          CurrentItem="{Binding SelectedSavedBird, Mode=TwoWay}">
+                          PeekAreaInsets="60">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="MandatorySingle"
                                    SnapPointsAlignment="Center" ItemSpacing="5"/>
@@ -55,7 +54,7 @@
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
-            <IndicatorView x:Name="BirdIndicator" Style="{StaticResource PrimaryIndicatorStyle}"/>
+            <IndicatorView x:Name="BirdIndicator" Style="{StaticResource PrimaryIndicatorStyle}" HorizontalOptions="Center"/>
         </VerticalStackLayout>
     </Grid>
 </views:BasePage>

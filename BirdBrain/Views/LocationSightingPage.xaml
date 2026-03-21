@@ -42,11 +42,11 @@
         <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="20" 
               Background="{DynamicResource Background}" HeightRequest="140">
             <VerticalStackLayout Grid.Column="1" Spacing="5">
-                <Label Text = "{Binding SelectedLocationName}" Style="{StaticResource SubTitles}"/>
+                <Label Text = "{Binding SelectedSavedLocation.Name}" Style="{StaticResource SubTitles}"/>
                 <HorizontalStackLayout >
-                    <Label Text = "{Binding Lat}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
+                    <Label Text = "{Binding SelectedSavedLocation.Lat}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
                     <Label Text = ", " Style="{StaticResource PageLabelNormal}"/>
-                    <Label Text = "{Binding Lng}" Style="{StaticResource PageLabelNormal}"/>
+                    <Label Text = "{Binding SelectedSavedLocation.Lng}" Style="{StaticResource PageLabelNormal}"/>
                 </HorizontalStackLayout >
                 <Label Text = "{Binding SelectedSavedLocation.Region}" Style="{StaticResource PageLabelNormal}"/>
                 <Label Text = "{Binding SelectedSavedLocation.Country}" Style="{StaticResource PageLabelNormal}"/>

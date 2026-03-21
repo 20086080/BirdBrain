@@ -7,46 +7,17 @@ namespace BirdBrain.Views;
 
 public partial class IntroPage : BasePage
 {
-    //private readonly JsonFileReader _jsonReader;
     
-    //public List<SavedLocation> savedLocations = new List<SavedLocation>();
-    //public IntroPage(JsonFileReader jsonReader)
     public IntroPage()
     {
         InitializeComponent();
         App.State.LeftSelected = true;
-        //_jsonReader = jsonReader;
         BindingContext = App.State;
-    }
-
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        
-        //if (AppState.SavedLocations == null || AppState.SavedLocations.Count == 0)
-        //{
-        //    AppState.SavedLocations = await _jsonReader
-        //        .ReadListAsync<SavedLocation>("LocationSeedData.json");
-        //}
-
-        //LocationCarousel.ItemsSource = AppState.SavedLocations;
-
-        //if (AppState.SavedLocations != null && AppState.SavedLocations.Count > 0)
-        //{
-        //    if (!AppState.SavedLocations.Contains(AppState.SelectedSavedLocation))
-        //    {
-        //        AppState.SelectedSavedLocation = AppState.SavedLocations[0];
-        //    }
-        //}
-        //else
-        //{
-        //    AppState.SelectedSavedLocation = null;
-        //}
     }
 
     private void OnTextChanged(object sender, EventArgs e)
     {
-        App.State.SelectedLocationName = LocationEntry.Text;
+        App.State.SelectedSavedLocation.Name = LocationEntry.Text;
     }
 
     async void OnAllBirdsTapped(object sender, EventArgs e)
@@ -76,9 +47,7 @@ public partial class IntroPage : BasePage
         if (e.Parameter is SavedLocation location)
         {
             App.State.SelectedSavedLocation = location;
-            App.State.SelectedLocationName = location.Name;
-            App.State.Lat = location.Lat;
-            App.State.Lng = location.Lng;
+            
         }
     }
 

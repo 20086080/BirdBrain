@@ -6,39 +6,29 @@ namespace BirdBrain.Views;
 
 public partial class LocationSightingPage : BasePage
 {
-    //private readonly SummaryService _summaryService;
-   // public LocationSightingPage(SummaryService summaryService)
+    
     public LocationSightingPage()
     {
         InitializeComponent();
-        
-        //TODO Clean -up 
-        if (AppState == null)
-            throw new Exception("AppState is NULL");
-
-       // _summaryService = summaryService;
-       //      _summaryService = App.Current?.Handler?.MauiContext?.Services
-       //         .GetRequiredService<SummaryService>();
-       // if (_summaryService == null)
-       //     throw new Exception("SummaryService is NULL");
-        BindingContext = AppState;
-        AppState.LeftSelected = true;
+        if (App.State == null)
+            throw new Exception("App.State is NULL");
+        BindingContext = App.State;
+        App.State.LeftSelected = true;
     }
     protected override async void OnAppearing()
     {
-        
         try
         {
             base.OnAppearing();
-            AppState.TotalSightings = await SummaryService.GetTotalLocationCountAsync(AppState.Lat, AppState.Lng);
-            if (AppState.TotalSightings <= 0)
+            App.State.TotalSightings = await SummaryService.GetTotalLocationCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng);
+            if (App.State.TotalSightings <= 0)
             {
                 await ErrorService.Show(ErrorType.NoLocationDataFound);
             }
-            AppState.TotalTypeOfBird = await SummaryService.GetTotalLocationBirdCountAsync(AppState.Lat, AppState.Lng);
-            AppState.TopBirds = await SummaryService.GetTop5BirdCountAsync(AppState.Lat, AppState.Lng);
-            AppState.LocationDailyObs = await SummaryService.GetLocationDailyObsAsync(AppState.Lat, AppState.Lng);
-            AppState.BuildChart(AppState.LocationDailyObs);
+            App.State.TotalTypeOfBird = await SummaryService.GetTotalLocationBirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng);
+            App.State.TopBirds = await SummaryService.GetTop5BirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng);
+            App.State.LocationDailyObs = await SummaryService.GetLocationDailyObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng);
+            App.State.BuildChart(App.State.LocationDailyObs);
 
         }
         catch (Exception ex) 
@@ -56,7 +46,7 @@ public partial class LocationSightingPage : BasePage
             BirdTab.Style = (Style)Application.Current.Resources["SegmentUnselectedStyle"];
             LocationTabLabel.Style = (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
             BirdTabLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-            AppState.LeftSelected = true;
+            App.State.LeftSelected = true;
             await Shell.Current.GoToAsync(nameof(LocationSightingPage));
         }
         catch (Exception ex)
@@ -74,7 +64,7 @@ public partial class LocationSightingPage : BasePage
             LocationTab.Style = (Style)Application.Current.Resources["SegmentUnselectedStyle"];
             BirdTabLabel.Style = (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
             LocationTabLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-            AppState.LeftSelected = false;
+            App.State.LeftSelected = false;
             await Shell.Current.GoToAsync(nameof(BirdSightingPage));
         }
         catch (Exception ex)

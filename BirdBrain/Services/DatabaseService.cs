@@ -51,8 +51,8 @@ namespace BirdBrain.Services
                 ObsReviewed = o.obsReviewed,
                 LocationPrivate = o.locationPrivate,
                 DateStamp = refreshTime,
-                AppLat = App.State.Lat,
-                AppLng = App.State.Lng
+                AppLat = App.State.SelectedSavedLocation.Lat,
+                AppLng = App.State.SelectedSavedLocation.Lng
             }).ToList();
         }
 

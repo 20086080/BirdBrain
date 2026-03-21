@@ -17,22 +17,9 @@ namespace BirdBrain.Services
 {
     public class AppState : INotifyPropertyChanged
     {
-        private int _selectedBirdId;
-        private int _selectedLocationId;
+        //private int _selectedBirdId;
+        //private int _selectedLocationId;
         private JsonFileReader _jsonReader = new JsonFileReader();
-
-        //TODO remove below values once testing is finished
-        //private string _selectedLocationName = "";
-
-        //private string _selectedBirdCommonName = "";
-
-        //private double _lat;
-        //private double _lng;
-
-        private double _lat = -31.9617;
-        private double _lng = 115.8420;
-        private string _selectedLocationName = "Kings Park";
-        private string _selectedBirdCommonName = "Yellow-billed Spoonbill";
 
         private SavedLocation _selectedSavedLocation { get; set; } = new();
 
@@ -61,6 +48,9 @@ namespace BirdBrain.Services
 
         public List<Bird> SavedBirds { get; set; } = new List<Bird>();
         public List<SavedLocation> SavedLocations { get; set; } = new List<SavedLocation>();
+
+        public List<LatLng> GlobalLocations { get; set; } = new List<LatLng>();
+
         public SavedLocation SelectedSavedLocation
         {
             get => _selectedSavedLocation;
@@ -92,6 +82,7 @@ namespace BirdBrain.Services
 
         public async Task InitializeAsync()
         {
+            //Get Saved (Favourite) Birds List
             if (SavedBirds != null && SavedBirds.Count > 0)
                 return;
 
@@ -106,6 +97,7 @@ namespace BirdBrain.Services
                 SelectedSavedBird = null;
             }
 
+            //Get Saved (Favourite) Location List
             if (SavedLocations != null && SavedLocations.Count > 0)
                 return;
 
@@ -119,6 +111,12 @@ namespace BirdBrain.Services
             {
                 SelectedSavedLocation = null;
             }
+
+            //Get Global Lat Lng List
+            if (GlobalLocations != null && GlobalLocations.Count > 0)
+                return;
+
+            GlobalLocations = await _jsonReader.ReadListAsync<LatLng>("LatLngSeedData.json");
         }
 
         private ISeries[] _series = Array.Empty<ISeries>();
@@ -333,16 +331,6 @@ namespace BirdBrain.Services
             OnPropertyChanged(nameof(PieSeries));
         }
 
-        public string SelectedLocationName
-        {
-            get => _selectedLocationName;
-            set
-            {
-                if (_selectedLocationName != value)
-                    { _selectedLocationName = value; OnPropertyChanged(); }
-            }
-        }
-
         public bool LeftSelected
         {
             get => _leftSelected;
@@ -350,16 +338,6 @@ namespace BirdBrain.Services
             {
                 if (_leftSelected != value)
                     { _leftSelected = value; OnPropertyChanged(); }
-            }
-        }
-
-        public string SelectedBirdCommonName
-        {
-            get => _selectedBirdCommonName;
-            set 
-            {
-                if (_selectedBirdCommonName != value)
-                    { _selectedBirdCommonName = value; OnPropertyChanged(); }
             }
         }
 
@@ -420,26 +398,6 @@ namespace BirdBrain.Services
             {
                 if (_radius != value)
                     { _radius = value; OnPropertyChanged(); }
-            }
-        }
-
-        public double Lng
-        {
-            get => _lng;
-            set
-            {
-                if (_lng != value)
-                    { _lng = value;OnPropertyChanged(); }
-            }
-        }
-
-        public double Lat
-        {
-            get => _lat;
-            set
-            {
-                if (_lat != value)
-                    { _lat = value; OnPropertyChanged(); }
             }
         }
 

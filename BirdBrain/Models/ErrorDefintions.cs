@@ -95,6 +95,35 @@ namespace BirdBrain.Models
                     Image = "error_occured.png"
                 },
 
+                ErrorType.ReadytoGoSavedLocation => new AppError
+                {
+                    Title = "Save to Favourite",
+                    Message = "Location successfully saved as Favourite.",
+                    Image = "ready_to_go.png"
+                },
+
+
+                ErrorType.ReadytoGoSavedBird => new AppError
+                {
+                    Title = "Save to Favourite",
+                    Message = "Bird successfully saved as Favourite.",
+                    Image = "ready_to_go.png"
+                },
+
+                ErrorType.ReadytoGoLocationAlreadySaved => new AppError
+                {
+                    Title = "Good to Go",
+                    Message = "Location is already a Favourite.",
+                    Image = "ready_to_go.png"
+                },
+
+
+                ErrorType.ReadytoGoBirdAlreadySaved => new AppError
+                {
+                    Title = "Good to Go",
+                    Message = "Bird is already a Favourite.",
+                    Image = "ready_to_go.png"
+                },
                 _ => new AppError
                 {
                     Title = "Unknown Error",

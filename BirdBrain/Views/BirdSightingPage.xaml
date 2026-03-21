@@ -42,8 +42,8 @@
         <Grid Grid.Row="2" ColumnDefinitions="*,*"  Background="{DynamicResource Background}" >
             <Image Grid.Column="0" Source="{Binding SelectedSavedBird.Thumbnail}" HorizontalOptions="Start" HeightRequest="128" Aspect="AspectFit"/>
             <VerticalStackLayout Grid.Column="1" Spacing="8">
-                <Label Text = "{Binding SelectedBirdCommonName}" Style = "{StaticResource SubTitles}"/>
-                <Label Text = "{Binding SelectedLocationName}" Style = "{StaticResource PageLabelNormal}"/>
+                <Label Text = "{Binding SelectedSavedBird.CommonName}" Style = "{StaticResource SubTitles}"/>
+                <Label Text = "{Binding SelectedSavedLocation.Name}" Style = "{StaticResource PageLabelNormal}"/>
                 <Label Text = "{Binding SelectedSavedLocation.Region}" Style = "{StaticResource PageLabelNormal}" />
                 <Label Text = "{Binding SelectedSavedLocation.Country}" Style = "{StaticResource PageLabelNormal}" />
             </VerticalStackLayout>

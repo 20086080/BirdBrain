@@ -9,9 +9,9 @@
         HorizontalOptions="Center" VerticalOptions="Center">
         <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="20">
             <Image Grid.Row="0" VerticalOptions="Center" Source="{Binding Image}" HeightRequest="200"/>
-            <Label Grid.Row ="1" Text="{Binding Title}" Style="{StaticResource SubTitles}" 
-                   TextColor= "{DynamicResource Background}" LineBreakMode="WordWrap" />
-            <Label Grid.Row ="2" Text="{Binding Message}" Style="{StaticResource PageLabelNormal}" 
+            <Label Grid.Row ="1" Text="{Binding Title}" Style="{StaticResource SubTitles} " 
+                   TextColor= "{DynamicResource Background}" LineBreakMode="WordWrap" HorizontalOptions="Center"/>
+            <Label Grid.Row ="2" Text="{Binding Message}" Style="{StaticResource PageLabelCenter}" 
                    TextColor= "{DynamicResource Background}" LineBreakMode="WordWrap" />
         </Grid>
     </Border>

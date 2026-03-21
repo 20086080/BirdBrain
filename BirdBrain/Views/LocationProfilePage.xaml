@@ -44,12 +44,12 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Text = "{Binding SelectedLocationName}" Style = "{StaticResource SubTitles}" 
+            <Label Grid.Row="0" Grid.Column="0" Text = "{Binding SelectedSavedLocation.Name}" Style = "{StaticResource SubTitles}" 
                    LineBreakMode="WordWrap"/>
             <HorizontalStackLayout Grid.Row="0" Grid.Column="1">
-                <Label Text = "{Binding Lat}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
+                <Label Text = "{Binding SelectedSavedLocation.Lat}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
                 <Label Text = ", " Style="{StaticResource PageLabelNormal}"/>
-                <Label Text = "{Binding Lng}" Style="{StaticResource PageLabelNormal}"/>
+                <Label Text = "{Binding SelectedSavedLocation.Lng}" Style="{StaticResource PageLabelNormal}"/>
             </HorizontalStackLayout>
             <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label Text = "{Binding SelectedSavedLocation.Region}" Style="{StaticResource PageLabelNormal}"/>

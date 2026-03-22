@@ -10,14 +10,14 @@ namespace BirdBrain.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string SpeciesCode { get; set; }
-        public string ComName { get; set; }
-        public string SciName { get; set; }
+        public string? SpeciesCode { get; set; }
+        public string? ComName { get; set; }
+        public string? SciName { get; set; }
 
-        public string LocId { get; set; }
-        public string LocName { get; set; }
+        public string? LocId { get; set; }
+        public string? LocName { get; set; }
 
-        public string ObsDt { get; set; }
+        public string? ObsDt { get; set; }
 
         public int? HowMany { get; set; }
 

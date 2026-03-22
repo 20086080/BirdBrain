@@ -11512,7 +11512,7 @@
     "lat": -22.57,
     "lng": 17.0836,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2": null
   },
   {
     "city_ascii": "Joinvile",
@@ -36474,7 +36474,7 @@
     "lat": -17.9167,
     "lng": 19.7667,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2": null
   },
   {
     "city_ascii": "Miramar",
@@ -41766,7 +41766,7 @@
     "lat": -22.9494,
     "lng": 14.5069,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2": null
   },
   {
     "city_ascii": "Tepexpan",
@@ -52087,7 +52087,7 @@
     "iso2": "PH"
   },
   {
-    "city_ascii": NaN,
+    "city_ascii": null,
     "lat": 51.8333,
     "lng": 12.2333,
     "country": "Germany",
@@ -96709,7 +96709,7 @@
     "lat": -17.7833,
     "lng": 15.6995,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Srebrenik",
@@ -108413,7 +108413,7 @@
     "lat": -19.25,
     "lng": 17.7,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Chipinge",
@@ -110058,7 +110058,7 @@
     "lat": -22.6667,
     "lng": 14.5333,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Isingiro",
@@ -122217,7 +122217,7 @@
     "lat": -17.9167,
     "lng": 15.95,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Oristano",
@@ -127908,7 +127908,7 @@
     "lat": -23.3167,
     "lng": 17.0833,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Kudligi",
@@ -128419,7 +128419,7 @@
     "lat": -17.5,
     "lng": 24.2667,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Leonding",
@@ -135902,7 +135902,7 @@
     "lat": -19.5658,
     "lng": 18.1036,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Bridgeton",
@@ -157098,7 +157098,7 @@
     "lat": -21.9796,
     "lng": 16.91,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Zaghouan",
@@ -176096,7 +176096,7 @@
     "lat": -20.4642,
     "lng": 16.6528,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Ramjibanpur",
@@ -179715,7 +179715,7 @@
     "lat": -22.45,
     "lng": 18.9667,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Kingsland",
@@ -198104,7 +198104,7 @@
     "lat": -26.5833,
     "lng": 18.1333,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Rijen",
@@ -199987,7 +199987,7 @@
     "lat": -17.4658,
     "lng": 16.3369,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Palmetto Estates",
@@ -245928,7 +245928,7 @@
     "lat": -26.6478,
     "lng": 15.1578,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Borodyanka",
@@ -246775,7 +246775,7 @@
     "lat": -24.6333,
     "lng": 17.9667,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Chabal Kalan",
@@ -247517,7 +247517,7 @@
     "lat": -17.4,
     "lng": 15.8833,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Punta del Este",
@@ -248742,7 +248742,7 @@
     "lat": -18.0556,
     "lng": 13.8406,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Amersfoort",
@@ -254090,7 +254090,7 @@
     "lat": -21.05,
     "lng": 15.5,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Abdul Khel",
@@ -271135,7 +271135,7 @@
     "lat": -17.7833,
     "lng": 15.7667,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Medog",
@@ -274659,7 +274659,7 @@
     "iso2": "US"
   },
   {
-    "city_ascii": NaN,
+    "city_ascii":null,
     "lat": 47.9,
     "lng": 13.1333,
     "country": "Austria",
@@ -274824,7 +274824,7 @@
     "lat": -19.65,
     "lng": 17.3333,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Jarjanaz",
@@ -284813,7 +284813,7 @@
     "lat": -17.6167,
     "lng": 18.6,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Oliveira de Frades",
@@ -326155,7 +326155,7 @@
     "lat": -28.55,
     "lng": 16.4333,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Kalabo",
@@ -326267,7 +326267,7 @@
     "lat": -18.3606,
     "lng": 16.5812,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Odzaci",
@@ -327128,7 +327128,7 @@
     "lat": -21.4183,
     "lng": 15.9539,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Vanrhynsdorp",
@@ -327366,7 +327366,7 @@
     "lat": -20.1069,
     "lng": 16.1503,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Lucea",
@@ -327380,7 +327380,7 @@
     "lat": -24.85,
     "lng": 16.9833,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Mitoma",
@@ -328094,7 +328094,7 @@
     "lat": -21.939,
     "lng": 15.853,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Smiltene",
@@ -328514,7 +328514,7 @@
     "lat": -17.5044,
     "lng": 14.9847,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Sayanogorsk",
@@ -328661,7 +328661,7 @@
     "lat": -28.0172,
     "lng": 18.7478,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Samaipata",
@@ -328990,7 +328990,7 @@
     "lat": -26.5006,
     "lng": 17.16,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Klin",
@@ -329291,7 +329291,7 @@
     "lat": -22.0,
     "lng": 15.6,
     "country": "Namibia",
-    "iso2": NaN
+    "iso2":null
   },
   {
     "city_ascii": "Lismore",

@@ -17,8 +17,7 @@ namespace BirdBrain.Services
 {
     public class AppState : INotifyPropertyChanged
     {
-        //private int _selectedBirdId;
-        //private int _selectedLocationId;
+        
         private JsonFileReader _jsonReader = new JsonFileReader();
 
         private SavedLocation _selectedSavedLocation { get; set; } = new();
@@ -83,40 +82,27 @@ namespace BirdBrain.Services
         public async Task InitializeAsync()
         {
             //Get Saved (Favourite) Birds List
-            if (SavedBirds != null && SavedBirds.Count > 0)
-                return;
-
-            SavedBirds = await _jsonReader.ReadListAsync<Bird>("BirdsSeedData.json");
-
-            if (SavedBirds.Count > 0)
+            if (SavedBirds == null || SavedBirds.Count == 0)
             {
-                SelectedSavedBird = SavedBirds[0];
-            }
-            else
-            {
-                SelectedSavedBird = null;
+                SavedBirds = await _jsonReader.ReadListAsync<Bird>("BirdsSeedData.json");
+
+                SelectedSavedBird = SavedBirds.Count > 0 ? SavedBirds[0] : null;
             }
 
             //Get Saved (Favourite) Location List
-            if (SavedLocations != null && SavedLocations.Count > 0)
-                return;
-
-            SavedLocations = await _jsonReader.ReadListAsync<SavedLocation>("LocationSeedData.json");
-
-            if (SavedLocations.Count > 0)
+            if (SavedLocations == null || SavedLocations.Count == 0)
             {
-                SelectedSavedLocation = SavedLocations[0];
+                SavedLocations = await _jsonReader.ReadListAsync<SavedLocation>("LocationSeedData.json");
+
+                SelectedSavedLocation = SavedLocations.Count > 0 ? SavedLocations[0] : null;
             }
-            else
-            {
-                SelectedSavedLocation = null;
-            }
+
 
             //Get Global Lat Lng List
-            if (GlobalLocations != null && GlobalLocations.Count > 0)
-                return;
-
-            GlobalLocations = await _jsonReader.ReadListAsync<LatLng>("LatLngSeedData.json");
+            if (GlobalLocations == null || GlobalLocations.Count == 0)
+            {
+                GlobalLocations = await _jsonReader.ReadListAsync<LatLng>("LatLngSeedData.json");
+            }
         }
 
         private ISeries[] _series = Array.Empty<ISeries>();

@@ -20,7 +20,8 @@ public partial class BirdSelectionPage : BasePage
     {
         base.OnAppearing();
         BirdCarousel.CurrentItem = null;   
-        BirdCarousel.CurrentItem = CarouselCurrentItem; 
+        BirdCarousel.CurrentItem = CarouselCurrentItem;
+        App.State.LeftSelected = false;
     }
 
     void Carousel_CurrentItemChanged(object sender, CurrentItemChangedEventArgs e)

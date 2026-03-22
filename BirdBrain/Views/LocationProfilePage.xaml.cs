@@ -16,6 +16,7 @@ public partial class LocationProfilePage : BasePage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        App.State.LeftSelected = true;
     }
     async void LocationTapped(object sender, EventArgs e)
     {

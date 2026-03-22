@@ -29,6 +29,7 @@ public partial class LocationSightingPage : BasePage
             App.State.TopBirds = await SummaryService.GetTop5BirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng);
             App.State.LocationDailyObs = await SummaryService.GetLocationDailyObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng);
             App.State.BuildChart(App.State.LocationDailyObs);
+            App.State.LeftSelected = true;
 
         }
         catch (Exception ex) 

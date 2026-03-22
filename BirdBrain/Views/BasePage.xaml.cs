@@ -23,6 +23,7 @@ public partial class BasePage : ContentPage
         InitializeComponent();
         Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific.Page
         .SetUseSafeArea(this, false);
+        Microsoft.Maui.Controls.NavigationPage.SetHasBackButton(this, false);
     }
 
     protected override void OnApplyTemplate()
@@ -60,7 +61,7 @@ public partial class BasePage : ContentPage
                 {
                     if (IsAnyDrawerOpen())
                         await CloseAllDrawers();
-                    if (AppState.LeftSelected)     //Location Selected on Page
+                    if (App.State.LeftSelected)     //Location Selected on Page
                         await Shell.Current.GoToAsync(nameof(LocationSightingPage));
                     else
                         await Shell.Current.GoToAsync(nameof(BirdSightingPage));
@@ -71,7 +72,7 @@ public partial class BasePage : ContentPage
                 {
                     if (IsAnyDrawerOpen())
                         await CloseAllDrawers();
-                    if (AppState.LeftSelected)     //Location Selected on Page
+                    if (App.State.LeftSelected)     //Location Selected on Page
                         await Shell.Current.GoToAsync(nameof(LocationProfilePage));
                     else
                         await Shell.Current.GoToAsync(nameof(BirdProfilePage));
@@ -82,7 +83,7 @@ public partial class BasePage : ContentPage
                 {
                     if (IsAnyDrawerOpen())
                         await CloseAllDrawers();
-                    if (AppState.LeftSelected)     //Location Selected on Page
+                    if (App.State.LeftSelected)     //Location Selected on Page
                         await Shell.Current.GoToAsync(nameof(LocationInsightsPage));
                     else
                         await Shell.Current.GoToAsync(nameof(BirdInsightsPage));

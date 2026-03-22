@@ -31,6 +31,7 @@ public partial class BirdSightingPage : BasePage
             App.State.BirdTimeObs = await SummaryService.GetBirdTimeObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.SelectedSavedBird.CommonName);
             App.State.BuildChartBird(App.State.BirdDailyObs);
             App.State.BuildChartBirdTime(App.State.BirdTimeObs);
+            App.State.LeftSelected = false;
         }
         catch (Exception ex)
         {

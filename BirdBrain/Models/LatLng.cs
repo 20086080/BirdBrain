@@ -7,22 +7,18 @@ namespace BirdBrain.Models
 {
     public class LatLng
     {
-        [JsonPropertyName("city_ascii")]
-        public string CityAscii { get; set; }
+        
+        public string? city_ascii { get; set; }
 
-        [JsonPropertyName("lat")]
-        public double Lat { get; set; }
-
-        [JsonPropertyName("lng")]
-        public double Lng { get; set; }
-
-        [JsonPropertyName("country")]
-        public string Country { get; set; }
-
-        [JsonPropertyName("iso2")]
-        public string Iso2 { get; set; }
+        public double lat { get; set; }
+        
+        public double lng { get; set; }
+       
+        public string? country { get; set; }
+       
+        public string? iso2 { get; set; }
 
         public string Display =>
-        $"{CityAscii}, {Country} ({Lat}, {Lng})";
+        $"{city_ascii}, {country} ({lat}, {lng})";
     }
 }

@@ -10,13 +10,13 @@ public partial class BirdProfilePage : BasePage
     {
         InitializeComponent();
         _summaryService = summaryService;
-        App.State.LeftSelected = false;
         BindingContext = App.State;
+        App.State.LeftSelected = false;
     }
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        
+        App.State.LeftSelected = false;
     }
     async void LocationTapped(object sender, EventArgs e)
     {

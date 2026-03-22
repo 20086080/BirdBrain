@@ -2,7 +2,6 @@ using System.Windows.Input;
 
 namespace BirdBrain.Controls;
 
-
 public partial class LeftSettingsDrawer : ContentView
 {
     public LeftSettingsDrawer()

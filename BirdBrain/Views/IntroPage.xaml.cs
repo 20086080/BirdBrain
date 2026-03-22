@@ -15,6 +15,12 @@ public partial class IntroPage : BasePage
         BindingContext = App.State;
     }
 
+    protected override async void OnAppearing()
+    {         
+        base.OnAppearing();
+        App.State.LeftSelected = true;
+    }
+
     private void OnTextChanged(object sender, EventArgs e)
     {
         App.State.SelectedSavedLocation.Name = LocationEntry.Text;

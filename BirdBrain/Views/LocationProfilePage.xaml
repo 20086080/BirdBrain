@@ -10,7 +10,7 @@
     x:DataType="services:AppState"
     Title="Location Profile">
 
-    <Grid RowDefinitions="Auto,Auto,Auto, Auto,Auto,*" Padding="10" RowSpacing="5">
+    <Grid RowDefinitions="Auto,Auto,Auto, Auto,*" Padding="10" RowSpacing="5">
 
         <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center" HeightRequest="45"
                        Spacing="10" Background="{DynamicResource Background}" >
@@ -62,8 +62,8 @@
         <Grid Grid.Row="3"  Background="{DynamicResource Background}">
             <Image Source="{Binding SelectedSavedLocation.ProfileImage}"  HeightRequest="330" Aspect="AspectFill"/>
         </Grid>
-        <BoxView Grid.Row="4" Style="{StaticResource UnderlineStyle}" />
-        <Grid Grid.Row="5" ColumnSpacing="20" Padding ="10" Background="{DynamicResource Background}">
+        
+        <Grid Grid.Row="4" Padding ="5" Background="{DynamicResource Background}">
             <Label Text = "{Binding SelectedSavedLocation.Description}" Style = "{StaticResource PageLabelNormal}" LineBreakMode="WordWrap"/>
         </Grid>
     </Grid>

@@ -5,7 +5,7 @@ public class SavedLocationService
 {
     private readonly JsonFileReader _jsonReader;
 
-    public List<SavedLocation> Locations { get; private set; }
+    public List<SavedLocation> Locations { get; private set; } = new();
 
     public SavedLocationService(JsonFileReader jsonReader)
     {

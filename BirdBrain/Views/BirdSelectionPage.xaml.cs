@@ -24,7 +24,7 @@ public partial class BirdSelectionPage : BasePage
         App.State.LeftSelected = false;
     }
 
-    void Carousel_CurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
+    void Carousel_CurrentItemChanged(object? sender, CurrentItemChangedEventArgs e)
     {
         if (e.CurrentItem is Bird bird)
         {
@@ -37,32 +37,32 @@ public partial class BirdSelectionPage : BasePage
         get
         {
             if (App.State.SavedBirds == null || App.State.SavedBirds.Count == 0)
-                return null;
+                return null!;
 
             if (App.State.SelectedSavedBird == null)
                 return App.State.SavedBirds[0];
 
             var match = App.State.SavedBirds.FirstOrDefault(b =>
-                b.CommonName.Equals(App.State.SelectedSavedBird.CommonName, StringComparison.OrdinalIgnoreCase));
+                b.CommonName!.Equals(App.State.SelectedSavedBird.CommonName, StringComparison.OrdinalIgnoreCase));
 
             return match ?? App.State.SavedBirds[0];
         }
     }
 
-    async void Bird_Completed(object sender, EventArgs e)
+    async void Bird_Completed(object? sender, EventArgs e)
     {
         if (sender is not Entry entry)
             return;
 
-        string textString = entry?.Text?.Trim();
+        string textString = entry?.Text?.Trim()!;
 
-        if (!ValidationHelper.IsValidString(textString))
+        if (!ValidationHelper.IsValidString(textString!))
         {
             await ErrorService.Show(ErrorType.InvalidBird);
             return;
         }
         var selected = App.State.SavedBirds
-            .FirstOrDefault(b => b.CommonName.Equals(textString, StringComparison.OrdinalIgnoreCase));
+            .FirstOrDefault(b => b.CommonName!.Equals(textString, StringComparison.OrdinalIgnoreCase));
 
         if (selected != null)
         {
@@ -76,13 +76,13 @@ public partial class BirdSelectionPage : BasePage
         Bird.Unfocus();
         await KeyboardHelper.DismissAsync();
         
-        Application.Current.Dispatcher.Dispatch(async () =>
+        Application.Current!.Dispatcher.Dispatch(async () =>
         {
             await Shell.Current.GoToAsync(nameof(BirdSightingPage));
         });
     }
 
-    async void OnBirdTapped(object sender, TappedEventArgs e)       //Selection from Saved Bird List
+    async void OnBirdTapped(object? sender, TappedEventArgs e)       //Selection from Saved Bird List
     {
         if (e.Parameter is Bird bird)
         {

@@ -7,7 +7,7 @@ namespace BirdBrain
 {
     public partial class App : Application
     {
-        public static AppState State { get; set; }
+        public static AppState State { get; set; } = new AppState();
 
         public App()
         {

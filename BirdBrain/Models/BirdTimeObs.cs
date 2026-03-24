@@ -6,7 +6,7 @@ namespace BirdBrain.Models
 {
     public class BirdTimeObs
     {
-        public string ObsDt { get; set; }
+        public string? ObsDt { get; set; }
         public int Sightings { get; set; }
     }
 }

@@ -7,18 +7,18 @@ namespace BirdBrain.Models
 {
     public class AppThemeOption
     {
-        public string Name { get; set; }
-        public Type ThemeType { get; set; }
+        public string? Name { get; set; }
+        public Type? ThemeType { get; set; }
 
-        public Color PreviewPrimary { get; set; }
-        public Color PreviewAccent { get; set; }
-        public Color PreviewBackground { get; set; }
+        public Color? PreviewPrimary { get; set; }
+        public Color? PreviewAccent { get; set; }
+        public Color? PreviewBackground { get; set; }
 
-        public Color PreviewSurface {  get; set; }
+        public Color? PreviewSurface {  get; set; }
 
-        public Color PreviewTextPrimary { get; set; }
+        public Color? PreviewTextPrimary { get; set; }
 
-        public Color PreviewTextOnPrimary { get; set; }
+        public Color? PreviewTextOnPrimary { get; set; }
 
     }
 }

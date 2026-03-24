@@ -12,7 +12,7 @@ namespace BirdBrain.Services
             var json = await reader.ReadToEndAsync();
             try
             {
-                return JsonSerializer.Deserialize<List<T>>(json);
+                return JsonSerializer.Deserialize<List<T>>(json)!;
             }
             catch (Exception ex)
             {

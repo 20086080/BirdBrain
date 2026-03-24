@@ -7,7 +7,7 @@ public partial class Animation : ContentPage
     public Animation()
 	{
         InitializeComponent();
-        //RunIntroAnimation();
+        
     }
 
     protected override async void OnAppearing()

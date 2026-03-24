@@ -138,7 +138,7 @@ namespace BirdBrain.Services
                     AND DateStamp = (
                         SELECT IFNULL(MAX(DateStamp),0)
                             FROM BirdObservationDb
-                        WHERE AppLat = b.AppLat
+                            WHERE AppLat = b.AppLat
                             AND AppLng = b.AppLng
                             AND ComName = b.ComName
                         )

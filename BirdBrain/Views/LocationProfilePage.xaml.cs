@@ -18,11 +18,11 @@ public partial class LocationProfilePage : BasePage
         base.OnAppearing();
         App.State.LeftSelected = true;
     }
-    async void LocationTapped(object sender, EventArgs e)
+    async void LocationTapped(object? sender, EventArgs e)
     {
         try
         {
-            LocationTab.Style = (Style)Application.Current.Resources["SegmentSelectedStyle"];
+            LocationTab.Style = (Style)Application.Current!.Resources["SegmentSelectedStyle"];
             BirdTab.Style = (Style)Application.Current.Resources["SegmentUnselectedStyle"];
             LocationTabLabel.Style = (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
             BirdTabLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
@@ -36,11 +36,11 @@ public partial class LocationProfilePage : BasePage
         }
     }
 
-    async void BirdTapped(object sender, EventArgs e)
+    async void BirdTapped(object? sender, EventArgs e)
     {
         try
         {
-            BirdTab.Style = (Style)Application.Current.Resources["SegmentSelectedStyle"];
+            BirdTab.Style = (Style)Application.Current!.Resources["SegmentSelectedStyle"];
             LocationTab.Style = (Style)Application.Current.Resources["SegmentUnselectedStyle"];
             BirdTabLabel.Style = (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
             LocationTabLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];

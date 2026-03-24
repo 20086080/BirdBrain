@@ -152,7 +152,7 @@ public partial class BasePage : ContentPage
             _drawerOverlay.IsVisible = false;
     }
 
-    async void OnSwipeRight(object sender, SwipedEventArgs e)
+    async void OnSwipeRight(object? sender, SwipedEventArgs e)
     {
         if (_rightDrawer?.TranslationX == 0)
             await CloseRightDrawer();
@@ -160,7 +160,7 @@ public partial class BasePage : ContentPage
             await OpenDrawer(); // existing LEFT drawer
     }
 
-    async void OnSwipeLeft(object sender, SwipedEventArgs e)
+    async void OnSwipeLeft(object? sender, SwipedEventArgs e)
     {
         if (_leftDrawer?.TranslationX == 0)
             await CloseDrawer();

@@ -11,18 +11,18 @@ public partial class AppHeader : ContentView
 	{
 		InitializeComponent();
 	}
-    void OnMenuTapped(object sender, EventArgs e)                       // Open Menu 
+    void OnMenuTapped(object? sender, EventArgs e)                       // Open Menu 
     {
         HamburgerClicked?.Invoke(this, EventArgs.Empty);
     }
 
-    async void OnCloseTapped(object sender, EventArgs e)                // Exit the app
+    async void OnCloseTapped(object? sender, EventArgs e)                // Exit the app
     {
         //TODO - Save SavedLocations and SavedBirds to json files before quitting
         Application.Current.Quit();   
     }
 
-    async void OnMenuFavouriteTapped(object sender, TappedEventArgs e)
+    async void OnMenuFavouriteTapped(object? sender, TappedEventArgs e)
     {
         if (App.State.LeftSelected)                                     // Location option is selected 
         {
@@ -54,7 +54,7 @@ public partial class AppHeader : ContentView
         }
     }
 
-    async void OnMenuRefreshTapped(object sender, TappedEventArgs e)    //Get API Data 
+    async void OnMenuRefreshTapped(object? sender, TappedEventArgs e)    //Get API Data 
     {
         await ErrorService.Show(ErrorType.GettingInformation);
         var refresh = new RefreshData();
@@ -69,7 +69,7 @@ public partial class AppHeader : ContentView
             await ErrorService.Show(ErrorType.RefreshSuccessful);
         }
     }
-    void OnMenuSettingsTapped(object sender, TappedEventArgs e)         // Call Settings Menu 
+    void OnMenuSettingsTapped(object? sender, TappedEventArgs e)         // Call Settings Menu 
     {
         SettingsClicked?.Invoke(this, EventArgs.Empty);
     }

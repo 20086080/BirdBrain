@@ -5,13 +5,13 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Class="BirdBrain.Controls.ErrorPopup">
 
-    <Border Style="{StaticResource RoundedAccentBorderStyle1}" Padding="5" WidthRequest="250" HeightRequest="350"
+    <Border Style="{StaticResource RoundedAccentBorderStyle1}" Padding="5" WidthRequest="250" HeightRequest="290"
         HorizontalOptions="Center" VerticalOptions="Center">
-        <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="20">
-            <Image Grid.Row="0" VerticalOptions="Center" Source="{Binding Image}" HeightRequest="200"/>
+        <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
+            <Image Grid.Row="0" VerticalOptions="Center" Source="{Binding Image}" HeightRequest="185"/>
             <Label Grid.Row ="1" Text="{Binding Title}" Style="{StaticResource SubTitles} " 
                    TextColor= "{DynamicResource Background}" LineBreakMode="WordWrap" HorizontalOptions="Center"/>
-            <Label Grid.Row ="2" Text="{Binding Message}" Style="{StaticResource PageLabelCenter}" 
+            <Label Grid.Row ="2" Text="{Binding Message}" Style="{StaticResource PageLabelCenter}" FontAttributes="Bold" 
                    TextColor= "{DynamicResource Background}" LineBreakMode="WordWrap" />
         </Grid>
     </Border>

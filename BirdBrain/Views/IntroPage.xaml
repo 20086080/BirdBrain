@@ -8,27 +8,39 @@
     BackgroundColor="{DynamicResource Background}">
 
     <!-- Proper page grid -->
-    <Grid Padding="20" RowSpacing="15" RowDefinitions="Auto,Auto,*,Auto">
-        <HorizontalStackLayout Grid.Row="0" Spacing="10" VerticalOptions="Center">
+    <Grid Padding="20" RowSpacing="10" RowDefinitions="Auto, Auto, Auto, Auto,*,Auto, Auto">
+        <HorizontalStackLayout Grid.Row="0" Spacing="5" >
             <Label Text="Use Current Location" Style="{StaticResource PageLabel}" />
             <Switch IsToggled="{Binding UseCurrentLocation}" Style="{StaticResource PrimarySwitchStyle}" />
         </HorizontalStackLayout>
-        <VerticalStackLayout Grid.Row="1" Spacing="2">
-            <Entry x:Name="LocationEntry" Placeholder="Enter location OR select from saved locations" FontAttributes="Italic"
-                   TextChanged="OnTextChanged"  Style="{StaticResource PrimaryEntryStyle}" />
-            <BoxView Style="{StaticResource UnderlineStyle}" />
-        </VerticalStackLayout>
+        <BoxView Grid.Row ="1" Style="{StaticResource UnderlineStyle}" />
 
+        <VerticalStackLayout Grid.Row="2" >
+            <HorizontalStackLayout >
+                <Label Text="Enter Latitude | Longitude" Style="{StaticResource PageLabel}" />
+                <Entry x:Name="Latitude" Text="{Binding SelectedSavedLocation.Lat}"
+                   TextChanged="Latitude_TextChanged"  Style="{StaticResource PrimaryEntryStyle}" />
+                <Label Text="," Style="{StaticResource PageLabel}"/>
+                <Entry x:Name="Longitude" Text="{Binding SelectedSavedLocation.Lng}" 
+                    TextChanged="Longitude_TextChanged"  Style="{StaticResource PrimaryEntryStyle}" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="Enter Location" Style="{StaticResource PageLabel}" />
+                <Entry x:Name="LocationEntry" Text="{Binding SelectedSavedLocation.Name}" 
+                   TextChanged="OnTextChanged"  Style="{StaticResource PrimaryEntryStyle}" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+        
+        <BoxView Grid.Row ="3" Style="{StaticResource UnderlineStyle}" />
         <!-- Location Carousel -->
-        <VerticalStackLayout Grid.Row="2" Spacing="10" VerticalOptions="FillAndExpand">
-            <Label Text="Saved Locations" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
+        <VerticalStackLayout Grid.Row="4" Spacing="5" >
+            <Label Text="Select from Saved Locations" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
             <CarouselView ItemsSource="{Binding SavedLocations}" 
                           x:Name="LocationCarousel"
                           IndicatorView="LocationIndicator" 
-                          VerticalOptions="FillAndExpand"
-                          HorizontalOptions="FillAndExpand" 
-                          PeekAreaInsets="60"
-                          CurrentItem="{Binding SelectedSavedLocation, Mode=TwoWay}">
+                          VerticalOptions="Fill"
+                          HorizontalOptions="Fill" 
+                          PeekAreaInsets="70">
 
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="MandatorySingle"
@@ -39,7 +51,7 @@
                     <DataTemplate>
                         <Border Stroke="{DynamicResource Accent}"
                                 Style="{StaticResource CarouselBorder}"
-                                HorizontalOptions="Center" WidthRequest="220">
+                                WidthRequest="220">
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer
                                     Tapped="OnLocationTapped"
@@ -54,22 +66,17 @@
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
-
             <IndicatorView x:Name="LocationIndicator" Style="{StaticResource PrimaryIndicatorStyle}"
-                           HorizontalOptions="Center"/>
+                           HorizontalOptions="Center" Padding="5"/>
         </VerticalStackLayout>
+        <BoxView Grid.Row ="5" Style="{StaticResource UnderlineStyle}" />
 
         <!-- Selector - All Birds / Specific Bird -->
-        <Border Grid.Row="3" Style="{StaticResource RoundedAccentBorderStyle}"
-                Padding="0" HorizontalOptions="Center">
-
+        <Border Grid.Row="6" Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" HorizontalOptions="Center">
             <Grid ColumnDefinitions="*,*" HeightRequest="44" WidthRequest="300">
-
                 <!-- All Birds TAB -->
-                <Border x:Name="AllBirdsTab"  Grid.Column="0"
-                        Style="{StaticResource SegmentSelectedStyle}">
-                    <Label x:Name="AllBirdsLabel" Text="All Birds"
-                           Style="{StaticResource SegmentSelectedLabelStyle}"/>
+                <Border x:Name="AllBirdsTab"  Grid.Column="0" Style="{StaticResource SegmentSelectedStyle}">
+                    <Label x:Name="AllBirdsLabel" Text="All Birds" Style="{StaticResource SegmentSelectedLabelStyle}"/>
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnAllBirdsTapped"/>
                     </Border.GestureRecognizers>

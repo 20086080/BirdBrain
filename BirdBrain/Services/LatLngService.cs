@@ -10,7 +10,7 @@ namespace BirdBrain.Services
     {
         private readonly JsonFileReader _jsonReader;
 
-        public List<LatLng> LatLng { get; private set; }
+        public List<LatLng> LatLng { get; private set; } = new();
 
         public LatLngService(JsonFileReader jsonReader)
         {

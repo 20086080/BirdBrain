@@ -25,7 +25,7 @@ namespace BirdBrain.Services
         private Bird _selectedSavedBird { get; set; } = new();
 
         private int _days = 30;
-        private int _radius = 10;
+        private int _radius = 50;
         private bool _leftSelected = true;
         private int _totalSightings;
         private int _totalTypeOfBird;

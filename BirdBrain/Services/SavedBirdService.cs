@@ -5,7 +5,7 @@ public class SavedBirdService
 {
     private readonly JsonFileReader _jsonReader;
 
-    public List<Bird> Birds { get; private set; }
+    public List<Bird> Birds { get; private set; } = new();
     
     public SavedBirdService(JsonFileReader jsonReader)
     {

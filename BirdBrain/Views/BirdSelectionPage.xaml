@@ -25,20 +25,20 @@
         </VerticalStackLayout>
 
         <!-- Bird Carousel -->
-        <VerticalStackLayout Grid.Row="2" Spacing="15" Margin="0,20,0,20" VerticalOptions="FillAndExpand">
+        <VerticalStackLayout Grid.Row="2" Spacing="10" Margin="0,20,0,20" >
             <Label Text="Saved Birds" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
             <CarouselView ItemsSource="{Binding SavedBirds}"
                           x:Name="BirdCarousel" 
                           IndicatorView="BirdIndicator" 
-                          VerticalOptions="FillAndExpand"
-                          PeekAreaInsets="60">
+                          VerticalOptions="Fill"
+                          PeekAreaInsets="90">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="MandatorySingle"
-                                   SnapPointsAlignment="Center" ItemSpacing="5"/>
+                                   SnapPointsAlignment="Center" ItemSpacing="10"/>
                 </CarouselView.ItemsLayout>
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
-                        <Grid WidthRequest="200" HorizontalOptions="Center">
+                        <Grid WidthRequest="220" >
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer
                                     Tapped="OnBirdTapped"

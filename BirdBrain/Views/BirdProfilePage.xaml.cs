@@ -16,6 +16,8 @@ public partial class BirdProfilePage : BasePage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        LocationTab.Style = (Style)Application.Current!.Resources["SegmentUnselectedStyle"];
+        LocationTabLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
         App.State.LeftSelected = false;
     }
     async void LocationTapped(object? sender, EventArgs e)

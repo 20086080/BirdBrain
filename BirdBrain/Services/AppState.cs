@@ -24,6 +24,11 @@ namespace BirdBrain.Services
 
         private Bird _selectedSavedBird { get; set; } = new();
 
+        private int _maxDays = 30;
+        private int _minDays = 1;
+        private int _maxRadius = 50;
+        private int _minRadius = 1;
+
         private int _days = 30;
         private int _radius = 50;
         private bool _leftSelected = true;
@@ -150,7 +155,7 @@ namespace BirdBrain.Services
                 Labels = new List<string>();
                 return;
             }
-            var color = (Color)Application.Current.Resources["TextPrimary"];
+            var color = (Color)Application.Current!.Resources["TextPrimary"];
             var skColor = new SKColor(
                 (byte)(color.Red * 255), (byte)(color.Green * 255),
                 (byte)(color.Blue * 255), (byte)(color.Alpha * 255));
@@ -167,7 +172,7 @@ namespace BirdBrain.Services
                 }
             };
             Labels = data
-                .Select(x => DateTime.Parse(x.ObsDt).ToString("dd/M"))
+                .Select(x => DateTime.Parse(x.ObsDt!).ToString("dd/M"))
                 .ToList();
             XAxes = new Axis[]
             {
@@ -236,7 +241,7 @@ namespace BirdBrain.Services
                 BirdLabels = new List<string>();
                 return;
             }
-            var color = (Color)Application.Current.Resources["TextPrimary"];
+            var color = (Color)Application.Current!.Resources["TextPrimary"];
             var skColor = new SKColor(
                 (byte)(color.Red * 255), (byte)(color.Green * 255),
                 (byte)(color.Blue * 255), (byte)(color.Alpha * 255));
@@ -334,6 +339,47 @@ namespace BirdBrain.Services
             {
                 if (_totalSightings != value)
                     { _totalSightings = value; OnPropertyChanged(); }
+            }
+        }
+
+        public int MaxRadius
+        {
+            get => _maxRadius;
+            set
+            {
+                if (_maxRadius != value)
+                { _maxRadius = value; OnPropertyChanged(); }
+            }
+        }
+
+        public int MinRadius
+        {
+            get => _minRadius;
+            set
+            {
+                if (_minRadius != value)
+                { _minRadius = value; OnPropertyChanged(); }
+            }
+        }
+
+
+        public int MaxDays
+        {
+            get => _maxDays;
+            set
+            {
+                if (_maxDays != value)
+                { _maxDays = value; OnPropertyChanged(); }
+            }
+        }
+
+        public int MinDays
+        {
+            get => _minDays;
+            set
+            {
+                if (_minDays != value)
+                { _minDays = value; OnPropertyChanged(); }
             }
         }
 

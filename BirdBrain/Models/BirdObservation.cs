@@ -21,7 +21,7 @@ namespace BirdBrain.Models
 
         public bool locationPrivate { get; set; }
 
-        public DateTime DateStamp { get; set; }
+        public string? DateStamp { get; set; }
 
         public double AppLat { get; set; }
         public double AppLng { get; set; }

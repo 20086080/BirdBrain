@@ -58,14 +58,14 @@
         <BoxView Grid.Row="3" Style="{StaticResource UnderlineStyle}"/>
 
         
-        <Grid Grid.Row="4" ColumnDefinitions="*,1.3*" >
+        <Grid Grid.Row="4" ColumnDefinitions="*,*" >
             <!-- SIGHTING STATS -->
             <Border Grid.Column ="0" Margin ="0,20,0,0" Padding="5,5,5,5" Style ="{DynamicResource RoundedAccentBorderStyle}" VerticalOptions="Start" 
                            Background="{DynamicResource Accent}">
-                <Grid ColumnDefinitions="1.4*,*" RowDefinitions="Auto,Auto" RowSpacing="5">
-                    <Label Grid.Row="0"  Grid.Column="0" Padding="5,10,5,10" Text="Sightings" Style="{StaticResource PageLabelCenter}" 
+                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" RowSpacing="5">
+                    <Label Grid.Row="0"  Grid.Column="0" Padding="5,10,5,10" Text="# Obs" Style="{StaticResource PageLabel}" 
                            TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="15"/>
-                    <Label Grid.Row="1" Grid.Column="0" Padding="5,10,5,10" Text="# Birds" Style="{StaticResource PageLabelCenter}" 
+                    <Label Grid.Row="1" Grid.Column="0" Padding="5,10,5,10" Text="# Bird Type" Style="{StaticResource PageLabel}" 
                            TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="15"/>
                     <Label Grid.Row="0" Grid.Column="1" Text="{Binding TotalSightings}" Style="{StaticResource PageLabelCenter}" 
                            TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
@@ -84,7 +84,7 @@
                     <CollectionView.Header>
                         <Grid ColumnDefinitions="*,*" RowDefinitions =" *,*" Padding="5">
                             <Label Text="Birds" Grid.Row ="0" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
-                            <Label Grid.Column="1" Grid.Row ="0" Text="# Sightings" Style="{StaticResource PageLabelNormal}" 
+                            <Label Grid.Column="1" Grid.Row ="0" Text="# Obs"  Style="{StaticResource PageLabelCenter}" 
                                    HorizontalOptions="Center"/>
                             <BoxView Grid.Row ="1" Grid.ColumnSpan ="2" Style="{StaticResource UnderlineStyle}"/>
                         </Grid>

@@ -11,26 +11,26 @@ namespace BirdBrain.Services
         
         public RefreshData()
         {
-            _ebird = new EBirdService();   
+            _ebird = new EBirdService();
+            
         }
 
         public async Task<bool> RefreshAsync(double lat, double lng)
         {
             await App.State.Database.InitAsync();
-            var lastRefresh =
-                await App.State.Database.GetLastRefreshTimeAsync();
+            var summaryService = new SummaryService(App.State.Database);
+            bool IsRefreshed = await summaryService.GetLocationRefreshTodayAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng);
 
-            if (lastRefresh.HasValue &&
-                DateTime.UtcNow - lastRefresh.Value < TimeSpan.FromMinutes(60))
+            if (IsRefreshed)
             {
-                return false; // too soon
+                return false; // Refresh already done today, skip API call and DB update
             }
 
             // API call
             var observations =
-                await _ebird.GetRecentObservationsAsync(lat, lng, App.State.Radius, App.State.Days);
+                await _ebird.GetRecentObservationsAsync(lat, lng, App.State.Radius, App.State.MinDays);     //API for 1 day only (MinDays = 1) 
 
-            var refreshTime = DateTime.UtcNow;
+            var refreshTime = DateTime.UtcNow.ToString("yyyy-MM-dd");
             var dbList =
                 App.State.Database.ConvertToDb(observations, refreshTime);
 

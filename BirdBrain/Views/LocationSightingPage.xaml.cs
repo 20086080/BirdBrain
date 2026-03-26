@@ -1,6 +1,7 @@
-using BirdBrain.Services;
 using BirdBrain.Models;
+using BirdBrain.Services;
 using System.Diagnostics;
+//using static AndroidX.Core.Text.Util.LocalePreferences.FirstDayOfWeek;
 
 namespace BirdBrain.Views;
 
@@ -20,14 +21,14 @@ public partial class LocationSightingPage : BasePage
         try
         {
             base.OnAppearing();
-            App.State.TotalSightings = await SummaryService.GetTotalLocationCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng);
+            App.State.TotalSightings = await SummaryService.GetTotalLocationCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, DateTime.UtcNow.AddDays(-App.State.Days));
             if (App.State.TotalSightings <= 0)
             {
                 await ErrorService.Show(ErrorType.NoLocationDataFound);
             }
-            App.State.TotalTypeOfBird = await SummaryService.GetTotalLocationBirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng);
-            App.State.TopBirds = await SummaryService.GetTop5BirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng);
-            App.State.LocationDailyObs = await SummaryService.GetLocationDailyObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng);
+            App.State.TotalTypeOfBird = await SummaryService.GetTotalLocationBirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, DateTime.UtcNow.AddDays(-App.State.Days));
+            App.State.TopBirds = await SummaryService.GetTop5BirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, DateTime.UtcNow.AddDays(-App.State.Days));
+            App.State.LocationDailyObs = await SummaryService.GetLocationDailyObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, DateTime.UtcNow.AddDays(-App.State.Days));
             App.State.BuildChart(App.State.LocationDailyObs);
             App.State.LeftSelected = true;
 

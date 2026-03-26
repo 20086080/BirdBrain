@@ -32,7 +32,7 @@ namespace BirdBrain.Services
         }
 
         public List<BirdObservationDb> ConvertToDb(
-            List<BirdObservation> apiList, DateTime refreshTime)
+            List<BirdObservation> apiList, string refreshTime)
         {
             //var now = DateTime.UtcNow;
 
@@ -63,7 +63,7 @@ namespace BirdBrain.Services
                             .ToListAsync();
         }
 
-        public async Task<DateTime?> GetLastRefreshTimeAsync()
+        public async Task<string?> GetLastRefreshTimeAsync()
         {
             var last = await _db.Table<BirdObservationDb>()
                                 .OrderByDescending(x => x.DateStamp)

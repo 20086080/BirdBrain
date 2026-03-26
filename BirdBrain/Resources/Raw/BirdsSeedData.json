@@ -1,17 +1,5 @@
 [
   {
-    "CommonName": "White-throated Kingfisher",
-    "ScientificName": "Halcyon smyrnensis",
-    "EBirdName": "White-throated Kingfisher",
-    "Description": "Striking blue and brown kingfisher often seen away from water.",
-    "Habitat": "Open areas, wetlands",
-    "Diet": "Insects, small vertebrates",
-    "Rarity": "Common",
-    "ConservationStatus": "Least Concern",
-    "Thumbnail": "kingfisher_t.png",
-    "ProfileImage": "kingfisher.png"
-  },
-  {
     "CommonName": "Australian Pelican",
     "ScientificName": "Pelecanus conspicillatus",
     "EBirdName": "Australian Pelican",
@@ -23,6 +11,31 @@
     "Thumbnail": "pelican_t.png",
     "ProfileImage": "pelican.png"
   },
+  {
+    "CommonName": "Rainbow Lorikeet",
+    "ScientificName": "Trichoglossus moluccanus",
+    "EBirdName": "Rainbow Lorikeet",
+    "Description": "Brightly colored parrot with a blue head, green wings, and orange-yellow breast, known for its energetic and noisy behavior.",
+    "Habitat": "Coastal forests, woodlands, urban areas",
+    "Diet": "Nectar, pollen, fruits",
+    "Rarity": "Common",
+    "ConservationStatus": "Least Concern",
+    "Thumbnail": "rainbow_lorikeet_t.png",
+    "ProfileImage": "rainbow_lorikeet.png"
+  },
+  {
+    "CommonName": "White-throated Kingfisher",
+    "ScientificName": "Halcyon smyrnensis",
+    "EBirdName": "White-throated Kingfisher",
+    "Description": "Striking blue and brown kingfisher often seen away from water.",
+    "Habitat": "Open areas, wetlands",
+    "Diet": "Insects, small vertebrates",
+    "Rarity": "Common",
+    "ConservationStatus": "Least Concern",
+    "Thumbnail": "kingfisher_t.png",
+    "ProfileImage": "kingfisher.png"
+  },
+
   {
     "CommonName": "New Holland Honeyeater",
     "ScientificName": "Phylidonyris novaehollandiae",

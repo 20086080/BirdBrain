@@ -46,12 +46,19 @@
 
         <!-- Bird LABEL -->
         <Grid Grid.Row="3"  Background="{DynamicResource Background}">
-            <Image Source="{Binding SelectedSavedBird.ProfileImage}"  HeightRequest="330" Aspect="AspectFill"/>
+            <Image Source="{Binding SelectedSavedBird.ProfileImage}" HeightRequest="350" Aspect="AspectFill"/>
         </Grid>
-
-        <Grid Grid.Row="4" Padding ="5" Background="{DynamicResource Background}">
-            <Label Text = "{Binding SelectedSavedBird.Description}" Style = "{StaticResource PageLabelNormal}" LineBreakMode="WordWrap"/>
-        </Grid>
+        <VerticalStackLayout Spacing="5" Grid.Row="4" Background="{DynamicResource Background}" >
+            <Label Text = "{Binding SelectedSavedBird.Description}" Style = "{StaticResource PageLabelNormal}" TextColor ="{DynamicResource Accent}" LineBreakMode="WordWrap"/>
+            <HorizontalStackLayout>
+                <Label Text = "{Binding SelectedSavedBird.Habitat, StringFormat = 'Habitat - {0}'}" Style = "{StaticResource PageLabelNormal}" LineBreakMode="WordWrap"/>
+                <Label Text = "{Binding SelectedSavedBird.Diet, StringFormat = ' | Diet - {0}'}" Style = "{StaticResource PageLabelNormal}" LineBreakMode="WordWrap"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text = "{Binding SelectedSavedBird.Rarity, StringFormat = 'Rarity - {0}'}" Style = "{StaticResource PageLabelNormal}" LineBreakMode="WordWrap"/>
+                <Label Text = "{Binding SelectedSavedBird.ConservationStatus, StringFormat = ' | Conservation - {0}'}" Style = "{StaticResource PageLabelNormal}" LineBreakMode="WordWrap"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
     </Grid>
 </views:BasePage>
 

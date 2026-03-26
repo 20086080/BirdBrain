@@ -6,8 +6,7 @@
     xmlns:controls="clr-namespace:BirdBrain.Controls"
     BackgroundColor = "{DynamicResource Accent70}"         
     Padding="0" Margin= "0">
-    <!-- TODO Make all themes translucent version-->
-    
+
     <VerticalStackLayout Padding="20,40" Spacing="24" >
 
         <!-- Header -->
@@ -36,12 +35,7 @@
                     Command="{Binding ProfileCommand,
                               Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
             </Grid>
-            <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
-                <Image Source="icon_insights.svg" Style="{StaticResource DrawerMenuIconStyle}" />
-                <Button Grid.Column ="1" Text="Insights" Style="{StaticResource DrawerMenuButtonStyle}"
-                    Command="{Binding InsightsCommand,
-                              Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
-            </Grid>
+            
             <Grid ColumnDefinitions="30,*" ColumnSpacing="15">
                 <Image Source="icon_location.svg" Style="{StaticResource DrawerMenuIconStyle}" />
                 <Button Grid.Column ="1" Text="Select Location" Style="{StaticResource DrawerMenuButtonStyle}"
@@ -65,24 +59,22 @@
         <VerticalStackLayout Spacing="8">
             <Label Text="Radius (km)" Style="{StaticResource DrawerSectionLabelStyle}" />
             <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
-                <Label Text="1" Style="{StaticResource SliderEndpointLabelStyle}" />
+                <Label Text="{Binding MinRadius}" Style="{StaticResource SliderEndpointLabelStyle}" />
                 <Slider Grid.Column="1" Style="{StaticResource DrawerSliderStyle}"
-                    Minimum="1" Maximum = "50"
-                    Value="{Binding Radius, Mode=TwoWay,
-                        Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
-                <Label Text ="50"  Grid.Column="2" Style="{StaticResource SliderEndpointLabelStyle}" />
+                    Minimum="{Binding MinRadius}" Maximum = "{Binding MaxRadius}"
+                    Value="{Binding Radius, Mode=TwoWay}" />
+                <Label Text ="{Binding MaxRadius}"  Grid.Column="2" Style="{StaticResource SliderEndpointLabelStyle}" />
             </Grid>
         </VerticalStackLayout>
        
         <VerticalStackLayout Spacing="8">
             <Label Text="Days" Style="{StaticResource DrawerSectionLabelStyle}" />
             <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
-                <Label Text="1" Style="{StaticResource SliderEndpointLabelStyle}" />
+                <Label Text="{Binding MinDays}" Style="{StaticResource SliderEndpointLabelStyle}" />
                 <Slider Grid.Column="1" Style="{StaticResource DrawerSliderStyle}"
-                    Minimum="1" Maximum="30"
-                    Value="{Binding Days, Mode=TwoWay,
-                        Source={RelativeSource AncestorType={x:Type controls:LeftSettingsDrawer}}}" />
-                <Label Text="30" Grid.Column="2" Style="{StaticResource SliderEndpointLabelStyle}" />
+                    Minimum="{Binding MinDays}" Maximum="{Binding MaxDays}"
+                    Value="{Binding Days, Mode=TwoWay}" />
+                <Label Text="{Binding MaxDays}" Grid.Column="2" Style="{StaticResource SliderEndpointLabelStyle}" />
             </Grid>
         </VerticalStackLayout>
     </VerticalStackLayout>

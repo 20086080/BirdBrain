@@ -82,6 +82,8 @@
                 <Setter Property="PlaceholderColor" Value="{DynamicResource Accent}" />
                 <Setter Property="FontAutoScalingEnabled" Value="True" />
                 <Setter Property="FontSize" Value="15" />
+                <Setter Property="IsSpellCheckEnabled" Value="False"/>
+                <Setter Property="IsTextPredictionEnabled" Value="False"/>
                 <Setter Property="FontAttributes" Value="Italic"/>
                 <Setter Property="FontFamily" Value="AppPrimary" />
             </Style>

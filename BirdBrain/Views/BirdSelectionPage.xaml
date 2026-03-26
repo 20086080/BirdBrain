@@ -46,7 +46,7 @@
                             </Grid.GestureRecognizers>
                             <Border Stroke="{DynamicResource Accent}" Style="{StaticResource CarouselBorder}">
                                 <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
-                                    <Image Source="{Binding Thumbnail}" HeightRequest="130" Aspect="AspectFill" />
+                                    <Image Source="{Binding Thumbnail}" HeightRequest="140" Aspect="AspectFill" />
                                     <Label Text="{Binding CommonName}" Style="{StaticResource CarouselLabel}" />
                                 </VerticalStackLayout>
                             </Border>

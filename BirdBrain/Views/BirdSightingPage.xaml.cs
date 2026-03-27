@@ -20,6 +20,7 @@ public partial class BirdSightingPage : BasePage
         base.OnAppearing();
         LocationTab.Style = (Style)Application.Current!.Resources["SegmentUnselectedStyle"];
         LocationTabLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
+        App.State.CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
         try
         {
             App.State.TotalBirdSightings = await SummaryService.GetTotalBirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.SelectedSavedBird.CommonName!, DateTime.UtcNow.AddDays(-App.State.Days));
@@ -27,7 +28,8 @@ public partial class BirdSightingPage : BasePage
             {
                 await ErrorService.Show(ErrorType.NoBirdsFound);
             }
-            App.State.TotalSightings = await SummaryService.GetTotalLocationCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, DateTime.UtcNow.AddDays(-App.State.Days));
+
+            App.State.TotalSightings = await SummaryService.GetTotalLocationCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate);
             App.State.PercTotalBirdSightings = 100 * ((double)App.State.TotalBirdSightings / App.State.TotalSightings) ; 
             App.State.BirdDailyObs = await SummaryService.GetBirdDailyObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.SelectedSavedBird.CommonName!, DateTime.UtcNow.AddDays(-App.State.Days));
             App.State.BirdTimeObs = await SummaryService.GetBirdTimeObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.SelectedSavedBird.CommonName!, DateTime.UtcNow.AddDays(-App.State.Days));

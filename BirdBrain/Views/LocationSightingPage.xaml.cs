@@ -21,17 +21,30 @@ public partial class LocationSightingPage : BasePage
         try
         {
             base.OnAppearing();
-            App.State.TotalSightings = await SummaryService.GetTotalLocationCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, DateTime.UtcNow.AddDays(-App.State.Days));
+            
+            App.State.CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
+            App.State.TotalSightings = await SummaryService.GetTotalLocationCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate);
             if (App.State.TotalSightings <= 0)
             {
                 await ErrorService.Show(ErrorType.NoLocationDataFound);
             }
-            App.State.TotalTypeOfBird = await SummaryService.GetTotalLocationBirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, DateTime.UtcNow.AddDays(-App.State.Days));
-            App.State.TopBirds = await SummaryService.GetTop5BirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, DateTime.UtcNow.AddDays(-App.State.Days));
-            App.State.LocationDailyObs = await SummaryService.GetLocationDailyObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, DateTime.UtcNow.AddDays(-App.State.Days));
+            string DateToday = await SummaryService.LatestDateStmpAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, 0);
+
+            App.State.TotalTypeOfBird = await SummaryService.GetTotalLocationBirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate);
+            App.State.TopBirds = await SummaryService.GetTop5BirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate, DateToday);
+            App.State.LocationDailyObs = await SummaryService.GetLocationDailyObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate);
             App.State.BuildChart(App.State.LocationDailyObs);
             App.State.LeftSelected = true;
-
+            App.State.TodayObs = App.State.TopBirds?.Sum(b => b.StatsToday) ?? 0;
+            int NumberDays = await SummaryService.DateStampTotalAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate);
+            App.State.AverageObs = App.State.TotalSightings / NumberDays;
+            App.State.NewBirds = 0;
+            if (NumberDays > 1)
+            {
+                string previousDate = await SummaryService.LatestDateStmpAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, 1);
+                int previousCount = await SummaryService.BirdCountForDateAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, previousDate);
+                App.State.NewBirds = App.State.TodayObs - previousCount; 
+            }
         }
         catch (Exception ex) 
         {

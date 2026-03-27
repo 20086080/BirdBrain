@@ -65,9 +65,9 @@
                     VerticalOptions="Start" Background="{DynamicResource Accent}">
 
                     <Grid ColumnDefinitions="1.4*,*" RowDefinitions="Auto,Auto" RowSpacing="5" Padding="5">
-                        <Label Grid.Row="0"  Grid.Column="0" Text="# Obs" Style="{StaticResource PageLabel}" 
+                        <Label Grid.Row="0"  Grid.Column="0" Text="# Obs" Padding ="5" Style="{StaticResource PageLabel}" 
                                TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
-                        <Label Grid.Row="1" Grid.Column="0" Text="# Species" Style="{StaticResource PageLabel}" 
+                        <Label Grid.Row="1" Grid.Column="0" Text="# Species" Padding ="5" Style="{StaticResource PageLabel}" 
                                TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
 
                         <Label Grid.Row="0" Grid.Column="1" Text="{Binding TotalSightings}" Style="{StaticResource PageLabelCenter}" 
@@ -82,25 +82,24 @@
                     </Grid>
                 </Border>
                 <HorizontalStackLayout  Padding="5">
-                    <Label Text = "Previous 24 Hr Obs : "  Style="{StaticResource PageLabelNormal}"></Label>
-                    <Label Text = "{Binding TodayObs}" Padding="5" Style="{StaticResource PageLabelNormal}"></Label>
-                    <Label Text = "/ Avg "  Padding="5" Style="{StaticResource PageLabelNormal}"></Label>
-                    <Label Text = "{Binding AverageObs}" Padding="5" Style="{StaticResource PageLabelNormal}"></Label>
+                    <Label Text = "{Binding TodayObs,StringFormat= 'Last 24hr {0} Obs / Avg'}" Style="{StaticResource PageLabelNormal}"></Label>
+                    <Label Text = "{Binding AverageObs, StringFormat=' {0}'}" Style="{StaticResource PageLabelNormal}"></Label>
+                    
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Padding="5">
                     <Label Text= "{Binding NewBirds}"  Style="{StaticResource PageLabelNormal}"></Label>
-                    <Label Text=" New Birds (last upload)"  Style="{StaticResource PageLabelNormal}"></Label>
+                    <Label Text=" New Birds last 24hr"  Style="{StaticResource PageLabelNormal}"></Label>
                 </HorizontalStackLayout>
 
             </VerticalStackLayout>
             
-            <Border Grid.Column ="1" Padding="5" HeightRequest="140" Style ="{DynamicResource RoundedAccentBorderStyle}">
+            <Border Grid.Column ="1" Padding="5" HeightRequest="145" Style ="{DynamicResource RoundedAccentBorderStyle}">
                 <ScrollView VerticalScrollBarVisibility="Always">
                     <CollectionView ItemsSource="{Binding TopBirds}">
                         <CollectionView.Header>
                             <Grid ColumnDefinitions="*,*,*" RowDefinitions =" *,*" Padding="5">
                                 <Label Text="Birds" Grid.Row ="0" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
-                                <Label Grid.Column="1" Grid.Row ="0" Grid.ColumnSpan ="2" Text="#Obs (Day | Period)" FontSize ="11" Style="{StaticResource PageLabelCenter}" 
+                                <Label Grid.Column="1" Grid.Row ="0" Grid.ColumnSpan ="2" Text="#Obs (Day | Period)" FontSize ="11.3" Style="{StaticResource PageLabelCenter}" 
                                    HorizontalOptions="Center"/>
                                 <BoxView Grid.Row ="1" Grid.ColumnSpan ="3" Style="{StaticResource UnderlineStyle}"/>
                             </Grid>
@@ -108,8 +107,8 @@
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="models:TopBirds">
-                                <Grid ColumnDefinitions="4*,*,*" Padding="2" ColumnSpacing="5">
-                                    <Label Text="{Binding BirdName}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start" FontSize="12"/>
+                                <Grid ColumnDefinitions="4*,*,*" ColumnSpacing="5">
+                                    <Label Text="{Binding BirdName}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start" FontSize="13"/>
                                     <Label Grid.Column="1" Text="{Binding StatsToday}"  HorizontalTextAlignment="Center" 
                                            HorizontalOptions="Center"  Style="{StaticResource PageLabelNormal}"/>
                                     <Label Grid.Column="2" Text="{Binding Sightings}" HorizontalTextAlignment="Center" 

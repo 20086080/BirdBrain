@@ -28,7 +28,7 @@ public partial class Animation : ContentPage
                 AnimatedImage.Opacity = 0;
                 AnimatedImage.Source = img;
                 await AnimatedImage.FadeToAsync(1, 100);
-                await Task.Delay(600);
+                await Task.Delay(500);
             }
         }
         catch (Exception ex)

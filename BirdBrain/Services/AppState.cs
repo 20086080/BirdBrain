@@ -36,7 +36,8 @@ namespace BirdBrain.Services
         private int _totalSightings;
         private int _todayObs;
         private int _averageObs;
-        private int _newBirds; 
+        private int _newBirds;
+        private string? _cutoffDate;
 
         private int _totalTypeOfBird;
         private int _totalBirdSightings;
@@ -460,6 +461,15 @@ namespace BirdBrain.Services
             }
         }
 
+        public string CutoffDate
+        {
+            get => _cutoffDate;
+            set
+            {
+                if (_cutoffDate != value)
+                { _cutoffDate = value; OnPropertyChanged(); }
+            }
+        }
         public int Radius
         {
             get => _radius;

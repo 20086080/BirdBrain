@@ -8,14 +8,14 @@
     BackgroundColor="{DynamicResource Background}">
 
     <!-- Proper page grid -->
-    <Grid Padding="20" RowSpacing="10" RowDefinitions="Auto, Auto, Auto, Auto,*,Auto, Auto">
+    <Grid Padding="20" RowSpacing="5" RowDefinitions="Auto, Auto, Auto, Auto,*,Auto, Auto">
         <HorizontalStackLayout Grid.Row="0" Spacing="5" >
             <Label Text="Use Current Location" Style="{StaticResource PageLabel}" />
             <Switch IsToggled="{Binding UseCurrentLocation}" Style="{StaticResource PrimarySwitchStyle}" />
         </HorizontalStackLayout>
         <BoxView Grid.Row ="1" Style="{StaticResource UnderlineStyle}" />
 
-        <VerticalStackLayout Grid.Row="2" >
+        <VerticalStackLayout Grid.Row="2" Spacing="5" Padding="0">
             <HorizontalStackLayout >
                 <Label Text="Enter Latitude | Longitude" Style="{StaticResource PageLabel}" />
                 <Entry x:Name="Latitude" Text="{Binding SelectedSavedLocation.Lat}"
@@ -34,7 +34,7 @@
         <BoxView Grid.Row ="3" Style="{StaticResource UnderlineStyle}" />
         <!-- Location Carousel -->
         <VerticalStackLayout Grid.Row="4" Spacing="5" >
-            <Label Text="Select from Saved Locations" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
+            <Label Text="Saved Locations Selection" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
             <CarouselView ItemsSource="{Binding SavedLocations}" 
                           x:Name="LocationCarousel"
                           IndicatorView="LocationIndicator" 

@@ -54,31 +54,42 @@
             <!-- SIGHTING STATS -->
             <Border Grid.Column ="0" Margin ="0,20,0,0" Padding="5,5,5,5" Style ="{DynamicResource RoundedAccentBorderStyle}" VerticalOptions="Start" 
                            Background="{DynamicResource Accent}">
-                <Grid ColumnDefinitions="1.4*,*" RowDefinitions="Auto,Auto" RowSpacing="5">
-                    <Label Grid.Row="0"  Grid.Column="0" Padding="5,10,5,10" Text="Sightings" Style="{StaticResource PageLabelCenter}" 
-                           TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="15"/>
-                    <Label Grid.Row="1" Grid.Column="0" Padding="5,10,5,10" Text="% Total" Style="{StaticResource PageLabelCenter}" 
-                           TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="15"/>
+                <Grid ColumnDefinitions="1.4*,*" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="5">
+                    <Label Grid.Row="0"  Grid.Column="0" Padding="5,10,5,10" Text="# Obs" Style="{StaticResource PageLabelCenter}" 
+                            TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="16"/>
                     <Label Grid.Row="0" Grid.Column="1" Text="{Binding TotalBirdSightings}" Style="{StaticResource PageLabelCenter}" 
-                           TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
+                            TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
+
+                    <Label Grid.Row="1" Grid.Column="0" Padding="5,10,5,10" Text="% Total" Style="{StaticResource PageLabelCenter}" 
+                           TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="16"/>
                     <Label Grid.Row="1" Grid.Column="1" Text="{Binding PercTotalBirdSightings, StringFormat='{0:F1}%'}" Style="{StaticResource PageLabelCenter}" 
                             TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
+
                     <BoxView Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource VerticallineStyle}" HorizontalOptions="End" 
-                           Color="{DynamicResource Background}" />
+                            Color="{DynamicResource Background}" />
                     <BoxView Grid.ColumnSpan="2" Grid.Row="0" Style="{StaticResource UnderlineStyle}" VerticalOptions="End"
-                           Color="{DynamicResource Background}"/>
+                            Color="{DynamicResource Background}"/>
+                    
+                    <Label Grid.Row="3"  Grid.Column="0" Padding="5,10,5,10" Text="# Obs" Style="{StaticResource PageLabelCenter}" 
+                        TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="16"/>
+                    <Label Grid.Row="3" Grid.Column="1" Text="{Binding TotalBirdSightings}" Style="{StaticResource PageLabelCenter}" 
+                        TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
+
+                    <Label Grid.Row="4" Grid.Column="0" Padding="5,10,5,10" Text="% Total" Style="{StaticResource PageLabelCenter}" 
+                        TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="16"/>
+                    <Label Grid.Row="4" Grid.Column="1" Text="{Binding PercTotalBirdSightings, StringFormat='{0:F1}%'}" Style="{StaticResource PageLabelCenter}" 
+                        TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
+                    
                 </Grid>
             </Border>
-            
-            <Border Grid.Column ="1" Padding="2" HeightRequest="140" Style ="{DynamicResource RoundedAccentBorderStyle}">
-            <lvc:PieChart Series="{Binding PieSeries}"
-                LegendPosition="Right" Background="{DynamicResource Surface}">
+
+            <lvc:PieChart Series="{Binding PieSeries}" Grid.Column ="1" Padding="2" HeightRequest="140"
+                LegendPosition="Bottom" >
                 <lvc:PieChart.LegendTextPaint>
-                        <lvc:SolidColorPaint Color="White" FontFamily ="8" />
+                    <lvc:SolidColorPaint Color="White" FontFamily ="8" />
                 </lvc:PieChart.LegendTextPaint>
-                </lvc:PieChart>
-            </Border>
-           
+            </lvc:PieChart>
+
         </Grid>
         <!-- DAILY SIGHTINGS Grid.Row = 3-->
         <Border Padding="5" Grid.Row="5" Style ="{DynamicResource RoundedAccentBorderStyle}" Background="{DynamicResource Surface}">

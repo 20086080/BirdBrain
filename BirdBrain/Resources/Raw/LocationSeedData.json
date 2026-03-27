@@ -13,6 +13,19 @@
     "ProfileImage": "kings_park.png"
   },
   {
+    "Id": "AU_ACT_JERRABOMBERRA_WETLANDS",
+    "EbirdLocId": null,
+    "Name": "Jerrabomberra Wetlands Nature Reserve",
+    "Lat": -35.3108,
+    "Lng": 149.1495,
+    "Country": "Australia",
+    "CountryCode": "AU",
+    "Region": "Australian Capital Territory",
+    "Description": "Important wetland reserve in Canberra known for waterbirds, migratory waders, and species like Latham’s Snipe, crakes, and various ducks and herons.",
+    "Thumbnail": "jerrabomberra_wetlands_t.png",
+    "ProfileImage": "jerrabomberra_wetlands.png"
+  },
+  {
     "Id": "AU_PER_LAKE_MONGER",
     "EbirdLocId": null,
     "Name": "Lake Monger",

@@ -26,7 +26,7 @@
 
         <!-- Bird Carousel -->
         <VerticalStackLayout Grid.Row="2" Spacing="10" Margin="0,20,0,20" >
-            <Label Text="Saved Birds" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
+            <Label Text="Saved Birds Selection" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
             <CarouselView ItemsSource="{Binding SavedBirds}"
                           x:Name="BirdCarousel" 
                           IndicatorView="BirdIndicator" 

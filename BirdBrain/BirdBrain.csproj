@@ -195,6 +195,7 @@
 	  <None Remove="Resources\Images\location_full\esplanade.png" />
 	  <None Remove="Resources\Images\location_full\flinders.png" />
 	  <None Remove="Resources\Images\location_full\freycinet.png" />
+	  <None Remove="Resources\Images\location_full\jerrabomberra_wetlands.png" />
 	  <None Remove="Resources\Images\location_full\kakadu.png" />
 	  <None Remove="Resources\Images\location_full\kings_park.png" />
 	  <None Remove="Resources\Images\location_full\lake_monger.png" />
@@ -224,6 +225,7 @@
 	  <None Remove="Resources\Images\location_thumbnail\esplanade_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\flinders_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\freycinet_t.png" />
+	  <None Remove="Resources\Images\location_thumbnail\jerrabomberra_wetlands_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\kakadu_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\kings_park_t.png" />
 	  <None Remove="Resources\Images\location_thumbnail\lake_monger_t.png" />
@@ -541,6 +543,7 @@
 	  <MauiImage Include="Resources\Images\location_full\esplanade.png" />
 	  <MauiImage Include="Resources\Images\location_full\flinders.png" />
 	  <MauiImage Include="Resources\Images\location_full\freycinet.png" />
+	  <MauiImage Include="Resources\Images\location_full\jerrabomberra_wetlands.png" />
 	  <MauiImage Include="Resources\Images\location_full\kakadu.png" />
 	  <MauiImage Include="Resources\Images\location_full\kings_park.png" />
 	  <MauiImage Include="Resources\Images\location_full\lake_monger.png" />
@@ -571,6 +574,7 @@
 	  <MauiImage Include="Resources\Images\location_thumbnail\esplanade_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\flinders_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\freycinet_t.png" />
+	  <MauiImage Include="Resources\Images\location_thumbnail\jerrabomberra_wetlands_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\kakadu_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\kings_park_t.png" />
 	  <MauiImage Include="Resources\Images\location_thumbnail\lake_monger_t.png" />

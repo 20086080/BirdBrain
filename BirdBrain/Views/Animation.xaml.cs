@@ -3,7 +3,7 @@ namespace BirdBrain.Views;
 
 public partial class Animation : ContentPage
 {
-    string[] images = { "animate1a.png", "animate2a.png", "animate3a.png", "animate4a.png", "animate5a.png" };
+    string[] images = { "animate1a.png", "animate2a.png", "animate3a.png", "animate4a.png" };
     public Animation()
 	{
         InitializeComponent();
@@ -28,9 +28,8 @@ public partial class Animation : ContentPage
                 AnimatedImage.Opacity = 0;
                 AnimatedImage.Source = img;
                 await AnimatedImage.FadeToAsync(1, 100);
-                await Task.Delay(800);
+                await Task.Delay(600);
             }
-            
         }
         catch (Exception ex)
         {

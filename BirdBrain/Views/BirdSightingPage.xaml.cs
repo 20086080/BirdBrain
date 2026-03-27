@@ -22,15 +22,15 @@ public partial class BirdSightingPage : BasePage
         LocationTabLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
         try
         {
-            App.State.TotalBirdSightings = await SummaryService.GetTotalBirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.SelectedSavedBird.CommonName!);
+            App.State.TotalBirdSightings = await SummaryService.GetTotalBirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.SelectedSavedBird.CommonName!, DateTime.UtcNow.AddDays(-App.State.Days));
             if (App.State.TotalBirdSightings <= 0)
             {
                 await ErrorService.Show(ErrorType.NoBirdsFound);
             }
             App.State.TotalSightings = await SummaryService.GetTotalLocationCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, DateTime.UtcNow.AddDays(-App.State.Days));
             App.State.PercTotalBirdSightings = 100 * ((double)App.State.TotalBirdSightings / App.State.TotalSightings) ; 
-            App.State.BirdDailyObs = await SummaryService.GetBirdDailyObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.SelectedSavedBird.CommonName!);
-            App.State.BirdTimeObs = await SummaryService.GetBirdTimeObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.SelectedSavedBird.CommonName!);
+            App.State.BirdDailyObs = await SummaryService.GetBirdDailyObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.SelectedSavedBird.CommonName!, DateTime.UtcNow.AddDays(-App.State.Days));
+            App.State.BirdTimeObs = await SummaryService.GetBirdTimeObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.SelectedSavedBird.CommonName!, DateTime.UtcNow.AddDays(-App.State.Days));
             App.State.BuildChartBird(App.State.BirdDailyObs);
             App.State.BuildChartBirdTime(App.State.BirdTimeObs);
             App.State.LeftSelected = false;

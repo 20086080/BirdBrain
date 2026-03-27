@@ -32,7 +32,12 @@ namespace BirdBrain.Services
         private int _days = 30;
         private int _radius = 50;
         private bool _leftSelected = true;
+
         private int _totalSightings;
+        private int _todayObs;
+        private int _averageObs;
+        private int _newBirds; 
+
         private int _totalTypeOfBird;
         private int _totalBirdSightings;
         private double _PercTotalSightings;
@@ -172,7 +177,9 @@ namespace BirdBrain.Services
                 }
             };
             Labels = data
-                .Select(x => DateTime.Parse(x.ObsDt!).ToString("dd/M"))
+                .Select(x => DateTime.TryParse(x.ObsDt, out var d)
+                ? d.ToString("dd/M")
+                : "")
                 .ToList();
             XAxes = new Axis[]
             {
@@ -339,6 +346,36 @@ namespace BirdBrain.Services
             {
                 if (_totalSightings != value)
                     { _totalSightings = value; OnPropertyChanged(); }
+            }
+        }
+
+        public int TodayObs
+        {
+            get => _todayObs;
+            set
+            {
+                if (_todayObs != value)
+                { _todayObs = value; OnPropertyChanged(); }
+            }
+        }
+
+        public int AverageObs
+        {
+            get => _averageObs;
+            set
+            {
+                if (_averageObs != value)
+                { _averageObs = value; OnPropertyChanged(); }
+            }
+        }
+
+        public int NewBirds
+        {
+            get => _newBirds;
+            set
+            {
+                if (_newBirds != value)
+                { _newBirds = value; OnPropertyChanged(); }
             }
         }
 

@@ -60,55 +60,74 @@
         
         <Grid Grid.Row="4" ColumnDefinitions="*,*" >
             <!-- SIGHTING STATS -->
-            <Border Grid.Column ="0" Margin ="0,20,0,0" Padding="5,5,5,5" Style ="{DynamicResource RoundedAccentBorderStyle}" VerticalOptions="Start" 
-                           Background="{DynamicResource Accent}">
-                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" RowSpacing="5">
-                    <Label Grid.Row="0"  Grid.Column="0" Padding="5,10,5,10" Text="# Obs" Style="{StaticResource PageLabel}" 
-                           TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="15"/>
-                    <Label Grid.Row="1" Grid.Column="0" Padding="5,10,5,10" Text="# Bird Type" Style="{StaticResource PageLabel}" 
-                           TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="15"/>
-                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding TotalSightings}" Style="{StaticResource PageLabelCenter}" 
-                           TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
-                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding TotalTypeOfBird}" Style="{StaticResource PageLabelCenter}" 
-                            TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
-                    <BoxView Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource VerticallineStyle}" HorizontalOptions="End" 
-                           Color="{DynamicResource Background}" />
-                    <BoxView Grid.ColumnSpan="2" Grid.Row="0" Style="{StaticResource UnderlineStyle}" VerticalOptions="End"
-                           Color="{DynamicResource Background}"/>
-                    
-                </Grid>
-            </Border>
-            <Border Grid.Column ="1" Padding="5" HeightRequest="140" Style ="{DynamicResource RoundedAccentBorderStyle}">
-            <ScrollView VerticalScrollBarVisibility="Always">
-                <CollectionView ItemsSource="{Binding TopBirds}">
-                    <CollectionView.Header>
-                        <Grid ColumnDefinitions="*,*" RowDefinitions =" *,*" Padding="5">
-                            <Label Text="Birds" Grid.Row ="0" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
-                            <Label Grid.Column="1" Grid.Row ="0" Text="# Obs"  Style="{StaticResource PageLabelCenter}" 
-                                   HorizontalOptions="Center"/>
-                            <BoxView Grid.Row ="1" Grid.ColumnSpan ="2" Style="{StaticResource UnderlineStyle}"/>
-                        </Grid>
-                    </CollectionView.Header>
+            <VerticalStackLayout Grid.Column ="0" >
+                <Border  Padding="5" Style ="{DynamicResource RoundedAccentBorderStyle}" 
+                    VerticalOptions="Start" Background="{DynamicResource Accent}">
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:TopBirds">
-                            <Grid ColumnDefinitions="2*,*" Padding="2" ColumnSpacing="5">
-                                <Label Text="{Binding BirdName}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start" />
-                                <Label Grid.Column="1" Text="{Binding Sightings}" HorizontalTextAlignment="Center" 
-                                       HorizontalOptions="Center" Style="{StaticResource PageLabelNormal}" />
+                    <Grid ColumnDefinitions="1.4*,*" RowDefinitions="Auto,Auto" RowSpacing="5" Padding="5">
+                        <Label Grid.Row="0"  Grid.Column="0" Text="# Obs" Style="{StaticResource PageLabel}" 
+                               TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
+                        <Label Grid.Row="1" Grid.Column="0" Text="# Species" Style="{StaticResource PageLabel}" 
+                               TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
+
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding TotalSightings}" Style="{StaticResource PageLabelCenter}" 
+                               TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
+                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding TotalTypeOfBird}" Style="{StaticResource PageLabelCenter}" 
+                               TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
+
+                        <BoxView Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource VerticallineStyle}" HorizontalOptions="End" 
+                               Color="{DynamicResource Background}" />
+                        <BoxView Grid.ColumnSpan="2" Grid.Row="0" Style="{StaticResource UnderlineStyle}" VerticalOptions="End"
+                               Color="{DynamicResource Background}"/>
+                    </Grid>
+                </Border>
+                <HorizontalStackLayout  Padding="5">
+                    <Label Text = "Previous 24 Hr Obs : "  Style="{StaticResource PageLabelNormal}"></Label>
+                    <Label Text = "{Binding TodayObs}" Padding="5" Style="{StaticResource PageLabelNormal}"></Label>
+                    <Label Text = "/ Avg "  Padding="5" Style="{StaticResource PageLabelNormal}"></Label>
+                    <Label Text = "{Binding AverageObs}" Padding="5" Style="{StaticResource PageLabelNormal}"></Label>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Padding="5">
+                    <Label Text= "{Binding NewBirds}"  Style="{StaticResource PageLabelNormal}"></Label>
+                    <Label Text=" New Birds (last upload)"  Style="{StaticResource PageLabelNormal}"></Label>
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+            
+            <Border Grid.Column ="1" Padding="5" HeightRequest="140" Style ="{DynamicResource RoundedAccentBorderStyle}">
+                <ScrollView VerticalScrollBarVisibility="Always">
+                    <CollectionView ItemsSource="{Binding TopBirds}">
+                        <CollectionView.Header>
+                            <Grid ColumnDefinitions="*,*,*" RowDefinitions =" *,*" Padding="5">
+                                <Label Text="Birds" Grid.Row ="0" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
+                                <Label Grid.Column="1" Grid.Row ="0" Grid.ColumnSpan ="2" Text="#Obs (Day | Period)" FontSize ="11" Style="{StaticResource PageLabelCenter}" 
+                                   HorizontalOptions="Center"/>
+                                <BoxView Grid.Row ="1" Grid.ColumnSpan ="3" Style="{StaticResource UnderlineStyle}"/>
                             </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </ScrollView>
-        </Border>
+                        </CollectionView.Header>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:TopBirds">
+                                <Grid ColumnDefinitions="4*,*,*" Padding="2" ColumnSpacing="5">
+                                    <Label Text="{Binding BirdName}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start" FontSize="12"/>
+                                    <Label Grid.Column="1" Text="{Binding StatsToday}"  HorizontalTextAlignment="Center" 
+                                           HorizontalOptions="Center"  Style="{StaticResource PageLabelNormal}"/>
+                                    <Label Grid.Column="2" Text="{Binding Sightings}" HorizontalTextAlignment="Center" 
+                                       HorizontalOptions="Center" Style="{StaticResource PageLabelNormal}" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </Border>
         </Grid>
         <!-- DAILY SIGHTINGS Grid.Row = 3-->
         <Border Padding="5" Grid.Row="5" Style ="{DynamicResource RoundedAccentBorderStyle}" Background="{DynamicResource Surface}">
             <VerticalStackLayout>
+                <Label Text="Observed Activity over Time" Style="{StaticResource PageLabelCenter}" />
                 <lvc:CartesianChart Series="{Binding Series}" XAxes="{Binding XAxes}" YAxes="{Binding YAxes}"
-                    Background="{DynamicResource Surface}" DrawMarginFrame="{x:Null}" HeightRequest="155"/>
-            </VerticalStackLayout>
+                        Background="{DynamicResource Surface}" DrawMarginFrame="{x:Null}" HeightRequest="125"/>
+            </VerticalStackLayout>        
         </Border>
     </Grid>
 </views:BasePage>

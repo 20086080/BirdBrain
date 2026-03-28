@@ -33,8 +33,8 @@ public partial class BirdSightingPage : BasePage
             App.State.PercTotalBirdSightings = 100 * ((double)App.State.TotalBirdSightings / App.State.TotalSightings) ; 
             App.State.BirdDailyObs = await SummaryService.GetBirdDailyObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.SelectedSavedBird.CommonName!, DateTime.UtcNow.AddDays(-App.State.Days));
             App.State.BirdTimeObs = await SummaryService.GetBirdTimeObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.SelectedSavedBird.CommonName!, DateTime.UtcNow.AddDays(-App.State.Days));
-            App.State.BuildChartBird(App.State.BirdDailyObs);
-            App.State.BuildChartBirdTime(App.State.BirdTimeObs);
+            //App.State.BuildChartBird(App.State.BirdDailyObs);
+            //App.State.BuildChartBirdTime(App.State.BirdTimeObs);
             App.State.LeftSelected = false;
         }
         catch (Exception ex)

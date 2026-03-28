@@ -20,9 +20,6 @@ namespace BirdBrain
             State = new AppState();
             State.Database = new DatabaseService();
 
-            // Load cached DB data (non-blocking)
-  //          LoadCachedData();
-
             // Show animation page first
             MainPage = new BirdBrain.Views.Animation();
 
@@ -51,28 +48,6 @@ namespace BirdBrain
             }
         }
 
-        private async void LoadCachedData()
-        {
-            await State.Database.InitAsync();
-
-            var cached = await State.Database.GetLatestObservationsAsync();
-
-            if (cached != null && cached.Count > 0)
-            {
-                State.Observations = cached.Select(x => new BirdObservation
-                {
-                    speciesCode = x.SpeciesCode,
-                    comName = x.ComName,
-                    sciName = x.SciName,
-                    locId = x.LocId,
-                    locName = x.LocName,
-                    obsDt = x.ObsDt,
-                    howMany = x.HowMany,
-                    lat = x.Lat,
-                    lng = x.Lng,
-                    obsValid = x.ObsValid
-                }).ToList();
-            }
-        }
+        
     }
 }

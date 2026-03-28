@@ -21,7 +21,8 @@ public partial class LocationSightingPage : BasePage
         try
         {
             base.OnAppearing();
-            
+
+            var chartService = new ChartService();
 
             App.State.CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
             App.State.TotalSightings = await SummaryService.GetTotalLocationCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate);
@@ -33,19 +34,29 @@ public partial class LocationSightingPage : BasePage
 
             App.State.TotalTypeOfBird = await SummaryService.GetTotalLocationBirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate);
             App.State.TopBirds = await SummaryService.GetTop5BirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate, DateToday);
-            App.State.LocationDailyObs = await SummaryService.GetLocationDailyObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate);
-            App.State.BuildChart(App.State.LocationDailyObs);
+            
+            //App.State.BuildChart(App.State.LocationDailyObs);
             App.State.LeftSelected = true;
             App.State.TodayObs = App.State.TopBirds?.Sum(b => b.StatsToday) ?? 0;
             int NumberDays = await SummaryService.DateStampTotalAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate);
             App.State.AverageObs = App.State.TotalSightings / NumberDays;
             App.State.NewBirds = 0;
+
+
             if (NumberDays > 1)
             {
                 string previousDate = await SummaryService.LatestDateStmpAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, 1);
                 int previousCount = await SummaryService.BirdCountForDateAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, previousDate);
                 App.State.NewBirds = App.State.TodayObs - previousCount; 
             }
+
+            App.State.LocationDailyObs = await SummaryService.GetLocationDailyObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate);
+            
+            var result = chartService.BuildLocationChart(App.State.LocationDailyObs);
+            App.State.Series = result.Series;
+            App.State.Labels = result.Labels;
+            App.State.XAxes = result.XAxes;
+            App.State.YAxes = result.YAxes;
         }
         catch (Exception ex) 
         {

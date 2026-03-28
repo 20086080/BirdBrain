@@ -8,11 +8,13 @@ namespace BirdBrain.Services
         public async Task<List<T>> ReadListAsync<T>(string fileName)
         {
             using var stream = await FileSystem.OpenAppPackageFileAsync(fileName);
-            using var reader = new StreamReader(stream);
-            var json = await reader.ReadToEndAsync();
+           // using var reader = new StreamReader(stream);
+           // var json = await reader.ReadToEndAsync();
+
             try
             {
-                return JsonSerializer.Deserialize<List<T>>(json)!;
+                //    return JsonSerializer.Deserialize<List<T>>(json)!;
+                return await JsonSerializer.DeserializeAsync<List<T>>(stream);
             }
             catch (Exception ex)
             {

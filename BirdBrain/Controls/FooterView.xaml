@@ -5,10 +5,10 @@
             
              xmlns:services="clr-namespace:BirdBrain.Services"
              x:DataType="services:AppState">
-    <Grid RowDefinitions="*,*" RowSpacing="0">
+    <Grid RowDefinitions="*,*"  Padding="0" RowSpacing="5">
         <BoxView Grid.Row="0" Style="{StaticResource UnderlineStyle}" />
-        <HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center">
-            <Label Text="{Binding Radius, StringFormat = 'Radius - {0}'}" Style="{StaticResource PageLabel}" FontAttributes="Italic"/>
+        <HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center" Padding="5" >
+            <Label Text="{Binding Radius, StringFormat = 'Radius - {0}'}" Style="{StaticResource PageLabel}" FontAttributes="Italic" />
             <Label Text="{Binding Days, StringFormat = ' km   |  Days - {0}'}" Style="{StaticResource PageLabel}" FontAttributes="Italic"/>
         </HorizontalStackLayout>
     </Grid>

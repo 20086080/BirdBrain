@@ -22,6 +22,7 @@ public partial class LocationSightingPage : BasePage
         {
             base.OnAppearing();
             
+
             App.State.CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
             App.State.TotalSightings = await SummaryService.GetTotalLocationCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate);
             if (App.State.TotalSightings <= 0)

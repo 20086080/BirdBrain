@@ -21,7 +21,7 @@ namespace BirdBrain
             State.Database = new DatabaseService();
 
             // Load cached DB data (non-blocking)
-            LoadCachedData();
+  //          LoadCachedData();
 
             // Show animation page first
             MainPage = new BirdBrain.Views.Animation();

@@ -1,11 +1,12 @@
-﻿using BirdBrain.Models;
+﻿//using AndroidX.Startup;
+using BirdBrain.Models;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
+using LiveChartsCore.Kernel;
 using LiveChartsCore.Kernel.Sketches;
 using LiveChartsCore.Measure;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
-using LiveChartsCore.Kernel;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -43,12 +44,7 @@ namespace BirdBrain.Services
         private int _totalBirdSightings;
         private double _PercTotalSightings;
 
-        private List<TopBirds> _topBirds = new();
-        public List<TopBirds> TopBirds
-        {
-            get => _topBirds;
-            set {_topBirds = value; OnPropertyChanged(); }
-        }
+        private bool _initialized;
         public List<LocationDailyObs> LocationDailyObs { get; set; } = new();
         public List<BirdDailyObs> BirdDailyObs { get; set; } = new();
         public List<BirdTimeObs> BirdTimeObs { get; set; } = new();
@@ -60,6 +56,15 @@ namespace BirdBrain.Services
         public List<SavedLocation> SavedLocations { get; set; } = new List<SavedLocation>();
 
         public List<LatLng> GlobalLocations { get; set; } = new List<LatLng>();
+
+        private List<TopBirds> _topBirds = new();
+
+
+        public List<TopBirds> TopBirds
+        {
+            get => _topBirds;
+            set { _topBirds = value; OnPropertyChanged(); }
+        }
 
         public SavedLocation SelectedSavedLocation
         {
@@ -92,28 +97,46 @@ namespace BirdBrain.Services
 
         public async Task InitializeAsync()
         {
-            //Get Saved (Favourite) Birds List
-            if (SavedBirds == null || SavedBirds.Count == 0)
-            {
-                SavedBirds = await _jsonReader.ReadListAsync<Bird>("BirdsSeedData.json");
+            if (_initialized) return;
 
-                SelectedSavedBird = SavedBirds.Count > 0 ? SavedBirds[0] : null;
-            }
+            _initialized = true;
+
+            var birdsTask = _jsonReader.ReadListAsync<Bird>("BirdsSeedData.json");
+            var locationsTask = _jsonReader.ReadListAsync<SavedLocation>("LocationSeedData.json");
+            var globalTask = _jsonReader.ReadListAsync<LatLng>("LatLngSeedData.json");
+
+            await Task.WhenAll(birdsTask, locationsTask, globalTask);
+
+            SavedBirds = await birdsTask;
+            SavedLocations = await locationsTask;
+            GlobalLocations = await globalTask;
+
+            // Now set selected values
+            SelectedSavedBird = SavedBirds.Count > 0 ? SavedBirds[0] : null;
+            SelectedSavedLocation = SavedLocations.Count > 0 ? SavedLocations[0] : null;
+
+            //Get Saved (Favourite) Birds List
+            //if (SavedBirds == null || SavedBirds.Count == 0)
+            //{
+            //    SavedBirds = await _jsonReader.ReadListAsync<Bird>("BirdsSeedData.json");
+
+            //    SelectedSavedBird = SavedBirds.Count > 0 ? SavedBirds[0] : null;
+            //}
 
             //Get Saved (Favourite) Location List
-            if (SavedLocations == null || SavedLocations.Count == 0)
-            {
-                SavedLocations = await _jsonReader.ReadListAsync<SavedLocation>("LocationSeedData.json");
+            //if (SavedLocations == null || SavedLocations.Count == 0)
+            //{
+            //    SavedLocations = await _jsonReader.ReadListAsync<SavedLocation>("LocationSeedData.json");
 
-                SelectedSavedLocation = SavedLocations.Count > 0 ? SavedLocations[0] : null;
-            }
+            //    SelectedSavedLocation = SavedLocations.Count > 0 ? SavedLocations[0] : null;
+            //}
 
 
             //Get Global Lat Lng List
-            if (GlobalLocations == null || GlobalLocations.Count == 0)
-            {
-                GlobalLocations = await _jsonReader.ReadListAsync<LatLng>("LatLngSeedData.json");
-            }
+            //if (GlobalLocations == null || GlobalLocations.Count == 0)
+            //{
+            //    GlobalLocations = await _jsonReader.ReadListAsync<LatLng>("LatLngSeedData.json");
+            //}
         }
 
         private ISeries[] _series = Array.Empty<ISeries>();

@@ -10,9 +10,9 @@
     x:DataType="services:AppState"
     Title="Location Profile">
 
-    <Grid RowDefinitions="Auto,Auto,Auto, Auto,  *" Padding="10" RowSpacing="5">
+    <Grid RowDefinitions="Auto,Auto,Auto, Auto,  *" Padding="5" RowSpacing="5">
 
-        <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center" HeightRequest="45"
+        <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center" HeightRequest="40"
                        Spacing="10" Background="{DynamicResource Background}" >
 
             <!-- LOCATION / BIRD Selection -->
@@ -39,7 +39,7 @@
 
         <BoxView Grid.Row="1" Style="{StaticResource UnderlineStyle}" />
 
-        <Grid Grid.Row="2" ColumnDefinitions = "*,*" Padding ="5" Background="{DynamicResource Background}">
+        <Grid Grid.Row="2" ColumnDefinitions = "*,*" Padding ="10" Background="{DynamicResource Background}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

@@ -4,7 +4,7 @@
              x:Class="BirdBrain.Resources.Themes.CoralNavyDark">
     <Color x:Key="Primary">#1D3557</Color>
     <Color x:Key="Accent">#E76F51</Color>
-    <Color x:Key="Background">#FAF3E0</Color>
+    <Color x:Key="Background">#FF1E2D</Color>
     <Color x:Key="Surface">#FFFFFF</Color>
     <Color x:Key="TextPrimary">#1D3557</Color>
     <Color x:Key="TextOnPrimary">#FFFFFF</Color>

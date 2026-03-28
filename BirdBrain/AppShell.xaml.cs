@@ -33,7 +33,7 @@ namespace BirdBrain
 
 
             _isNavigating = true;
-            _ = Task.Delay(2000).ContinueWith(_ =>
+            _ = Task.Delay(1000).ContinueWith(_ =>
             {
                 _isNavigating = false;
             }, TaskScheduler.FromCurrentSynchronizationContext());

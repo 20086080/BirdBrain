@@ -8,6 +8,7 @@ namespace BirdBrain.Views;
 public partial class IntroPage : BasePage
 {
     public bool IsNewLocation = false;
+    public bool IsCarouselVisible { get; set; }
     public IntroPage()
     {
         InitializeComponent();
@@ -18,9 +19,12 @@ public partial class IntroPage : BasePage
     protected override async void OnAppearing()
     {         
         base.OnAppearing();
+        IsCarouselVisible = false;
         LocationCarousel.CurrentItem = null;
         LocationCarousel.CurrentItem = CarouselCurrentItem;
         App.State.LeftSelected = true;
+        await Task.Delay(50);
+        IsCarouselVisible = true;
     }
 
     public SavedLocation CarouselCurrentItem

@@ -78,17 +78,7 @@ public partial class BasePage : ContentPage
                         await Shell.Current.GoToAsync(nameof(BirdProfilePage));
                 });
 
-                //// Insights Selection
-                //_leftDrawer.InsightsCommand = new Command(async () =>
-                //{
-                //    if (IsAnyDrawerOpen())
-                //        await CloseAllDrawers();
-                //    if (App.State.LeftSelected)     //Location Selected on Page
-                //        await Shell.Current.GoToAsync(nameof(LocationInsightsPage));
-                //    else
-                //        await Shell.Current.GoToAsync(nameof(BirdInsightsPage));
-                //});
-
+                
             }
 
 

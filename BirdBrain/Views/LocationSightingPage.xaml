@@ -10,13 +10,12 @@
     x:DataType="services:AppState"
     Title="Location Sightings">
     
-    <Grid RowDefinitions="Auto,Auto,Auto, Auto,Auto,*" Padding="10" RowSpacing="5">
+    <Grid RowDefinitions="Auto,Auto,Auto, Auto,Auto,*" Padding="5" >
 
-        <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Center" HeightRequest="45"
-                       Spacing="10" Background="{DynamicResource Background}" >
+        <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Start" Background="{DynamicResource Background}" >
 
             <!-- LOCATION / BIRD Selection -->
-            <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" WidthRequest="200" HeightRequest="45">
+            <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" WidthRequest="170" HeightRequest="35">
                 <Grid ColumnDefinitions="*,*" HorizontalOptions="Fill" >
                     <!-- Location TAB -->
                     <Border x:Name="LocationTab" Grid.Column="0" Style="{StaticResource SegmentSelectedStyle}">

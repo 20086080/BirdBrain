@@ -58,7 +58,8 @@
                                     CommandParameter="{Binding .}" />
                             </Border.GestureRecognizers>
                             <VerticalStackLayout Spacing="8" Padding="5">
-                                <Image Source="{Binding Thumbnail}" HeightRequest="130" Aspect="AspectFill" />
+                                <Image Source="{Binding Thumbnail}" HeightRequest="130" Aspect="AspectFill" 
+                                       IsVisible="{Binding Source={x:Reference LocationCarousel}, Path=IsVisible}"/>
                                 <Label Text="{Binding Name}" Style="{StaticResource CarouselLabel}"
                                        HorizontalOptions="Center"/>
                             </VerticalStackLayout>
@@ -73,7 +74,7 @@
 
         <!-- Selector - All Birds / Specific Bird -->
         <Border Grid.Row="6" Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" HorizontalOptions="Center">
-            <Grid ColumnDefinitions="*,*" HeightRequest="44" WidthRequest="300">
+            <Grid ColumnDefinitions="*,*" HeightRequest="40" WidthRequest="220">
                 <!-- All Birds TAB -->
                 <Border x:Name="AllBirdsTab"  Grid.Column="0" Style="{StaticResource SegmentSelectedStyle}">
                     <Label x:Name="AllBirdsLabel" Text="All Birds" Style="{StaticResource SegmentSelectedLabelStyle}"/>

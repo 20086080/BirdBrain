@@ -10,9 +10,11 @@ using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 
 namespace BirdBrain.Services
 {
@@ -53,7 +55,7 @@ namespace BirdBrain.Services
         public List<Bird> SavedBirds { get; set; } = new List<Bird>();
         public List<SavedLocation> SavedLocations { get; set; } = new List<SavedLocation>();
 
-        public List<LatLng> GlobalLocations { get; set; } = new List<LatLng>();
+        public ObservableCollection<LatLng> GlobalLocations { get; set; } = new();
 
         private List<TopBirds> _topBirds = new();
 
@@ -93,6 +95,49 @@ namespace BirdBrain.Services
             _jsonReader = reader;
         }
 
+        private bool _isLoadingGlobalLocations;
+
+        public async Task LoadGlobalLocationsAsync()
+        {
+            if (_isLoadingGlobalLocations) return;
+
+            _isLoadingGlobalLocations = true;
+
+            using var stream = await FileSystem.OpenAppPackageFileAsync("LatLngSeedData.json");
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            int count = 0;
+
+            await foreach (var item in JsonSerializer.DeserializeAsyncEnumerable<LatLng>(stream, options))
+            {
+                if (item == null) continue;
+
+                // First item immediately (fast UI response)
+                if (count == 0)
+                {
+                    MainThread.BeginInvokeOnMainThread(() =>
+                        GlobalLocations.Add(item));
+                }
+                else
+                {
+                    // Throttle UI updates slightly (every 20 items)
+                    if (count % 20 == 0)
+                    {
+                        await Task.Yield(); // give UI breathing room
+                    }
+
+                    MainThread.BeginInvokeOnMainThread(() =>
+                        GlobalLocations.Add(item));
+                }
+
+                count++;
+            }
+        }
+
         public async Task InitializeAsync()
         {
             if (_initialized) return;
@@ -101,14 +146,14 @@ namespace BirdBrain.Services
 
             var birdsTask = _jsonReader.ReadListAsync<Bird>("BirdsSeedData.json");
             var locationsTask = _jsonReader.ReadListAsync<SavedLocation>("LocationSeedData.json");
-            var globalTask = _jsonReader.ReadListAsync<LatLng>("LatLngSeedData.json");
+            //var globalTask = _jsonReader.ReadListAsync<LatLng>("LatLngSeedData.json");
 
-            await Task.WhenAll(birdsTask, locationsTask, globalTask);
+            await Task.WhenAll(birdsTask, locationsTask);
 
             SavedBirds = await birdsTask;
             SavedLocations = await locationsTask;
-            GlobalLocations = await globalTask;
-
+            //GlobalLocations = await globalTask;
+            _ = LoadGlobalLocationsAsync();
             SelectedSavedBird = SavedBirds.Count > 0 ? SavedBirds[0] : null;
             SelectedSavedLocation = SavedLocations.Count > 0 ? SavedLocations[0] : null;
 
@@ -153,56 +198,7 @@ namespace BirdBrain.Services
             set { _yAxes = value; OnPropertyChanged(); }
         }
 
-        //public void BuildChart(List<LocationDailyObs> data)
-        //{
-        //    if (data == null || !data.Any())
-        //    {
-        //        Series = Array.Empty<ISeries>();
-        //        Labels = new List<string>();
-        //        return;
-        //    }
-        //    var color = (Color)Application.Current!.Resources["TextPrimary"];
-        //    var skColor = new SKColor(
-        //        (byte)(color.Red * 255), (byte)(color.Green * 255),
-        //        (byte)(color.Blue * 255), (byte)(color.Alpha * 255));
-        //    var maxSightings = data.Any() ? data.Max(x => x.Sightings) : 0;
-        //    Series = new ISeries[]
-        //    {
-        //        new LineSeries<int>
-        //        {
-        //            Values = data.Select(x => x.Sightings).ToList(),
-        //            GeometrySize = 0,
-        //            Stroke = new SolidColorPaint(skColor)
-        //                { StrokeThickness = 3 },
-        //                Fill = null
-        //        }
-        //    };
-        //    Labels = data
-        //        .Select(x => DateTime.TryParse(x.ObsDt, out var d)
-        //        ? d.ToString("dd/M")
-        //        : "")
-        //        .ToList();
-        //    XAxes = new Axis[]
-        //    {
-        //        new Axis
-        //        {
-        //            Labels = Labels, LabelsRotation = 20,
-        //            MinStep = 1, SeparatorsPaint = null,
-        //            TextSize = 11, 
-        //            LabelsPaint = new SolidColorPaint(skColor)
-        //        }
-        //    };
-        //    YAxes = new Axis[]
-        //    {
-        //        new Axis
-        //        {
-        //            SeparatorsPaint = null, MinStep = 5,
-        //            TextSize = 11,
-        //            LabelsPaint = new SolidColorPaint(skColor),
-        //            MaxLimit = maxSightings + 5
-        //        }
-        //    };
-        //}
+        
 
         private ISeries[] _Birdseries = Array.Empty<ISeries>();
         public ISeries[] BirdSeries
@@ -241,94 +237,11 @@ namespace BirdBrain.Services
             set { _BirdyAxes = value; OnPropertyChanged(); }
         }
 
-        //public void BuildChartBird(List<BirdDailyObs> data)
-        //{
-        //    if (data == null || !data.Any())
-        //    {
-        //        BirdSeries = Array.Empty<ISeries>();
-        //        BirdLabels = new List<string>();
-        //        return;
-        //    }
-        //    var color = (Color)Application.Current!.Resources["TextPrimary"];
-        //    var skColor = new SKColor(
-        //        (byte)(color.Red * 255), (byte)(color.Green * 255),
-        //        (byte)(color.Blue * 255), (byte)(color.Alpha * 255));
-        //    var maxSightings = data.Max(x => x.Sightings);
-        //    BirdSeries = new ISeries[]
-        //    {
-        //        new LineSeries<int>
-        //        {
-        //            Values = data.Select(x => x.Sightings).ToList(),
-        //            GeometrySize = 0,
-        //            Stroke = new SolidColorPaint(skColor)
-        //                { StrokeThickness = 3 },
-        //                Fill = null
-        //        }
-        //    };
-        //    BirdLabels = data
-        //        .Select(x => DateTime.Parse(x.ObsDt).ToString("dd/M"))
-        //        .ToList();
-        //    BirdXAxes = new Axis[]
-        //    {
-        //        new Axis
-        //        {
-        //            Labels = Labels, LabelsRotation = 20,
-        //            MinStep = 1, SeparatorsPaint = null,
-        //            TextSize = 11,
-        //            LabelsPaint = new SolidColorPaint(skColor)
-        //        }
-        //    };
-        //    BirdYAxes = new Axis[]
-        //    {
-        //        new Axis
-        //        {
-        //            SeparatorsPaint = null, MinStep = 5,
-        //            TextSize = 11, 
-        //            LabelsPaint = new SolidColorPaint(skColor),
-        //            MaxLimit = maxSightings + 5
-        //        }
-        //    };
-        //}
+        
 
         public ISeries[] PieSeries { get; set; }
 
-        //public void BuildChartBirdTime(List<BirdTimeObs> data)
-        //{
-        //    var color = (Color)Application.Current.Resources["TextPrimary"];
-        //    var skColor = new SKColor(
-        //        (byte)(color.Red * 255), (byte)(color.Green * 255),
-        //        (byte)(color.Blue * 255), (byte)(color.Alpha * 255));
-        //    if (data == null || !data.Any())
-        //    {
-        //        PieSeries = Array.Empty<ISeries>();
-        //        return;
-        //    }
-        //    var topTimes = data
-        //        .GroupBy(x => x.ObsDt)
-        //        .Select(g => new
-        //        {
-        //            Time = g.Key,
-        //            Total = g.Sum(x => x.Sightings)
-        //    })
-        //    .OrderByDescending(x => x.Total)
-        //    .Take(6)
-        //    .ToList();
-
-        //    PieSeries = topTimes
-        //        .Select(x => new PieSeries<double>
-        //        {
-        //            Values = new double[] { x.Total },
-        //            Name = DateTime.Parse(x.Time).ToString("HH:mm"),
-        //            InnerRadius = 40,
-        //            DataLabelsSize = 14,
-        //            DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
-        //            DataLabelsFormatter = point => ((double)point.Model!).ToString("N0"),
-        //            Stroke = new SolidColorPaint(skColor, 1)
-        //        })
-        //        .Cast<ISeries>()
-        //        .ToArray();
-        //    OnPropertyChanged(nameof(PieSeries));
-        //}
+        
 
         public bool LeftSelected
         {

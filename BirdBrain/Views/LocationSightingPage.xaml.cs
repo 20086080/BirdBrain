@@ -1,19 +1,90 @@
 using BirdBrain.Models;
 using BirdBrain.Services;
+using LiveChartsCore;
+using System.ComponentModel;
 using System.Diagnostics;
-//using static AndroidX.Core.Text.Util.LocalePreferences.FirstDayOfWeek;
+using LiveChartsCore.SkiaSharpView;
 
 namespace BirdBrain.Views;
 
-public partial class LocationSightingPage : BasePage
+public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
 {
-    
+    public AppState State => App.State;
+
+    public int TotalSightings { get; set; }
+    public int TodayObs { get; set; }
+    public int AverageObs { get; set; }
+    public int NewBirds { get; set; }
+    public string? CutoffDate { get; set; }
+    public int TotalTypeOfBird { get; set; }
+
+    public List<TopBirds> TopBirds { get; set; } = new();
+
+    public List<LocationDailyObs> LocationDailyObs { get; set; } = new();
+
+    // SERIES
+    private ISeries[] _series = Array.Empty<ISeries>();
+    public ISeries[] Series
+    {
+        get => _series;
+        set
+        {
+            _series = value ?? Array.Empty<ISeries>();
+            OnPropertyChanged(nameof(Series));
+        }
+    }
+
+    // LABELS
+    private List<string> _labels = new();
+    public List<string> Labels
+    {
+        get => _labels;
+        set
+        {
+            _labels = value ?? new List<string>();
+            OnPropertyChanged(nameof(Labels));
+        }
+    }
+
+    // X AXES
+    private Axis[] _xAxes =
+    {
+    new Axis { LabelsRotation = 20 }
+};
+
+    public Axis[] XAxes
+    {
+        get => _xAxes;
+        set
+        {
+            _xAxes = value ?? new Axis[] { new Axis { LabelsRotation = 20 } };
+            OnPropertyChanged(nameof(XAxes));
+        }
+    }
+
+    // Y AXES
+    private Axis[] _yAxes =
+    {
+    new Axis { LabelsRotation = 20 }
+};
+
+    public Axis[] YAxes
+    {
+        get => _yAxes;
+        set
+        {
+            _yAxes = value ?? new Axis[] { new Axis { LabelsRotation = 20 } };
+            OnPropertyChanged(nameof(YAxes));
+        }
+    }
+
     public LocationSightingPage()
     {
         InitializeComponent();
+        
         if (App.State == null)
             throw new Exception("App.State is NULL");
-        BindingContext = App.State;
+        BindingContext = this;
         App.State.LeftSelected = true;
     }
     protected override async void OnAppearing()
@@ -24,39 +95,39 @@ public partial class LocationSightingPage : BasePage
 
             var chartService = new ChartService();
 
-            App.State.CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
-            App.State.TotalSightings = await SummaryService.GetTotalLocationCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate);
-            if (App.State.TotalSightings <= 0)
+            CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
+            TotalSightings = await SummaryService.GetTotalLocationCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate);
+            if (TotalSightings <= 0)
             {
                 await ErrorService.Show(ErrorType.NoLocationDataFound);
             }
             string DateToday = await SummaryService.LatestDateStmpAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, 0);
 
-            App.State.TotalTypeOfBird = await SummaryService.GetTotalLocationBirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate);
-            App.State.TopBirds = await SummaryService.GetTop5BirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate, DateToday);
+            TotalTypeOfBird = await SummaryService.GetTotalLocationBirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate);
+            TopBirds = await SummaryService.GetTop5BirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate, DateToday);
             
-            //App.State.BuildChart(App.State.LocationDailyObs);
+            
             App.State.LeftSelected = true;
-            App.State.TodayObs = App.State.TopBirds?.Sum(b => b.StatsToday) ?? 0;
-            int NumberDays = await SummaryService.DateStampTotalAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate);
-            App.State.AverageObs = App.State.TotalSightings / NumberDays;
-            App.State.NewBirds = 0;
-
+            TodayObs = TopBirds?.Sum(b => b.StatsToday) ?? 0;
+            int NumberDays = await SummaryService.DateStampTotalAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate);
+            AverageObs = TotalSightings / NumberDays;
+            NewBirds = 0;
 
             if (NumberDays > 1)
             {
                 string previousDate = await SummaryService.LatestDateStmpAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, 1);
                 int previousCount = await SummaryService.BirdCountForDateAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, previousDate);
-                App.State.NewBirds = App.State.TodayObs - previousCount; 
+                NewBirds = TodayObs - previousCount; 
             }
 
-            App.State.LocationDailyObs = await SummaryService.GetLocationDailyObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate);
+            LocationDailyObs = await SummaryService.GetLocationDailyObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate);
             
-            var result = chartService.BuildLocationChart(App.State.LocationDailyObs);
-            App.State.Series = result.Series;
-            App.State.Labels = result.Labels;
-            App.State.XAxes = result.XAxes;
-            App.State.YAxes = result.YAxes;
+            var result = chartService.BuildLocationChart(LocationDailyObs);
+            Series = result.Series;
+            Labels = result.Labels;
+            XAxes = result.XAxes;
+            YAxes = result.YAxes;
+            OnPropertyChanged(null);
         }
         catch (Exception ex) 
         {
@@ -99,5 +170,12 @@ public partial class LocationSightingPage : BasePage
             Debug.WriteLine(ex);
             throw;
         }
+    }
+
+    public new event PropertyChangedEventHandler? PropertyChanged;
+
+    protected void OnPropertyChanged(string name)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

@@ -9,6 +9,9 @@ public partial class IntroPage : BasePage
 {
     public bool IsNewLocation = false;
     public bool IsCarouselVisible { get; set; }
+
+    private SavedLocation _carouselItem;
+
     public IntroPage()
     {
         InitializeComponent();
@@ -16,15 +19,18 @@ public partial class IntroPage : BasePage
         BindingContext = App.State;
     }
 
-    protected override async void OnAppearing()
-    {         
+    protected override void OnAppearing()
+    {
+
         base.OnAppearing();
-        IsCarouselVisible = false;
-        LocationCarousel.CurrentItem = null;
-        LocationCarousel.CurrentItem = CarouselCurrentItem;
-        App.State.LeftSelected = true;
-        await Task.Delay(50);
-        IsCarouselVisible = true;
+
+        _carouselItem = CarouselCurrentItem;
+
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            LocationCarousel.CurrentItem = _carouselItem;
+            IsCarouselVisible = true;
+        });
     }
 
     public SavedLocation CarouselCurrentItem
@@ -87,7 +93,7 @@ public partial class IntroPage : BasePage
         App.State.SelectedSavedLocation.Name = LocationEntry.Text;
     }
 
-   
+
     private void Latitude_TextChanged(object? sender, TextChangedEventArgs e)
     {
         if (sender is not Entry entry || e.OldTextValue == null || e.OldTextValue == e.NewTextValue)
@@ -118,11 +124,10 @@ public partial class IntroPage : BasePage
 
     async void OnUseLocationInvoked(object? sender, EventArgs e)
     {
-        // Optional micro animation
-        await this.ScaleToAsync(0.98, 70);
-        await this.ScaleToAsync(1, 70);
+        
+        
 
         // 🔥 Call location logic here
-        // await GetCurrentLocation();
+        
     }
 }

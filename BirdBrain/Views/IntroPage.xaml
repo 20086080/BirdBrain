@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿
 <views:BasePage
     x:Class="BirdBrain.Views.IntroPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -7,7 +7,7 @@
     Title="Location Selection"
     BackgroundColor="{DynamicResource Background}">
 
-    <!-- Proper page grid -->
+
     <Grid Padding="20" RowSpacing="5" RowDefinitions="Auto, Auto, Auto, Auto,*,Auto, Auto">
         <HorizontalStackLayout Grid.Row="0" Spacing="5" >
             <Label Text="Use Current Location" Style="{StaticResource PageLabel}" />
@@ -30,9 +30,9 @@
                    TextChanged="OnTextChanged"  Style="{StaticResource PrimaryEntryStyle}" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
-        
+
         <BoxView Grid.Row ="3" Style="{StaticResource UnderlineStyle}" />
-        <!-- Location Carousel -->
+        
         <VerticalStackLayout Grid.Row="4" Spacing="5" >
             <Label Text="Saved Locations Selection" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
             <CarouselView ItemsSource="{Binding SavedLocations}" 
@@ -72,10 +72,10 @@
         </VerticalStackLayout>
         <BoxView Grid.Row ="5" Style="{StaticResource UnderlineStyle}" />
 
-        <!-- Selector - All Birds / Specific Bird -->
+
         <Border Grid.Row="6" Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" HorizontalOptions="Center">
             <Grid ColumnDefinitions="*,*" HeightRequest="40" WidthRequest="220">
-                <!-- All Birds TAB -->
+
                 <Border x:Name="AllBirdsTab"  Grid.Column="0" Style="{StaticResource SegmentSelectedStyle}">
                     <Label x:Name="AllBirdsLabel" Text="All Birds" Style="{StaticResource SegmentSelectedLabelStyle}"/>
                     <Border.GestureRecognizers>
@@ -83,7 +83,6 @@
                     </Border.GestureRecognizers>
                 </Border>
 
-                <!-- Specific Bird TAB -->
                 <Border x:Name="SpecificBirdTab"  Grid.Column="1"
                         Style="{StaticResource SegmentUnselectedStyle}">
                     <Label x:Name="SpecificBirdLabel" Text="Specific Bird"
@@ -95,4 +94,6 @@
             </Grid>
         </Border>
     </Grid>
+   
 </views:BasePage>
+    

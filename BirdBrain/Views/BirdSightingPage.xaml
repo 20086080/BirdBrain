@@ -39,12 +39,12 @@
 
         <!-- Bird LABEL -->
         <Grid Grid.Row="2" ColumnDefinitions="*,*"  Background="{DynamicResource Background}" >
-            <Image Grid.Column="0" Source="{Binding SelectedSavedBird.Thumbnail}" HorizontalOptions="Start" HeightRequest="128" Aspect="AspectFit"/>
+            <Image Grid.Column="0" Source="{Binding State.SelectedSavedBird.Thumbnail}" HorizontalOptions="Start" HeightRequest="128" Aspect="AspectFit"/>
             <VerticalStackLayout Grid.Column="1" Spacing="8">
-                <Label Text = "{Binding SelectedSavedBird.CommonName}" Style = "{StaticResource SubTitles}"/>
-                <Label Text = "{Binding SelectedSavedLocation.Name}" Style = "{StaticResource PageLabelNormal}"/>
-                <Label Text = "{Binding SelectedSavedLocation.Region}" Style = "{StaticResource PageLabelNormal}" />
-                <Label Text = "{Binding SelectedSavedLocation.Country}" Style = "{StaticResource PageLabelNormal}" />
+                <Label Text = "{Binding State.SelectedSavedBird.CommonName}" Style = "{StaticResource SubTitles}"/>
+                <Label Text = "{Binding State.SelectedSavedLocation.Name}" Style = "{StaticResource PageLabelNormal}"/>
+                <Label Text = "{Binding State.SelectedSavedLocation.Region}" Style = "{StaticResource PageLabelNormal}" />
+                <Label Text = "{Binding State.SelectedSavedLocation.Country}" Style = "{StaticResource PageLabelNormal}" />
             </VerticalStackLayout>
         </Grid>
         <BoxView Grid.Row="3" Style="{StaticResource UnderlineStyle}" />

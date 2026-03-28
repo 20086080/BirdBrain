@@ -41,17 +41,17 @@
         <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="20" 
               Background="{DynamicResource Background}" HeightRequest="140">
             <VerticalStackLayout Grid.Column="1" Spacing="5">
-                <Label Text = "{Binding SelectedSavedLocation.Name}" Style="{StaticResource SubTitles}"/>
+                <Label Text = "{Binding State.SelectedSavedLocation.Name}" Style="{StaticResource SubTitles}"/>
                 <HorizontalStackLayout >
-                    <Label Text = "{Binding SelectedSavedLocation.Lat}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
+                    <Label Text = "{Binding State.SelectedSavedLocation.Lat}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
                     <Label Text = ", " Style="{StaticResource PageLabelNormal}"/>
-                    <Label Text = "{Binding SelectedSavedLocation.Lng}" Style="{StaticResource PageLabelNormal}"/>
+                    <Label Text = "{Binding State.SelectedSavedLocation.Lng}" Style="{StaticResource PageLabelNormal}"/>
                 </HorizontalStackLayout >
-                <Label Text = "{Binding SelectedSavedLocation.Region}" Style="{StaticResource PageLabelNormal}"/>
-                <Label Text = "{Binding SelectedSavedLocation.Country}" Style="{StaticResource PageLabelNormal}"/>
+                <Label Text = "{Binding State.SelectedSavedLocation.Region}" Style="{StaticResource PageLabelNormal}"/>
+                <Label Text = "{Binding State.SelectedSavedLocation.Country}" Style="{StaticResource PageLabelNormal}"/>
             </VerticalStackLayout>
             <Border Padding="0" Grid.Column="0">
-                <Image Source="{Binding SelectedSavedLocation.Thumbnail}" HeightRequest="130" Aspect="AspectFill"/>
+                <Image Source="{Binding State.SelectedSavedLocation.Thumbnail}" HeightRequest="130" Aspect="AspectFill"/>
             </Border>
         </Grid>
         <BoxView Grid.Row="3" Style="{StaticResource UnderlineStyle}"/>

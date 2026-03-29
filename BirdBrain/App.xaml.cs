@@ -12,10 +12,7 @@ namespace BirdBrain
         public App()
         {
             InitializeComponent();
-
-            // Load theme
-            ThemeManager.LoadSavedTheme(typeof(SunsetCoralNavyDark));
-
+            
             // Initialize AppState
             State = new AppState();
             State.Database = new DatabaseService();
@@ -23,11 +20,21 @@ namespace BirdBrain
             // Show animation page first
             MainPage = new BirdBrain.Views.Animation();
 
+            // Let UI render FIRST
+            Dispatcher.Dispatch(async () =>
+            {
+                await Task.Yield(); 
+
+                ThemeManager.LoadSavedTheme(typeof(SunsetCoralNavyDark));
+
+                await InitializeApp();
+            });
+
             // Start initialization
             InitializeApp();
         }
 
-        private async void InitializeApp()
+        private async Task InitializeApp()
         {
             try
             {

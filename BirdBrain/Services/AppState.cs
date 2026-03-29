@@ -123,48 +123,6 @@ namespace BirdBrain.Services
             SelectedSavedBird = SavedBirds.Count > 0 ? SavedBirds[0] : null;
             SelectedSavedLocation = SavedLocations.Count > 0 ? SavedLocations[0] : null;
         }
-
-        
-
-        //private ISeries[] _Birdseries = Array.Empty<ISeries>();
-        //public ISeries[] BirdSeries
-        //{
-        //    get => _Birdseries;
-        //    set { _Birdseries = value ?? Array.Empty<ISeries>(); OnPropertyChanged(); }
-        //}
-
-        //private List<string> _Birdlabels;
-        //public List<string> BirdLabels
-        //{
-        //    get => _Birdlabels;
-        //    set { _Birdlabels = value; OnPropertyChanged(); }
-        //}
-
-        //private Axis[] _BirdxAxes =
-        //{
-        //    new Axis
-        //        { LabelsRotation = 20 }
-        //};
-
-        //public Axis[] BirdXAxes
-        //{
-        //    get => _BirdxAxes;
-        //    set { _BirdxAxes = value; OnPropertyChanged(); }
-        //}
-
-        //private Axis[] _BirdyAxes =
-        //{
-        //    new Axis
-        //        { LabelsRotation = 20 }
-        //};
-        //public Axis[] BirdYAxes
-        //{
-        //    get => _BirdyAxes;
-        //    set { _BirdyAxes = value; OnPropertyChanged(); }
-        //}
-
-        //public ISeries[] PieSeries { get; set; }
-
      
         public bool LeftSelected
         {

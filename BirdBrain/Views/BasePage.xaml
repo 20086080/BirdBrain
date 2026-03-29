@@ -24,8 +24,9 @@
 
                 <!-- OVERLAY -->
                 <BoxView x:Name="DrawerOverlay"
-                    BackgroundColor="#80000000" IsVisible="False"
-                         InputTransparent="False">
+                    BackgroundColor="#80000000" 
+                         Opacity="0"
+                         InputTransparent="True">
                     <BoxView.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnOverlayTapped"/>
                     </BoxView.GestureRecognizers>

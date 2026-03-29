@@ -10,7 +10,6 @@ namespace BirdBrain.Views;
 public partial class BasePage : ContentPage
 {
     private SummaryService _summaryService;
-
     BoxView _drawerOverlay;
     LeftSettingsDrawer _leftDrawer;
     RightSettingsDrawer _rightDrawer;
@@ -18,7 +17,6 @@ public partial class BasePage : ContentPage
     BoxView _swipeCatcher;
     const double DrawerHiddenX = -360;
     const double RightDrawerHiddenX = 360;
-
     bool _initialized;
 
     public BasePage()
@@ -29,14 +27,14 @@ public partial class BasePage : ContentPage
         Microsoft.Maui.Controls.NavigationPage.SetHasBackButton(this, false);
     }
 
-
     protected override void OnApplyTemplate()
     {
         base.OnApplyTemplate();
-        if (_initialized) return;
-            _initialized = true;
-
+        if (_initialized)
+            { return; }
+        _initialized = true;
         _drawerOverlay = GetTemplateChild("DrawerOverlay") as BoxView;
+        
         _leftDrawer = GetTemplateChild("LeftDrawer") as LeftSettingsDrawer;
         _rightDrawer = GetTemplateChild("RightDrawer") as RightSettingsDrawer;
 
@@ -45,7 +43,6 @@ public partial class BasePage : ContentPage
         _drawerOverlay.InputTransparent = true;
     }
 
-    
 
     void SetupDrawers()
     {
@@ -54,73 +51,62 @@ public partial class BasePage : ContentPage
             var header = GetTemplateChild("AppHeader") as AppHeader;
             if (_leftDrawer != null)
             {
-                //Home Selection 
-                _leftDrawer.HomeCommand = new Command(async () =>
+                _leftDrawer.HomeCommand = new Command(async () =>           //Home Selection 
                 {
                     await ExecuteWithDrawerClose(() =>
                         Shell.Current.GoToAsync("//IntroPage"));
                 });
-
-                // Bird Selection
-                _leftDrawer.SelectBirdCommand = new Command(async () =>
+               
+                _leftDrawer.SelectBirdCommand = new Command(async () =>      // Bird Selection
                 {
-                    ExecuteWithDrawerClose(() =>
+                    await ExecuteWithDrawerClose(() =>
                      Shell.Current.GoToAsync(nameof(BirdSelectionPage)));
                 });
-
-                // Sighting Selection
-                _leftDrawer.SightingsCommand = new Command(async () =>
+                
+                _leftDrawer.SightingsCommand = new Command(async () =>      // Sighting Selection
                 {
-                        if (App.State.LeftSelected)     //Location Selected on Page
-                            ExecuteWithDrawerClose(() =>
-                                Shell.Current.GoToAsync(nameof(LocationSightingPage)));
-                        else
-                            ExecuteWithDrawerClose(() =>
-                                Shell.Current.GoToAsync(nameof(BirdSightingPage)));
+                    if (App.State.LeftSelected)                             //Location Selected on Page
+                        await ExecuteWithDrawerClose(() =>
+                            Shell.Current.GoToAsync(nameof(LocationSightingPage)));
+                    else
+                        await ExecuteWithDrawerClose(() =>
+                            Shell.Current.GoToAsync(nameof(BirdSightingPage)));
                 });
-
-                // Profile Selection
-                _leftDrawer.ProfileCommand = new Command(async () =>
+              
+                _leftDrawer.ProfileCommand = new Command(async () =>        // Profile Selection
                 {
-                        if (App.State.LeftSelected)     //Location Selected on Page
-                            ExecuteWithDrawerClose(() =>
+                    if (App.State.LeftSelected)                             //Location Selected on Page
+                        await ExecuteWithDrawerClose(() =>
                             Shell.Current.GoToAsync(nameof(LocationProfilePage)));
-                        else
-                            ExecuteWithDrawerClose(() =>
+                    else
+                        await ExecuteWithDrawerClose(() =>
                             Shell.Current.GoToAsync(nameof(BirdProfilePage)));
                 });
             }
 
             if (header != null)
             {
-                    header.HamburgerClicked += async (_, __) =>
-                    {
-                        if (IsAnyDrawerOpen())
-                            await CloseAllDrawers();
-                        else
-                            await OpenDrawer(); // ← existing left drawer logic
-                    };
-                    // Right drawer
-                    header.SettingsClicked += async (_, __) =>
-                    {
-                        if (IsAnyDrawerOpen())
-                            await CloseAllDrawers();
-                        else
-                            await OpenRightDrawer();
-                    };
+                header.HamburgerClicked += async (_, __) =>
+                {
+                    if (_drawerState == DrawerState.LeftOpen)
+                        await CloseDrawer();
+                    else
+                        await OpenDrawer();
+                };
+                // Right drawer
+                header.SettingsClicked += async (_, __) =>
+                {
+                    if (_drawerState == DrawerState.RightOpen)
+                        await CloseRightDrawer();
+                    else
+                        await OpenRightDrawer();
+                };
             }
 
-
-            bool IsAnyDrawerOpen()
-                {
-                    return (_leftDrawer?.TranslationX == 0) || (_rightDrawer?.TranslationX == 0);
-                }
-
-                // 🔒 GUARANTEED hidden
-                if (_leftDrawer != null)
-                    _leftDrawer.TranslationX = DrawerHiddenX;
-                if (_rightDrawer != null)
-                    _rightDrawer.TranslationX = RightDrawerHiddenX;
+            if (_leftDrawer != null)
+                _leftDrawer.TranslationX = DrawerHiddenX;
+            if (_rightDrawer != null)
+            _rightDrawer.TranslationX = RightDrawerHiddenX;
         }
         catch (Exception ex)
         {
@@ -129,55 +115,67 @@ public partial class BasePage : ContentPage
         }
     }
 
+    enum DrawerState
+    {
+        Closed,
+        LeftOpen,
+        RightOpen
+    }
+
+    DrawerState _drawerState = DrawerState.Closed;
+
     bool IsAnyDrawerOpen()
     {
-        return (_leftDrawer?.TranslationX ?? DrawerHiddenX) > DrawerHiddenX ||
-            (_rightDrawer?.TranslationX ?? RightDrawerHiddenX) < RightDrawerHiddenX;
+        return _drawerState != DrawerState.Closed;
     }
 
     async Task ExecuteWithDrawerClose(Func<Task> action)
     {
         if (IsAnyDrawerOpen())
             await CloseAllDrawers();
-
         await action();
     }
 
     async Task OpenRightDrawer()
     {
         if (_rightDrawer == null) return;
-
         _leftDrawer?.AbortAnimation("TranslateTo");
         _rightDrawer.AbortAnimation("TranslateTo");
-
-        await CloseDrawer(); // closes left if open
+        if (_drawerState == DrawerState.LeftOpen)
+            await CloseDrawer();
 
         if (_drawerOverlay != null)
-            _drawerOverlay.IsVisible = true;
-
+        { 
+            _drawerOverlay.Opacity = 1;
+            _drawerOverlay.InputTransparent = false;
+        }
         await _rightDrawer.TranslateToAsync(0, 0, 250, Easing.CubicOut);
+        _drawerState = DrawerState.RightOpen;
     }
 
     async Task CloseRightDrawer()
     {
         if (_rightDrawer == null) return;
-
         await _rightDrawer.TranslateToAsync(RightDrawerHiddenX, 0, 250, Easing.CubicIn);
         if (_drawerOverlay != null)
-            _drawerOverlay.IsVisible = false;
+        {
+            _drawerOverlay.Opacity = 0;
+            _drawerOverlay.InputTransparent = true;
+        }
+        _drawerState = DrawerState.Closed;
     }
 
     async void OnSwipeRight(object? sender, SwipedEventArgs e)
     {
-        if (_rightDrawer?.TranslationX == 0)
+        if (_drawerState == DrawerState.RightOpen)
             await CloseRightDrawer();
         else
-            await OpenDrawer(); // existing LEFT drawer
+            await OpenDrawer();
     }
 
     async void OnSwipeLeft(object? sender, SwipedEventArgs e)
     {
-        if (_leftDrawer?.TranslationX == 0)
+        if (_drawerState == DrawerState.LeftOpen)
             await CloseDrawer();
         else
             await OpenRightDrawer();
@@ -186,14 +184,15 @@ public partial class BasePage : ContentPage
     async Task OpenDrawer()
     {
         if (_leftDrawer == null) return;
-
         _leftDrawer.AbortAnimation("TranslateTo");
         _rightDrawer?.AbortAnimation("TranslateTo");
-
         if (_drawerOverlay != null)
-            _drawerOverlay.IsVisible = true;
-
+        {
+            _drawerOverlay.Opacity = 1;
+            _drawerOverlay.InputTransparent = false;
+        }
         await _leftDrawer.TranslateToAsync(0, 0, 250, Easing.CubicOut);
+        _drawerState = DrawerState.LeftOpen;
     }
 
     async Task CloseDrawer()
@@ -201,7 +200,11 @@ public partial class BasePage : ContentPage
         if (_leftDrawer == null) return;
         await _leftDrawer.TranslateToAsync(DrawerHiddenX, 0, 250, Easing.CubicIn);
         if (_drawerOverlay != null)
-        _drawerOverlay.IsVisible = false;
+        {
+            _drawerOverlay.Opacity = 0;
+            _drawerOverlay.InputTransparent = true;
+        }
+        _drawerState = DrawerState.Closed;
     }
 
     async void OnOverlayTapped(object sender, EventArgs e)
@@ -211,10 +214,9 @@ public partial class BasePage : ContentPage
 
     async Task CloseAllDrawers()
     {
-        if (_leftDrawer?.TranslationX == 0)
+        if (_drawerState == DrawerState.LeftOpen)
             await CloseDrawer();
-
-        if (_rightDrawer?.TranslationX == 0)
+        else if (_drawerState == DrawerState.RightOpen)
             await CloseRightDrawer();
     }
 

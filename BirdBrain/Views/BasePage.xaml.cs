@@ -86,15 +86,15 @@ public partial class BasePage : ContentPage
 
             if (header != null)
             {
-                header.HamburgerClicked += async (_, __) =>
+                header.HamburgerClicked += async (_, __) =>             // Left drawer
                 {
                     if (_drawerState == DrawerState.LeftOpen)
                         await CloseDrawer();
                     else
                         await OpenDrawer();
                 };
-                // Right drawer
-                header.SettingsClicked += async (_, __) =>
+                
+                header.SettingsClicked += async (_, __) =>              // Right drawer
                 {
                     if (_drawerState == DrawerState.RightOpen)
                         await CloseRightDrawer();
@@ -110,7 +110,7 @@ public partial class BasePage : ContentPage
         }
         catch (Exception ex)
         {
-                System.Diagnostics.Debug.WriteLine("TEMPLATE CRASH: " + ex);
+            System.Diagnostics.Debug.WriteLine("TEMPLATE CRASH: " + ex);
                 throw;
         }
     }
@@ -220,7 +220,7 @@ public partial class BasePage : ContentPage
             await CloseRightDrawer();
     }
 
-    public static AppState State;
+    //public static AppState State;
 
     //public AppState AppState =>
     //Microsoft.Maui.Controls.Application.Current

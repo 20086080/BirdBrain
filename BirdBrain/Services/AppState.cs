@@ -140,18 +140,55 @@ namespace BirdBrain.Services
             set
             {
                 if (_days != value)
-                    { _days = value; OnPropertyChanged(); }
+                { 
+                    _days = value; 
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(DaysSlider));
+                }
             }
         }
 
-        
+        public double DaysSlider
+        {
+            get => Days;  // slider reads from Days
+
+            set
+            {
+                int newValue = (int)Math.Round(value);
+
+                if (Days != newValue)
+                {
+                    Days = newValue; // update real value
+                }
+            }
+        }
+
+        public double RadiusSlider
+        {
+            get => Radius;  // slider reads from Radius
+
+            set
+            {
+                int newValue = (int)Math.Round(value);
+
+                if (Radius != newValue)
+                {
+                    Radius = newValue; // update real value
+                }
+            }
+        }
+
         public int Radius
         {
             get => _radius;
             set
             {
                 if (_radius != value)
-                    { _radius = value; OnPropertyChanged(); }
+                { 
+                    _radius = value; 
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(RadiusSlider));
+                }
             }
         }
 

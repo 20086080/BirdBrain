@@ -7,15 +7,16 @@ namespace BirdBrain
 {
     public partial class App : Application
     {
-        public static AppState State { get; set; } = new AppState();
-
+        //public static AppState State { get; set; } = new AppState();
+        public static AppState State { get; private set; }
         public App()
         {
             InitializeComponent();
-            
+
             // Initialize AppState
             State = new AppState();
             State.Database = new DatabaseService();
+            //State = Handler.MauiContext.Services.GetRequiredService<AppState>();
 
             // Show animation page first
             MainPage = new BirdBrain.Views.Animation();

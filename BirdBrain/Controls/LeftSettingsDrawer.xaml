@@ -56,25 +56,25 @@
         <BoxView Style="{StaticResource DrawerDividerStyle}" />
         
         <!-- Slider -->
-        <VerticalStackLayout Spacing="8">
-            <Label Text="Radius (km)" Style="{StaticResource DrawerSectionLabelStyle}" />
-            <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
-                <Label Text="{Binding MinRadius}" Style="{StaticResource SliderEndpointLabelStyle}" />
+        <VerticalStackLayout Spacing = "8">
+            <Label Text = "Radius (km)" Style = "{StaticResource DrawerSectionLabelStyle}" />
+            <Grid ColumnDefinitions = "Auto,*,Auto" VerticalOptions="Center">
+                <Label Text = "{Binding MinRadius}" Style="{StaticResource SliderEndpointLabelStyle}" />
                 <Slider Grid.Column="1" Style="{StaticResource DrawerSliderStyle}"
-                    Minimum="{Binding MinRadius}" Maximum = "{Binding MaxRadius}"
-                    Value="{Binding Radius, Mode=TwoWay}" />
-                <Label Text ="{Binding MaxRadius}"  Grid.Column="2" Style="{StaticResource SliderEndpointLabelStyle}" />
+                    Minimum = "1" Maximum = "50"
+                    Value = "{Binding RadiusSlider, Mode = TwoWay}" />
+                <Label Text = "{Binding MaxRadius}"  Grid.Column="2" Style = "{StaticResource SliderEndpointLabelStyle}" />
             </Grid>
         </VerticalStackLayout>
        
-        <VerticalStackLayout Spacing="8">
-            <Label Text="Days" Style="{StaticResource DrawerSectionLabelStyle}" />
+        <VerticalStackLayout Spacing = "8">
+            <Label Text = "Days" Style = "{StaticResource DrawerSectionLabelStyle}" />
             <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
-                <Label Text="{Binding MinDays}" Style="{StaticResource SliderEndpointLabelStyle}" />
-                <Slider Grid.Column="1" Style="{StaticResource DrawerSliderStyle}"
-                    Minimum="{Binding MinDays}" Maximum="{Binding MaxDays}"
-                    Value="{Binding Days, Mode=TwoWay}" />
-                <Label Text="{Binding MaxDays}" Grid.Column="2" Style="{StaticResource SliderEndpointLabelStyle}" />
+                <Label Text = "{Binding MinDays}" Style="{StaticResource SliderEndpointLabelStyle}" />
+                <Slider Grid.Column = "1" Style="{StaticResource DrawerSliderStyle}"
+                    Minimum = "1" Maximum = "30"
+                    Value = "{Binding DaysSlider, Mode = TwoWay}" />
+                <Label Text = "{Binding MaxDays}" Grid.Column = "2" Style = "{StaticResource SliderEndpointLabelStyle}" />
             </Grid>
         </VerticalStackLayout>
     </VerticalStackLayout>

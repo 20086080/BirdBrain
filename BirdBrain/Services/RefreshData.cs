@@ -28,7 +28,7 @@ namespace BirdBrain.Services
 
             // API call
             var observations =
-                await _ebird.GetRecentObservationsAsync(lat, lng, App.State.Radius, App.State.MinDays);     //API for 1 day only (MinDays = 1) 
+                await _ebird.GetRecentObservationsAsync(lat, lng, App.State.MaxRadius, App.State.MinDays);     //API for 1 day only (MinDays = 1) 
 
             var refreshTime = DateTime.UtcNow.ToString("yyyy-MM-dd");
             var dbList =

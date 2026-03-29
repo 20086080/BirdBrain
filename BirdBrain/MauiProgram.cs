@@ -38,7 +38,7 @@ namespace BirdBrain
 
             var app = builder.Build();
 
-            App.State = app.Services.GetRequiredService<AppState>();
+            //App.State = app.Services.GetRequiredService<AppState>();
 
             return app;
 

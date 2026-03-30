@@ -144,6 +144,15 @@
                 <Setter Property="Stroke" Value="{DynamicResource Accent}" />
             </Style>
 
+            <!-- Normal Border -->
+            <Style x:Key="NormalAccentBorderStyle" TargetType="Border">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Padding" Value="10" />
+                
+                <Setter Property="BackgroundColor" Value="{DynamicResource Surface}" />
+                <Setter Property="Stroke" Value="{DynamicResource Accent}" />
+            </Style>
+
             <!-- Rounded Border -->
             <Style x:Key="RoundedAccentBorderStyle1" TargetType="Border">
                 <Setter Property="Margin" Value="5" />

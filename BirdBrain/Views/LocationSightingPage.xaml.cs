@@ -20,6 +20,7 @@ public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
 
     public List<TopBirds> TopBirds { get; set; } = new();
 
+    public List<LocationSightingSummary> SightingsCount { get; set; }
     public List<LocationDailyObs> LocationDailyObs { get; set; } = new();
 
     // SERIES
@@ -89,39 +90,42 @@ public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
     }
     protected override async void OnAppearing()
     {
+        base.OnAppearing();
+        _ = LoadDataAsync();
+
+    }
+
+    private async Task LoadDataAsync()
+    {
         try
         {
-            base.OnAppearing();
-
+            Double Lat = App.State.SelectedSavedLocation.Lat;
+            Double Lng = App.State.SelectedSavedLocation.Lng;
+            App.State.LeftSelected = true;
             var chartService = new ChartService();
+            await App.State.Database.InitAsync();
 
             CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
-            TotalSightings = await SummaryService.GetTotalLocationCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate);
+            var (DateToday, previousDate) = await SummaryService.GetLatestTwoDatesAsync(Lat, Lng);
+            
+            var resultSummary = await SummaryService.GetLocationCountsAsync(Lat, Lng, CutoffDate, DateToday, previousDate);
+            
+            TotalSightings = resultSummary.FirstOrDefault()?.TotalSightings ?? 0;
             if (TotalSightings <= 0)
             {
                 await ErrorService.Show(ErrorType.NoLocationDataFound);
             }
-            string DateToday = await SummaryService.LatestDateStmpAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, 0);
+            int NumberDays = resultSummary.FirstOrDefault()?.TotalDays ?? 0;
+            TotalTypeOfBird = resultSummary.FirstOrDefault()?.TotalBirds ?? 0;
+            TodayObs = resultSummary.FirstOrDefault()?.TodayBirds ?? 0;
+            int previousCount = resultSummary.FirstOrDefault()?.PreviousDayBirds ?? 0;
 
-            TotalTypeOfBird = await SummaryService.GetTotalLocationBirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate);
-            TopBirds = await SummaryService.GetTop5BirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate, DateToday);
-            
-            
-            App.State.LeftSelected = true;
-            TodayObs = TopBirds?.Sum(b => b.StatsToday) ?? 0;
-            int NumberDays = await SummaryService.DateStampTotalAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate);
             AverageObs = TotalSightings / NumberDays;
-            NewBirds = 0;
+            NewBirds = TodayObs - previousCount;
 
-            if (NumberDays > 1)
-            {
-                string previousDate = await SummaryService.LatestDateStmpAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, 1);
-                int previousCount = await SummaryService.BirdCountForDateAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, previousDate);
-                NewBirds = TodayObs - previousCount; 
-            }
+            TopBirds = await SummaryService.GetTop5BirdCountAsync(Lat, Lng, CutoffDate, DateToday);
+            LocationDailyObs = await SummaryService.GetLocationDailyObsAsync(Lat, Lng, CutoffDate);
 
-            LocationDailyObs = await SummaryService.GetLocationDailyObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate);
-            
             var result = chartService.BuildLocationChart(LocationDailyObs);
             Series = result.Series;
             Labels = result.Labels;
@@ -129,7 +133,7 @@ public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
             YAxes = result.YAxes;
             OnPropertyChanged(null);
         }
-        catch (Exception ex) 
+        catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"DB Error: {ex}");
             await ErrorService.Show(ErrorType.ErrorFound);

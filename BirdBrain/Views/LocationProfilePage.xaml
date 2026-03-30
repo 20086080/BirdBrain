@@ -12,7 +12,7 @@
 
     <Grid RowDefinitions="Auto,Auto,Auto, Auto, *" Padding="5" >
 
-        <HorizontalStackLayout Grid.Row="0" HorizontalOptions="Start" Background="{DynamicResource Background}" >
+        <Grid Grid.Row="0" HorizontalOptions="Start" Background="{DynamicResource Background}" >
 
             <!-- LOCATION / BIRD Selection -->
             <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" WidthRequest="170" HeightRequest="35">
@@ -34,37 +34,31 @@
                     </Border>
                 </Grid>
             </Border>
-        </HorizontalStackLayout>
+        </Grid>
 
         <BoxView Grid.Row="1" Style="{StaticResource UnderlineStyle}" />
 
-        <Grid Grid.Row="2" ColumnDefinitions = "*,*" Padding ="10" Background="{DynamicResource Background}">
+        <Grid Grid.Row="2" ColumnDefinitions = "2*,*" Padding ="10" Background="{DynamicResource Background}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Text = "{Binding SelectedSavedLocation.Name}" Style = "{StaticResource SubTitles}" 
                    LineBreakMode="WordWrap"/>
-            <HorizontalStackLayout Grid.Row="0" Grid.Column="1">
-                <Label Text = "{Binding SelectedSavedLocation.Lat}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
-                <Label Text = ", " Style="{StaticResource PageLabelNormal}"/>
-                <Label Text = "{Binding SelectedSavedLocation.Lng}" Style="{StaticResource PageLabelNormal}"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                <Label Text = "{Binding SelectedSavedLocation.Region}" Style="{StaticResource PageLabelNormal}"/>
-                <Label Text = ", " Style="{StaticResource PageLabelNormal}"/>
-                <Label Text = "{Binding SelectedSavedLocation.Country}" Style="{StaticResource PageLabelNormal}"/>
-            </HorizontalStackLayout>    
+            <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="Auto,*">
+                <Label Grid.Column = "0" Text = "{Binding SelectedSavedLocation.Region, StringFormat='{0}, '}" 
+                    Style="{StaticResource PageLabelNormal}"/>
+                <Label Grid.Column = "1" Text = "{Binding SelectedSavedLocation.Country}" Style="{StaticResource PageLabelNormal}"/>
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="1" ColumnDefinitions="Auto,*">
+                <Label Grid.Column = "0" Text = "{Binding SelectedSavedLocation.Lat, StringFormat='{0}, '}" 
+                                Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
+                <Label Grid.Column = "2" Text = "{Binding SelectedSavedLocation.Lng}" Style="{StaticResource PageLabelNormal}"/>
+            </Grid>
+                
         </Grid>
-        
-        <!-- Location LABEL -->
-        <Grid Grid.Row="3"  Background="{DynamicResource Background}">
-            <Image Source="{Binding SelectedSavedLocation.ProfileImage}"  HeightRequest="330" Aspect="AspectFill"/>
-        </Grid>
-        
-        <Grid Grid.Row="4" Padding ="5" Background="{DynamicResource Background}">
-            <Label Text = "{Binding SelectedSavedLocation.Description}" Style = "{StaticResource PageLabelNormal}" LineBreakMode="WordWrap"/>
-        </Grid>
+        <Image Grid.Row ="3" Source="{Binding SelectedSavedLocation.ProfileImage}"  HeightRequest="330" Aspect="AspectFill" HorizontalOptions="Fill"/>
+        <Label Grid.Row="4" Margin ="0,5,0,0" Text = "{Binding SelectedSavedLocation.Description}" Style = "{StaticResource PageLabelNormal}" LineBreakMode="WordWrap"/>
     </Grid>
 </views:BasePage>
 

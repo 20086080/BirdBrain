@@ -7,7 +7,7 @@
              x:DataType="services:AppState">
     <Grid RowDefinitions="*,*"  Padding="5" RowSpacing="0">
         <BoxView Grid.Row="0" Style="{StaticResource UnderlineStyle}" />
-        <HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center" >
+        <HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Start" >
             <Label Text="{Binding Radius, StringFormat = 'Radius - {0}'}" Style="{StaticResource PageLabel}" FontAttributes="Italic" />
             <Label Text="{Binding Days, StringFormat = ' km   |  Days - {0}'}" Style="{StaticResource PageLabel}" FontAttributes="Italic"/>
         </HorizontalStackLayout>

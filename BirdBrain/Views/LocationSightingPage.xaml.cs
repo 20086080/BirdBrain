@@ -102,36 +102,46 @@ public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
             Double Lat = App.State.SelectedSavedLocation.Lat;
             Double Lng = App.State.SelectedSavedLocation.Lng;
             App.State.LeftSelected = true;
-            var chartService = new ChartService();
+            
             await App.State.Database.InitAsync();
 
             CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
             var (DateToday, previousDate) = await SummaryService.GetLatestTwoDatesAsync(Lat, Lng);
-            
+
             var resultSummary = await SummaryService.GetLocationCountsAsync(Lat, Lng, CutoffDate, DateToday, previousDate);
-            
+
             TotalSightings = resultSummary.FirstOrDefault()?.TotalSightings ?? 0;
             if (TotalSightings <= 0)
             {
                 await ErrorService.Show(ErrorType.NoLocationDataFound);
+                await Shell.Current.GoToAsync("//IntroPage");
+                return;
             }
-            int NumberDays = resultSummary.FirstOrDefault()?.TotalDays ?? 0;
-            TotalTypeOfBird = resultSummary.FirstOrDefault()?.TotalBirds ?? 0;
-            TodayObs = resultSummary.FirstOrDefault()?.TodayBirds ?? 0;
-            int previousCount = resultSummary.FirstOrDefault()?.PreviousDayBirds ?? 0;
+            else
+            {
+                var TopBirdsTask = SummaryService.GetTop5BirdCountAsync(Lat, Lng, CutoffDate, DateToday);
+                var LocationDailyObsTask = SummaryService.GetLocationDailyObsAsync(Lat, Lng, CutoffDate);
 
-            AverageObs = TotalSightings / NumberDays;
-            NewBirds = TodayObs - previousCount;
+                int NumberDays = resultSummary.FirstOrDefault()?.TotalDays ?? 0;
+                TotalTypeOfBird = resultSummary.FirstOrDefault()?.TotalBirds ?? 0;
+                TodayObs = resultSummary.FirstOrDefault()?.TodayBirds ?? 0;
+                int previousCount = resultSummary.FirstOrDefault()?.PreviousDayBirds ?? 0;
 
-            TopBirds = await SummaryService.GetTop5BirdCountAsync(Lat, Lng, CutoffDate, DateToday);
-            LocationDailyObs = await SummaryService.GetLocationDailyObsAsync(Lat, Lng, CutoffDate);
+                AverageObs = TotalSightings / NumberDays;
+                NewBirds = TodayObs - previousCount;
 
-            var result = chartService.BuildLocationChart(LocationDailyObs);
-            Series = result.Series;
-            Labels = result.Labels;
-            XAxes = result.XAxes;
-            YAxes = result.YAxes;
-            OnPropertyChanged(null);
+                await Task.WhenAll(TopBirdsTask, LocationDailyObsTask);
+                TopBirds = await TopBirdsTask;
+                LocationDailyObs = await LocationDailyObsTask;
+
+                var chartService = new ChartService();
+                var result = chartService.BuildLocationChart(LocationDailyObs);
+                Series = result.Series;
+                Labels = result.Labels;
+                XAxes = result.XAxes;
+                YAxes = result.YAxes;
+                OnPropertyChanged(null);
+            }
         }
         catch (Exception ex)
         {

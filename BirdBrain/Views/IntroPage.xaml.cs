@@ -23,7 +23,7 @@ public partial class IntroPage : BasePage
     {
 
         base.OnAppearing();
-
+        App.State.LeftSelected = true;
         _carouselItem = CarouselCurrentItem;
 
         MainThread.BeginInvokeOnMainThread(() =>
@@ -52,20 +52,20 @@ public partial class IntroPage : BasePage
 
     async void OnAllBirdsTapped(object? sender, EventArgs e)
     {
-        AllBirdsTab.Style = (Style)Application.Current!.Resources["SegmentSelectedStyle"];
-        SpecificBirdTab.Style = (Style)Application.Current.Resources["SegmentUnselectedStyle"];
-        AllBirdsLabel.Style = (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
-        SpecificBirdLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
+        //AllBirdsTab.Style = (Style)Application.Current!.Resources["SegmentSelectedStyle"];
+        //SpecificBirdTab.Style = (Style)Application.Current.Resources["SegmentUnselectedStyle"];
+        //AllBirdsLabel.Style = (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
+        //SpecificBirdLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
         App.State.LeftSelected = true;
         await Shell.Current.GoToAsync(nameof(LocationSightingPage));
     }
 
     async void OnSpecificBirdTapped(object? sender, EventArgs e)
     {
-        SpecificBirdTab.Style = (Style)Application.Current!.Resources["SegmentSelectedStyle"];
-        AllBirdsTab.Style = (Style)Application.Current.Resources["SegmentUnselectedStyle"];
-        SpecificBirdLabel.Style = (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
-        AllBirdsLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
+        //SpecificBirdTab.Style = (Style)Application.Current!.Resources["SegmentSelectedStyle"];
+        //AllBirdsTab.Style = (Style)Application.Current.Resources["SegmentUnselectedStyle"];
+        //SpecificBirdLabel.Style = (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
+        //AllBirdsLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
         App.State.LeftSelected = false;
         await Shell.Current.GoToAsync(nameof(BirdSelectionPage));
     }

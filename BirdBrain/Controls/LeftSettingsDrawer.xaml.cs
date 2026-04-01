@@ -72,19 +72,7 @@ public partial class LeftSettingsDrawer : ContentView
         set => SetValue(ProfileCommandProperty, value);
     }
 
-    //public static readonly BindableProperty InsightsCommandProperty =
-    //    BindableProperty.Create(
-    //        nameof(InsightsCommand), 
-    //        typeof(ICommand), 
-    //        typeof(LeftSettingsDrawer),
-    //        null);
-
-    //public ICommand InsightsCommand
-    //{
-    //    get => (ICommand)GetValue(InsightsCommandProperty);
-    //    set => SetValue(InsightsCommandProperty, value);
-    //}
-
+    
     public static readonly BindableProperty SelectLocationCommandProperty =
         BindableProperty.Create(
             nameof(SelectLocationCommand), 

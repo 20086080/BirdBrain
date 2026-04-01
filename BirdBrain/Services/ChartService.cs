@@ -33,10 +33,13 @@ namespace BirdBrain.Services
             var skColor = GetTextColor();
             var values = data.Select(x => x.Sightings).ToList();
             var labels = data
-                            .Select(x => DateTime.TryParse(x.ObsDt, out var d)
-                                ? d.ToString("dd/M")
-                                : "")
-                            .ToList();
+                .Select(x =>
+                {
+                    if (DateTime.TryParse(x.ObsDt, out var dt))
+                        return dt.ToString("dd/M");
+                        return string.Empty; // or fallback
+                })
+                .ToList();
 
             var maxSightings = values.Max();
 

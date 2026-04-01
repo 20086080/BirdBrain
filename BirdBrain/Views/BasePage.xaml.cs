@@ -22,8 +22,8 @@ public partial class BasePage : ContentPage
     public BasePage()
     {
         InitializeComponent();
-        Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific.Page
-        .SetUseSafeArea(this, false);
+        //Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific.Page
+        //.SetUseSafeArea(this, false);
         Microsoft.Maui.Controls.NavigationPage.SetHasBackButton(this, false);
     }
 
@@ -33,14 +33,21 @@ public partial class BasePage : ContentPage
         if (_initialized)
             { return; }
         _initialized = true;
-        _drawerOverlay = GetTemplateChild("DrawerOverlay") as BoxView;
+        _drawerOverlay = GetTemplateChild("DrawerOverlay") as BoxView
+            ?? throw new InvalidOperationException("DrawerOverlay not found");
         
-        _leftDrawer = GetTemplateChild("LeftDrawer") as LeftSettingsDrawer;
-        _rightDrawer = GetTemplateChild("RightDrawer") as RightSettingsDrawer;
-
-        SetupDrawers();
-        _drawerOverlay.Opacity = 0;
-        _drawerOverlay.InputTransparent = true;
+        _leftDrawer = GetTemplateChild("LeftDrawer") as LeftSettingsDrawer
+            ?? throw new InvalidOperationException("Left Drawer not found");
+        _rightDrawer = GetTemplateChild("RightDrawer") as RightSettingsDrawer
+            ?? throw new InvalidOperationException("Right Drawer not found");
+        
+        Dispatcher.Dispatch(() =>
+        {
+            SetupDrawers();
+        } );
+        
+        _drawerOverlay?.Opacity = 0;
+        _drawerOverlay?.InputTransparent = true;
     }
 
 

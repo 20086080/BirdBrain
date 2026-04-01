@@ -4,8 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:BirdBrain.Controls"
-    BackgroundColor = "{DynamicResource Accent70}"         
+    BackgroundColor = "{DynamicResource Accent70}"    
+    x:Name="Root"
     Padding="0" Margin= "0">
+    <ContentView.BindingContext>
+        <x:Reference Name="Root" />
+    </ContentView.BindingContext>
 
     <VerticalStackLayout Padding="20,40" Spacing="24" >
 

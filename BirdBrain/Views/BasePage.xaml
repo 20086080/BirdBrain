@@ -12,7 +12,7 @@
     <ContentPage.ControlTemplate>
         <ControlTemplate>
             <Grid IsClippedToBounds="True">
-                <Grid RowDefinitions="Auto,Auto,*">
+                <Grid RowDefinitions="Auto,*,Auto">
                     <controls:AppHeader x:Name="AppHeader" Grid.Row="0"/>
                     <ContentPresenter Grid.Row="1"/>
                     <controls:FooterView x:Name="AppFooter" Grid.Row="2"/>

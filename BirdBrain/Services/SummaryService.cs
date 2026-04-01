@@ -18,6 +18,22 @@ namespace BirdBrain.Services
             _databaseService = databaseService;
         }
 
+        ///Has Location been Refreshed today ///        
+        public async Task<bool> GetLocationRefreshTodayAsync(double lat, double lng)
+        {
+            await _databaseService.InitAsync();
+            var db = _databaseService.Db;
+            var todayStart = DateTime.UtcNow.ToString("yyyy-MM-dd");
+            var result = await db.ExecuteScalarAsync<int>(
+                @"SELECT Count(1) 
+                FROM BirdObservationDb
+                WHERE AppLat = ?
+                    AND AppLng = ?
+                    AND DateStamp >= ?",
+                lat, lng, todayStart);
+            return result > 0;
+        }
+
         public async Task<List<LocationSightingSummary>> GetLocationCountsAsync(double lat, double lng, string CutoffDate, string DateToday, string previousDate)
         {
             await _databaseService.InitAsync();
@@ -58,7 +74,6 @@ namespace BirdBrain.Services
 
             return (latest, previous);
         }
-
 
         //# Observatons for each Bird in location ///
         public async Task<List<TopBirds>> GetTop5BirdCountAsync(double lat, double lng, string CutoffDate, string DateToday)
@@ -103,53 +118,29 @@ namespace BirdBrain.Services
             return result.ToList();
         }
 
-        
-
-
-
-
-        ///Total Observations of Bird in location ///        
-        public async Task<int> GetTotalBirdCountAsync(double lat, double lng, string comName, DateTime CutoffDate)
+        ///Daily Birds Observation in location ///
+        public async Task<List<BirdDailyObs>> GetBirdDailyObsAsync(double lat, double lng, string comName, string CutoffDate)
         {
             await _databaseService.InitAsync();
             var db = _databaseService.Db;
-            var result = await db.ExecuteScalarAsync<int>(
-                @"SELECT SUM(HowMany) as Sightings
+
+            var result = await db.QueryAsync<BirdDailyObs>(
+
+                @"SELECT DATE(ObsDt) as ObsDt, 
+                COUNT(*) as Sightings 
                 FROM BirdObservationDb
                 WHERE AppLat = ?
-                    AND AppLng = ?
-                    AND ComName = ?
-                    AND HowMany > 0
-                    AND Date(ObsDt) >= ?)",
-                lat, lng, comName, CutoffDate);
-            return result;
-        }
-
-        ///Daily Observation Bird ///
-        public async Task<List<BirdDailyObs>> GetBirdDailyObsAsync(double lat, double lng, string comName, DateTime CutoffDate)
-        {
-            await _databaseService.InitAsync();
-            var db = _databaseService.Db;
-            var result = await db.QueryAsync<BirdDailyObs>(
-                //HowMany capped at 100 for levelliing anomalies such as flocks > 100 etc
-                @"SELECT DATE(ObsDt) as ObsDt,
-                IFNULL(MIN(Sightings,100),0) as Sightings
-                FROM
-                (
-                    SELECT DATE(ObsDt) as ObsDt,
-                        SUM(HowMany) as Sightings
-                    FROM BirdObservationDb b
-                    WHERE AppLat = ?
-                    AND AppLng = ?
-                    AND HowMany > 0
-                    AND ComName = ?
-                    AND Date(ObsDt) >= ?
-                    GROUP BY DATE(ObsDt))",
-                lat, lng, comName, CutoffDate);
+                AND AppLng = ?
+                AND HowMany > 0
+                AND ComName = ?
+                AND Date(ObsDt) >= ? 
+                GROUP BY DATE(ObsDt)
+                ORDER BY DATE(ObsDt)",
+                lat, lng, CutoffDate);
             return result.ToList();
         }
 
-        public async Task<List<BirdTimeObs>> GetBirdTimeObsAsync(double lat, double lng, string comName, DateTime CutoffDate)
+        public async Task<List<BirdTimeObs>> GetBirdTimeObsAsync(double lat, double lng, string comName, string CutoffDate)
         {
             await _databaseService.InitAsync();
             var db = _databaseService.Db;
@@ -174,20 +165,25 @@ namespace BirdBrain.Services
             return result.ToList();
         }
 
-        ///Has Location been Refreshed today ///        
-        public async Task<bool> GetLocationRefreshTodayAsync(double lat, double lng)
+        ///Total Observations of Bird in location ///        
+        public async Task<List<BirdSightingSummary>> GetTotalBirdCountAsync(double lat, double lng, string comName, string CutoffDate)
         {
             await _databaseService.InitAsync();
             var db = _databaseService.Db;
-            var todayStart = DateTime.UtcNow.ToString("yyyy-MM-dd");
-            var result = await db.ExecuteScalarAsync<int>(
-                @"SELECT Count(1) 
-                FROM BirdObservationDb
-                WHERE AppLat = ?
+            var result = await db.QueryAsync<BirdSightingSummary>(
+                @"SELECT 
+                    COUNT(*) as TotalSightings,
+                    COUNT(CASE WHEN ComName = ? THEN ComName END) as BirdSightings,
+                    COUNT(DISTINCT DateStamp) as TotalDays
+                    FROM BirdObservationDb
+                    WHERE 
+                    AppLat = ?
                     AND AppLng = ?
+                    AND HowMany > 0           
                     AND DateStamp >= ?",
-                lat, lng, todayStart);
-            return result>0;
+                comName, lat, lng, CutoffDate);
+            return result.ToList();
         }
+        
     }
 }

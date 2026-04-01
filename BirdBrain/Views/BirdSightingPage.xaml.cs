@@ -11,8 +11,9 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
 {
     public AppState State => App.State;
 
-    public int TotalBirdSightings { get; set; }
-    public double PercTotalSightings { get; set; }
+    int BirdSightings { get; set; }
+    int TotalSightings { get; set; }
+    public double PercBirdSightings { get; set; }
     public string? CutoffDate { get; set; }
 
     public List<BirdDailyObs> BirdDailyObs { get; set; } = new();
@@ -101,25 +102,50 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        _ = LoadDataAsync();
+
+    }
+
+    private async Task LoadDataAsync()
+    {
         LocationTab.Style = (Style)Application.Current!.Resources["SegmentUnselectedStyle"];
         LocationTabLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-        CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
+        App.State.LeftSelected = false;
+
         try
         {
-            TotalBirdSightings = await SummaryService.GetTotalBirdCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.SelectedSavedBird.CommonName!, DateTime.UtcNow.AddDays(-App.State.Days));
-            if (TotalBirdSightings <= 0)
+            Double Lat = App.State.SelectedSavedLocation.Lat;
+            Double Lng = App.State.SelectedSavedLocation.Lng;
+            string commonName = App.State.SelectedSavedBird.CommonName!;
+
+            CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
+            var (DateToday, previousDate) = await SummaryService.GetLatestTwoDatesAsync(Lat, Lng);
+
+            var resultSummary = await SummaryService.GetTotalBirdCountAsync(Lat, Lng, commonName, CutoffDate);
+
+            BirdSightings = resultSummary.FirstOrDefault()?.BirdSightings ?? 0;
+            TotalSightings = resultSummary.FirstOrDefault()?.TotalSightings ?? 0;
+
+            if (BirdSightings <= 0)
             {
                 await ErrorService.Show(ErrorType.NoBirdsFound);
             }
+            int NumberDays = resultSummary.FirstOrDefault()?.TotalDays ?? 0;
+            BirdDailyObs = await SummaryService.GetBirdDailyObsAsync(Lat, Lng, commonName, CutoffDate);
+            BirdTimeObs = await SummaryService.GetBirdTimeObsAsync(Lat, Lng, commonName, CutoffDate);
+            int PercBirdSightings = TotalSightings == 0 ? 0
+                                    : (int)(100.0 * BirdSightings / TotalSightings);
 
-          //  App.State.TotalSightings = await SummaryService.GetTotalLocationCountAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.CutoffDate);
-          //  App.State.PercTotalBirdSightings = 100 * ((double)App.State.TotalBirdSightings / App.State.TotalSightings) ; 
-            BirdDailyObs = await SummaryService.GetBirdDailyObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.SelectedSavedBird.CommonName!, DateTime.UtcNow.AddDays(-App.State.Days));
-            BirdTimeObs = await SummaryService.GetBirdTimeObsAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, App.State.SelectedSavedBird.CommonName!, DateTime.UtcNow.AddDays(-App.State.Days));
-            //App.State.BuildChartBird(App.State.BirdDailyObs);
-            //App.State.BuildChartBirdTime(App.State.BirdTimeObs);
-            App.State.LeftSelected = false;
-            OnPropertyChanged(null);
+            var chartService = new ChartService();
+            var result = chartService.BuildBirdChart(BirdDailyObs);
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                BirdSeries = result.Series;
+                BirdLabels = result.Labels;
+                BirdXAxes = result.XAxes;
+                BirdYAxes = result.YAxes;
+            });
+            OnPropertyChanged(string.Empty);
         }
         catch (Exception ex)
         {
@@ -127,6 +153,7 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
             await ErrorService.Show(ErrorType.ErrorFound);
         }
     }
+
     async void LocationTapped(object? sender, EventArgs e)
     {
         //LocationTab.Style = (Style)Application.Current!.Resources["SegmentSelectedStyle"];

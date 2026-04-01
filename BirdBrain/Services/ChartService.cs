@@ -14,7 +14,7 @@ namespace BirdBrain.Services
     {
         private SKColor GetTextColor()
         {
-            var color = (Color)Application.Current!.Resources["TextPrimary"];
+            var color = (Color)Application.Current!.Resources["TextPrimary"];       // Create Colour palette of Charts
             return new SKColor(
                 (byte)(color.Red * 255),
                 (byte)(color.Green * 255),
@@ -22,7 +22,9 @@ namespace BirdBrain.Services
                 (byte)(color.Alpha * 255));
         }
 
-        public (ISeries[] Series, List<string> Labels, Axis[] XAxes, Axis[] YAxes) BuildLocationChart(List<LocationDailyObs> data)
+        // Build chart for Location Sightings Page - Line Chart
+        public (ISeries[] Series, List<string> Labels, Axis[] XAxes, Axis[] YAxes) 
+            BuildLocationChart(List<LocationDailyObs> data)
         {
             if (data == null || !data.Any())
             {
@@ -82,6 +84,7 @@ namespace BirdBrain.Services
             return (series, labels, xAxes, yAxes);
         }
 
+        // Build chart for Bird Sightings Page - Line Chart
         public (ISeries[] Series, List<string> Labels, Axis[] XAxes, Axis[] YAxes)
             BuildBirdChart(List<BirdDailyObs> data)
         {
@@ -139,6 +142,7 @@ namespace BirdBrain.Services
             return (series, labels, xAxes, yAxes);
         }
 
+        // Build chart for Bird Sightings Page - Pie Chart (Time of Day segments) 
         public ISeries[] BuildBirdTimeChart(List<BirdTimeObs> data)
         {
             if (data == null || !data.Any())
@@ -146,27 +150,22 @@ namespace BirdBrain.Services
 
             var skColor = GetTextColor();
 
-            var topTimes = data
-                .GroupBy(x => x.ObsDt)
-                .Select(g => new
-                {
-                    Time = g.Key,
-                    Total = g.Sum(x => x.Sightings)
-                })
-                .OrderByDescending(x => x.Total)
-                .Take(6)
-                .ToList();
-
-            var series = topTimes
+            var series = data
                 .Select(x => new PieSeries<double>
                 {
-                    Values = new double[] { x.Total },
-                    Name = DateTime.Parse(x.Time).ToString("HH:mm"),
-                    InnerRadius = 40,
+                    Values = new double[] { x.Sightings },
+                    Name = x.ObsDt, // already "HH:mm"
+                    InnerRadius = 70,
                     DataLabelsSize = 14,
-                    DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
-                    DataLabelsFormatter = point => ((double)point.Model!).ToString("N0"),
-                    Stroke = new SolidColorPaint(skColor, 1)
+                    DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Outer,
+                    DataLabelsFormatter = point =>
+                    {
+                        var value = (double)point.Model!;
+                        var name = (point.Context.Series as PieSeries<double>)?.Name ?? "";
+                        return $"{name}\n{value:N0}";
+                    },
+                    Stroke = null
+                    
                 })
                 .Cast<ISeries>()
                 .ToArray();

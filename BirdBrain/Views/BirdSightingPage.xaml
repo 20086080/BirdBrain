@@ -26,9 +26,7 @@
                     <!-- Bird TAB -->
                     <Border x:Name="BirdTab" Grid.Column="1" Style="{StaticResource SegmentSelectedStyle}">
                         <Label x:Name="BirdTabLabel" Text="Bird" Style="{StaticResource SegmentSelectedLabelStyle}"/>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="BirdTapped"/>
-                        </Border.GestureRecognizers>
+                        
                     </Border>
                 </Grid>
             </Border>
@@ -74,18 +72,33 @@
                             Color="{DynamicResource Background}"/>
                     </Grid>
                 </Border>
-                <!--
+                
                 <Grid Grid.Row="1" ColumnDefinitions="Auto,*" Padding="5">
                     <Label Grid.Column = "0" Text = "{Binding BirdSightings,StringFormat= 'Seen {0} days out of '}" Style="{StaticResource PageLabelNormal}"></Label>
                     <Label Grid.Column = "1" Text = "{Binding NumberDays}" Style="{StaticResource PageLabelNormal}"></Label>
                 </Grid>
-                -->
+                
+            </Grid>
+            <Grid Grid.Row="4" Grid.Column="1" RowDefinitions="Auto,*,*" Padding="5">
+                <CollectionView ItemsSource="{Binding BirdTimeObs}" Grid.Row="0" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="5,5,5,0" ColumnDefinitions="Auto,*" >
+                                <Label Grid.Column="0" Text="{Binding ObsDt}" Style="{StaticResource PageLabelNormal}" />
+                                <Label Grid.Column="1" Text="{Binding Sightings}" Style="{StaticResource PageLabelNormal}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Label Grid.Row="1" Text="Obs at xxxd Locations" Style="{StaticResource PageLabelNormal}"/>
+                <Label Grid.Row="2" Text="Last seen " Style="{StaticResource PageLabelNormal}"/>
             </Grid>
             <!--
-            <lvc:PieChart Series="{Binding PieSeries}" Grid.Column ="1" Grid.RowSpan ="2" Padding="2" HeightRequest="140"
-                LegendPosition="Bottom" >
+            <lvc:PieChart Series="{Binding PieSeries}" Background="Transparent" 
+                          Grid.Column ="1" Grid.RowSpan ="2" Padding="2" HeightRequest="200"
+                LegendPosition="Right" >
                 <lvc:PieChart.LegendTextPaint>
-                    <lvc:SolidColorPaint Color="White" FontFamily ="8" />
+                    <lvc:SolidColorPaint Color="White" />
                 </lvc:PieChart.LegendTextPaint>
             </lvc:PieChart>
             -->

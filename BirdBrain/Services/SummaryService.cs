@@ -136,7 +136,7 @@ namespace BirdBrain.Services
                 AND Date(ObsDt) >= ? 
                 GROUP BY DATE(ObsDt)
                 ORDER BY DATE(ObsDt)",
-                lat, lng, CutoffDate);
+                lat, lng, comName, CutoffDate);
             return result.ToList();
         }
 
@@ -146,11 +146,12 @@ namespace BirdBrain.Services
             var db = _databaseService.Db;
             var result = await db.QueryAsync<BirdTimeObs>(
                 //HowMany capped at 100 for levelliing anomalies such as flocks > 100 etc
-                @"SELECT DATE(ObsDt) as ObsDt,
-                IFNULL(MIN(Sightings,100),0) as Sightings
+                @"SELECT ObsDt,
+                IFNULL(
+                    CASE WHEN Sightings > 100 THEN 100 ELSE Sightings END, 0) as Sightings
                 FROM
                 (
-                    SELECT TIME(ObsDt) as ObsDt,
+                    SELECT STRFTIME('%H:%M',ObsDt) as ObsDt,
                         SUM(HowMany) as Sightings
                     FROM BirdObservationDb b
                     WHERE AppLat = ?
@@ -158,8 +159,9 @@ namespace BirdBrain.Services
                     AND HowMany > 0
                     AND ComName = ?
                     AND Date(ObsDt) >= ? 
-                    GROUP BY TIME(ObsDt)
-                    LIMIT 6
+                    GROUP BY STRFTIME('%H:%M', ObsDt)
+                    ORDER BY TIME(ObsDt)
+                    LIMIT 4
                 )",
                 lat, lng, comName, CutoffDate);
             return result.ToList();

@@ -28,14 +28,12 @@ namespace BirdBrain.Services
 
         public async Task SaveObservationsAsync(List<BirdObservationDb> observations)
         {
-            await _db.InsertAllAsync(observations);
+            await _db.InsertAllAsync(observations);                 //Insert into Sqlite database
         }
 
         public List<BirdObservationDb> ConvertToDb(
             List<BirdObservation> apiList, string refreshTime)
         {
-            //var now = DateTime.UtcNow;
-
             return apiList.Select(o => new BirdObservationDb
             {
                 SpeciesCode = o.speciesCode,
@@ -56,44 +54,45 @@ namespace BirdBrain.Services
             }).ToList();
         }
 
-        public async Task<List<BirdObservationDb>> GetLatestObservationsAsync()
-        {
-            return await _db.Table<BirdObservationDb>()
-                            .OrderByDescending(x => x.DateStamp)
-                            .ToListAsync();
-        }
+        //public async Task<List<BirdObservationDb>> GetLatestObservationsAsync()
+        //{
+        //    return await _db.Table<BirdObservationDb>()
+        //                    .OrderByDescending(x => x.DateStamp)
+        //                    .ToListAsync();
+        //}
 
-        public async Task<string?> GetLastRefreshTimeAsync()
-        {
-            var last = await _db.Table<BirdObservationDb>()
-                                .OrderByDescending(x => x.DateStamp)
-                                .FirstOrDefaultAsync();
+        //public async Task<string?> GetLastRefreshTimeAsync()                // Get the most recent DateStamp from the database
+        //{
+        //    var last = await _db.Table<BirdObservationDb>()
+        //                        .OrderByDescending(x => x.DateStamp)
+        //                        .FirstOrDefaultAsync();
 
-            return last?.DateStamp;
-        }
+        //    return last?.DateStamp;
+        //}
 
-        public async Task CleanupOldObservationsAsync(double lat, double lng)
-        {
-            // Find the two most recent DateStamp groups
+// TODO - Cleanup old observations prior to a year ago 
+        //public async Task CleanupOldObservationsAsync(double lat, double lng)
+        //{
+        //    // Find the two most recent DateStamp groups
 
-            var keepDates = await _db.QueryAsync<DateTime>(
-                @"SELECT DISTINCT DateStamp 
-                    FROM BirdObservationDb
-                    WHERE AppLat = ? AND AppLng = ?
-                    ORDER BY DateStamp DESC
-                    LIMIT 2",
-                lat, lng);
+        //    var keepDates = await _db.QueryAsync<DateTime>(
+        //        @"SELECT DISTINCT DateStamp 
+        //            FROM BirdObservationDb
+        //            WHERE AppLat = ? AND AppLng = ?
+        //            ORDER BY DateStamp DESC
+        //            LIMIT 2",
+        //        lat, lng);
 
-            if (keepDates.Count < 2)
-                return;
+        //    if (keepDates.Count < 2)
+        //        return;
 
 
-            await _db.ExecuteAsync(
-                @"DELETE FROM BirdObservationDb
-                    WHERE AppLat = ?
-                    AND AppLng = ?
-                    AND DateStamp NOT IN (?,?)",
-                lat, lng, keepDates[0], keepDates[1]);
-        }
+        //    await _db.ExecuteAsync(
+        //        @"DELETE FROM BirdObservationDb
+        //            WHERE AppLat = ?
+        //            AND AppLng = ?
+        //            AND DateStamp NOT IN (?,?)",
+        //        lat, lng, keepDates[0], keepDates[1]);
+        //}
     }
 }

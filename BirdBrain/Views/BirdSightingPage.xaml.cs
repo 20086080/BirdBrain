@@ -11,16 +11,70 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
 {
     public AppState State => App.State;
 
-    int BirdSightings { get; set; }
-    int TotalSightings { get; set; }
-    public double PercBirdSightings { get; set; }
+    private int _birdSightings;
+    public int BirdSightings
+    {
+        get => _birdSightings;
+        set
+        {
+            if (_birdSightings != value)
+            {
+                _birdSightings = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(PercBirdSightings));
+            }
+        }
+    }
+
+    private int _totalSightings;
+    public int TotalSightings
+    {
+        get => _totalSightings;
+        set
+        {
+            if (_totalSightings != value)
+            {
+                _totalSightings = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(PercBirdSightings));
+            }
+        }
+    }
+
+    private int _NumberDays;
+    public int NumberDays
+    {
+        get => _NumberDays;
+        set
+        {
+            if (_NumberDays != value)
+            {
+                _NumberDays = value;
+                OnPropertyChanged();
+                
+            }
+        }
+    }
+
+    private double _percBirdSightings;
+    public double PercBirdSightings
+    {
+        get => _percBirdSightings;
+        set
+        {
+            if (_percBirdSightings != value)
+            {
+                _percBirdSightings = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public string? CutoffDate { get; set; }
 
     public List<BirdDailyObs> BirdDailyObs { get; set; } = new();
     public List<BirdTimeObs> BirdTimeObs { get; set; } = new();
     public List<BirdObservation> Observations { get; set; } = new();
-
-    //private readonly SummaryService _summaryService;
 
     // BIRD SERIES
     private ISeries[] _birdSeries = Array.Empty<ISeries>();
@@ -49,8 +103,8 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
     // BIRD X AXES
     private Axis[] _birdXAxes =
     {
-    new Axis { LabelsRotation = 20 }
-};
+        new Axis { LabelsRotation = 20 }
+    };
 
     public Axis[] BirdXAxes
     {
@@ -65,8 +119,8 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
     // BIRD Y AXES
     private Axis[] _birdYAxes =
     {
-    new Axis { LabelsRotation = 20 }
-};
+        new Axis { LabelsRotation = 20 }
+    };
 
     public Axis[] BirdYAxes
     {
@@ -89,12 +143,12 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
             OnPropertyChanged(nameof(PieSeries));
         }
     }
+
     public BirdSightingPage()
 	{
         InitializeComponent();
         if (App.State == null)
             throw new Exception("App.State is NULL");
-        //_summaryService = summaryService;
         App.State.LeftSelected = false;
         BindingContext = this;
     }
@@ -103,7 +157,6 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
     {
         base.OnAppearing();
         _ = LoadDataAsync();
-
     }
 
     private async Task LoadDataAsync()
@@ -130,7 +183,7 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
             {
                 await ErrorService.Show(ErrorType.NoBirdsFound);
             }
-            int NumberDays = resultSummary.FirstOrDefault()?.TotalDays ?? 0;
+            NumberDays = resultSummary.FirstOrDefault()?.TotalDays ?? 0;
             BirdDailyObs = await SummaryService.GetBirdDailyObsAsync(Lat, Lng, commonName, CutoffDate);
             BirdTimeObs = await SummaryService.GetBirdTimeObsAsync(Lat, Lng, commonName, CutoffDate);
             int PercBirdSightings = TotalSightings == 0 ? 0
@@ -145,6 +198,13 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
                 BirdXAxes = result.XAxes;
                 BirdYAxes = result.YAxes;
             });
+            //var chartServicePie = new ChartService();
+            //var resultPie = chartServicePie.BuildBirdTimeChart(BirdTimeObs);
+            //MainThread.BeginInvokeOnMainThread(() =>
+            //{
+            //    PieSeries = resultPie;
+                
+            //});
             OnPropertyChanged(string.Empty);
         }
         catch (Exception ex)
@@ -156,21 +216,7 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
 
     async void LocationTapped(object? sender, EventArgs e)
     {
-        //LocationTab.Style = (Style)Application.Current!.Resources["SegmentSelectedStyle"];
-        //BirdTab.Style = (Style)Application.Current.Resources["SegmentUnselectedStyle"];
-        //LocationTabLabel.Style = (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
-        //BirdTabLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
         App.State.LeftSelected = true;
         await Shell.Current.GoToAsync(nameof(LocationSightingPage));
-    }
-
-    async void BirdTapped(object? sender, EventArgs e)
-    {
-        //BirdTab.Style = (Style)Application.Current!.Resources["SegmentSelectedStyle"];
-        //LocationTab.Style = (Style)Application.Current.Resources["SegmentUnselectedStyle"];
-        //BirdTabLabel.Style = (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
-        //LocationTabLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
-        //App.State.LeftSelected = false;
-        //await Shell.Current.GoToAsync(nameof(BirdSightingPage));    
     }
 }

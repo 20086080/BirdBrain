@@ -75,7 +75,8 @@ public partial class BirdSelectionPage : BasePage
         }
         Bird.Unfocus();
         await KeyboardHelper.DismissAsync();
-        
+        if (!App.State.HasBird)
+            return;
         Application.Current!.Dispatcher.Dispatch(async () =>
         {
             await Shell.Current.GoToAsync(nameof(BirdSightingPage));
@@ -86,7 +87,6 @@ public partial class BirdSelectionPage : BasePage
     {
         if (e.Parameter is Bird bird)
         {
-            
             App.State.SelectedSavedBird = bird;
             await Shell.Current.GoToAsync(nameof(BirdSightingPage));
         }

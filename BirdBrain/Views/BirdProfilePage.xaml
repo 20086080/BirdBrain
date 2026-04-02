@@ -7,10 +7,10 @@
     xmlns:services="clr-namespace:BirdBrain.Services"
     xmlns:models="clr-namespace:BirdBrain.Models"
     xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
-    x:DataType="services:AppState"
+    
     Title="Bird Profile">
 
-    <Grid RowDefinitions="Auto,Auto,Auto,Auto, *" Padding="5" >
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" Padding="5" >
         <!-- LOCATION / BIRD Selection -->
             <Border Grid.Row="0"  Style="{StaticResource RoundedAccentBorderStyle}" HorizontalOptions ="Start" Padding="0" 
                                 WidthRequest="170" HeightRequest="35">
@@ -25,9 +25,7 @@
                 <!-- Bird TAB -->
                     <Border x:Name="BirdTab" Grid.Column="1" Style="{StaticResource SegmentSelectedStyle}">
                         <Label x:Name="BirdTabLabel" Text="Bird" Style="{StaticResource SegmentSelectedLabelStyle}"/>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="BirdTapped"/>
-                        </Border.GestureRecognizers>
+                        
                     </Border>
                 </Grid>
             </Border>
@@ -42,7 +40,7 @@
         </Grid>
 
         <!-- Bird LABEL -->
-        <Image Grid.Row ="3" Source="{Binding SelectedSavedBird.ProfileImage}" HeightRequest="340" Aspect="AspectFill" HorizontalOptions="Fill"/>
+        <Image Grid.Row ="3" Source="{Binding SelectedSavedBird.ProfileImage}" HeightRequest="330" Aspect="AspectFill" HorizontalOptions="Fill"/>
         <Grid Grid.RowDefinitions ="Auto,Auto,Auto"  RowSpacing="5" Grid.Row="4" Background="{DynamicResource Background}" >
             <Label Grid.Row ="0" Text= "{Binding SelectedSavedBird.Description}" Margin="0,5,0,0" Style = "{StaticResource PageLabelNormal}" 
                                 TextColor ="{DynamicResource Accent}" LineBreakMode="WordWrap"/>

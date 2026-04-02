@@ -7,7 +7,7 @@
     xmlns:services="clr-namespace:BirdBrain.Services"
     xmlns:models="clr-namespace:BirdBrain.Models"
     xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
-    x:DataType="services:AppState"
+    
     Title="Location Sightings">
     
     <Grid RowDefinitions="Auto,Auto,Auto, Auto,*,Auto" Padding="5" >
@@ -20,9 +20,7 @@
                     <!-- Location TAB -->
                     <Border x:Name="LocationTab" Grid.Column="0" Style="{StaticResource SegmentSelectedStyle}">
                         <Label x:Name="LocationTabLabel" Text="Location" Style="{StaticResource SegmentSelectedLabelStyle}"/>
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="LocationTapped"/>
-                            </Border.GestureRecognizers>
+                            
                     </Border>
                     
                     <!-- Bird TAB -->
@@ -64,14 +62,14 @@
                 <Border Grid.Row = "0" Padding="3" Style ="{DynamicResource RoundedAccentBorderStyle}" Background="{DynamicResource Accent}">
                     <Grid ColumnDefinitions="1.4*,*" RowDefinitions="Auto,Auto" RowSpacing="5" Padding="5">
                         <Label Grid.Row="0"  Grid.Column="0" Text="# Obs" Padding ="5" Style="{StaticResource PageLabel}" 
-                                FontAttributes="Bold" FontSize="17"/>
+                                FontAttributes="Bold" FontSize="17" TextColor="{DynamicResource Background}"/>
                         <Label Grid.Row="1" Grid.Column="0" Text="# Species" Padding ="5" Style="{StaticResource PageLabel}" 
-                               FontAttributes="Bold" FontSize="17"/>
+                               FontAttributes="Bold" FontSize="17" TextColor="{DynamicResource Background}"/>
 
                         <Label Grid.Row="0" Grid.Column="1" Text="{Binding TotalSightings}" Style="{StaticResource PageLabelCenter}" 
-                               FontAttributes="Bold" FontSize="17"/>
+                               FontAttributes="Bold" FontSize="17" TextColor="{DynamicResource Background}"/>
                         <Label Grid.Row="1" Grid.Column="1" Text="{Binding TotalTypeOfBird}" Style="{StaticResource PageLabelCenter}" 
-                               FontAttributes="Bold" FontSize="17"/>
+                               FontAttributes="Bold" FontSize="17" TextColor="{DynamicResource Background}"/>
 
                         <BoxView Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource VerticallineStyle}" HorizontalOptions="End" Color="{DynamicResource Background}" />
                         <BoxView Grid.ColumnSpan="2" Grid.Row="0" Style="{StaticResource UnderlineStyle}" VerticalOptions="End" Color="{DynamicResource Background}" />

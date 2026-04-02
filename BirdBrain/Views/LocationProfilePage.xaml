@@ -7,7 +7,7 @@
     xmlns:services="clr-namespace:BirdBrain.Services"
     xmlns:models="clr-namespace:BirdBrain.Models"
     xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
-    x:DataType="services:AppState"
+    
     Title="Location Profile">
 
     <Grid RowDefinitions="Auto,Auto,Auto, Auto, *" Padding="5" >
@@ -20,9 +20,7 @@
                     <!-- Location TAB -->
                     <Border x:Name="LocationTab" Grid.Column="0" Style="{StaticResource SegmentSelectedStyle}">
                         <Label x:Name="LocationTabLabel" Text="Location" Style="{StaticResource SegmentSelectedLabelStyle}"/>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="LocationTapped"/>
-                        </Border.GestureRecognizers>
+                        
                     </Border>
 
                     <!-- Bird TAB -->
@@ -53,7 +51,7 @@
             <Grid Grid.Row="0" Grid.Column="1" ColumnDefinitions="Auto,*">
                 <Label Grid.Column = "0" Text = "{Binding SelectedSavedLocation.Lat, StringFormat='{0}, '}" 
                                 Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
-                <Label Grid.Column = "2" Text = "{Binding SelectedSavedLocation.Lng}" Style="{StaticResource PageLabelNormal}"/>
+                <Label Grid.Column = "2" Text = "{Binding SelectedSavedLocation.Lng, StringFormat=' {0}'}" Style="{StaticResource PageLabelNormal}"/>
             </Grid>
                 
         </Grid>

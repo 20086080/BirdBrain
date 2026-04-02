@@ -132,18 +132,6 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
         }
     }
 
-    // PIE SERIES (IMPORTANT: make it bindable)
-    private ISeries[] _pieSeries = Array.Empty<ISeries>();
-    public ISeries[] PieSeries
-    {
-        get => _pieSeries;
-        set
-        {
-            _pieSeries = value ?? Array.Empty<ISeries>();
-            OnPropertyChanged(nameof(PieSeries));
-        }
-    }
-
     public BirdSightingPage()
 	{
         InitializeComponent();
@@ -186,7 +174,7 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
             NumberDays = resultSummary.FirstOrDefault()?.TotalDays ?? 0;
             BirdDailyObs = await SummaryService.GetBirdDailyObsAsync(Lat, Lng, commonName, CutoffDate);
             BirdTimeObs = await SummaryService.GetBirdTimeObsAsync(Lat, Lng, commonName, CutoffDate);
-            int PercBirdSightings = TotalSightings == 0 ? 0
+            PercBirdSightings = TotalSightings == 0 ? 0
                                     : (int)(100.0 * BirdSightings / TotalSightings);
 
             var chartService = new ChartService();
@@ -198,13 +186,7 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
                 BirdXAxes = result.XAxes;
                 BirdYAxes = result.YAxes;
             });
-            //var chartServicePie = new ChartService();
-            //var resultPie = chartServicePie.BuildBirdTimeChart(BirdTimeObs);
-            //MainThread.BeginInvokeOnMainThread(() =>
-            //{
-            //    PieSeries = resultPie;
-                
-            //});
+            
             OnPropertyChanged(string.Empty);
         }
         catch (Exception ex)
@@ -216,6 +198,8 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
 
     async void LocationTapped(object? sender, EventArgs e)
     {
+        if (!App.State.HasLocation)
+            return;
         App.State.LeftSelected = true;
         await Shell.Current.GoToAsync(nameof(LocationSightingPage));
     }

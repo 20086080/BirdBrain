@@ -10,14 +10,18 @@ namespace BirdBrain.Services
 {
     public class AppState : INotifyPropertyChanged
     {
+        
+        private bool _hasBird = false;
+        private bool _hasBirdLocation = false;
         public readonly int MaxDays = 30;
         public readonly int MinDays = 1;
         public readonly int MaxRadius = 50;
         public readonly int MinRadius = 1;
 
         private JsonFileReader _jsonReader = new JsonFileReader();
-        private SavedLocation _selectedSavedLocation { get; set; } = new();
-        private Bird _selectedSavedBird { get; set; } = new();
+
+        private SavedLocation _selectedSavedLocation ;
+        private Bird _selectedSavedBird ;
 
         private int _days = 30;
         private int _radius = 50;
@@ -32,7 +36,8 @@ namespace BirdBrain.Services
 
         public List<BirdObservation> Observations { get; set; } = new();
         public ObservableCollection<LatLng> GlobalLocations { get; set; } = new();
-        
+
+        public bool HasLocation => SelectedSavedLocation != null;
         public SavedLocation SelectedSavedLocation
         {
             get => _selectedSavedLocation;
@@ -40,10 +45,14 @@ namespace BirdBrain.Services
             {
                 if (_selectedSavedLocation != value)
                 {
-                    _selectedSavedLocation = value; OnPropertyChanged();
+                    _selectedSavedLocation = value; 
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(HasLocation));
                 }
             }
         }
+
+        public bool HasBird => SelectedSavedBird != null;
 
         public Bird SelectedSavedBird
         {
@@ -53,6 +62,7 @@ namespace BirdBrain.Services
                 if (_selectedSavedBird != value)
                 {
                     _selectedSavedBird = value; OnPropertyChanged();
+                    OnPropertyChanged(nameof(HasBird));
                 }
             }
         }
@@ -120,7 +130,7 @@ namespace BirdBrain.Services
             SavedLocations = await locationsTask;
             
             _ = LoadGlobalLocationsAsync();
-            SelectedSavedBird = SavedBirds.Count > 0 ? SavedBirds[0] : null;
+ //           SelectedSavedBird = SavedBirds.Count > 0 ? SavedBirds[0] : null;
             SelectedSavedLocation = SavedLocations.Count > 0 ? SavedLocations[0] : null;
         }
      
@@ -131,6 +141,17 @@ namespace BirdBrain.Services
             {
                 if (_leftSelected != value)
                     { _leftSelected = value; OnPropertyChanged(); }
+            }
+        }
+
+        
+        public bool HasBirdLocation
+        {
+            get => _hasBirdLocation;
+            set
+            {
+                if (_hasBirdLocation != value)
+                { _hasBirdLocation = value; OnPropertyChanged(); }
             }
         }
 

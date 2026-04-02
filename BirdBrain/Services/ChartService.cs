@@ -141,37 +141,5 @@ namespace BirdBrain.Services
 
             return (series, labels, xAxes, yAxes);
         }
-
-        // Build chart for Bird Sightings Page - Pie Chart (Time of Day segments) 
-        public ISeries[] BuildBirdTimeChart(List<BirdTimeObs> data)
-        {
-            if (data == null || !data.Any())
-                return Array.Empty<ISeries>();
-
-            var skColor = GetTextColor();
-
-            var series = data
-                .Select(x => new PieSeries<double>
-                {
-                    Values = new double[] { x.Sightings },
-                    Name = x.ObsDt, // already "HH:mm"
-                    InnerRadius = 70,
-                    DataLabelsSize = 14,
-                    DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Outer,
-                    DataLabelsFormatter = point =>
-                    {
-                        var value = (double)point.Model!;
-                        var name = (point.Context.Series as PieSeries<double>)?.Name ?? "";
-                        return $"{name}\n{value:N0}";
-                    },
-                    Stroke = null
-                    
-                })
-                .Cast<ISeries>()
-                .ToArray();
-
-            return series;
-        }
-
     }
 }

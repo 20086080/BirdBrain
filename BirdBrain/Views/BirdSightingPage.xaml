@@ -7,10 +7,10 @@
     xmlns:services="clr-namespace:BirdBrain.Services"
     xmlns:models="clr-namespace:BirdBrain.Models"
     xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
-    x:DataType="services:AppState"
+    
     Title="Bird Sightings">
 
-    <Grid RowDefinitions="Auto,Auto,Auto, Auto,Auto,*" Padding="10" >
+    <Grid RowDefinitions="Auto,Auto,Auto, Auto,*,Auto" Padding="10" >
 
         <!-- LOCATION / BIRD Selection -->
             <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" WidthRequest="175" HeightRequest="35" HorizontalOptions="Start">
@@ -36,9 +36,9 @@
         <!-- Bird LABEL -->
         <Grid Grid.Row="2" ColumnDefinitions="*,1.5*"  Background="{DynamicResource Background}" >
             <Image Grid.Column="0" Source="{Binding State.SelectedSavedBird.Thumbnail}" HorizontalOptions="Start" HeightRequest="128" Aspect="AspectFit"/>
-            <Grid Grid.Column="1" RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="5">
+            <Grid Grid.Column="1" RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="4">
                 <Label Grid.Row="0" Text = "{Binding State.SelectedSavedBird.CommonName}" Style = "{StaticResource SubTitles}"/>
-                <Label Grid.Row ="1" Text = "{Binding State.SelectedSavedLocation.Name}" Style="{StaticResource SubTitles}"/>
+                <Label Grid.Row ="1" Text = "{Binding State.SelectedSavedLocation.Name}" Style="{StaticResource PageLabelNormal}" FontAttributes ="Bold" FontSize="14"/>
                 <Grid Grid.Row="2" ColumnDefinitions="Auto,Auto,*">
                     <Label Grid.Column="0" Text = "{Binding State.SelectedSavedLocation.Lat}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
                     <Label Grid.Column="1" Text = ", " Style="{StaticResource PageLabelNormal}"/>
@@ -52,16 +52,16 @@
 
         <Grid Grid.Row="4" ColumnDefinitions="*,1.3*" >
             <!-- SIGHTING STATS -->
-            <Grid Grid.Column = "0" RowDefinitions="Auto,Auto,Auto">
-                <Border Grid.Column ="0" Grid.Row ="0" Margin ="0,5,0,0" Padding="5" Style ="{DynamicResource RoundedAccentBorderStyle}" VerticalOptions="Start" 
+            <Grid Grid.Column = "0" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+                <Border Grid.Column ="0" Grid.Row ="0"  Style ="{DynamicResource RoundedAccentBorderStyle}" VerticalOptions="Start" 
                            Background="{DynamicResource Accent}">
-                    <Grid ColumnDefinitions="1.4*,*" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="5">
-                        <Label Grid.Row="0"  Grid.Column="0" Padding="5,10,5,10" Text="# Obs" Style="{StaticResource PageLabelCenter}" 
+                    <Grid ColumnDefinitions="1.4*,*" RowDefinitions="Auto,Auto" RowSpacing="5">
+                        <Label Grid.Row="0"  Grid.Column="0" Padding="5" Text="# Obs" Style="{StaticResource PageLabelCenter}" 
                             TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="16"/>
                         <Label Grid.Row="0" Grid.Column="1" Text="{Binding BirdSightings}" Style="{StaticResource PageLabelCenter}" 
                             TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
 
-                        <Label Grid.Row="1" Grid.Column="0" Padding="5,10,5,10" Text="% Total" Style="{StaticResource PageLabelCenter}" 
+                        <Label Grid.Row="1" Grid.Column="0" Padding="5" Text="% Total" Style="{StaticResource PageLabelCenter}" 
                            TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="16"/>
                         <Label Grid.Row="1" Grid.Column="1" Text="{Binding PercBirdSightings, StringFormat='{0:F1}%'}" Style="{StaticResource PageLabelCenter}" 
                             TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
@@ -72,36 +72,37 @@
                             Color="{DynamicResource Background}"/>
                     </Grid>
                 </Border>
-                
-                <Grid Grid.Row="1" ColumnDefinitions="Auto,*" Padding="5">
-                    <Label Grid.Column = "0" Text = "{Binding BirdSightings,StringFormat= 'Seen {0} days out of '}" Style="{StaticResource PageLabelNormal}"></Label>
-                    <Label Grid.Column = "1" Text = "{Binding NumberDays}" Style="{StaticResource PageLabelNormal}"></Label>
+
+                <Grid Grid.Row="2" ColumnDefinitions="Auto,*" Padding="5">
+                    <Label Grid.Column = "0" Text = "{Binding BirdSightings,StringFormat= 'Seen {0} days out of'}" Style="{StaticResource PageLabelNormal}"></Label>
+                    <Label Grid.Column = "1" Text = "{Binding NumberDays, StringFormat= ' {0}'}" Style="{StaticResource PageLabelNormal}"></Label>
                 </Grid>
-                
+                <Label Grid.Row = "3" Text = "{Binding BirdSightings, StringFormat 'Obs at {0} Locations'}" Style="{StaticResource PageLabelNormal}" Padding="5,0"/>
+                <Label Grid.Row = "4" Text = "Last Seen" Style="{StaticResource PageLabelNormal}" Padding="5"/>
             </Grid>
-            <Grid Grid.Row="4" Grid.Column="1" RowDefinitions="Auto,*,*" Padding="5">
-                <CollectionView ItemsSource="{Binding BirdTimeObs}" Grid.Row="0" >
+
+            <Border Grid.Row="0" Grid.Column="1" Style ="{DynamicResource NormalAccentBorderStyle}">
+                <CollectionView ItemsSource="{Binding BirdTimeObs}" VerticalScrollBarVisibility="Always" 
+                                        ItemSizingStrategy="MeasureFirstItem">
+                    <CollectionView.Header>
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="*,*" Padding="5">
+                            <Label Text="Top Time" Grid.Row ="0" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
+                            <Label Grid.Column="1" Grid.Row ="0" Text="# Birds" Style="{StaticResource PageLabelCenter}" 
+                                                HorizontalOptions="End"/>
+                            <BoxView Grid.Row ="1" Grid.ColumnSpan ="3" Style="{StaticResource UnderlineStyle}"/>
+                        </Grid>
+                    </CollectionView.Header>
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Padding="5,5,5,0" ColumnDefinitions="Auto,*" >
+                            <Grid Padding="5,5,5,0" ColumnDefinitions="*,*" >
                                 <Label Grid.Column="0" Text="{Binding ObsDt}" Style="{StaticResource PageLabelNormal}" />
-                                <Label Grid.Column="1" Text="{Binding Sightings}" Style="{StaticResource PageLabelNormal}"/>
+                                <Label Grid.Column="1" Text="{Binding Sightings}" Style="{StaticResource PageLabelCenter}"/>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <Label Grid.Row="1" Text="Obs at xxxd Locations" Style="{StaticResource PageLabelNormal}"/>
-                <Label Grid.Row="2" Text="Last seen " Style="{StaticResource PageLabelNormal}"/>
-            </Grid>
-            <!--
-            <lvc:PieChart Series="{Binding PieSeries}" Background="Transparent" 
-                          Grid.Column ="1" Grid.RowSpan ="2" Padding="2" HeightRequest="200"
-                LegendPosition="Right" >
-                <lvc:PieChart.LegendTextPaint>
-                    <lvc:SolidColorPaint Color="White" />
-                </lvc:PieChart.LegendTextPaint>
-            </lvc:PieChart>
-            -->
+            </Border>
         </Grid>
         
         <!-- DAILY SIGHTINGS Grid.Row = 3-->

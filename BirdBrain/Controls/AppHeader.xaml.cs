@@ -26,7 +26,7 @@ public partial class AppHeader : ContentView
     {
         if (App.State.LeftSelected)                                     // Location option is selected 
         {
-            if (App.State.SelectedSavedLocation == null)
+            if (App.State.SelectedSavedLocation == null || !App.State.HasLocation)
                 return;
             if (App.State.SavedLocations.Contains(App.State.SelectedSavedLocation))
             {
@@ -40,7 +40,7 @@ public partial class AppHeader : ContentView
         }
         else
         {                                                           // Bird option is selected
-            if (App.State.SelectedSavedBird == null)
+            if (App.State.SelectedSavedBird == null || !App.State.HasBird)
                 return;
             if (App.State.SavedBirds.Contains(App.State.SelectedSavedBird))
             {
@@ -56,6 +56,8 @@ public partial class AppHeader : ContentView
 
     async void OnMenuRefreshTapped(object? sender, TappedEventArgs e)    //Get API Data 
     {
+        if (App.State.SelectedSavedLocation == null || !App.State.HasLocation)
+            return;
         await ErrorService.Show(ErrorType.GettingInformation);
         var refresh = new RefreshData();
         bool refreshed = await refresh.RefreshAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng);

@@ -75,16 +75,15 @@
 
         <Border Grid.Row="6" Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" HorizontalOptions="Center">
             <Grid ColumnDefinitions="*,*" HeightRequest="40" WidthRequest="220">
-
-                <Border x:Name="AllBirdsTab"  Grid.Column="0" Style="{StaticResource SegmentSelectedStyle}">
+                <Border x:Name="AllBirdsTab"  Grid.Column="0" Style = "{StaticResource SegmentSelectedStyle}" IsEnabled="{Binding HasLocation}">
                     <Label x:Name="AllBirdsLabel" Text="All Birds" Style="{StaticResource SegmentSelectedLabelStyle}"/>
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnAllBirdsTapped"/>
+                        <TapGestureRecognizer Tapped="OnAllBirdsTapped" />
                     </Border.GestureRecognizers>
                 </Border>
 
                 <Border x:Name="SpecificBirdTab"  Grid.Column="1"
-                        Style="{StaticResource SegmentUnselectedStyle}">
+                        Style="{StaticResource SegmentUnselectedStyle}" IsEnabled="{Binding HasLocation}">
                     <Label x:Name="SpecificBirdLabel" Text="Specific Bird"
                            Style="{StaticResource SegmentUnselectedLabelStyle}"/>
                     <Border.GestureRecognizers>

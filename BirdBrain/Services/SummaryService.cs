@@ -160,7 +160,7 @@ namespace BirdBrain.Services
                     AND ComName = ?
                     AND Date(ObsDt) >= ? 
                     GROUP BY STRFTIME('%H:%M', ObsDt)
-                    ORDER BY TIME(ObsDt)
+                    ORDER BY Sightings DESC
                     LIMIT 4
                 )",
                 lat, lng, comName, CutoffDate);

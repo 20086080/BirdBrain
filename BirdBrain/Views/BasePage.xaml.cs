@@ -22,8 +22,6 @@ public partial class BasePage : ContentPage
     public BasePage()
     {
         InitializeComponent();
-        //Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific.Page
-        //.SetUseSafeArea(this, false);
         Microsoft.Maui.Controls.NavigationPage.SetHasBackButton(this, false);
     }
 
@@ -66,28 +64,51 @@ public partial class BasePage : ContentPage
                
                 _leftDrawer.SelectBirdCommand = new Command(async () =>      // Bird Selection
                 {
-                    await ExecuteWithDrawerClose(() =>
-                     Shell.Current.GoToAsync(nameof(BirdSelectionPage)));
+                    if (App.State.HasLocation)
+                    { 
+                        await ExecuteWithDrawerClose(() =>
+                        Shell.Current.GoToAsync(nameof(BirdSelectionPage)));
+                    }
                 });
                 
                 _leftDrawer.SightingsCommand = new Command(async () =>      // Sighting Selection
                 {
-                    if (App.State.LeftSelected)                             //Location Selected on Page
-                        await ExecuteWithDrawerClose(() =>
+                    if (App.State.LeftSelected)
+                    {                               //Location Selected on Page
+                        if (App.State.HasLocation)
+                        {
+                            await ExecuteWithDrawerClose(() =>
                             Shell.Current.GoToAsync(nameof(LocationSightingPage)));
+                        }
+                    }
                     else
-                        await ExecuteWithDrawerClose(() =>
+                    {
+                        if (App.State.HasBird)
+                        {
+                            await ExecuteWithDrawerClose(() =>
                             Shell.Current.GoToAsync(nameof(BirdSightingPage)));
+                        }
+                    }
                 });
               
                 _leftDrawer.ProfileCommand = new Command(async () =>        // Profile Selection
                 {
                     if (App.State.LeftSelected)                             //Location Selected on Page
-                        await ExecuteWithDrawerClose(() =>
-                            Shell.Current.GoToAsync(nameof(LocationProfilePage)));
+                    {
+                        if (App.State.HasLocation)
+                        {
+                            await ExecuteWithDrawerClose(() =>
+                                Shell.Current.GoToAsync(nameof(LocationProfilePage)));
+                        }
+                    }
                     else
-                        await ExecuteWithDrawerClose(() =>
-                            Shell.Current.GoToAsync(nameof(BirdProfilePage)));
+                    {
+                        if (App.State.HasBird)
+                        {
+                            await ExecuteWithDrawerClose(() =>
+                                 Shell.Current.GoToAsync(nameof(BirdProfilePage)));
+                        }
+                    }
                 });
             }
 

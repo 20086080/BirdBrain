@@ -76,15 +76,15 @@ namespace BirdBrain.Models
 
                 ErrorType.InvalidBird => new AppError
                 {
-                    Title = "Bird information not Found",
-                    Message = "Select another bird and try again",
+                    Title = "Invalid Bird Entry",
+                    Message = "Select a bird and try again",
                     Image = "invalid_bird.png"
                 },
 
                 ErrorType.InvalidLocation => new AppError
                 {
-                    Title = "Location not Found",
-                    Message = "Select another location and try again",
+                    Title = "Invalid Location Entry",
+                    Message = "Select a location and try again",
                     Image = "invalid_location.png"
                 },
 

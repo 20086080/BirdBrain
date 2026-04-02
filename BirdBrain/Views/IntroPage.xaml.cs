@@ -21,7 +21,6 @@ public partial class IntroPage : BasePage
 
     protected override void OnAppearing()
     {
-
         base.OnAppearing();
         App.State.LeftSelected = true;
         _carouselItem = CarouselCurrentItem;
@@ -38,8 +37,11 @@ public partial class IntroPage : BasePage
         get
         {
             if (App.State.SavedLocations == null || App.State.SavedLocations.Count == 0)
+            {
+                
                 return null!;
-
+            }
+            
             if (App.State.SelectedSavedLocation.Name == null)
                 return App.State.SavedLocations[0];
 
@@ -52,20 +54,16 @@ public partial class IntroPage : BasePage
 
     async void OnAllBirdsTapped(object? sender, EventArgs e)
     {
-        //AllBirdsTab.Style = (Style)Application.Current!.Resources["SegmentSelectedStyle"];
-        //SpecificBirdTab.Style = (Style)Application.Current.Resources["SegmentUnselectedStyle"];
-        //AllBirdsLabel.Style = (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
-        //SpecificBirdLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
+        if (!App.State.HasLocation)
+            return;
         App.State.LeftSelected = true;
         await Shell.Current.GoToAsync(nameof(LocationSightingPage));
     }
 
     async void OnSpecificBirdTapped(object? sender, EventArgs e)
     {
-        //SpecificBirdTab.Style = (Style)Application.Current!.Resources["SegmentSelectedStyle"];
-        //AllBirdsTab.Style = (Style)Application.Current.Resources["SegmentUnselectedStyle"];
-        //SpecificBirdLabel.Style = (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
-        //AllBirdsLabel.Style = (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
+        if (!App.State.HasLocation)
+            return;
         App.State.LeftSelected = false;
         await Shell.Current.GoToAsync(nameof(BirdSelectionPage));
     }
@@ -73,10 +71,14 @@ public partial class IntroPage : BasePage
     async void OnLocationTapped(object? sender, TappedEventArgs e)
     {
         if (e.Parameter == null)
+        {
+            
             return;
+        }
         if (e.Parameter is SavedLocation location)
         {
             App.State.SelectedSavedLocation = location;
+            
         }
     }
 
@@ -91,6 +93,7 @@ public partial class IntroPage : BasePage
             IsNewLocation = true;
         }
         App.State.SelectedSavedLocation.Name = LocationEntry.Text;
+        
     }
 
 
@@ -123,11 +126,7 @@ public partial class IntroPage : BasePage
     }
 
     async void OnUseLocationInvoked(object? sender, EventArgs e)
-    {
-        
-        
-
-        // 🔥 Call location logic here
-        
+    { 
+        // 🔥 Call location logic here  
     }
 }

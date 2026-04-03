@@ -9,6 +9,8 @@ namespace BirdBrain.Models
         public int TotalSightings { get; set; }
 
         public int BirdSightings { get; set; }
+
+        public int TotalBirds { get; set; }
         public int TotalDays { get; set; }
 
         public int DistinctLocations { get; set; }

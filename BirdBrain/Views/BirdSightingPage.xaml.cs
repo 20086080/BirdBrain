@@ -94,6 +94,22 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
             }
         }
     }
+
+    private int _totalBirds;
+    public int TotalBirds
+    {
+        get => _totalBirds;
+        set
+        {
+            if (_totalBirds != value)
+            {
+                _totalBirds = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(PercBirdSightings));
+            }
+        }
+    }
+
     private int _NumberDays;
     public int NumberDays
     {
@@ -115,10 +131,10 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
 
     public string? CutoffDate { get; set; }
 
-    public List<BirdObservationLatest> BirdObservationLatest { get; set; } = new();
-    public List<BirdDailyObs> BirdDailyObs { get; set; } = new();
-    public List<BirdTimeObs> BirdTimeObs { get; set; } = new();
-    public List<BirdObservation> Observations { get; set; } = new();
+    public List<BirdObservationLatest> BirdObservationLatest { get; set; } 
+    public List<BirdDailyObs> BirdDailyObs { get; set; } 
+    public List<BirdTimeObs> BirdTimeObs { get; set; } 
+    public List<BirdObservation> Observations { get; set; } 
 
     // BIRD SERIES
     private ISeries[] _birdSeries = Array.Empty<ISeries>();
@@ -208,16 +224,24 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
             var resultSummary = await SummaryService.GetTotalBirdCountAsync(Lat, Lng, commonName, CutoffDate);
 
             BirdSightings = resultSummary.FirstOrDefault()?.BirdSightings ?? 0;
-            TotalSightings = resultSummary.FirstOrDefault()?.TotalSightings ?? 0;
-
+            
             if (BirdSightings <= 0)
             {
                 await ErrorService.Show(ErrorType.NoBirdsFound);
             }
+
+            TotalSightings = resultSummary.FirstOrDefault()?.TotalSightings ?? 0;
+            TotalBirds = resultSummary.FirstOrDefault()?.TotalBirds ?? 0;
             NumberDays = resultSummary.FirstOrDefault()?.TotalDays ?? 0;
             DistinctLocations = resultSummary.FirstOrDefault()?.DistinctLocations ?? 0;
             BirdDailyObs = await SummaryService.GetBirdDailyObsAsync(Lat, Lng, commonName, CutoffDate);
             BirdTimeObs = await SummaryService.GetBirdTimeObsAsync(Lat, Lng, commonName, CutoffDate);
+            foreach (var item in BirdTimeObs)
+            {
+                item.PercOff = TotalBirds == 0
+                    ? 0
+                    : (int)Math.Round((double)item.Sightings * 100 / TotalBirds);
+            }
             BirdObservationLatest = await SummaryService.GetLatestObservationAsync(Lat, Lng, CutoffDate, commonName);
             ObsDtLatest = BirdObservationLatest.FirstOrDefault()?.ObsDt?
                                 .ToString("dd/MM HH:mm") ?? string.Empty;

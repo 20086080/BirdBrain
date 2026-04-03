@@ -176,6 +176,7 @@ namespace BirdBrain.Services
                 @"SELECT 
                     COUNT(*) as TotalSightings,
                     COUNT(CASE WHEN ComName = ? THEN ComName END) as BirdSightings,
+                    SUM(CASE WHEN ComName = ? THEN HowMany END) as TotalBirds,
                     COUNT(DISTINCT DateStamp) as TotalDays,
                     (SELECT COUNT(*) 
                         FROM (
@@ -195,7 +196,7 @@ namespace BirdBrain.Services
                     AND AppLng = ?
                     AND HowMany > 0           
                     AND DateStamp >= ?",
-                comName, lat, lng, CutoffDate, comName, lat, lng, CutoffDate);
+                comName, comName, lat, lng, CutoffDate, comName, lat, lng, CutoffDate);
             return result.ToList();
         }
 

@@ -8,5 +8,7 @@ namespace BirdBrain.Models
     {
         public string? ObsDt { get; set; }
         public int Sightings { get; set; }
+
+        public double PercOff { get; set; } 
     }
 }

@@ -26,6 +26,46 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
         }
     }
 
+    private string _ObsDtLatest;
+    public string ObsDtLatest
+    {
+        get => _ObsDtLatest;
+        set
+        {
+            if (_ObsDtLatest != value)
+            {
+                _ObsDtLatest = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private double _LatLatest;
+    public double LatLatest
+    {
+        get => _LatLatest;
+        set
+        {
+            if (_LatLatest != value)
+            {
+                _LatLatest = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private double _LngLatest;
+    public double LngLatest
+    {
+           get => _LngLatest;
+        set
+        {
+            if (_LngLatest != value)
+            {
+                _LngLatest = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    
     private int _totalSightings;
     public int TotalSightings
     {
@@ -41,6 +81,19 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
         }
     }
 
+    private int _distinctLocations;
+    public int DistinctLocations
+    {
+        get => _distinctLocations;
+        set
+        {
+            if (_distinctLocations != value)
+            {
+                _distinctLocations = value;
+                OnPropertyChanged();
+            }
+        }
+    }
     private int _NumberDays;
     public int NumberDays
     {
@@ -51,27 +104,18 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
             {
                 _NumberDays = value;
                 OnPropertyChanged();
-                
+                OnPropertyChanged(nameof(PercBirdSightings));
+
             }
         }
     }
 
-    private double _percBirdSightings;
-    public double PercBirdSightings
-    {
-        get => _percBirdSightings;
-        set
-        {
-            if (_percBirdSightings != value)
-            {
-                _percBirdSightings = value;
-                OnPropertyChanged();
-            }
-        }
-    }
+    public double PercBirdSightings => TotalSightings == 0 ? 0
+                                    : (int) (100.0 * BirdSightings / TotalSightings);
 
     public string? CutoffDate { get; set; }
 
+    public List<BirdObservationLatest> BirdObservationLatest { get; set; } = new();
     public List<BirdDailyObs> BirdDailyObs { get; set; } = new();
     public List<BirdTimeObs> BirdTimeObs { get; set; } = new();
     public List<BirdObservation> Observations { get; set; } = new();
@@ -161,7 +205,6 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
 
             CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
             var (DateToday, previousDate) = await SummaryService.GetLatestTwoDatesAsync(Lat, Lng);
-
             var resultSummary = await SummaryService.GetTotalBirdCountAsync(Lat, Lng, commonName, CutoffDate);
 
             BirdSightings = resultSummary.FirstOrDefault()?.BirdSightings ?? 0;
@@ -172,10 +215,14 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
                 await ErrorService.Show(ErrorType.NoBirdsFound);
             }
             NumberDays = resultSummary.FirstOrDefault()?.TotalDays ?? 0;
+            DistinctLocations = resultSummary.FirstOrDefault()?.DistinctLocations ?? 0;
             BirdDailyObs = await SummaryService.GetBirdDailyObsAsync(Lat, Lng, commonName, CutoffDate);
             BirdTimeObs = await SummaryService.GetBirdTimeObsAsync(Lat, Lng, commonName, CutoffDate);
-            PercBirdSightings = TotalSightings == 0 ? 0
-                                    : (int)(100.0 * BirdSightings / TotalSightings);
+            BirdObservationLatest = await SummaryService.GetLatestObservationAsync(Lat, Lng, CutoffDate, commonName);
+            ObsDtLatest = BirdObservationLatest.FirstOrDefault()?.ObsDt?
+                                .ToString("dd/MM HH:mm") ?? string.Empty;
+            LatLatest = BirdObservationLatest.FirstOrDefault()?.Lat ?? 0;
+            LngLatest = BirdObservationLatest.FirstOrDefault()?.Lng ?? 0;
 
             var chartService = new ChartService();
             var result = chartService.BuildBirdChart(BirdDailyObs);

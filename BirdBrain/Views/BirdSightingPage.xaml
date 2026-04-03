@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+
 <views:BasePage
     x:Class="BirdBrain.Views.BirdSightingPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -77,9 +77,13 @@
                     <Label Grid.Column = "0" Text = "{Binding BirdSightings,StringFormat= 'Seen {0} days out of'}" Style="{StaticResource PageLabelNormal}"></Label>
                     <Label Grid.Column = "1" Text = "{Binding NumberDays, StringFormat= ' {0}'}" Style="{StaticResource PageLabelNormal}"></Label>
                 </Grid>
-                <Label Grid.Row = "3" Text = "{Binding BirdSightings, StringFormat 'Obs at {0} Locations'}" Style="{StaticResource PageLabelNormal}" Padding="5,0"/>
-                <Label Grid.Row = "4" Text = "Last Seen" Style="{StaticResource PageLabelNormal}" Padding="5"/>
-            </Grid>
+                <Label Grid.Row = "3" Text = "{Binding DistinctLocations, StringFormat ='Obs at {0} Locations'}" Style="{StaticResource PageLabelNormal}" Padding="5,0"/>
+                <HorizontalStackLayout Grid.Row = "4">
+                    <Label Text = "{Binding ObsDtLatest, StringFormat = 'Last Seen {0}'}" Style="{StaticResource PageLabelNormal}" Padding="5"/>
+                    <Label Text = "{Binding LatLatest,   StringFormat = 'At {0},'}" Style="{StaticResource PageLabelNormal}" Padding="5"/>
+                    <Label Text = "{Binding LngLatest,   StringFormat = ' {0}'}" Style="{StaticResource PageLabelNormal}" Padding="5"/>
+                </HorizontalStackLayout> 
+           </Grid>
 
             <Border Grid.Row="0" Grid.Column="1" Style ="{DynamicResource NormalAccentBorderStyle}">
                 <CollectionView ItemsSource="{Binding BirdTimeObs}" VerticalScrollBarVisibility="Always" 

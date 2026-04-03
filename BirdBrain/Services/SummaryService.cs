@@ -176,16 +176,48 @@ namespace BirdBrain.Services
                 @"SELECT 
                     COUNT(*) as TotalSightings,
                     COUNT(CASE WHEN ComName = ? THEN ComName END) as BirdSightings,
-                    COUNT(DISTINCT DateStamp) as TotalDays
+                    COUNT(DISTINCT DateStamp) as TotalDays,
+                    (SELECT COUNT(*) 
+                        FROM (
+                            SELECT DISTINCT Lat, Lng
+                            FROM BirdObservationDb
+                            WHERE 
+                            AppLat = ?
+                            AND AppLng = ?
+                            AND HowMany > 0           
+                            AND DateStamp >= ?
+                            AND ComName = ?
+                            )
+                        ) as DistinctLocations
                     FROM BirdObservationDb
                     WHERE 
                     AppLat = ?
                     AND AppLng = ?
                     AND HowMany > 0           
                     AND DateStamp >= ?",
-                comName, lat, lng, CutoffDate);
+                comName, lat, lng, CutoffDate, comName, lat, lng, CutoffDate);
             return result.ToList();
         }
-        
+
+        public async Task<List<BirdObservationLatest?>> GetLatestObservationAsync(double lat, double lng, string cutoffDate, string comName)
+        {
+            await _databaseService.InitAsync();
+            var db = _databaseService.Db;
+
+            var result = await db.QueryAsync<BirdObservationLatest>(
+                @"SELECT ObsDt, Lat, Lng
+                FROM BirdObservationDb
+                WHERE 
+                    AppLat = ?
+                    AND AppLng = ?
+                    AND HowMany > 0           
+                    AND DateStamp >= ?
+                    AND ComName = ?
+                    ORDER BY ObsDt DESC
+                    LIMIT 1;",
+                lat, lng, cutoffDate, comName);
+
+            return result;
+        }
     }
 }

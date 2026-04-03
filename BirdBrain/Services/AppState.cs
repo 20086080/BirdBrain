@@ -10,8 +10,6 @@ namespace BirdBrain.Services
 {
     public class AppState : INotifyPropertyChanged
     {
-        
-        private bool _hasBird = false;
         private bool _hasBirdLocation = false;
         public readonly int MaxDays = 30;
         public readonly int MinDays = 1;

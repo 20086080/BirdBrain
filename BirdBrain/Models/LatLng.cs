@@ -18,7 +18,7 @@ namespace BirdBrain.Models
        
         public string? iso2 { get; set; }
 
-        public string Display =>
-        $"{city_ascii}, {country} ({lat}, {lng})";
+        public string DisplayText =>
+            $"{city_ascii}, {country} ({lat:F4}, {lng:F4})";
     }
 }

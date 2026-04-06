@@ -91,11 +91,19 @@ namespace BirdBrain.Services
             {
                 if (item == null) continue;
 
+                if (App.State == null)
+                    throw new Exception("App.State is NULL");
+
+                if (App.State.GlobalLocations == null)
+                    throw new Exception("GlobalLocations is NULL");
+
                 // First item immediately (fast UI response)
+                var safeItem = item;
                 if (count == 0)
                 {
+                    
                     MainThread.BeginInvokeOnMainThread(() =>
-                        GlobalLocations.Add(item));
+                        App.State.GlobalLocations.Add(safeItem));
                 }
                 else
                 {

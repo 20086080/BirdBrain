@@ -9,23 +9,17 @@
     Title="Bird Selection"
     BackgroundColor="{DynamicResource Background}">
 
-    <Grid RowDefinitions="Auto,Auto,*" Padding="20" RowSpacing="10">
-
-        <VerticalStackLayout Grid.Row="0" Spacing="12">
-            <HorizontalStackLayout>
-                <Label Text="Location: " Style="{StaticResource SubTitles}" />
-                <Label Text ="{Binding SelectedSavedLocation.Name}" Style="{StaticResource SubTitles}" />
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
-
-        <VerticalStackLayout Grid.Row="1" Spacing="2">
-            <Entry x:Name="Bird" Placeholder="Enter bird OR select from saved birds" FontAttributes="Italic" 
-                   Style="{StaticResource PrimaryEntryStyle}" Completed="Bird_Completed"/>
-            <BoxView Style="{StaticResource UnderlineStyle}"/>
-        </VerticalStackLayout>
+    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="20" RowSpacing="10">
+        <Label Grid.Row ="0" Text ="{Binding SelectedSavedLocation.Name, StringFormat='Location: {0}'}" Style="{StaticResource SubTitles}" />
+        <HorizontalStackLayout Grid.Row="1" Margin="0,10,0,10">
+            <Label Text = "Bird Selection: " Style="{StaticResource SubTitles}" VerticalOptions="Start"/>
+            <Entry x:Name="Bird" Text ="{Binding SelectedSavedBird.CommonName}" 
+                   Style="{StaticResource PrimaryEntryStyle}" FontSize ="18" Completed="Bird_Completed" VerticalOptions="Start"/>
+        </HorizontalStackLayout>
+        <BoxView Grid.Row ="2" Style="{StaticResource UnderlineStyle}"/>
 
         <!-- Bird Carousel -->
-        <VerticalStackLayout Grid.Row="2" Spacing="10" Margin="0,20,0,20" >
+        <VerticalStackLayout Grid.Row="3" Spacing="10" Margin="0,20,0,20" >
             <Label Text="Saved Birds Selection" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
             <CarouselView ItemsSource="{Binding SavedBirds}"
                           x:Name="BirdCarousel" 

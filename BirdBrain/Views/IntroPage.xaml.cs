@@ -2,6 +2,7 @@
 using BirdBrain.Helpers;
 using BirdBrain.Models;
 using BirdBrain.Services;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Design;
 namespace BirdBrain.Views;
 
@@ -10,13 +11,17 @@ public partial class IntroPage : BasePage
     public bool IsNewLocation = false;
     public bool IsCarouselVisible { get; set; }
 
+    public ObservableCollection<LatLng> FilteredLocations { get; set; } = new();
+
     private SavedLocation _carouselItem;
+
+    public AppState State => App.State;
 
     public IntroPage()
     {
         InitializeComponent();
         App.State.LeftSelected = true;
-        BindingContext = App.State;
+        BindingContext = this;
     }
 
     protected override void OnAppearing()
@@ -30,6 +35,8 @@ public partial class IntroPage : BasePage
             LocationCarousel.CurrentItem = _carouselItem;
             IsCarouselVisible = true;
         });
+        FilteredLocations.Clear();
+        DropdownBorder.IsVisible = false;
     }
 
     public SavedLocation CarouselCurrentItem
@@ -92,7 +99,7 @@ public partial class IntroPage : BasePage
             App.State.SelectedSavedLocation = new SavedLocation();
             IsNewLocation = true;
         }
-        App.State.SelectedSavedLocation.Name = LocationEntry.Text;
+        App.State.SelectedSavedLocation.Name = SearchBox.Text;
         
     }
 
@@ -128,5 +135,63 @@ public partial class IntroPage : BasePage
     async void OnUseLocationInvoked(object? sender, EventArgs e)
     { 
         // 🔥 Call location logic here  
+    }
+
+    private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+    {
+        var searchText = e.NewTextValue;
+
+        FilteredLocations.Clear();
+
+        if (string.IsNullOrWhiteSpace(searchText) || searchText.Length < 2)
+        {
+            DropdownBorder.IsVisible = false;
+            return;
+        }
+
+        var results = App.State.GlobalLocations
+            .Where(x =>
+                (x.city_ascii?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
+                (x.country?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false))
+            .Take(20);
+
+        foreach (var item in results)
+            FilteredLocations.Add(item);
+
+        DropdownBorder.IsVisible = FilteredLocations.Any();
+    }
+
+    private void OnItemSelected(object sender, SelectionChangedEventArgs e)
+    {
+        var selected = e.CurrentSelection.FirstOrDefault() as LatLng;
+
+        if (selected == null)
+            return;
+
+        
+        SearchBox.Text = $"{selected.city_ascii}, {selected.country}";
+
+       
+        App.State.SelectedSavedLocation = new SavedLocation
+        {
+            Name = selected.city_ascii,
+            Lat = selected.lat,
+            Lng = selected.lng,
+            Country = selected.country,
+            CountryCode = selected.iso2
+        };
+
+        
+        ((CollectionView)sender).SelectedItem = null;
+
+        
+        DropdownBorder.IsVisible = false;
+        FilteredLocations.Clear();
+
+        
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            SearchBox.Unfocus();
+        });
     }
 }

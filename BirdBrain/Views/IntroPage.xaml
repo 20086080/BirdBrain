@@ -5,25 +5,31 @@
     xmlns:views="clr-namespace:BirdBrain.Views"
     Title="Location Selection"
     BackgroundColor="{DynamicResource Background}">
+    <Grid>
+        <Grid Padding ="5" RowDefinitions="Auto, Auto, Auto, Auto, Auto,*,Auto" RowSpacing="5">
+            <HorizontalStackLayout Grid.Row="0" Spacing="10" >
+                <Label Text="Use Current Location" Padding="5" Style="{StaticResource PageLabel}" />
+                <Switch IsToggled="{Binding UseCurrentLocation}" Style="{StaticResource PrimarySwitchStyle}" />
+            </HorizontalStackLayout>
+            <BoxView Grid.Row ="1" Style="{StaticResource UnderlineStyle}" />
 
-    <Grid RowSpacing="10" Padding ="5" RowDefinitions="Auto, Auto, Auto, Auto, Auto,*,Auto, Auto">
-        <HorizontalStackLayout Grid.Row="0" Padding="5" >
-            <Label Text="Use Current Location" Style="{StaticResource PageLabel}" />
-            <Switch IsToggled="{Binding UseCurrentLocation}" Style="{StaticResource PrimarySwitchStyle}" />
-        </HorizontalStackLayout>
-        <BoxView Grid.Row ="1" Style="{StaticResource UnderlineStyle}" />
-
-        <Grid Grid.Row="2" ColumnDefinitions="Auto,*" RowDefinitions ="Auto,Auto,Auto" RowSpacing="15" Padding="5">
-            <Label Grid.Row="0" Grid.Column="0"
+            <Grid Grid.Row="2" ColumnDefinitions="Auto,*" RowDefinitions ="Auto,Auto" RowSpacing="15" Padding="5">
+                <Label Grid.Row="0" Grid.Column="0"
                     Text="{Binding State.SelectedSavedLocation.Lat, StringFormat='Latitude | Longitude     {0},'}" Style="{StaticResource SubTitles}" />
-            <Label Grid.Row="0" Grid.Column="1"
+                <Label Grid.Row="0" Grid.Column="1"
                     Text="{Binding State.SelectedSavedLocation.Lng, StringFormat=' {0}'}" Style="{StaticResource SubTitles}" />
-            <Label Grid.Row ="1" Grid.ColumnSpan ="2"  Text="{Binding State.SelectedSavedLocation.Name}" Style="{StaticResource SubTitles}" />
-        </Grid>
-
-        <VerticalStackLayout Grid.Row="3">
-            <SearchBar x:Name="SearchBox" Placeholder="Search location..." Style="{StaticResource PageLabel}"
-                            TextChanged="OnSearchTextChanged" ZIndex="1"/>
+                <Label Grid.Row ="1" Grid.ColumnSpan ="2"  Text="{Binding State.SelectedSavedLocation.Name, StringFormat='Location {0}'}" Style="{StaticResource SubTitles}" />
+            </Grid>
+            <!--
+        <VerticalStackLayout Grid.Row="3"> -->
+            <SearchBar Grid.Row = "3" x:Name="SearchBox" Placeholder="Search location..." Style="{StaticResource PageLabel}"
+                            TextChanged="OnSearchTextChanged" ZIndex="1"
+                            Keyboard="Default" 
+                            IsTextPredictionEnabled="False"
+                            IsSpellCheckEnabled="False"
+                            HorizontalOptions="Start"
+                            Margin ="0"/>
+            <!--
             <Border x:Name="DropdownBorder" ZIndex="10" Style="{StaticResource NormalAccentBorderStyle1}" Padding="5" Margin="15" 
                             IsVisible="False">
                 
@@ -40,67 +46,98 @@
                 </CollectionView>
             </Border>
         </VerticalStackLayout>
+-->
+            <BoxView Grid.Row ="4" Style="{StaticResource UnderlineStyle}" />
 
-        <BoxView Grid.Row ="4" Style="{StaticResource UnderlineStyle}" />
-
-        <VerticalStackLayout Grid.Row="5" >
-            <Label Text="Saved Locations Selection" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
-            <CarouselView ItemsSource="{Binding State.SavedLocations}" 
+            <VerticalStackLayout Grid.Row="5" Spacing ="10">
+                <Label Text="Saved Locations Selection" Padding ="10" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
+                <CarouselView ItemsSource="{Binding State.SavedLocations}" 
                           x:Name="LocationCarousel"
                           IndicatorView="LocationIndicator" 
                           VerticalOptions="Fill" HorizontalOptions="Fill" 
                           PeekAreaInsets="70">
 
-                <CarouselView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" SnapPointsType="MandatorySingle"
+                    <CarouselView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" SnapPointsType="MandatorySingle"
                                        SnapPointsAlignment="Center" ItemSpacing="10"/>
-                </CarouselView.ItemsLayout>
+                    </CarouselView.ItemsLayout>
 
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
-                        <Border Stroke="{DynamicResource Accent}"
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Stroke="{DynamicResource Accent}"
                                 Style="{StaticResource CarouselBorder}"
                                 WidthRequest="220">
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
                                     Tapped="OnLocationTapped"
                                     CommandParameter="{Binding .}" />
-                            </Border.GestureRecognizers>
-                            <VerticalStackLayout Spacing="5" Padding="5">
-                                <Image Source="{Binding Thumbnail}" HeightRequest="130" Aspect="AspectFill" 
+                                </Border.GestureRecognizers>
+                                <VerticalStackLayout Spacing="5" Padding="5">
+                                    <Image Source="{Binding Thumbnail}" HeightRequest="130" Aspect="AspectFill" 
                                        IsVisible="{Binding Source={x:Reference LocationCarousel}, Path=IsVisible}"/>
-                                <Label Text="{Binding Name}" Style="{StaticResource CarouselLabel}"
+                                    <Label Text="{Binding Name}" Style="{StaticResource CarouselLabel}"
                                        HorizontalOptions="Center"/>
-                            </VerticalStackLayout>
-                        </Border>
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
-            <IndicatorView x:Name="LocationIndicator" Style="{StaticResource PrimaryIndicatorStyle}"
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                <IndicatorView x:Name="LocationIndicator" Style="{StaticResource PrimaryIndicatorStyle}"
                            HorizontalOptions="Center" Padding="5"/>
-        </VerticalStackLayout>
+            </VerticalStackLayout>
 
-        <BoxView Grid.Row ="6" Style="{StaticResource UnderlineStyle}" />
+            
 
-        <Border Grid.Row="7" Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" HorizontalOptions="Center">
-            <Grid ColumnDefinitions="*,*" HeightRequest="40" WidthRequest="220">
-                <Border x:Name="AllBirdsTab"  Grid.Column="0" Style = "{StaticResource SegmentSelectedStyle}" IsEnabled="{Binding HasLocation}">
-                    <Label x:Name="AllBirdsLabel" Text="All Birds" Style="{StaticResource SegmentSelectedLabelStyle}"/>
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnAllBirdsTapped" />
-                    </Border.GestureRecognizers>
-                </Border>
+            <Border Grid.Row="6" Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" HorizontalOptions="Center">
+                <Grid ColumnDefinitions="*,*" HeightRequest="40" WidthRequest="220">
+                    <Border x:Name="AllBirdsTab"  Grid.Column="0" Style = "{StaticResource SegmentSelectedStyle}" IsEnabled="{Binding HasLocation}">
+                        <Label x:Name="AllBirdsLabel" Text="All Birds" Style="{StaticResource SegmentSelectedLabelStyle}"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAllBirdsTapped" />
+                        </Border.GestureRecognizers>
+                    </Border>
 
-                <Border x:Name="SpecificBirdTab"  Grid.Column="1"
+                    <Border x:Name="SpecificBirdTab"  Grid.Column="1"
                         Style="{StaticResource SegmentUnselectedStyle}" IsEnabled="{Binding HasLocation}">
-                    <Label x:Name="SpecificBirdLabel" Text="Specific Bird"
+                        <Label x:Name="SpecificBirdLabel" Text="Specific Bird"
                            Style="{StaticResource SegmentUnselectedLabelStyle}"/>
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnSpecificBirdTapped"/>
-                    </Border.GestureRecognizers>
-                </Border>
-            </Grid>
-        </Border>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSpecificBirdTapped"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="Overlay"  IsVisible="False" BackgroundColor="#80000000">
+            <!-- semi-transparent backdrop -->
+
+            <!-- Tap outside to close -->
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnOverlayTapped"/>
+            </Grid.GestureRecognizers>
+
+            <!-- Dropdown -->
+            <Border x:Name="DropdownBorder"
+                Style="{StaticResource NormalAccentBorderStyle1}"
+                Padding="5"
+                Margin="40,140,20,0"
+                VerticalOptions="Start">
+
+                <CollectionView x:Name="ResultsList"
+                        HeightRequest="250"
+                        ItemsSource="{Binding FilteredLocations}"
+                        SelectionMode="Single"
+                        SelectionChanged="OnItemSelected">
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding DisplayText}" Style="{StaticResource SelectionBoxLabel}" Padding="10"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Border>
+        </Grid>
     </Grid>
 </views:BasePage>
     

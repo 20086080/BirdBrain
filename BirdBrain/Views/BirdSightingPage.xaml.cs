@@ -228,6 +228,8 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
             if (BirdSightings <= 0)
             {
                 await ErrorService.Show(ErrorType.NoBirdsFound);
+                await Shell.Current.GoToAsync(nameof(BirdSelectionPage));
+                return;
             }
 
             TotalSightings = resultSummary.FirstOrDefault()?.TotalSightings ?? 0;

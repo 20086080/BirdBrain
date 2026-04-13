@@ -36,7 +36,7 @@ public partial class IntroPage : BasePage
             IsCarouselVisible = true;
         });
         FilteredLocations.Clear();
-        DropdownBorder.IsVisible = false;
+        Overlay.IsVisible = false;
     }
 
     public SavedLocation CarouselCurrentItem
@@ -145,7 +145,7 @@ public partial class IntroPage : BasePage
 
         if (string.IsNullOrWhiteSpace(searchText) || searchText.Length < 2)
         {
-            DropdownBorder.IsVisible = false;
+            Overlay.IsVisible = false;
             return;
         }
 
@@ -158,9 +158,16 @@ public partial class IntroPage : BasePage
         foreach (var item in results)
             FilteredLocations.Add(item);
 
-        DropdownBorder.IsVisible = FilteredLocations.Any();
+        Overlay.IsVisible = FilteredLocations.Any();
     }
 
+    private void OnOverlayTapped(object sender, EventArgs e)
+    {
+        Overlay.IsVisible = false;
+        FilteredLocations.Clear();
+
+        SearchBox.Unfocus();
+    }
     private void OnItemSelected(object sender, SelectionChangedEventArgs e)
     {
         var selected = e.CurrentSelection.FirstOrDefault() as LatLng;
@@ -185,7 +192,7 @@ public partial class IntroPage : BasePage
         ((CollectionView)sender).SelectedItem = null;
 
         
-        DropdownBorder.IsVisible = false;
+        Overlay.IsVisible = false;
         FilteredLocations.Clear();
 
         

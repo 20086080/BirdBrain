@@ -117,8 +117,7 @@ public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
                 await Shell.Current.GoToAsync("//IntroPage");
                 return;
             }
-            else
-            {
+            
                 var TopBirdsTask = SummaryService.GetTop5BirdCountAsync(Lat, Lng, CutoffDate, DateToday);
                 var LocationDailyObsTask = SummaryService.GetLocationDailyObsAsync(Lat, Lng, CutoffDate);
 
@@ -141,7 +140,7 @@ public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
                 XAxes = result.XAxes;
                 YAxes = result.YAxes;
                 OnPropertyChanged(null);
-            }
+            
         }
         catch (Exception ex)
         {

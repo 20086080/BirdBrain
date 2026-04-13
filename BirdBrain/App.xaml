@@ -43,6 +43,15 @@
                 
             </Style>
 
+            <!-- Selection Box Label  -->
+            <Style x:Key="SelectionBoxLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="{DynamicResource Background}" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="Padding" Value="10"/>
+            </Style>
+
             <!-- Center Label Style -->
             <Style x:Key="PageLabelCenter" TargetType="Label">
                 <Setter Property="VerticalOptions" Value="Center" />
@@ -148,11 +157,18 @@
             <Style x:Key="NormalAccentBorderStyle" TargetType="Border">
                 <Setter Property="Margin" Value="5" />
                 <Setter Property="Padding" Value="10" />
-                
                 <Setter Property="BackgroundColor" Value="{DynamicResource Surface}" />
                 <Setter Property="Stroke" Value="{DynamicResource Accent}" />
             </Style>
 
+            <!-- Normal Border 70% transparency-->
+            <Style x:Key="NormalAccentBorderStyle1" TargetType="Border">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource Accent70}" />
+                <Setter Property="Stroke" Value="{DynamicResource Accent}" />
+            </Style>
+            
             <!-- Rounded Border -->
             <Style x:Key="RoundedAccentBorderStyle1" TargetType="Border">
                 <Setter Property="Margin" Value="5" />

@@ -7,26 +7,24 @@
     BackgroundColor="{DynamicResource Background}">
 
     <Grid RowSpacing="10" Padding ="5" RowDefinitions="Auto, Auto, Auto, Auto, Auto,*,Auto, Auto">
-        <HorizontalStackLayout Grid.Row="0" Spacing="5" >
+        <HorizontalStackLayout Grid.Row="0" Padding="5" >
             <Label Text="Use Current Location" Style="{StaticResource PageLabel}" />
             <Switch IsToggled="{Binding UseCurrentLocation}" Style="{StaticResource PrimarySwitchStyle}" />
         </HorizontalStackLayout>
         <BoxView Grid.Row ="1" Style="{StaticResource UnderlineStyle}" />
 
-        <Grid Grid.Row="2" ColumnDefinitions="Auto,*" RowDefinitions ="Auto,Auto" >
+        <Grid Grid.Row="2" ColumnDefinitions="Auto,*" RowDefinitions ="Auto,Auto,Auto" RowSpacing="15" Padding="5">
             <Label Grid.Row="0" Grid.Column="0"
                     Text="{Binding State.SelectedSavedLocation.Lat, StringFormat='Latitude | Longitude     {0},'}" Style="{StaticResource SubTitles}" />
             <Label Grid.Row="0" Grid.Column="1"
                     Text="{Binding State.SelectedSavedLocation.Lng, StringFormat=' {0}'}" Style="{StaticResource SubTitles}" />
-            <!--        <Label Grid.Row ="1" Grid.Column ="0" Text="Location Selection " Style="{StaticResource PageLabel}" />
-           <Entry Grid.Row ="1" Grid.Column ="1" x:Name="LocationEntry" Text="{Binding State.SelectedSavedLocation.Name}" 
-                   TextChanged="OnTextChanged"  Style="{StaticResource PrimaryEntryStyle}" />  -->
+            <Label Grid.Row ="1" Grid.ColumnSpan ="2"  Text="{Binding State.SelectedSavedLocation.Name}" Style="{StaticResource SubTitles}" />
         </Grid>
 
         <VerticalStackLayout Grid.Row="3">
             <SearchBar x:Name="SearchBox" Placeholder="Search location..." Style="{StaticResource PageLabel}"
                             TextChanged="OnSearchTextChanged" ZIndex="1"/>
-            <Border x:Name="DropdownBorder" ZIndex="10" Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" Margin="0" 
+            <Border x:Name="DropdownBorder" ZIndex="10" Style="{StaticResource NormalAccentBorderStyle1}" Padding="5" Margin="15" 
                             IsVisible="False">
                 
                 <CollectionView x:Name="ResultsList" HeightRequest="200"
@@ -36,10 +34,7 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Padding="8" RowDefinitions="Auto,1">
-                                <Label Text="{Binding DisplayText}" Style="{StaticResource PageLabel}"/>
-                                <BoxView Grid.Row="1" HeightRequest="1" BackgroundColor="{DynamicResource Background}" />
-                            </Grid>
+                            <Label Text="{Binding DisplayText}" Style="{StaticResource SelectionBoxLabel}"/>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

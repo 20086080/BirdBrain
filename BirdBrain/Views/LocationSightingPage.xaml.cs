@@ -10,7 +10,6 @@ namespace BirdBrain.Views;
 public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
 {
     public AppState State => App.State;
-
     public int TotalSightings { get; set; }
     public int TodayObs { get; set; }
     public int AverageObs { get; set; }
@@ -50,8 +49,8 @@ public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
     // X AXES
     private Axis[] _xAxes =
     {
-    new Axis { LabelsRotation = 20 }
-};
+        new Axis { LabelsRotation = 20 }
+    };
 
     public Axis[] XAxes
     {
@@ -66,8 +65,8 @@ public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
     // Y AXES
     private Axis[] _yAxes =
     {
-    new Axis { LabelsRotation = 20 }
-};
+        new Axis { LabelsRotation = 20 }
+    };
 
     public Axis[] YAxes
     {
@@ -92,7 +91,6 @@ public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
     {
         base.OnAppearing();
         _ = LoadDataAsync();
-
     }
 
     private async Task LoadDataAsync()
@@ -101,10 +99,7 @@ public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
         {
             Double Lat = App.State.SelectedSavedLocation.Lat;
             Double Lng = App.State.SelectedSavedLocation.Lng;
-            App.State.LeftSelected = true;
             
-            await App.State.Database.InitAsync();
-
             CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
             var (DateToday, previousDate) = await SummaryService.GetLatestTwoDatesAsync(Lat, Lng);
 
@@ -117,30 +112,30 @@ public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
                 await Shell.Current.GoToAsync("//IntroPage");
                 return;
             }
-            
-                var TopBirdsTask = SummaryService.GetTop5BirdCountAsync(Lat, Lng, CutoffDate, DateToday);
-                var LocationDailyObsTask = SummaryService.GetLocationDailyObsAsync(Lat, Lng, CutoffDate);
 
-                int NumberDays = resultSummary.FirstOrDefault()?.TotalDays ?? 0;
-                TotalTypeOfBird = resultSummary.FirstOrDefault()?.TotalBirds ?? 0;
-                TodayObs = resultSummary.FirstOrDefault()?.TodayBirds ?? 0;
-                int previousCount = resultSummary.FirstOrDefault()?.PreviousDayBirds ?? 0;
+            App.State.LeftSelected = true;
+            var TopBirdsTask = SummaryService.GetTop5BirdCountAsync(Lat, Lng, CutoffDate, DateToday);
+            var LocationDailyObsTask = SummaryService.GetLocationDailyObsAsync(Lat, Lng, CutoffDate);
 
-                AverageObs = TotalSightings / NumberDays;
-                NewBirds = TodayObs - previousCount;
+            int NumberDays = resultSummary.FirstOrDefault()?.TotalDays ?? 0;
+            TotalTypeOfBird = resultSummary.FirstOrDefault()?.TotalBirds ?? 0;
+            TodayObs = resultSummary.FirstOrDefault()?.TodayBirds ?? 0;
+            int previousCount = resultSummary.FirstOrDefault()?.PreviousDayBirds ?? 0;
 
-                await Task.WhenAll(TopBirdsTask, LocationDailyObsTask);
-                TopBirds = await TopBirdsTask;
-                LocationDailyObs = await LocationDailyObsTask;
+            AverageObs = TotalSightings / NumberDays;
+            NewBirds = TodayObs - previousCount;
 
-                var chartService = new ChartService();
-                var result = chartService.BuildLocationChart(LocationDailyObs);
-                Series = result.Series;
-                Labels = result.Labels;
-                XAxes = result.XAxes;
-                YAxes = result.YAxes;
-                OnPropertyChanged(null);
-            
+            await Task.WhenAll(TopBirdsTask, LocationDailyObsTask);
+            TopBirds = await TopBirdsTask;
+            LocationDailyObs = await LocationDailyObsTask;
+
+            var chartService = new ChartService();
+            var result = chartService.BuildLocationChart(LocationDailyObs);
+            Series = result.Series;
+            Labels = result.Labels;
+            XAxes = result.XAxes;
+            YAxes = result.YAxes;
+            OnPropertyChanged(null);
         }
         catch (Exception ex)
         {

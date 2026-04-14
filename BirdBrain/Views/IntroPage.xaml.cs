@@ -45,7 +45,6 @@ public partial class IntroPage : BasePage
         {
             if (App.State.SavedLocations == null || App.State.SavedLocations.Count == 0)
             {
-                
                 return null!;
             }
             
@@ -79,58 +78,42 @@ public partial class IntroPage : BasePage
     {
         if (e.Parameter == null)
         {
-            
             return;
         }
         if (e.Parameter is SavedLocation location)
         {
-            App.State.SelectedSavedLocation = location;
-            
+            App.State.SelectedSavedLocation = location;   
         }
     }
 
-    private void OnTextChanged(object? sender, TextChangedEventArgs e)
-    {
-        if (sender is not Entry entry || e.OldTextValue == null || e.OldTextValue == e.NewTextValue)
-            return;
-        string textString = entry?.Text?.Trim()!;
-        if (!IsNewLocation)
-        {
-            App.State.SelectedSavedLocation = new SavedLocation();
-            IsNewLocation = true;
-        }
-        App.State.SelectedSavedLocation.Name = SearchBox.Text;
-        
-    }
 
+    //private void Latitude_TextChanged(object? sender, TextChangedEventArgs e)
+    //{
+    //    if (sender is not Entry entry || e.OldTextValue == null || e.OldTextValue == e.NewTextValue)
+    //        return;
+    //    string textString = entry?.Text?.Trim()!;
+    //    double.TryParse(textString, out double lat);
+    //    if (!IsNewLocation)
+    //    {
+    //        App.State.SelectedSavedLocation = new SavedLocation();
+    //        IsNewLocation = true;
+    //    }
+    //    App.State.SelectedSavedLocation.Lat = lat;
+    //}
 
-    private void Latitude_TextChanged(object? sender, TextChangedEventArgs e)
-    {
-        if (sender is not Entry entry || e.OldTextValue == null || e.OldTextValue == e.NewTextValue)
-            return;
-        string textString = entry?.Text?.Trim()!;
-        double.TryParse(textString, out double lat);
-        if (!IsNewLocation)
-        {
-            App.State.SelectedSavedLocation = new SavedLocation();
-            IsNewLocation = true;
-        }
-        App.State.SelectedSavedLocation.Lat = lat;
-    }
-
-    private void Longitude_TextChanged(object? sender, TextChangedEventArgs e)
-    {
-        if (sender is not Entry entry || e.OldTextValue == null || e.OldTextValue == e.NewTextValue)
-            return;
-        string textString = entry?.Text?.Trim()!;
-        double.TryParse(textString, out double lng);
-        if (!IsNewLocation)
-        {
-            App.State.SelectedSavedLocation = new SavedLocation();
-            IsNewLocation = true;
-        }
-        App.State.SelectedSavedLocation.Lng = lng;
-    }
+    //private void Longitude_TextChanged(object? sender, TextChangedEventArgs e)
+    //{
+    //    if (sender is not Entry entry || e.OldTextValue == null || e.OldTextValue == e.NewTextValue)
+    //        return;
+    //    string textString = entry?.Text?.Trim()!;
+    //    double.TryParse(textString, out double lng);
+    //    if (!IsNewLocation)
+    //    {
+    //        App.State.SelectedSavedLocation = new SavedLocation();
+    //        IsNewLocation = true;
+    //    }
+    //    App.State.SelectedSavedLocation.Lng = lng;
+    //}
 
     async void OnUseLocationInvoked(object? sender, EventArgs e)
     { 
@@ -140,9 +123,7 @@ public partial class IntroPage : BasePage
     private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
     {
         var searchText = e.NewTextValue;
-
         FilteredLocations.Clear();
-
         if (string.IsNullOrWhiteSpace(searchText) || searchText.Length < 2)
         {
             Overlay.IsVisible = false;
@@ -165,20 +146,15 @@ public partial class IntroPage : BasePage
     {
         Overlay.IsVisible = false;
         FilteredLocations.Clear();
-
         SearchBox.Unfocus();
     }
+
     private void OnItemSelected(object sender, SelectionChangedEventArgs e)
     {
         var selected = e.CurrentSelection.FirstOrDefault() as LatLng;
-
         if (selected == null)
             return;
-
-        
         SearchBox.Text = $"{selected.city_ascii}, {selected.country}";
-
-       
         App.State.SelectedSavedLocation = new SavedLocation
         {
             Name = selected.city_ascii,
@@ -187,14 +163,9 @@ public partial class IntroPage : BasePage
             Country = selected.country,
             CountryCode = selected.iso2
         };
-
-        
         ((CollectionView)sender).SelectedItem = null;
-
-        
         Overlay.IsVisible = false;
         FilteredLocations.Clear();
-
         
         MainThread.BeginInvokeOnMainThread(() =>
         {

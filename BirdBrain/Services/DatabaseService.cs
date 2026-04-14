@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SQLite;
+﻿using Android.Icu.Text;
 using BirdBrain.Models;
+using SQLite;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace BirdBrain.Services
 {
@@ -24,6 +25,9 @@ namespace BirdBrain.Services
             _db = new SQLiteAsyncConnection(dbPath);
 
             await _db.CreateTableAsync<BirdObservationDb>();
+            await _db.ExecuteAsync(
+                @"CREATE INDEX IF NOT EXISTS idx_location_date
+                    ON BirdObservationDb(Lat, Lng, DateStamp, ComName);");
         }
 
         public async Task SaveObservationsAsync(List<BirdObservationDb> observations)
@@ -54,45 +58,6 @@ namespace BirdBrain.Services
             }).ToList();
         }
 
-        //public async Task<List<BirdObservationDb>> GetLatestObservationsAsync()
-        //{
-        //    return await _db.Table<BirdObservationDb>()
-        //                    .OrderByDescending(x => x.DateStamp)
-        //                    .ToListAsync();
-        //}
-
-        //public async Task<string?> GetLastRefreshTimeAsync()                // Get the most recent DateStamp from the database
-        //{
-        //    var last = await _db.Table<BirdObservationDb>()
-        //                        .OrderByDescending(x => x.DateStamp)
-        //                        .FirstOrDefaultAsync();
-
-        //    return last?.DateStamp;
-        //}
-
-// TODO - Cleanup old observations prior to a year ago 
-        //public async Task CleanupOldObservationsAsync(double lat, double lng)
-        //{
-        //    // Find the two most recent DateStamp groups
-
-        //    var keepDates = await _db.QueryAsync<DateTime>(
-        //        @"SELECT DISTINCT DateStamp 
-        //            FROM BirdObservationDb
-        //            WHERE AppLat = ? AND AppLng = ?
-        //            ORDER BY DateStamp DESC
-        //            LIMIT 2",
-        //        lat, lng);
-
-        //    if (keepDates.Count < 2)
-        //        return;
-
-
-        //    await _db.ExecuteAsync(
-        //        @"DELETE FROM BirdObservationDb
-        //            WHERE AppLat = ?
-        //            AND AppLng = ?
-        //            AND DateStamp NOT IN (?,?)",
-        //        lat, lng, keepDates[0], keepDates[1]);
-        //}
+        
     }
 }

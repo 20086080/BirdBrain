@@ -48,8 +48,8 @@ namespace BirdBrain.Models
 
                 ErrorType.NoBirdsFound => new AppError
                 {
-                    Title = "No Observations for this Bird",
-                    Message = "Select another bird",
+                    Title = "No Observations for this Bird and Location",
+                    Message = "Select another bird / location",
                     Image = "no_bird_found.png"
                 },
 

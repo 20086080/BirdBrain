@@ -223,8 +223,8 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
             var (DateToday, previousDate) = await SummaryService.GetLatestTwoDatesAsync(Lat, Lng);
             var resultSummary = await SummaryService.GetTotalBirdCountAsync(Lat, Lng, commonName, CutoffDate);
 
-            BirdSightings = resultSummary.FirstOrDefault()?.BirdSightings ?? 0;
-            
+            BirdSightings = resultSummary.FirstOrDefault()?.BirdSightings ?? 0;         // # of times Bird seen in Location
+
             if (BirdSightings <= 0)
             {
  //               await ErrorService.Show(ErrorType.NoBirdsFound);
@@ -232,10 +232,10 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
                 return;
             }
 
-            TotalSightings = resultSummary.FirstOrDefault()?.TotalSightings ?? 0;
-            TotalBirds = resultSummary.FirstOrDefault()?.TotalBirds ?? 0;
-            NumberDays = resultSummary.FirstOrDefault()?.TotalDays ?? 0;
-            DistinctLocations = resultSummary.FirstOrDefault()?.DistinctLocations ?? 0;
+            TotalSightings = resultSummary.FirstOrDefault()?.TotalSightings ?? 0;           // Count - all Birds in Location
+            TotalBirds = resultSummary.FirstOrDefault()?.TotalBirds ?? 0;                   // How many actual birds (not count)
+            NumberDays = resultSummary.FirstOrDefault()?.TotalDays ?? 0;                    // Days Bird seen
+            DistinctLocations = resultSummary.FirstOrDefault()?.DistinctLocations ?? 0;     // How many different locations
             BirdDailyObs = await SummaryService.GetBirdDailyObsAsync(Lat, Lng, commonName, CutoffDate);
             BirdTimeObs = await SummaryService.GetBirdTimeObsAsync(Lat, Lng, commonName, CutoffDate);
             foreach (var item in BirdTimeObs)
@@ -245,8 +245,10 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
                     : (int)Math.Round((double)item.Sightings * 100 / TotalBirds);
             }
             BirdObservationLatest = await SummaryService.GetLatestObservationAsync(Lat, Lng, CutoffDate, commonName);
-            ObsDtLatest = BirdObservationLatest.FirstOrDefault()?.ObsDt?
-                                .ToString("dd/MM HH:mm") ?? string.Empty;
+            var obsDtString = BirdObservationLatest.FirstOrDefault()?.ObsDt;
+            ObsDtLatest = DateTime.TryParse(obsDtString, out var obsDt)
+                ? obsDt.ToString("dd/MM :HH")
+                : string.Empty;
             LatLatest = BirdObservationLatest.FirstOrDefault()?.Lat ?? 0;
             LngLatest = BirdObservationLatest.FirstOrDefault()?.Lng ?? 0;
 

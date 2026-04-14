@@ -246,7 +246,7 @@ namespace BirdBrain.Services
             var db = _databaseService.Db;
 
             var result = await db.QueryAsync<BirdObservationLatest>(
-                @"SELECT ObsDt, Lat, Lng
+                @"SELECT ObsDt, ROUND(CAST(Lat AS REAL), 1) AS Lat, ROUND(CAST(Lng AS REAL), 1) AS Lng
                 FROM BirdObservationDb
                 WHERE 
                     AppLat = ?

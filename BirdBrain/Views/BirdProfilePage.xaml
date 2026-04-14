@@ -33,7 +33,7 @@
         
         <BoxView Grid.Row="1" Style="{StaticResource UnderlineStyle}" />
 
-        <Grid Grid.Row = "2" Grid.ColumnDefinitions ="*,*" Padding ="5" Background="{DynamicResource Background} ">
+        <Grid Grid.Row = "2" Grid.ColumnDefinitions ="*,*" Padding ="5,10,5,10" Background="{DynamicResource Background} ">
             <Label Grid.Column="0" Text = "{Binding SelectedSavedBird.CommonName}" Style = "{StaticResource SubTitles}" LineBreakMode="WordWrap"/>
             <Label Grid.Column="1" Text = "{Binding SelectedSavedBird.ScientificName}" Margin="15,0,0,0" 
                                 Style = "{StaticResource PageLabel}" LineBreakMode="WordWrap"/>
@@ -41,7 +41,7 @@
 
         <!-- Bird LABEL -->
         <Image Grid.Row ="3" Source="{Binding SelectedSavedBird.ProfileImage}" HeightRequest="330" Aspect="AspectFill" HorizontalOptions="Fill"/>
-        <Grid Grid.RowDefinitions ="Auto,Auto,Auto"  RowSpacing="5" Grid.Row="4" Background="{DynamicResource Background}" >
+        <Grid Grid.RowDefinitions ="Auto,Auto,Auto" Padding="5"  RowSpacing="5" Grid.Row="4" Background="{DynamicResource Background}" >
             <Label Grid.Row ="0" Text= "{Binding SelectedSavedBird.Description}" Margin="0,5,0,0" Style = "{StaticResource PageLabelNormal}" 
                                 TextColor ="{DynamicResource Accent}" LineBreakMode="WordWrap"/>
             <Grid Grid.Row="1" ColumnDefinitions="Auto,*">

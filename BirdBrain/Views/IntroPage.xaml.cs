@@ -9,6 +9,7 @@ namespace BirdBrain.Views;
 public partial class IntroPage : BasePage
 {
     public bool IsNewLocation = false;
+    public string? CutoffDate;
     public bool IsCarouselVisible { get; set; }
 
     public ObservableCollection<LatLng> FilteredLocations { get; set; } = new();
@@ -47,13 +48,16 @@ public partial class IntroPage : BasePage
             {
                 return null!;
             }
-            
+
             if (App.State.SelectedSavedLocation.Name == null)
+            {
+                SearchBox.Text = null;
                 return App.State.SavedLocations[0];
+            }
 
             var match = App.State.SavedLocations.FirstOrDefault(b =>
                 b.Name!.Equals(App.State.SelectedSavedLocation.Name, StringComparison.OrdinalIgnoreCase));
-
+            SearchBox.Text = null;
             return match ?? App.State.SavedLocations[0];
         }
     }
@@ -62,6 +66,13 @@ public partial class IntroPage : BasePage
     {
         if (!App.State.HasLocation)
             return;
+        CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
+        var result = await SummaryService.LocationHasDataAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate);
+        if (!result)                                            // Location has no Data in Sql table for date range 
+        {
+            await ErrorService.Show(ErrorType.NoLocationDataFound);
+            return;
+        }
         App.State.LeftSelected = true;
         await Shell.Current.GoToAsync(nameof(LocationSightingPage));
     }
@@ -135,10 +146,8 @@ public partial class IntroPage : BasePage
                 (x.city_ascii?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
                 (x.country?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false))
             .Take(20);
-
         foreach (var item in results)
             FilteredLocations.Add(item);
-
         Overlay.IsVisible = FilteredLocations.Any();
     }
 

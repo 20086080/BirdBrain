@@ -9,6 +9,7 @@ namespace BirdBrain.Views;
 
 public partial class BirdSelectionPage : BasePage
 {
+    public string? CutoffDate;
     public BirdSelectionPage()
 	{
 		InitializeComponent();
@@ -73,14 +74,33 @@ public partial class BirdSelectionPage : BasePage
             App.State.SelectedSavedBird = new Bird();
             App.State.SelectedSavedBird.CommonName = textString;
         }
+
+        bool checkBird = await Check_Bird();
+        if (!checkBird)
+            return;
+
         Bird.Unfocus();
         await KeyboardHelper.DismissAsync();
-        if (!App.State.HasBird)
-            return;
+        
         Application.Current!.Dispatcher.Dispatch(async () =>
         {
             await Shell.Current.GoToAsync(nameof(BirdSightingPage));
         });
+    }
+
+    async Task<bool> Check_Bird()
+    {
+        //if (!App.State.HasBird)
+        //    return false;
+        CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
+        string? comName = App.State.SelectedSavedBird.CommonName;
+        var result = await SummaryService.BirdHasDataAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate, comName);
+        if (!result)                                            // Bird has no data for this Location and date range 
+        {
+            await ErrorService.Show(ErrorType.NoBirdsFound);
+            return false;
+        }
+        return true;
     }
 
     async void OnBirdTapped(object? sender, TappedEventArgs e)       //Selection from Saved Bird List
@@ -88,6 +108,10 @@ public partial class BirdSelectionPage : BasePage
         if (e.Parameter is Bird bird)
         {
             App.State.SelectedSavedBird = bird;
+            bool checkBird = await Check_Bird();
+            if (!checkBird)
+                return;
+            
             await Shell.Current.GoToAsync(nameof(BirdSightingPage));
         }
     }

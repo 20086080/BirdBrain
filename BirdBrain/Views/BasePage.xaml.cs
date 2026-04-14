@@ -1,5 +1,6 @@
 
 using BirdBrain.Controls;
+using BirdBrain.Models;
 using BirdBrain.Services;
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
@@ -13,6 +14,7 @@ public partial class BasePage : ContentPage
     BoxView _drawerOverlay;
     LeftSettingsDrawer _leftDrawer;
     RightSettingsDrawer _rightDrawer;
+    String CutoffDate;
     bool _isDrawerOpen;
     BoxView _swipeCatcher;
     const double DrawerHiddenX = -360;
@@ -50,19 +52,21 @@ public partial class BasePage : ContentPage
 
 
     void SetupDrawers()
-    {
+    {   
+        
+
         try
         {
             var header = GetTemplateChild("AppHeader") as AppHeader;
             if (_leftDrawer != null)
             {
-                _leftDrawer.HomeCommand = new Command(async () =>           //Home Selection 
+                _leftDrawer.HomeCommand = new Command(async () =>               //Home Selection 
                 {
                     await ExecuteWithDrawerClose(() =>
                         Shell.Current.GoToAsync("//IntroPage"));
                 });
                
-                _leftDrawer.SelectBirdCommand = new Command(async () =>      // Bird Selection
+                _leftDrawer.SelectBirdCommand = new Command(async () =>         // Bird Selection
                 {
                     if (App.State.HasLocation)
                     { 
@@ -71,31 +75,55 @@ public partial class BasePage : ContentPage
                     }
                 });
                 
-                _leftDrawer.SightingsCommand = new Command(async () =>      // Sighting Selection
+                _leftDrawer.SightingsCommand = new Command(async () =>          // Sighting Selection
                 {
-                    if (App.State.LeftSelected)
-                    {                               //Location Selected on Page
-                        if (App.State.HasLocation)
+                    if (App.State.LeftSelected)                                 // Originating page is Location
+                    {
+                        if (!App.State.HasLocation)                             // Location is not selected
                         {
-                            await ExecuteWithDrawerClose(() =>
-                            Shell.Current.GoToAsync(nameof(LocationSightingPage)));
+                            await ErrorService.Show(ErrorType.LocationNotSelected);
+                            await CloseDrawer();
+                            return;
                         }
+                        CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
+                        var result = await SummaryService.LocationHasDataAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate);
+                        if (!result)                                            // Location has no Data in Sql table for date range 
+                        {
+                            await ErrorService.Show(ErrorType.NoLocationDataFound);
+                            await CloseDrawer();
+                            return;
+                        }
+                        await ExecuteWithDrawerClose(() =>
+                        Shell.Current.GoToAsync(nameof(LocationSightingPage)));                    
                     }
                     else
                     {
-                        if (App.State.HasBird)
+                        if (!App.State.HasBird)                                  // If bird not selected 
                         {
-                            await ExecuteWithDrawerClose(() =>
-                            Shell.Current.GoToAsync(nameof(BirdSightingPage)));
+                            await ErrorService.Show(ErrorType.BirdNotSelected);
+                            await CloseDrawer();
+                            return;
                         }
+                        CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
+                        string? comName = App.State.SelectedSavedBird.CommonName;
+                        var result = await SummaryService.BirdHasDataAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate, comName);
+                        if (!result)                                            // Bird has no data for this Location and date range 
+                        {
+                            await ErrorService.Show(ErrorType.NoBirdsFound);
+                            await CloseDrawer();
+                            return;
+                        }
+                        await ExecuteWithDrawerClose(() =>
+                        Shell.Current.GoToAsync(nameof(BirdSightingPage)));
+                        
                     }
                 });
               
-                _leftDrawer.ProfileCommand = new Command(async () =>        // Profile Selection
+                _leftDrawer.ProfileCommand = new Command(async () =>            // Profile Selection
                 {
-                    if (App.State.LeftSelected)                             //Location Selected on Page
+                    if (App.State.LeftSelected)                                 // Originating page is Location 
                     {
-                        if (App.State.HasLocation)
+                        if (App.State.HasLocation)                              // If a location has been selected
                         {
                             await ExecuteWithDrawerClose(() =>
                                 Shell.Current.GoToAsync(nameof(LocationProfilePage)));
@@ -103,7 +131,7 @@ public partial class BasePage : ContentPage
                     }
                     else
                     {
-                        if (App.State.HasBird)
+                        if (App.State.HasBird)                                  // If a bird has been selected & has data in table
                         {
                             await ExecuteWithDrawerClose(() =>
                                  Shell.Current.GoToAsync(nameof(BirdProfilePage)));
@@ -248,14 +276,6 @@ public partial class BasePage : ContentPage
             await CloseRightDrawer();
     }
 
-    //public static AppState State;
-
-    //public AppState AppState =>
-    //Microsoft.Maui.Controls.Application.Current
-    //    .Handler
-    //    .MauiContext
-    //    .Services
-    //    .GetRequiredService<AppState>();
 
     public SummaryService SummaryService =>
     _summaryService ??=

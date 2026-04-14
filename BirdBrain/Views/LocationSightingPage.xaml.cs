@@ -108,7 +108,7 @@ public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
             TotalSightings = resultSummary.FirstOrDefault()?.TotalSightings ?? 0;
             if (TotalSightings <= 0)
             {
-                await ErrorService.Show(ErrorType.NoLocationDataFound);
+            //    await ErrorService.Show(ErrorType.NoLocationDataFound);
                 await Shell.Current.GoToAsync("//IntroPage");
                 return;
             }

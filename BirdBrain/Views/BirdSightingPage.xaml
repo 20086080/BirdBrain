@@ -66,10 +66,8 @@
                         <Label Grid.Row="1" Grid.Column="1" Text="{Binding TotalBirds}" Style="{StaticResource PageLabelCenter}" 
                             TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
 
-                        <BoxView Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource VerticallineStyle}" HorizontalOptions="End" 
-                            Color="{DynamicResource Background}" />
-                        <BoxView Grid.ColumnSpan="2" Grid.Row="0" Style="{StaticResource UnderlineStyle}" VerticalOptions="End"
-                            Color="{DynamicResource Background}"/>
+                        <BoxView Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource VerticallineStyle}" />
+                        <BoxView Grid.ColumnSpan="2" Grid.Row="0" Style="{StaticResource UnderlineStyle1}"/>
                     </Grid>
                 </Border>
 

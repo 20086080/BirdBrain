@@ -12,7 +12,7 @@
     
     <Grid RowDefinitions="Auto,Auto,Auto, Auto,*,Auto" Padding="5" >
 
-        <Grid Grid.Row="0" HorizontalOptions="Start"   >
+        <Grid Grid.Row="0" HorizontalOptions="Start">
 
             <!-- LOCATION / BIRD Selection -->
             <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" WidthRequest="170" HeightRequest="35">
@@ -52,10 +52,9 @@
                 <Image Source="{Binding State.SelectedSavedLocation.Thumbnail}" HeightRequest="130" Aspect="AspectFill"/>
             </Border>
         </Grid>
-        
+
         <BoxView Grid.Row="3" Style="{StaticResource UnderlineStyle}"/>
 
-        
         <Grid Grid.Row="4" ColumnDefinitions="*,1.1*" Margin="0,5,0,0">
             <!-- SIGHTING STATS -->
             <Grid Grid.Column = "0" RowDefinitions="Auto,Auto,Auto">
@@ -71,8 +70,8 @@
                         <Label Grid.Row="1" Grid.Column="1" Text="{Binding TotalTypeOfBird}" Style="{StaticResource PageLabelCenter}" 
                                FontAttributes="Bold" FontSize="17" TextColor="{DynamicResource Background}"/>
 
-                        <BoxView Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource VerticallineStyle}" HorizontalOptions="End" Color="{DynamicResource Background}" />
-                        <BoxView Grid.ColumnSpan="2" Grid.Row="0" Style="{StaticResource UnderlineStyle}" VerticalOptions="End" Color="{DynamicResource Background}" />
+                        <BoxView Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource VerticallineStyle}"  />
+                        <BoxView Grid.ColumnSpan="2" Grid.Row="0" Style="{StaticResource UnderlineStyle1}"  />
                     </Grid>
                 </Border>
                 <Grid Grid.Row="1" ColumnDefinitions="Auto,*" Padding="5">

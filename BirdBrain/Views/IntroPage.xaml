@@ -31,8 +31,7 @@
             <VerticalStackLayout Grid.Row="5" Spacing ="10">
                 <Label Text="Saved Locations Selection" Padding ="10" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
                 <CarouselView ItemsSource="{Binding State.SavedLocations}" 
-                          x:Name="LocationCarousel"
-                          IndicatorView="LocationIndicator" 
+                          x:Name="LocationCarousel" IndicatorView="LocationIndicator" 
                           VerticalOptions="Fill" HorizontalOptions="Fill" 
                           PeekAreaInsets="70">
 
@@ -40,16 +39,11 @@
                         <LinearItemsLayout Orientation="Horizontal" SnapPointsType="MandatorySingle"
                                        SnapPointsAlignment="Center" ItemSpacing="10"/>
                     </CarouselView.ItemsLayout>
-
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
-                            <Border Stroke="{DynamicResource Accent}"
-                                Style="{StaticResource CarouselBorder}"
-                                WidthRequest="220">
+                            <Border Style="{StaticResource CarouselBorder}" WidthRequest="220">
                                 <Border.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                    Tapped="OnLocationTapped"
-                                    CommandParameter="{Binding .}" />
+                                    <TapGestureRecognizer Tapped="OnLocationTapped" CommandParameter="{Binding .}" />
                                 </Border.GestureRecognizers>
                                 <VerticalStackLayout Spacing="5" Padding="5">
                                     <Image Source="{Binding Thumbnail}" HeightRequest="130" Aspect="AspectFill" 

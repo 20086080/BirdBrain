@@ -17,32 +17,26 @@
         <BoxView Grid.Row ="3" Style="{StaticResource UnderlineStyle}"/>
 
         <!-- Bird Carousel -->
-        <VerticalStackLayout Grid.Row="4" Spacing="10" Margin="0,15,0,15" >
+        <VerticalStackLayout Grid.Row="4" Spacing ="10" >
             <Label Text="Saved Birds Selection" Style="{StaticResource PageLabel}" HorizontalOptions="Center"/>
             <CarouselView ItemsSource="{Binding SavedBirds}"
-                          x:Name="BirdCarousel" 
-                          IndicatorView="BirdIndicator" 
-                          VerticalOptions="Fill"
-                          PeekAreaInsets="90">
+                          x:Name="BirdCarousel"  IndicatorView="BirdIndicator" 
+                          VerticalOptions="Fill" PeekAreaInsets="70">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="MandatorySingle"
                                    SnapPointsAlignment="Center" ItemSpacing="10"/>
                 </CarouselView.ItemsLayout>
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
-                        <Grid WidthRequest="220" >
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer
-                                    Tapped="OnBirdTapped"
-                                    CommandParameter="{Binding .}" />
-                            </Grid.GestureRecognizers>
-                            <Border Stroke="{DynamicResource Accent}" Style="{StaticResource CarouselBorder}">
-                                <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
-                                    <Image Source="{Binding Thumbnail}" HeightRequest="140" Aspect="AspectFill" />
-                                    <Label Text="{Binding CommonName}" Style="{StaticResource CarouselLabel}" />
-                                </VerticalStackLayout>
-                            </Border>
-                        </Grid>
+                        <Border Style="{StaticResource CarouselBorder}" WidthRequest="220">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnBirdTapped" CommandParameter="{Binding .}" />
+                            </Border.GestureRecognizers>
+                            <VerticalStackLayout Spacing="5" Padding="5"  >
+                                <Image Source="{Binding Thumbnail}"  HeightRequest="140" />
+                                <Label Text="{Binding CommonName}" Style="{StaticResource CarouselLabel}" HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </Border>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>

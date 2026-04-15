@@ -36,7 +36,7 @@
 
         <BoxView Grid.Row="1" Style="{StaticResource UnderlineStyle}" />
 
-        <Grid Grid.Row="2" ColumnDefinitions = "2*,*" Padding ="10" Background="{DynamicResource Background}">
+        <Grid Grid.Row="2" ColumnDefinitions = "2*,*" Padding ="10" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

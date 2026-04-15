@@ -13,24 +13,21 @@
     <Grid RowDefinitions="Auto,Auto,Auto, Auto,Auto,Auto" Padding="10" >
 
         <!-- LOCATION / BIRD Selection -->
-            <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" WidthRequest="175" HeightRequest="35" HorizontalOptions="Start">
-                <Grid ColumnDefinitions="*,*" HorizontalOptions="Fill" >
-                    <!-- Location TAB -->
-                    <Border x:Name="LocationTab" Grid.Column="0" Style="{StaticResource SegmentUnSelectedStyle}">
-                        <Label x:Name="LocationTabLabel" Text="Location" Style="{StaticResource SegmentUnSelectedLabelStyle}"/>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="LocationTapped"/>
-                        </Border.GestureRecognizers>
-                    </Border>
-
-                    <!-- Bird TAB -->
-                    <Border x:Name="BirdTab" Grid.Column="1" Style="{StaticResource SegmentSelectedStyle}">
-                        <Label x:Name="BirdTabLabel" Text="Bird" Style="{StaticResource SegmentSelectedLabelStyle}"/>
-                        
-                    </Border>
-                </Grid>
-            </Border>
-        
+        <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" WidthRequest="175" HeightRequest="35" HorizontalOptions="Start">
+            <Grid ColumnDefinitions="*,*" HorizontalOptions="Fill" >
+                <!-- Location TAB -->
+                <Border x:Name="LocationTab" Grid.Column="0" Style="{StaticResource SegmentUnSelectedStyle}">
+                    <Label x:Name="LocationTabLabel" Text="Location" Style="{StaticResource SegmentUnSelectedLabelStyle}"/>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="LocationTapped"/>
+                    </Border.GestureRecognizers>
+                </Border>
+                <!-- Bird TAB -->
+                <Border x:Name="BirdTab" Grid.Column="1" Style="{StaticResource SegmentSelectedStyle}">
+                    <Label x:Name="BirdTabLabel" Text="Bird" Style="{StaticResource SegmentSelectedLabelStyle}"/>
+                </Border>
+            </Grid>
+        </Border>
         <BoxView Grid.Row="1" Style="{StaticResource UnderlineStyle}" Margin="0,5,0,5"/>
 
         <!-- Bird LABEL -->
@@ -39,11 +36,11 @@
             <Grid Grid.Column="1" RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="4">
                 <Label Grid.Row="0" Text = "{Binding State.SelectedSavedBird.CommonName}" Style = "{StaticResource SubTitles}"/>
                 <Label Grid.Row ="1" Text = "{Binding State.SelectedSavedLocation.Name}" Style="{StaticResource PageLabelNormal}" FontAttributes ="Bold" FontSize="14"/>
-                <Grid Grid.Row="2" ColumnDefinitions="Auto,Auto,*">
-                    <Label Grid.Column="0" Text = "{Binding State.SelectedSavedLocation.Lat}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
-                    <Label Grid.Column="1" Text = ", " Style="{StaticResource PageLabelNormal}"/>
-                    <Label Grid.Column="2" Text = "{Binding State.SelectedSavedLocation.Lng}" Style="{StaticResource PageLabelNormal}"/>
-                </Grid>
+                <HorizontalStackLayout Grid.Row="2" >
+                    <Label Text = "{Binding State.SelectedSavedLocation.Lat}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
+                    <Label Text = ", " Style="{StaticResource PageLabelNormal}"/>
+                    <Label Text = "{Binding State.SelectedSavedLocation.Lng}" Style="{StaticResource PageLabelNormal}"/>
+                </HorizontalStackLayout>
                 <Label Grid.Row ="3" Text = "{Binding State.SelectedSavedLocation.Region}" Style="{StaticResource PageLabelNormal}"/>
                 <Label Grid.Row ="4" Text = "{Binding State.SelectedSavedLocation.Country}" Style="{StaticResource PageLabelNormal}"/>
             </Grid>
@@ -71,10 +68,10 @@
                     </Grid>
                 </Border>
 
-                <Grid Grid.Row="2" ColumnDefinitions="Auto,*" Padding="5">
-                    <Label Grid.Column = "0" Text = "{Binding BirdSightings,StringFormat = 'Seen {0} /'}" Style = "{StaticResource PageLabelNormal}"/>
-                    <Label Grid.Column = "1" Text = "{Binding NumberDays, StringFormat = ' {0} days'}" Style = "{StaticResource PageLabelNormal}"/>
-                </Grid>
+                <HorizontalStackLayout Grid.Row="2" Padding="5">
+                    <Label Text = "{Binding BirdSightings, StringFormat = 'Seen {0} /'}" Style = "{StaticResource PageLabelNormal}"/>
+                    <Label Text = "{Binding NumberDays, StringFormat = ' {0} days'}" Style = "{StaticResource PageLabelNormal}"/>
+                </HorizontalStackLayout>
                 <Label Grid.Row = "3" Text = "{Binding DistinctLocations, StringFormat ='Obs at {0} Locations'}" Style = "{StaticResource PageLabelNormal}" Padding="5,0"/>
                 <Label Grid.Row = "4" Padding="5" Text = "{Binding ObsDtLatest, StringFormat = 'Last Obs {0} time'}" Style = "{StaticResource PageLabelNormal}" />
                 <HorizontalStackLayout Grid.Row = "5" Padding="5">

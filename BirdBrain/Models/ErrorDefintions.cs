@@ -20,7 +20,7 @@ namespace BirdBrain.Models
 
                 ErrorType.RefreshSuccessful => new AppError
                 {
-                    Title = "Successful Data Fetch",
+                    Title = "Success",
                     Message = "Observations successfully downloaded",
                     Image = "refresh_successful.png"
                 },
@@ -43,6 +43,13 @@ namespace BirdBrain.Models
                 {
                     Title = "API Service Error",
                     Message = "Bird data cannot be retrieved - Try later",
+                    Image = "api_failure.png"
+                },
+
+                ErrorType.JsonFailure => new AppError
+                {
+                    Title = "Json Failure",
+                    Message = "Json Failure - Try download again",
                     Image = "api_failure.png"
                 },
 

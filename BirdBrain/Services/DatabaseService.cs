@@ -15,17 +15,17 @@ namespace BirdBrain.Services
 
         public async Task InitAsync()
         {
-            if (_db != null)
+            if (_db != null)                                        // If No connection 
                 return;
 
             var dbPath = Path.Combine(
                 FileSystem.AppDataDirectory,
                 "birdbrain.db");
 
-            _db = new SQLiteAsyncConnection(dbPath);
+            _db = new SQLiteAsyncConnection(dbPath);    
 
-            await _db.CreateTableAsync<BirdObservationDb>();
-            await _db.ExecuteAsync(
+            await _db.CreateTableAsync<BirdObservationDb>();        // Create the table if it doesn't exist
+            await _db.ExecuteAsync(                                 // Create Indexes if not exisitng 
                 @"CREATE INDEX IF NOT EXISTS idx_location_date
                     ON BirdObservationDb(Lat, Lng, DateStamp, ComName);");
         }
@@ -57,7 +57,5 @@ namespace BirdBrain.Services
                 AppLng = App.State.SelectedSavedLocation.Lng
             }).ToList();
         }
-
-        
     }
 }

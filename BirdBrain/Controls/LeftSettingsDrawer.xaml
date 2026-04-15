@@ -16,7 +16,6 @@
         <!-- Header -->
         <Grid ColumnDefinitions="*,Auto">
             <Grid ColumnDefinitions="*,26" ColumnSpacing="12">
-        
                 <Label Grid.Column ="0" Text="BirdBrain Menu" Style="{StaticResource Titles}" />
                 <Image Grid.Column ="1" Source="icon_exit.svg" Style="{StaticResource DrawerMenuIconStyle}" />
             </Grid>

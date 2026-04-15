@@ -28,19 +28,56 @@ namespace BirdBrain.Services
         public async Task<List<BirdObservation>> GetRecentObservationsAsync(
             double lat, double lng, int radiusKm, int days)
         {
-            var url =
-                $"{BaseUrl}?lat={lat}&lng={lng}&dist={radiusKm}&back={days}";
+            try
+            {
+                var url =
+                    $"{BaseUrl}?lat={lat}&lng={lng}&dist={radiusKm}&back={days}";
 
-            var response = await _httpClient.GetAsync(url);
-            response.EnsureSuccessStatusCode();
-
-            var json = await response.Content.ReadAsStringAsync();
-
-            return JsonSerializer.Deserialize<List<BirdObservation>>(
-                json,  new JsonSerializerOptions
+                var response = await _httpClient.GetAsync(url);
+                if (!response.IsSuccessStatusCode)
                 {
-                    PropertyNameCaseInsensitive = true
-                });
+                    await ErrorService.Show(ErrorType.ApiFailure);
+                    return new List<BirdObservation>();
+                }
+
+                //       response.EnsureSuccessStatusCode();
+
+                var json = await response.Content.ReadAsStringAsync();
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    await ErrorService.Show(ErrorType.JsonFailure);
+                    return new List<BirdObservation>();
+                }
+
+                return JsonSerializer.Deserialize<List<BirdObservation>>(
+                    json, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+            }
+            catch (TaskCanceledException)
+            {
+                // Timeout
+                await ErrorService.Show(ErrorType.ApiFailure);
+                return new List<BirdObservation>();
+            }
+            catch (HttpRequestException)
+            {
+                // Network issue
+                await ErrorService.Show(ErrorType.NoInternet);
+                return new List<BirdObservation>();
+            }
+            catch (JsonException)
+            {
+                // Bad JSON
+                await ErrorService.Show(ErrorType.JsonFailure);
+                return new List<BirdObservation>();
+            }
+            catch (Exception ex)
+            { 
+                await ErrorService.Show(ErrorType.ErrorFound);
+                return new List<BirdObservation>();
+            }
         }
     }
 }

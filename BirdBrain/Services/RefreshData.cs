@@ -29,14 +29,18 @@ namespace BirdBrain.Services
             // API call
             var observations =
                 await _ebird.GetRecentObservationsAsync(lat, lng, App.State.MaxRadius, App.State.MinDays);     //API for 1 day only (MinDays = 1) 
-
+                                                                                                               // Exit early if no data
+            if (observations == null || observations.Count == 0)
+            {
+                return false;
+            }
             var refreshTime = DateTime.UtcNow.ToString("yyyy-MM-dd");               // Create DateStamp which is saved in Sqlite
             var dbList =
                 App.State.Database.ConvertToDb(observations, refreshTime);          // Convert to Database format, including DateStamp for each record
 
             await App.State.Database.SaveObservationsAsync(dbList);                 // Insert records into Sqlite
             //TODO Check if this is required 
-            App.State.Observations = observations;
+            //App.State.Observations = observations;
             return true;
         }
     }

@@ -21,6 +21,7 @@ namespace BirdBrain.Models
         ReadytoGoSavedLocation,
         ReadytoGoBirdAlreadySaved,
         ReadytoGoLocationAlreadySaved,
+        JsonFailure,
         ErrorFound
     }
 }

@@ -49,16 +49,19 @@
 
         <Grid Grid.Row="4" ColumnDefinitions="*,1.1*" >
             <!-- SIGHTING STATS -->
-            <Grid Grid.Column = "0" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+            <Grid Grid.Column = "0" RowDefinitions="1.4*,1.4*,Auto,Auto,Auto" RowSpacing="5" >
                 <Border Grid.Column ="0" Grid.Row ="0"  Style ="{StaticResource RoundedAccentBorderStyle}" VerticalOptions="Start" 
                            Background="{DynamicResource Accent}">
-                    <Grid ColumnDefinitions="1.4*,*" RowDefinitions="Auto,Auto" RowSpacing="5">
-                        <Label Grid.Row="0"  Grid.Column="0" Padding="5" Text="# Obs" Style="{StaticResource PageLabelCenter}" 
-                            TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="16"/>
-                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding BirdSightings}" Style="{StaticResource PageLabelCenter}" 
-                            TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
-
-                        <Label Grid.Row="1" Grid.Column="0" Padding="5" Text="# Birds" Style="{StaticResource PageLabelCenter}" 
+                    <Grid ColumnDefinitions="1.4*,*" RowDefinitions="Auto,Auto" RowSpacing="5" VerticalOptions="Center">
+                        <Label Grid.Row="0" Grid.Column="0" Text="Obs Days" Style="{StaticResource PageLabelCenter}" 
+                            TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="16" />
+                        <HorizontalStackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" Padding="5">
+                            <Label Text="{Binding BirdSightings, StringFormat='{0} /'}" Style="{StaticResource PageLabelCenter}" 
+                                            TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
+                            <Label Text="{Binding NumberDays, StringFormat=' {0}'}" Style="{StaticResource PageLabelCenter}" 
+                                            TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>   
+                        </HorizontalStackLayout>
+                        <Label Grid.Row="1" Grid.Column="0" Text="# Birds" Style="{StaticResource PageLabelCenter}" 
                            TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="16"/>
                         <Label Grid.Row="1" Grid.Column="1" Text="{Binding TotalBirds}" Style="{StaticResource PageLabelCenter}" 
                             TextColor="{DynamicResource Background}" FontAttributes="Bold" FontSize="17"/>
@@ -68,13 +71,9 @@
                     </Grid>
                 </Border>
 
-                <HorizontalStackLayout Grid.Row="2" Padding="5">
-                    <Label Text = "{Binding BirdSightings, StringFormat = 'Seen {0} /'}" Style = "{StaticResource PageLabelNormal}"/>
-                    <Label Text = "{Binding NumberDays, StringFormat = ' {0} days'}" Style = "{StaticResource PageLabelNormal}"/>
-                </HorizontalStackLayout>
-                <Label Grid.Row = "3" Text = "{Binding DistinctLocations, StringFormat ='Obs at {0} Locations'}" Style = "{StaticResource PageLabelNormal}" Padding="5,0"/>
-                <Label Grid.Row = "4" Padding="5" Text = "{Binding ObsDtLatest, StringFormat = 'Last Obs {0} time'}" Style = "{StaticResource PageLabelNormal}" />
-                <HorizontalStackLayout Grid.Row = "5" Padding="5">
+                <Label Grid.Row = "2" Text = "{Binding DistinctLocations, StringFormat ='Obs at {0} Locations'}" Style = "{StaticResource PageLabelNormal}"/>
+                <Label Grid.Row = "3" Text = "{Binding ObsDtLatest, StringFormat = 'Last Obs {0} time'}" Style = "{StaticResource PageLabelNormal}" />
+                <HorizontalStackLayout Grid.Row = "4" >
                     <Label Text = "{Binding LatLatest, StringFormat = 'at location {0},'}" Style = "{StaticResource PageLabelNormal}" />
                     <Label Text = "{Binding LngLatest, StringFormat = ' {0}'}" Style = "{StaticResource PageLabelNormal}" />
                 </HorizontalStackLayout>
@@ -107,7 +106,7 @@
         </Grid>
         
         <!-- DAILY SIGHTINGS Grid.Row = 3-->
-        <Border Padding="5" Grid.Row="5" HeightRequest ="130" VerticalOptions ="End" Style ="{StaticResource RoundedAccentBorderStyle}" Background="{DynamicResource Surface}">
+        <Border Padding="5" Grid.Row="5" Margin="0,10,0,0" HeightRequest ="130" VerticalOptions ="End" Style ="{StaticResource RoundedAccentBorderStyle}" Background="{DynamicResource Surface}">
             <lvc:CartesianChart Series="{Binding BirdSeries}" XAxes="{Binding BirdXAxes}" YAxes="{Binding BirdYAxes}"
                     Background= "{DynamicResource Surface}" DrawMarginFrame="{x:Null}" />
         </Border>

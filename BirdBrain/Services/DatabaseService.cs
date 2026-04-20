@@ -1,4 +1,4 @@
-﻿using Android.Icu.Text;
+﻿
 using BirdBrain.Models;
 using SQLite;
 using System;

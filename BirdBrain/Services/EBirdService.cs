@@ -4,7 +4,7 @@ using System.Text;
 using BirdBrain.Models;
 using System.Net.Http;
 using System.Text.Json;
-
+using Microsoft.Maui.Networking;
 namespace BirdBrain.Services
 {
     public class EBirdService
@@ -18,7 +18,7 @@ namespace BirdBrain.Services
         {
             _httpClient = new HttpClient
             {
-                Timeout = TimeSpan.FromSeconds(15)
+                Timeout = TimeSpan.FromSeconds(10)
             };
 
             _httpClient.DefaultRequestHeaders.Add(
@@ -32,6 +32,12 @@ namespace BirdBrain.Services
             {
                 var url =
                     $"{BaseUrl}?lat={lat}&lng={lng}&dist={radiusKm}&back={days}";
+
+                if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                {
+                    await ErrorService.Show(ErrorType.NoInternet);
+                    return new List<BirdObservation>();
+                }
 
                 var response = await _httpClient.GetAsync(url);
                 if (!response.IsSuccessStatusCode)

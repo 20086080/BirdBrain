@@ -14,7 +14,7 @@ public partial class IntroPage : BasePage
 
     public ObservableCollection<LatLng> FilteredLocations { get; set; } = new();
 
-    private SavedLocation _carouselItem;
+    private SavedLocation? _carouselItem;
 
     public AppState State => App.State;
 
@@ -49,7 +49,7 @@ public partial class IntroPage : BasePage
                 return null!;
             }
 
-            if (App.State.SelectedSavedLocation.Name == null)
+            if (App.State.SelectedSavedLocation?.Name == null)
             {
                 SearchBox.Text = null;
                 return App.State.SavedLocations[0];
@@ -67,7 +67,7 @@ public partial class IntroPage : BasePage
         if (!App.State.HasLocation)
             return;
         CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
-        var result = await SummaryService.LocationHasDataAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate);
+        var result = await SummaryService.LocationHasDataAsync(App.State.SelectedSavedLocation!.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate);
         if (!result)                                            // Location has no Data in Sql table for date range 
         {
             await ErrorService.Show(ErrorType.NoLocationDataFound);

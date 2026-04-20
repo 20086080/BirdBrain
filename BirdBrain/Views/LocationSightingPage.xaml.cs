@@ -19,7 +19,7 @@ public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
 
     public List<TopBirds> TopBirds { get; set; } = new();
 
-    public List<LocationSightingSummary> SightingsCount { get; set; }
+    public List<LocationSightingSummary>? SightingsCount { get; set; }
     public List<LocationDailyObs> LocationDailyObs { get; set; } = new();
 
     // SERIES
@@ -87,6 +87,7 @@ public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
         BindingContext = this;
         App.State.LeftSelected = true;
     }
+
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -97,8 +98,8 @@ public partial class LocationSightingPage : BasePage, INotifyPropertyChanged
     {
         try
         {
-            Double Lat = App.State.SelectedSavedLocation.Lat;
-            Double Lng = App.State.SelectedSavedLocation.Lng;
+            Double Lat = App.State.SelectedSavedLocation?.Lat??0;
+            Double Lng = App.State.SelectedSavedLocation?.Lng??0;
             
             CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
             var (DateToday, previousDate) = await SummaryService.GetLatestTwoDatesAsync(Lat, Lng);

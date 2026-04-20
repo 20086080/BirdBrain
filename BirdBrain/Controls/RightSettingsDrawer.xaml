@@ -69,6 +69,7 @@
             </Grid>
         </Border>
         <!-- Font Size Slider -->
+        <!--
         <VerticalStackLayout Spacing="8">
             <Label Text="Font Size" Style="{StaticResource DrawerSectionLabelStyle}" />
             <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
@@ -80,5 +81,6 @@
                 <Label Text ="large"  Grid.Column="2" Style="{StaticResource SliderEndpointLabelStyle}" />
             </Grid>
         </VerticalStackLayout>
+        -->
     </VerticalStackLayout>
 </ContentView>

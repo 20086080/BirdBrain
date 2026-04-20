@@ -59,6 +59,7 @@
         <BoxView Style="{StaticResource DrawerDividerStyle}" />
         
         <!-- Slider -->
+        <!--
         <VerticalStackLayout Spacing = "8">
             <Label Text = "Radius (km)" Style = "{StaticResource DrawerSectionLabelStyle}" />
             <Grid ColumnDefinitions = "Auto,*,Auto" VerticalOptions="Center">
@@ -69,7 +70,7 @@
                 <Label Text = "{Binding MaxRadius}"  Grid.Column="2" Style = "{StaticResource SliderEndpointLabelStyle}" />
             </Grid>
         </VerticalStackLayout>
-       
+       -->
         <VerticalStackLayout Spacing = "8">
             <Label Text = "Days" Style = "{StaticResource DrawerSectionLabelStyle}" />
             <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">

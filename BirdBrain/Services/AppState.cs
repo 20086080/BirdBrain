@@ -18,16 +18,45 @@ namespace BirdBrain.Services
 
         private JsonFileReader _jsonReader = new JsonFileReader();
 
-        private SavedLocation _selectedSavedLocation ;
-        private Bird _selectedSavedBird ;
+        private SavedLocation? _selectedSavedLocation ;
+        private Bird? _selectedSavedBird ;
 
         private int _days = 30;
+        public int Days
+        {
+            get => _days;
+            set
+            {
+                if (_days != value)
+                {
+                    _days = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(DaysSlider));
+                }
+            }
+        }
+
+        public double DaysSlider
+        {
+            get => Days;            // slider reads from Days
+
+            set
+            {
+                int newValue = (int)Math.Round(value);
+
+                if (Days != newValue)
+                {
+                    Days = newValue; // update real value
+                }
+            }
+        }
+
         private int _radius = 50;
 
         private bool _leftSelected = true;
         private bool _initialized;
 
-        public DatabaseService Database { get; set; }
+        public DatabaseService? Database { get; set; }
 
         public List<Bird> SavedBirds { get; set; } = new List<Bird>();
         public List<SavedLocation> SavedLocations { get; set; } = new List<SavedLocation>();
@@ -36,7 +65,7 @@ namespace BirdBrain.Services
         public ObservableCollection<LatLng> GlobalLocations { get; set; } = new();
 
         public bool HasLocation => SelectedSavedLocation != null;
-        public SavedLocation SelectedSavedLocation
+        public SavedLocation? SelectedSavedLocation
         {
             get => _selectedSavedLocation;
             set
@@ -52,7 +81,7 @@ namespace BirdBrain.Services
 
         public bool HasBird => SelectedSavedBird != null;
 
-        public Bird SelectedSavedBird
+        public Bird? SelectedSavedBird
         {
             get => _selectedSavedBird;
             set
@@ -97,20 +126,18 @@ namespace BirdBrain.Services
                 if (App.State.GlobalLocations == null)
                     throw new Exception("GlobalLocations is NULL");
 
-                // First item immediately (fast UI response)
-                var safeItem = item;
+                
+                var safeItem = item;                // First item immediately (fast UI response)
                 if (count == 0)
                 {
-                    
                     MainThread.BeginInvokeOnMainThread(() =>
                         App.State.GlobalLocations.Add(safeItem));
                 }
                 else
                 {
-                    // Throttle UI updates slightly (every 20 items)
-                    if (count % 20 == 0)
+                    if (count % 20 == 0)            // UI updates slightly in stages (every 20 items)
                     {
-                        await Task.Yield(); // give UI breathing room
+                        await Task.Yield(); 
                     }
 
                     MainThread.BeginInvokeOnMainThread(() =>
@@ -149,7 +176,6 @@ namespace BirdBrain.Services
                     { _leftSelected = value; OnPropertyChanged(); }
             }
         }
-
         
         public bool HasBirdLocation
         {
@@ -158,35 +184,6 @@ namespace BirdBrain.Services
             {
                 if (_hasBirdLocation != value)
                 { _hasBirdLocation = value; OnPropertyChanged(); }
-            }
-        }
-
-        public int Days
-        {
-            get => _days;
-            set
-            {
-                if (_days != value)
-                { 
-                    _days = value; 
-                    OnPropertyChanged();
-                    OnPropertyChanged(nameof(DaysSlider));
-                }
-            }
-        }
-
-        public double DaysSlider
-        {
-            get => Days;  // slider reads from Days
-
-            set
-            {
-                int newValue = (int)Math.Round(value);
-
-                if (Days != newValue)
-                {
-                    Days = newValue; // update real value
-                }
             }
         }
 
@@ -219,9 +216,9 @@ namespace BirdBrain.Services
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

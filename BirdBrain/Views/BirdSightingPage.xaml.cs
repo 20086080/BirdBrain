@@ -26,8 +26,8 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
         }
     }
 
-    private string _ObsDtLatest;
-    public string ObsDtLatest
+    private string? _ObsDtLatest;
+    public string? ObsDtLatest
     {
         get => _ObsDtLatest;
         set
@@ -131,10 +131,10 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
 
     public string? CutoffDate { get; set; }
 
-    public List<BirdObservationLatest> BirdObservationLatest { get; set; } 
-    public List<BirdDailyObs> BirdDailyObs { get; set; } 
-    public List<BirdTimeObs> BirdTimeObs { get; set; } 
-    public List<BirdObservation> Observations { get; set; } 
+    public List<BirdObservationLatest>? BirdObservationLatest { get; set; } 
+    public List<BirdDailyObs>? BirdDailyObs { get; set; } 
+    public List<BirdTimeObs>? BirdTimeObs { get; set; } 
+    public List<BirdObservation>? Observations { get; set; } 
 
     // BIRD SERIES
     private ISeries[] _birdSeries = Array.Empty<ISeries>();
@@ -215,9 +215,9 @@ public partial class BirdSightingPage : BasePage, INotifyPropertyChanged
 
         try
         {
-            Double Lat = App.State.SelectedSavedLocation.Lat;
+            Double Lat = App.State.SelectedSavedLocation!.Lat;
             Double Lng = App.State.SelectedSavedLocation.Lng;
-            string commonName = App.State.SelectedSavedBird.CommonName!;
+            string commonName = App.State.SelectedSavedBird!.CommonName!;
 
             CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
             var (DateToday, previousDate) = await SummaryService.GetLatestTwoDatesAsync(Lat, Lng);

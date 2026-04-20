@@ -93,8 +93,8 @@ public partial class BirdSelectionPage : BasePage
         //if (!App.State.HasBird)
         //    return false;
         CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
-        string? comName = App.State.SelectedSavedBird.CommonName;
-        var result = await SummaryService.BirdHasDataAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate, comName);
+        string? comName = App.State.SelectedSavedBird?.CommonName;
+        var result = await SummaryService.BirdHasDataAsync(App.State.SelectedSavedLocation!.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate, comName!);
         if (!result)                                            // Bird has no data for this Location and date range 
         {
             await ErrorService.Show(ErrorType.NoBirdsFound);

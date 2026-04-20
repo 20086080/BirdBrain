@@ -10,13 +10,13 @@ namespace BirdBrain.Views;
 
 public partial class BasePage : ContentPage
 {
-    private SummaryService _summaryService;
-    BoxView _drawerOverlay;
-    LeftSettingsDrawer _leftDrawer;
-    RightSettingsDrawer _rightDrawer;
-    String CutoffDate;
+    private SummaryService? _summaryService;
+    BoxView? _drawerOverlay;
+    LeftSettingsDrawer? _leftDrawer;
+    RightSettingsDrawer? _rightDrawer;
+    String? CutoffDate;
     bool _isDrawerOpen;
-    BoxView _swipeCatcher;
+    BoxView? _swipeCatcher;
     const double DrawerHiddenX = -360;
     const double RightDrawerHiddenX = 360;
     bool _initialized;
@@ -86,7 +86,7 @@ public partial class BasePage : ContentPage
                             return;
                         }
                         CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
-                        var result = await SummaryService.LocationHasDataAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate);
+                        var result = await SummaryService.LocationHasDataAsync(App.State.SelectedSavedLocation!.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate);
                         if (!result)                                            // Location has no Data in Sql table for date range 
                         {
                             await ErrorService.Show(ErrorType.NoLocationDataFound);
@@ -105,8 +105,8 @@ public partial class BasePage : ContentPage
                             return;
                         }
                         CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
-                        string? comName = App.State.SelectedSavedBird.CommonName;
-                        var result = await SummaryService.BirdHasDataAsync(App.State.SelectedSavedLocation.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate, comName);
+                        string? comName = App.State.SelectedSavedBird?.CommonName;
+                        var result = await SummaryService.BirdHasDataAsync(App.State.SelectedSavedLocation!.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate, comName!);
                         if (!result)                                            // Bird has no data for this Location and date range 
                         {
                             await ErrorService.Show(ErrorType.NoBirdsFound);

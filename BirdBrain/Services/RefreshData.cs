@@ -30,7 +30,7 @@ namespace BirdBrain.Services
             var observations =
                 await _ebird.GetRecentObservationsAsync(lat, lng, App.State.MaxRadius, App.State.MinDays);     //API for 1 day only (MinDays = 1) 
                                                                                                                // Exit early if no data
-            if (observations == null || observations.Count == 0)
+            if (!observations.Any())
             {
                 return false;
             }
@@ -39,8 +39,7 @@ namespace BirdBrain.Services
                 App.State.Database.ConvertToDb(observations, refreshTime);          // Convert to Database format, including DateStamp for each record
 
             await App.State.Database.SaveObservationsAsync(dbList);                 // Insert records into Sqlite
-            //TODO Check if this is required 
-            //App.State.Observations = observations;
+            
             return true;
         }
     }

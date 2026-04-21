@@ -35,11 +35,7 @@ namespace BirdBrain
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
-
             var app = builder.Build();
-
-            //App.State = app.Services.GetRequiredService<AppState>();
-
             return app;
 
         }

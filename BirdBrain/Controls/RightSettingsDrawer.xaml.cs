@@ -9,6 +9,12 @@ public partial class RightSettingsDrawer : ContentView
     public RightSettingsDrawer()
     {
         InitializeComponent();
+        this.Loaded += OnLoaded;
+    }
+
+    private void OnLoaded(object sender, EventArgs e)
+    {
+        setDarkLightUI();
     }
 
     // ===== Sliders =====
@@ -32,31 +38,45 @@ public partial class RightSettingsDrawer : ContentView
 
     void OnDarkTapped(object sender, EventArgs e)
     {
-        DarkTab.Style =
-            (Style)Application.Current.Resources["SegmentSelectedStyle"];
-
-        LightTab.Style =
-            (Style)Application.Current.Resources["SegmentUnselectedStyle"];
-
-        DarkLabel.Style =
-            (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
-
-        LightLabel.Style =
-            (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
+        App.State!.DarkLightMode = true;
+        setDarkLightUI();
     }
 
-    async void OnLightTapped(object sender, EventArgs e)
+    void OnLightTapped(object sender, EventArgs e)
     {
-        LightTab.Style =
-            (Style)Application.Current.Resources["SegmentSelectedStyle"];
+        App.State!.DarkLightMode = false;
+        setDarkLightUI();
+    }
 
-        DarkTab.Style =
-            (Style)Application.Current.Resources["SegmentUnselectedStyle"];
+    void setDarkLightUI()
+    {
+        if (App.State!.DarkLightMode)
+        {
+            DarkTab.Style =
+            (Style)Application.Current!.Resources["SegmentSelectedStyle"];
 
-        LightLabel.Style =
-            (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
+            LightTab.Style =
+                (Style)Application.Current.Resources["SegmentUnselectedStyle"];
 
-        DarkLabel.Style =
-            (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
+            DarkLabel.Style =
+                (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
+
+            LightLabel.Style =
+                (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
+        }
+        else
+        {
+            LightTab.Style =
+            (Style)Application.Current!.Resources["SegmentSelectedStyle"];
+
+            DarkTab.Style =
+                (Style)Application.Current.Resources["SegmentUnselectedStyle"];
+
+            LightLabel.Style =
+                (Style)Application.Current.Resources["SegmentSelectedLabelStyle"];
+
+            DarkLabel.Style =
+                (Style)Application.Current.Resources["SegmentUnselectedLabelStyle"];
+        }
     }
 }

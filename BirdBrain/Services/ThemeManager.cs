@@ -13,7 +13,7 @@ public static class ThemeManager
         if (!typeof(ResourceDictionary).IsAssignableFrom(themeDictionaryType))
             throw new ArgumentException("Theme must be a ResourceDictionary");
 
-        var dictionaries = Application.Current.Resources.MergedDictionaries;
+        var dictionaries = Application.Current!.Resources.MergedDictionaries;
 
         dictionaries.Clear();
         dictionaries.Add((ResourceDictionary)Activator.CreateInstance(themeDictionaryType)!);
@@ -49,7 +49,7 @@ public static class ThemeManager
 
     public static AppThemeOption CreateThemeOption(Type themeType)
     {
-        var theme = (ResourceDictionary)Activator.CreateInstance(themeType);
+        var theme = (ResourceDictionary)Activator.CreateInstance(themeType)!;
 
         Color GetColor(string key)
         {
@@ -72,5 +72,4 @@ public static class ThemeManager
             PreviewTextOnPrimary = GetColor("TextOnPrimary")
         };
     }
-
 }

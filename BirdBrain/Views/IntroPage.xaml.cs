@@ -64,7 +64,7 @@ public partial class IntroPage : BasePage
 
     async void OnAllBirdsTapped(object? sender, EventArgs e)
     {
-        if (!App.State.HasLocation)
+        if (!App.State!.HasLocation)
             return;
         CutoffDate = DateTime.UtcNow.AddDays(-App.State.Days).ToString("yyyy-MM-dd");
         var result = await SummaryService.LocationHasDataAsync(App.State.SelectedSavedLocation!.Lat, App.State.SelectedSavedLocation.Lng, CutoffDate);
@@ -79,7 +79,7 @@ public partial class IntroPage : BasePage
 
     async void OnSpecificBirdTapped(object? sender, EventArgs e)
     {
-        if (!App.State.HasLocation)
+        if (!App.State!.HasLocation)
             return;
         App.State.LeftSelected = false;
         await Shell.Current.GoToAsync(nameof(BirdSelectionPage));
@@ -93,7 +93,7 @@ public partial class IntroPage : BasePage
         }
         if (e.Parameter is SavedLocation location)
         {
-            App.State.SelectedSavedLocation = location;   
+            App.State!.SelectedSavedLocation = location;   
         }
     }
 
@@ -141,7 +141,7 @@ public partial class IntroPage : BasePage
             return;
         }
 
-        var results = App.State.GlobalLocations
+        var results = App.State!.GlobalLocations
             .Where(x =>
                 (x.city_ascii?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
                 (x.country?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false))
@@ -164,7 +164,7 @@ public partial class IntroPage : BasePage
         if (selected == null)
             return;
         SearchBox.Text = $"{selected.city_ascii}, {selected.country}";
-        App.State.SelectedSavedLocation = new SavedLocation
+        App.State!.SelectedSavedLocation = new SavedLocation
         {
             Name = selected.city_ascii,
             Lat = selected.lat,

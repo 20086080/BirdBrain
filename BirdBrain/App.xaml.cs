@@ -7,8 +7,8 @@ namespace BirdBrain
 {
     public partial class App : Application
     {
-        //public static AppState State { get; set; } = new AppState();
-        public static AppState State { get; private set; }
+        
+        public static AppState? State { get; private set; }
         public App()
         {
             InitializeComponent();
@@ -25,9 +25,10 @@ namespace BirdBrain
             Dispatcher.Dispatch(async () =>
             {
                 await Task.Yield(); 
-
-                ThemeManager.LoadSavedTheme(typeof(SunsetCoralNavyDark));
-
+                if (State.DarkLightMode)
+                    ThemeManager.LoadSavedTheme(typeof(SunsetCoralNavyDark));
+                else
+                    ThemeManager.LoadSavedTheme(typeof(SunsetCoralNavyLight));
                 await InitializeApp();
             });
 
@@ -39,7 +40,7 @@ namespace BirdBrain
         {
             try
             {
-                await State.InitializeAsync();   
+                await State!.InitializeAsync();   
             }
             catch (Exception ex)
             {
@@ -55,7 +56,5 @@ namespace BirdBrain
                 };
             }
         }
-
-        
     }
 }

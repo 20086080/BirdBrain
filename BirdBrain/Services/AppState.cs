@@ -21,6 +21,24 @@ namespace BirdBrain.Services
         private SavedLocation? _selectedSavedLocation ;
         private Bird? _selectedSavedBird ;
 
+        private bool _darkLightMode = Preferences.Get("DarkLightMode", true);
+        public bool DarkLightMode
+        {
+            get
+            {
+                return Preferences.Get("DarkLightMode",_darkLightMode); 
+            }
+            set
+            {
+                if (_darkLightMode != value)
+                {
+                    Preferences.Set("DarkLightMode", value);
+                    _darkLightMode = value; 
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private int _days = 30;
         public int Days
         {

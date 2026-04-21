@@ -24,12 +24,17 @@ namespace BirdBrain.Services
         private int _days = 30;
         public int Days
         {
-            get => _days;
+            get //=> _days;
+            {
+                return Preferences.Get("NumberDays", _days);
+            }
+            
             set
             {
                 if (_days != value)
                 {
                     _days = value;
+                    Preferences.Set("NumberDays", value);
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(DaysSlider));
                 }

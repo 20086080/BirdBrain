@@ -1,5 +1,9 @@
 
+
+using BirdBrain.Services;
+using BirdBrain.ViewModels;
 using BirdBrain.Views;
+using LiveChartsCore.Themes;
 using System.Windows.Input;
 
 namespace BirdBrain.Controls;
@@ -40,12 +44,20 @@ public partial class RightSettingsDrawer : ContentView
     {
         App.State!.DarkLightMode = true;
         setDarkLightUI();
+        if (ThemeManager.CurrentThemeType != null)
+        {
+            ThemeManager.ReapplyThemeForMode(ThemeManager.CurrentThemeType);
+        }
     }
 
     void OnLightTapped(object sender, EventArgs e)
     {
         App.State!.DarkLightMode = false;
         setDarkLightUI();
+        if (ThemeManager.CurrentThemeType != null)
+        {
+            ThemeManager.ReapplyThemeForMode(ThemeManager.CurrentThemeType);
+        }
     }
 
     void setDarkLightUI()

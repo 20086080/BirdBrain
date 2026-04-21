@@ -33,7 +33,7 @@ namespace BirdBrain.Services
                 if (_darkLightMode != value)
                 {
                     Preferences.Set("DarkLightMode", value);
-                    _darkLightMode = value; 
+                    _darkLightMode = value;
                     OnPropertyChanged();
                 }
             }

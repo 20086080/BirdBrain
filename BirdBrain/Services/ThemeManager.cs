@@ -8,6 +8,8 @@ using System.Text.RegularExpressions;
 public static class ThemeManager
 {
     private const string ThemePrefKey = "SelectedTheme";
+    public static Type CurrentThemeType { get; private set; }
+
     public static void ApplyTheme(Type themeDictionaryType, bool persist = true)
     {
         if (!typeof(ResourceDictionary).IsAssignableFrom(themeDictionaryType))
@@ -17,7 +19,7 @@ public static class ThemeManager
 
         dictionaries.Clear();
         dictionaries.Add((ResourceDictionary)Activator.CreateInstance(themeDictionaryType)!);
-
+        CurrentThemeType = themeDictionaryType;
         if (persist)
             Preferences.Set(ThemePrefKey, themeDictionaryType.AssemblyQualifiedName);
     }
@@ -71,5 +73,25 @@ public static class ThemeManager
             PreviewTextPrimary = GetColor("TextPrimary"),
             PreviewTextOnPrimary = GetColor("TextOnPrimary")
         };
+    }
+
+    public static void ReapplyThemeForMode(Type baseThemeType)
+    {
+        var fullName = baseThemeType.FullName!;
+
+        var baseName = fullName
+            .Replace("Dark", "")
+            .Replace("Light", "");
+
+        string finalName = App.State.DarkLightMode
+            ? baseName + "Dark"
+            : baseName + "Light";
+
+        var assemblyName = baseThemeType.Assembly.FullName;
+        var qualifiedName = $"{finalName}, {assemblyName}";
+
+        var resolvedType = Type.GetType(qualifiedName)!;
+
+        ApplyTheme(resolvedType);
     }
 }

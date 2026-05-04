@@ -7,12 +7,13 @@
     BackgroundColor="{DynamicResource Background}">
     <Grid>
         <Grid Padding ="5" RowDefinitions="Auto, Auto, Auto, Auto, Auto,*,Auto" RowSpacing="5">
+            <!--
             <HorizontalStackLayout Grid.Row="0" Spacing="10" >
                 <Label Text="Use Current Location" Padding="5" Style="{StaticResource PageLabel}" />
                 <Switch IsToggled="{Binding UseCurrentLocation}" Style="{StaticResource PrimarySwitchStyle}" />
             </HorizontalStackLayout>
             <BoxView Grid.Row ="1" Style="{StaticResource UnderlineStyle}" />
-
+            -->
             <Grid Grid.Row="2" ColumnDefinitions="Auto,*" RowDefinitions ="Auto,Auto" RowSpacing="15" Padding="5">
                 <Label Grid.Row="0" Grid.Column="0"
                     Text="{Binding State.SelectedSavedLocation.Lat, StringFormat='Latitude | Longitude     {0},'}" Style="{StaticResource PageLabelNormal}" />

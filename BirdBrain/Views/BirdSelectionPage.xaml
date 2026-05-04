@@ -12,7 +12,7 @@
     <Grid RowDefinitions="Auto,Auto, Auto,Auto,*" Padding="10" RowSpacing="5">
         <Label Grid.Row ="0" Text ="{Binding SelectedSavedLocation.Name, StringFormat='Location: {0}'}" Style="{StaticResource PageLabel}" />
         <Label Grid.Row ="1" Margin="0,10,0,0" Text = "Bird Selection: " Style="{StaticResource SubTitles}" VerticalOptions="Start"/>
-        <Entry Grid.Row ="2" x:Name="Bird" Text ="{Binding SelectedSavedBird.CommonName}" 
+        <Entry Grid.Row ="2" x:Name="Bird" Text ="{Binding SelectedSavedBird.CommonName, Mode=OneWay }" 
                             Style="{StaticResource PrimaryEntryStyle}" FontSize ="18" Completed="Bird_Completed" />
         <BoxView Grid.Row ="3" Style="{StaticResource UnderlineStyle}"/>
 

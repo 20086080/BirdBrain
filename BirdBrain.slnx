@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="BirdBrain/BirdBrain.csproj" />
+  <Project Path="BirdBrain/BirdBrain.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
 </Solution>

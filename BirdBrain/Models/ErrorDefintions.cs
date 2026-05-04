@@ -42,7 +42,7 @@ namespace BirdBrain.Models
                 ErrorType.ApiFailure => new AppError
                 {
                     Title = "API Service Error",
-                    Message = "Bird data cannot be retrieved - Try later",
+                    Message = "Observations cannot be retrieved - Try later",
                     Image = "api_failure.png"
                 },
 

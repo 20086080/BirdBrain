@@ -25,14 +25,6 @@ public partial class BirdSelectionPage : BasePage
         App.State.LeftSelected = false;
     }
 
-    void Carousel_CurrentItemChanged(object? sender, CurrentItemChangedEventArgs e)
-    {
-        if (e.CurrentItem is Bird bird)
-        {
-            App.State.SelectedSavedBird = bird;
-        }
-    }
-
     public Bird CarouselCurrentItem
     {
         get

@@ -1,5 +1,3 @@
-
-
 using BirdBrain.Services;
 using BirdBrain.ViewModels;
 using BirdBrain.Views;

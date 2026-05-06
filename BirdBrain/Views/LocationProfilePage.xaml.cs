@@ -19,6 +19,19 @@ public partial class LocationProfilePage : BasePage
         App.State.LeftSelected = true;
     }
 
+    protected override void OnSizeAllocated(double width, double height)
+    {
+        base.OnSizeAllocated(width, height);
+
+        if (LocationInfo == null)
+            return;
+
+        bool isLandscape = width > height;
+        Grid.SetColumn(LocationInfo, isLandscape ? 1 : 0);
+        Grid.SetRow(LocationInfo, isLandscape ? 3 : 2);
+        //LocationInfo.BackgroundColor = isLandscape ? Colors.Purple : Colors.Red;
+    }
+
     async void BirdTapped(object? sender, EventArgs e)
     {
         try

@@ -10,20 +10,14 @@
     
     Title="Location Profile">
 
-    <Grid RowDefinitions="Auto,Auto,Auto, Auto, *" Padding="5" >
-
-        <Grid Grid.Row="0" HorizontalOptions="Start"  >
-
-            <!-- LOCATION / BIRD Selection -->
+    <Grid RowDefinitions="Auto,Auto,Auto,*" x:Name="RootGrid" Padding="5" ColumnDefinitions="Auto,*">
+       
+        <Grid Grid.Row ="0" Grid.Column="0"  HorizontalOptions="Start" Grid.ColumnSpan="2">
             <Border Style="{StaticResource RoundedAccentBorderStyle}" Padding="0" WidthRequest="170" HeightRequest="35">
                 <Grid ColumnDefinitions="*,*" HorizontalOptions="Fill" >
-                    <!-- Location TAB -->
                     <Border x:Name="LocationTab" Grid.Column="0" Style="{StaticResource SegmentSelectedStyle}">
                         <Label x:Name="LocationTabLabel" Text="Location" Style="{StaticResource SegmentSelectedLabelStyle}"/>
-                        
                     </Border>
-
-                    <!-- Bird TAB -->
                     <Border x:Name="BirdTab" Grid.Column="1" Style="{StaticResource SegmentUnselectedStyle}">
                         <Label x:Name="BirdTabLabel" Text="Bird" Style="{StaticResource SegmentUnselectedLabelStyle}"/>
                         <Border.GestureRecognizers>
@@ -34,29 +28,27 @@
             </Border>
         </Grid>
 
-        <BoxView Grid.Row="1" Style="{StaticResource UnderlineStyle}" />
+        <BoxView Grid.Row="1" Grid.Column="0" Style="{StaticResource UnderlineStyle}" Grid.ColumnSpan="2"/>
 
-        <Grid Grid.Row="2" ColumnDefinitions = "2*,*" Padding ="10" >
+        <Grid Grid.Row="2" Grid.Column="0" ColumnDefinitions = "2*,*" x:Name="LocationInfo" Padding ="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Text = "{Binding SelectedSavedLocation.Name}" Style = "{StaticResource SubTitles}" 
-                   LineBreakMode="WordWrap"/>
+            <Label Grid.Row="0" Grid.Column="0" Text = "{Binding SelectedSavedLocation.Name}" Style = "{StaticResource SubTitles}" LineBreakMode="WordWrap"/>
             <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="Auto,*">
-                <Label Grid.Column = "0" Text = "{Binding SelectedSavedLocation.Region, StringFormat='{0}, '}" 
-                    Style="{StaticResource PageLabelNormal}"/>
+                <Label Grid.Column = "0" Text = "{Binding SelectedSavedLocation.Region, StringFormat='{0}, '}" Style="{StaticResource PageLabelNormal}"/>
                 <Label Grid.Column = "1" Text = "{Binding SelectedSavedLocation.Country}" Style="{StaticResource PageLabelNormal}"/>
             </Grid>
             <Grid Grid.Row="0" Grid.Column="1" ColumnDefinitions="Auto,*">
-                <Label Grid.Column = "0" Text = "{Binding SelectedSavedLocation.Lat, StringFormat='{0}, '}" 
-                                Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
-                <Label Grid.Column = "2" Text = "{Binding SelectedSavedLocation.Lng, StringFormat=' {0}'}" Style="{StaticResource PageLabelNormal}"/>
+                <Label Grid.Column = "0" Text = "{Binding SelectedSavedLocation.Lat, StringFormat='{0}, '}" Style="{StaticResource PageLabelNormal}" HorizontalOptions="Start"/>
+                <Label Grid.Column = "1" Text = "{Binding SelectedSavedLocation.Lng, StringFormat=' {0}'}" Style="{StaticResource PageLabelNormal}"/>
             </Grid>
-                
+            <Label Grid.Row="2" x:Name="LabelDesc" Text = "{Binding SelectedSavedLocation.Description}" Style = "{StaticResource PageLabelNormal}" LineBreakMode="WordWrap"/>
         </Grid>
-        <Image Grid.Row ="3" Source="{Binding SelectedSavedLocation.ProfileImage}"  HeightRequest="330" Aspect="AspectFill" HorizontalOptions="Fill"/>
-        <Label Grid.Row="4" Padding ="10" Text = "{Binding SelectedSavedLocation.Description}" Style = "{StaticResource PageLabelNormal}" LineBreakMode="WordWrap"/>
+
+        <Image Grid.Row="3" Grid.Column="0" x:Name="ProfileImage" Source="{Binding SelectedSavedLocation.ProfileImage}" HorizontalOptions="Start"/>
     </Grid>
 </views:BasePage>
 
